@@ -1,20 +1,27 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-#include "main.h"
 #include "iostream"
-
-=======
->>>>>>> c09da0191b9424f5c30fa2cc4af424414086e7af
-int main() {
-	std::cout << "Test" << std::endl;
-	getchar();
-=======
 #include "Model.h"
 #include "View.h"
+#include "Score.h"
+#include "ScoreBoard.h"
 
 int main() {
-	Model model = Model();
-	View view = View(model);
->>>>>>> a3198cc4071857c9e7fe7c62ec4ec05b54623359
-	return 0;
+    Model model = Model();
+    View view = View(model);
+    Score score;
+
+    ScoreBoard board = ScoreBoard();
+
+    for(int i = 0; i < 15; i++)
+    {
+        score = Score();
+        score.addScore(static_cast<int> (rand() / 10));
+
+	    board.addScore(score);
+	    board.printScoreBoard();
+	    std::cout << std::endl;
+    }
+
+    getchar();
+
+    return 0;
 }

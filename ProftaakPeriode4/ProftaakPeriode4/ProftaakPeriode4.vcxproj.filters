@@ -25,6 +25,12 @@
     <Filter Include="Source Files\View">
       <UniqueIdentifier>{3f894ff1-3c57-4b97-a2b2-983619b3cc74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Score">
+      <UniqueIdentifier>{58e203c0-7050-4ec9-98c4-27c3878df8fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Score">
+      <UniqueIdentifier>{25ff7e9c-5149-4593-8f25-d768c82f838c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +42,12 @@
     <ClCompile Include="View.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Source Files\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreBoard.cpp">
+      <Filter>Source Files\Score</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Model.h">
@@ -44,10 +56,11 @@
     <ClInclude Include="View.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Score.h">
+      <Filter>Header Files\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreBoard.h">
+      <Filter>Header Files\Score</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
