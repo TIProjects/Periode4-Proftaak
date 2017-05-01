@@ -5,8 +5,7 @@ class Score
 {
     public:
         Score();
-        void addScore(int);
-        void reduceScore(int);
+        void changeScore(int);
         int returnScore();
     private:
         unsigned int _score;

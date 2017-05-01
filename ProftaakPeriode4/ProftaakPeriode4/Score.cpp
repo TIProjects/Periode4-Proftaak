@@ -5,14 +5,17 @@ Score::Score()
     _score = 0;
 }
 
-void Score::addScore(int plusScore)
+//Score can't get below zero.
+void Score::changeScore(int difScore)
 {
-    _score += plusScore;
-}
-
-void Score::reduceScore(int minScore)
-{
-    _score -= minScore;
+    int score = _score + difScore;
+    
+    if (score <= 0)
+    {
+        _score = 0;
+        return;
+    }
+    _score += difScore;
 }
 
 int Score::returnScore()

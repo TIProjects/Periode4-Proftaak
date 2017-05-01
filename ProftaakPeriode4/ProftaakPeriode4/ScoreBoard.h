@@ -1,5 +1,6 @@
 #pragma once
 #include "Score.h"
+#include <vector>
 
 class ScoreBoard
 {
@@ -9,8 +10,7 @@ class ScoreBoard
         void printScoreBoard();
 
     private:
-        void sortArray();
         void checkArray();
         int _amountOfScores;
-        int _scores[11];
+        std::vector<int> _scores;
 };
