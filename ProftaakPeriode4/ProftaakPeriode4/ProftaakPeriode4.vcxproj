@@ -150,6 +150,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
+    <ClCompile Include="Source Files\Score\Score.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>

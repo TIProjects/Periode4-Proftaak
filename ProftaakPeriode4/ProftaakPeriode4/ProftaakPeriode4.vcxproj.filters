@@ -1,70 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\Model">
-      <UniqueIdentifier>{11e21160-aa6a-4c86-aff6-27d904cc1639}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model">
-      <UniqueIdentifier>{eef651e3-ded0-43aa-8fbd-a8ef6a1795ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\View">
-      <UniqueIdentifier>{b034ed1a-37b9-4930-b7db-291a748c22dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\View">
-      <UniqueIdentifier>{3f894ff1-3c57-4b97-a2b2-983619b3cc74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Score">
-      <UniqueIdentifier>{58e203c0-7050-4ec9-98c4-27c3878df8fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Score">
-      <UniqueIdentifier>{25ff7e9c-5149-4593-8f25-d768c82f838c}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="Lanes.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="ScoreBoard.cpp" />
+    <ClCompile Include="View.cpp" />
+    <ClCompile Include="Source Files\Score\Score.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="View.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="Score.cpp">
-      <Filter>Source Files\Score</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreBoard.cpp">
-      <Filter>Source Files\Score</Filter>
-    <ClCompile Include="Lanes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="Score.h">
-      <Filter>Header Files\Score</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreBoard.h">
-      <Filter>Header Files\Score</Filter>
-    <ClInclude Include="Lanes.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
+    <ClInclude Include="Score.h" />
+    <ClInclude Include="Lanes.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ScoreBoard.h" />
+    <ClInclude Include="View.h" />
   </ItemGroup>
 </Project>
