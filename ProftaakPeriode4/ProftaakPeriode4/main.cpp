@@ -2,7 +2,7 @@
 #include "iostream"
 
 int main() {
-	std::cout << "Test" << std::endl << "Panncake";
+	std::cout << "Test" << std::endl;
 	getchar();
 	return 0;
 }
