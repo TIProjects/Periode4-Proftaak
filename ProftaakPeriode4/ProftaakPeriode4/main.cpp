@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "main.h"
 #include "iostream"
 
@@ -7,5 +8,13 @@
 int main() {
 	std::cout << "Test" << std::endl;
 	getchar();
+=======
+#include "Model.h"
+#include "View.h"
+
+int main() {
+	Model model = Model();
+	View view = View(model);
+>>>>>>> a3198cc4071857c9e7fe7c62ec4ec05b54623359
 	return 0;
 }
