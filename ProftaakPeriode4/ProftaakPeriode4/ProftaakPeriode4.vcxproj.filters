@@ -37,7 +37,7 @@
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{d4976496-9021-491c-93b9-42d7fb0576ac}</UniqueIdentifier>
     </Filter>
-	<Filter Include="Header Files\Lanes">
+    <Filter Include="Header Files\Lanes">
       <UniqueIdentifier>{c2f14859-e4a3-4b78-9f19-32712f107464}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Model">
