@@ -9,12 +9,12 @@ ScoreBoard::ScoreBoard()
     _amountOfScores = 0;
 }
 
+//Adds the new score and directly sorts the list
 void ScoreBoard::addScore(Score score)
 {
     _scores.push_back(score.returnScore());
-    std::sort(_scores.begin(),_scores.end(), std::greater<>());
+    std::sort(_scores.begin(), _scores.end(), std::greater<>());
 
-    
     _amountOfScores++;
     ScoreBoard::checkArray();
 }

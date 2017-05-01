@@ -6,7 +6,7 @@
 class Model {
 	public:
 		Model();
-		void update(int timeDiff);
 
 		std::vector<Player> _players;
+		void update(int deltaTime);
 };
