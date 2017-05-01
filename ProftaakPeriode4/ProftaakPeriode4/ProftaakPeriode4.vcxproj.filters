@@ -47,6 +47,8 @@
     </ClCompile>
     <ClCompile Include="ScoreBoard.cpp">
       <Filter>Source Files\Score</Filter>
+    <ClCompile Include="Lanes.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +63,8 @@
     </ClInclude>
     <ClInclude Include="ScoreBoard.h">
       <Filter>Header Files\Score</Filter>
+    <ClInclude Include="Lanes.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
