@@ -1,19 +1,72 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Lanes.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Score.cpp" />
-    <ClCompile Include="ScoreBoard.cpp" />
-    <ClCompile Include="View.cpp" />
-    <ClCompile Include="Source Files\Score\Score.cpp" />
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lanes.cpp">
+      <Filter>Source Files\Lanes</Filter>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreBoard.cpp">
+      <Filter>Source Files\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Source Files\Score</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Score.h" />
-    <ClInclude Include="Lanes.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="ScoreBoard.h" />
-    <ClInclude Include="View.h" />
+    <ClInclude Include="ScoreBoard.h">
+      <Filter>Header Files\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Header Files\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Lanes.h">
+      <Filter>Header Files\Lanes</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{75c95ee0-9977-4e83-82a8-74cca66f517d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{1dc7219f-661f-42d9-8295-5aa02fced060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lanes">
+      <UniqueIdentifier>{c2f14859-e4a3-4b78-9f19-32712f107464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{a1333fcc-87b2-494a-ab23-f4d9ad4a0c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Score">
+      <UniqueIdentifier>{37bd51cf-db2d-4768-85be-665761ad058d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{9dd1b347-790b-4e09-80bd-c5baced5a6ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lanes">
+      <UniqueIdentifier>{25c3414b-1742-4321-b3ae-dcb8e519a5b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Score">
+      <UniqueIdentifier>{614e0ca1-c9e5-4b12-9e1a-d96a68b9b731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{2e85ee14-1ddf-481c-8bda-9eac2936b1dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{bdfa273e-8ae7-499f-a859-b01f2ab52db1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

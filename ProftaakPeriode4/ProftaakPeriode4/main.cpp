@@ -6,6 +6,7 @@
 
 int main() {
     Model model = Model();
-    View view = View(model);
+    View view = View(&model);
+
     return 0;
 }
