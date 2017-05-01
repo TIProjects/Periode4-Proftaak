@@ -3,22 +3,28 @@
 #include "View.h"
 #include "Score.h"
 #include "ScoreBoard.h"
+#include <GL\freeglut.h>
+#include "Idle.h"
+#include "Lanes.h"
 
-int main() {
-    Model model = Model();
-    View view = View(&model);
+void Test()
+{
 
-    Score score = Score();
-    ScoreBoard board = ScoreBoard();
+	Lanes lanes = Lanes(3);
+}
 
-    for(int i = 0; i < 10; i++)
-    {
-        score.changeScore(100);
-        board.addScore(score);
-        board.printScoreBoard();
-        std::cout << std::endl;
-    }
-    getchar();
+int main(int argc, char* argv[]) {
+	Test();
 
-    return 0;
+	glutInit(&argc, argv);
+
+	Model model = Model();
+	View view = View(&model);
+
+	glutDisplayFunc(window);
+	glutReshapeFunc(reshape);
+	glutIdleFunc(idle);
+
+	glutMainLoop();
+	return 0;
 }

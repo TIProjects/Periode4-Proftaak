@@ -1,4 +1,6 @@
 #include "Model.h"
+#include <GL\freeglut.h>
+#include "Idle.h"
 
 Model::Model()
 {

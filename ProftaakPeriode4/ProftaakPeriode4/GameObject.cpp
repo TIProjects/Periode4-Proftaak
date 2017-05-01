@@ -4,13 +4,8 @@
 GameObject::GameObject(std::vector<Matrix3GLf> vertices)
 {
 	_vertices = vertices;
-	_position.x = 0.0f;
-	_position.y = 0.0f;
-	_position.z = 0.0f;
-	
-	_rotation.x = 0.0f;
-	_rotation.y = 0.0f;
-	_rotation.z = 0.0f;
+	_position = Matrix3GLf();
+	_rotation = Matrix3GLf();
 }
 
 void GameObject::update(int timeDiff)
