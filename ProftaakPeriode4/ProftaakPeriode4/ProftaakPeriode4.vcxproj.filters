@@ -125,5 +125,25 @@
     <ClInclude Include="CameraComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Button.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\GUI-Design.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\LifeBar.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\LifeFrame.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\LifeFrameSegment.psd">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

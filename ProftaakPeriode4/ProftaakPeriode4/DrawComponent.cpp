@@ -1,5 +1,6 @@
-#include "DrawComponent.h"
 #include <GL/freeglut.h>
+#include "DrawComponent.h"
+
 
 DrawComponent::DrawComponent(GameObject * parent) : Component(DRAW_COMPONENT, parent)
 {
@@ -11,9 +12,8 @@ DrawComponent::~DrawComponent()
 }
 
 
-void DrawComponent::Update(int deltaTime)
+void DrawComponent::Draw()
 {
-	// todo deltaTime not implemented
 	for (ObjGroup * group : groups)
 	{
 		for (Face face : group->faces)

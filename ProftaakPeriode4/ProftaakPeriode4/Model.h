@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+// #include "Component.h"
 #include "GameObject.h"
 
 class Model {
@@ -14,7 +15,7 @@ public:
 	void update();
 
 	// Vector of every GameObject present in the model
-	std::vector<GameObject> _gameObjects;
+	std::vector<GameObject*> _gameObjects;
 private:
 	// The last time a frame was rendered in milliseconds
 	int _lastTime;

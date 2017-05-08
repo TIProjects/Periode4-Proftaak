@@ -1,6 +1,6 @@
 #pragma once
-#include "Component.h"
 #include <vector>
+#include "Component.h"
 #include "Vec.h"
 #include "ObjectFactory.h"
 
@@ -8,14 +8,13 @@
  * Class for drawing gameObjects
  * Created by ObjectFactory
  */
-class DrawComponent : Component
+class DrawComponent : public Component
 {
 public:
 	DrawComponent(GameObject * parent);
 	~DrawComponent();
 
-	// drawing (deltaTime not implemented)
-	void Update(int deltaTime) override;
+	void Draw();
 
 	std::vector<Vec3f>	vertices;
 	std::vector<Vec3f>	normals;

@@ -1,6 +1,8 @@
 #include <GL/freeglut.h>
+// #include "Component.h"
 #include "CameraComponent.h"
 #include "Vec.h"
+#include "Input.h"
 
 CameraComponent::CameraComponent(int width, int height, int nearPlane, int farPlane, int fov, GameObject * parent) 
 : Component(CAMERA_COMPONENT, parent)
@@ -24,7 +26,7 @@ void CameraComponent::LateUpdate(int deltaTime)
 
 void CameraComponent::Update(int deltaTime)
 {
-	Vec2i mousePos(2, 2); // TODO get from input
+	Vec2i mousePos(Mouse::GetMousePos());
 
 	// Calculate mouse movement and reset mouse
 	int dx = mousePos.x - _screenWidth/ 2;

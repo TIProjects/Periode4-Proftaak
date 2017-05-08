@@ -1,3 +1,4 @@
+// #include "Component.h"
 #include "Input.h"
 /*
 * bool arrays, are read by components
@@ -103,7 +104,7 @@ void Mouse::MoveMouse(int x, int y)
 /*
 * returns mouseposition vec2i as const pointer
 */
-const Vec2i Mouse::GetMousePos()
+Vec2i Mouse::GetMousePos()
 {
 	return mousePos;
 }

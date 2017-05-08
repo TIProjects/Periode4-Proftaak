@@ -1,5 +1,6 @@
 #pragma once
 #include <GL\freeglut.h>
+// #include "Component.h"
 #include "Model.h"
 
 class View {

@@ -1,10 +1,15 @@
 #pragma once
 #include <list>
+// #include "Component.h"
 #include "TextureLoader.h"
 #include "DrawComponent.h"
 
-// needed for unknown reasons todo find out why this is needed!
+// Forward decleration needed because DrawComponent needs this header
+// While this header also needs the DrawComponent header.
+// Since they both need eachother they should include one another, but 
+// this is impossible...
 class DrawComponent;
+class GameObject;
 
 /*
  * Class needed for creating a gameobject
@@ -64,4 +69,4 @@ void loadMaterialFile(const std::string &fileName, const std::string &dirName, D
  * \fileName the location of the .obj file which will be loaded!
  * returns DrawComponent with loaded .obj data
  */
-DrawComponent * LoadComponent(const std::string &fileName);
+DrawComponent * LoadComponent(const std::string &fileName, GameObject * gameObject);
