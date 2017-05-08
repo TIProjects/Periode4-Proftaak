@@ -1,10 +1,13 @@
 #pragma once
 #include "GameObject.h"
 
+class GameObject;
+
 // Enum which will indicate the functionality of a Component
 enum ComponentID
 {
-	CAMERA_COMPONENT
+	CAMERA_COMPONENT,
+	DRAW_COMPONENT
 };
 
 class Component

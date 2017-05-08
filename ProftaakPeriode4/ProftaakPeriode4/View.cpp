@@ -1,6 +1,9 @@
 #include "View.h"
 #include <GL\freeglut.h>
 #include "CameraComponent.h"
+#include <GL/freeglut.h>
+#include "DrawComponent.h"
+#include <iostream>
 
 View::View(Model * model)
 {
@@ -27,10 +30,10 @@ View::View()
 	_camFar = 50.0f;
 }
 
-void View::update()
+void View::UpdateView()
 {
-	glClearColor(100, 100, 150, 0);
 
+	glClearColor(100, 100, 150, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
@@ -51,8 +54,8 @@ void View::update()
 			break;
 		}
 	}
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	gluPerspective(90.0f, _screenWidth / (float)_screenHeight, _camNear, _camFar);
+	glPolygonMode(GL_FRONT, GL_FILL);
 
 	glEnable(GL_DEPTH_TEST);
 

@@ -14,9 +14,17 @@ CameraComponent::CameraComponent(int width, int height, int nearPlane, int farPl
 	_fov = fov;
 }
 
+CameraComponent::~CameraComponent()
+{
+}
+
+void CameraComponent::LateUpdate(int deltaTime)
+{
+}
+
 void CameraComponent::Update(int deltaTime)
 {
-	Vec2f mousePos(2, 2); // TODO get from input
+	Vec2i mousePos(2, 2); // TODO get from input
 
 	// Calculate mouse movement and reset mouse
 	int dx = mousePos.x - _screenWidth/ 2;

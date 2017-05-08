@@ -35,7 +35,7 @@
 //	Lanes(int count);
 //
 //	// Update the lanes
-//	void update();
+//	void UpdateView();
 //
 //	// The amount of lanes
 //	int _count; 

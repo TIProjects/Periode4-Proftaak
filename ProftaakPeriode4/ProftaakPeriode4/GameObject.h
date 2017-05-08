@@ -4,6 +4,9 @@
 #include <vector>
 #include "Component.h"
 
+class Component;
+enum ComponentID;
+
 class GameObject {
 public:
 	/*
