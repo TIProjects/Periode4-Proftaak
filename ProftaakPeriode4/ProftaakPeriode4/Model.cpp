@@ -1,12 +1,21 @@
 #include "Model.h"
 #include <GL\freeglut.h>
-#include "Idle.h"
 
 Model::Model()
 {
 }
 
-void Model::update(int timeDiff)
+int Model::getDeltaTime(const int* delta)
 {
-	// todo add logics for update
+	delta = &deltaTime;
+	return *delta;
+}
+
+void Model::update()
+{
+	int currentTime = glutGet(GLUT_ELAPSED_TIME);
+	deltaTime = (currentTime - lastTime) / 1000;
+	lastTime = currentTime;
+
+	glutPostRedisplay();
 }
