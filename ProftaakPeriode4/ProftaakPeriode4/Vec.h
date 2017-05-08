@@ -33,3 +33,20 @@ public:
 	Vec2f(Vec2f &other);
 	float& operator [](int);
 };
+
+class Vec2i
+{
+public:
+	union
+	{
+		struct
+		{
+			int x, y;
+		};
+		int v[2];
+	};
+	Vec2i();
+	Vec2i(int x, int y);
+	Vec2i(Vec2i &other);
+	int& operator [](int);
+};
