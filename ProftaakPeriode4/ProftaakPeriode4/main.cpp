@@ -3,6 +3,7 @@
 #include "Lanes.h"
 
 #include <GL\freeglut.h>
+#include "CameraComponent.h"
 
 Model model;
 View view;

@@ -1,9 +1,10 @@
 #pragma once
+#include "GameObject.h"
 
 // Enum which will indicate the functionality of a Component
 enum ComponentID
 {
-
+	CAMERA_COMPONENT
 };
 
 class Component
@@ -12,7 +13,9 @@ public:
 	// Base Constructor for a component
 	// if a class overrides this function it's important to
 	// still call this function to make sure the id is set
-	explicit Component(ComponentID id);
+	// @param Component id: the if of the Component
+	// @param GameObject * parent: the paren GameObject of this Component
+	explicit Component(ComponentID id, GameObject * parent);
 
 	// Base Destructor for a component
 	// TODO Add base Destructor functionality
@@ -30,6 +33,8 @@ public:
 
 	// The identifier of the component
 	ComponentID _id;
-private:
+protected:
+	// Pointer to the parent GameObject of this Component
+	GameObject * _parent;
 };
 

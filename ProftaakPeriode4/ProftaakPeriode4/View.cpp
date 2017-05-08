@@ -1,5 +1,6 @@
 #include "View.h"
 #include <GL\freeglut.h>
+#include "CameraComponent.h"
 
 
 View::View(Model * model)
@@ -77,7 +78,8 @@ void drawCube()
 
 void View::update()
 {
-	glClearColor(0, 0, 0, 0);
+	glClearColor(100, 100, 150, 0);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
@@ -87,12 +89,19 @@ void View::update()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluPerspective(90.0f, _screenWidth / (float)_screenHeight, _camNear, _camFar);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	// Use the Camera GameObject to create a view
+	for (GameObject gameObject : _modelPtr->_gameObjects)
+	{
+		CameraComponent * camera = dynamic_cast<CameraComponent *>(gameObject.GetComponent(CAMERA_COMPONENT));
+		if(camera != nullptr)
+		{
+			// Found camera, apply it's view and stop looping the list
+			camera->ApplyCamera();
+			break;
+		}
+	}
 
-	gluLookAt(0, 5, 5,
-		0, 0, 0,
-		0, 1, 0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	//Models are drawn here..
 //#ifdef DEBUG
@@ -102,8 +111,6 @@ void View::update()
 	drawCube();
 	glPopMatrix();
 //#endif // DEBUG
-
-
 
 	glEnable(GL_DEPTH_TEST);
 

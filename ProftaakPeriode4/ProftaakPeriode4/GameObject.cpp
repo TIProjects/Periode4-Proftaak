@@ -1,7 +1,7 @@
 ﻿#include "GameObject.h"
 
 
-GameObject::GameObject(std::vector<Vec3f> vertices)
+GameObject::GameObject()
 {
 	_position = Vec3f();
 	_rotation = Vec3f();

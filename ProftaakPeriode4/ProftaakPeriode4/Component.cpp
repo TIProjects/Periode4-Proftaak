@@ -1,8 +1,9 @@
 #include "Component.h"
 
-Component::Component(ComponentID id)
+Component::Component(ComponentID id, GameObject * parent)
 {
 	_id = id;
+	_parent = parent;
 }
 
 Component::~Component()

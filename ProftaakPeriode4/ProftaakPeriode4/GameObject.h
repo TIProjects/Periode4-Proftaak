@@ -10,7 +10,7 @@ public:
 	* Constructor for creating object
 	* @param vertices as Vector with Matrix3GLf
 	*/
-	GameObject(std::vector<Vec3f> vertices);
+	GameObject();
 	/*
 	* Update function will call the update function
 	* of every Component in this GameObject
