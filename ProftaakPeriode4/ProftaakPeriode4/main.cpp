@@ -1,34 +1,40 @@
+#include "iostream"
 #include "Model.h"
 #include "View.h"
+#include "Score.h"
+#include "ScoreBoard.h"
+#include <GL\freeglut.h>
 #include "Lanes.h"
 
-#include <GL\freeglut.h>
-
-Model model;
-View view;
-
-void display()
+void Test()
 {
-	view.update();
+	Lanes lanes = Lanes(3);
 }
 
-void reshape(int w, int h)
+void window()
 {
-	view.reshape(w, h);
+    
+}
+
+void reshape(int, int)
+{
+    
 }
 
 void idle()
 {
-	
+    
 }
 
 int main(int argc, char* argv[]) {
+	Test();
+
 	glutInit(&argc, argv);
 
-	model = Model();
-	view = View(&model);
+	Model model = Model();
+	View view = View(&model);
 
-	glutDisplayFunc(display);
+	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);
 

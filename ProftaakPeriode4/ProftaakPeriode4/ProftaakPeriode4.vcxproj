@@ -150,17 +150,21 @@
     <ClCompile Include="Lanes.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="View.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Lanes.h" />
     <ClInclude Include="Matrix3GLf.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="View.h" />
+    <ClInclude Include="GameObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
