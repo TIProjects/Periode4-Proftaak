@@ -81,9 +81,6 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Score.cpp">
-      <Filter>Source Files\Score</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
@@ -105,11 +102,11 @@
     <ClCompile Include="ScoreBoard.cpp">
       <Filter>Source Files\Score</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Source Files\Score</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Score.h">
-      <Filter>Header Files\Score</Filter>
-    </ClInclude>
     <ClInclude Include="View.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
@@ -135,6 +132,9 @@
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="ScoreBoard.h">
+      <Filter>Header Files\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
       <Filter>Header Files\Score</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,19 +3,32 @@
 
 Model::Model()
 {
+	_lastTime = 0;
 }
 
 int Model::getDeltaTime(const int* delta)
 {
-	delta = &deltaTime;
-	return *delta;
+    return 0;
 }
 
 void Model::update()
 {
+	// Calculate the deltaTime
 	int currentTime = glutGet(GLUT_ELAPSED_TIME);
-	deltaTime = (currentTime - lastTime) / 1000;
-	lastTime = currentTime;
+	int deltaTime = (currentTime - _lastTime) / 1000;
+	_lastTime = currentTime;
+
+	// Call the Update of every GameObject
+	for (GameObject gameObject : _gameObjects)
+	{
+		gameObject.Update(deltaTime);
+	}
+
+	// Call the LateUpdate of every Gameobject afterwards
+	for(GameObject gameObject : _gameObjects)
+	{
+		gameObject.LateUpdate(deltaTime);
+	}
 
 	glutPostRedisplay();
 }

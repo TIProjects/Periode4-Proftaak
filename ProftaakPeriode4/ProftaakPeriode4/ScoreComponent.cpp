@@ -1,4 +1,4 @@
-#include "Score.h"
+#include "ScoreComponent.h"
 
 ScoreComponent::ScoreComponent() : Component(SCORE_COMPONENT)
 {

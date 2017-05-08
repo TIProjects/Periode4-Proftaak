@@ -7,11 +7,11 @@ class ScoreComponent : Component
     public:
         ScoreComponent();
 
-    virtual ~ScoreComponent()
-    {
-    }
+        virtual ~ScoreComponent()
+        {
+        }
 
-    void changeScore(int);
+        void changeScore(int);
         int returnScore();
 
         void Update(int deltaTime) override;

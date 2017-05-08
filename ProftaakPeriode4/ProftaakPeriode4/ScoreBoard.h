@@ -1,5 +1,5 @@
 #pragma once
-#include "Score.h"
+#include "ScoreComponent.h"
 #include <vector>
 
 class ScoreBoard
