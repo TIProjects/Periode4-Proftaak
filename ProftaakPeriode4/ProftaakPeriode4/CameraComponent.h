@@ -9,7 +9,7 @@ public:
 
 	void LateUpdate(int deltaTime) override;
 	void Update(int deltaTime) override;
-	void ApplyCamera();
+	void ApplyCamera() const;
 private:
 	int _screenWidth;
 	int _screenHeight;

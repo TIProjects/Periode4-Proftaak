@@ -44,3 +44,24 @@ float& Vec2f::operator [](int index)
 {
 	return v[index];
 }
+
+Vec2i::Vec2i(int x, int y)
+{
+	this->x = x;
+	this->y = y;
+}
+Vec2i::Vec2i()
+{
+	this->x = 0;
+	this->y = 0;
+}
+Vec2i::Vec2i(Vec2i &other)
+{
+	this->x = other.x;
+	this->y = other.y;
+}
+
+int& Vec2i::operator [](int index)
+{
+	return v[index];
+}
