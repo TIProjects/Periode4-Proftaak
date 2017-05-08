@@ -8,8 +8,7 @@ Score::Score()
 //Score can't get below zero.
 void Score::changeScore(int difScore)
 {
-    int score = _score + difScore;
-    
+    int score = _score + difScore;    
     if (score <= 0)
     {
         _score = 0;

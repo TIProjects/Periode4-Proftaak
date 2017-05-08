@@ -102,6 +102,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ScoreBoard.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>Header Files\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>Header Files\View</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Header Files\Control</Filter>

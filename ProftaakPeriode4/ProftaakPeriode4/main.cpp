@@ -4,12 +4,26 @@
 #include "Score.h"
 #include "ScoreBoard.h"
 #include <GL\freeglut.h>
-#include "Idle.h"
 #include "Lanes.h"
 
 void Test()
 {
 	Lanes lanes = Lanes(3);
+}
+
+void window()
+{
+    
+}
+
+void reshape(int, int)
+{
+    
+}
+
+void idle()
+{
+    
 }
 
 int main(int argc, char* argv[]) {
