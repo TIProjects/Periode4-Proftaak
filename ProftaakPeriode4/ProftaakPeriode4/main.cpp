@@ -2,14 +2,8 @@
 #include "Model.h"
 #include "View.h"
 #include "Score.h"
-#include "ScoreBoard.h"
 #include <GL\freeglut.h>
 #include "Lanes.h"
-
-void Test()
-{
-	Lanes lanes = Lanes(3);
-}
 
 void window()
 {
@@ -27,8 +21,6 @@ void idle()
 }
 
 int main(int argc, char* argv[]) {
-	Test();
-
 	glutInit(&argc, argv);
 
 	Model model = Model();

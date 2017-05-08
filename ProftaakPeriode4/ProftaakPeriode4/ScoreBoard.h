@@ -6,7 +6,7 @@ class ScoreBoard
 {
     public: 
         ScoreBoard();
-        void addScore(Score);
+        void addScore(ScoreComponent);
         void printScoreBoard();
 
     private:

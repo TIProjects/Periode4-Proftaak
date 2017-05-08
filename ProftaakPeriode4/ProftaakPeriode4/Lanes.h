@@ -1,3 +1,4 @@
+/*
 #pragma once
 #include <vector>
 #include <GL/freeglut.h>
@@ -6,7 +7,7 @@
 class Lane : public GameObject
 {
 public:
-	Lane(std::vector<Matrix3GLf> vertices);
+	Lane(std::vector<Vec3f> vertices);
 
 	// Add a GameObject to the lane
 	// @param GameObject *: The pointer to the gameObject wich will be added to the lane
@@ -45,3 +46,4 @@ public:
 private:
 
 };
+*/

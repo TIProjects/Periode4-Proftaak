@@ -1,38 +1,42 @@
 ﻿#include "GameObject.h"
 
 
-GameObject::GameObject(std::vector<Matrix3GLf> vertices)
+GameObject::GameObject(std::vector<Vec3f> vertices)
 {
-	_vertices = vertices;
-	_position = Matrix3GLf();
-	_rotation = Matrix3GLf();
+	_position = Vec3f();
+	_rotation = Vec3f();
 }
 
-void GameObject::update(int timeDiff)
+void GameObject::update(int deltaTime)
 {
-
+	for (Component component : _components)
+	{
+		component.Update(deltaTime);
+	}
 }
 
-void GameObject::move(Matrix3GLf direction, GLfloat magnitude)
+void GameObject::lateUpdate(int deltaTime)
 {
-	_position.x += direction.x * magnitude;
-	_position.y += direction.y * magnitude;
-	_position.z += direction.z * magnitude;
+	for(Component component : _components)
+	{
+		component.LateUpdate(deltaTime);
+	}
 }
 
-void GameObject::setPosition(Matrix3GLf position)
+
+void GameObject::setPosition(Vec3f position)
 {
-	_position = position;
+	_position = Vec3f(position);
 }
 
-void GameObject::rotate(Matrix3GLf rotation)
+void GameObject::rotate(Vec3f rotation)
 {
 	_rotation.x += rotation.x;
 	_rotation.y += rotation.y;
 	_rotation.z += rotation.z;
 }
 
-void GameObject::setRotation(Matrix3GLf rotation)
+void GameObject::setRotation(Vec3f rotation)
 {
-	_rotation = rotation;
+	_rotation = Vec3f(rotation);
 }

@@ -1,6 +1,7 @@
+/*
 #include "Lanes.h"
 
-Lane::Lane(std::vector<Matrix3GLf> vertices) : GameObject(vertices)
+Lane::Lane(std::vector<Vec3f> vertices) : GameObject(vertices)
 {
 	
 }
@@ -44,16 +45,16 @@ int Lane::isInLane(GameObject* gameObject)
 
 Lanes::Lanes(int count)
 {
-	std::vector<Matrix3GLf> vertices;
-	vertices.push_back(Matrix3GLf( 0.0f,  0.0f, 0.0f   ));
-	vertices.push_back(Matrix3GLf( 10.0f, 0.0f, 0.0f   ));
-	vertices.push_back(Matrix3GLf( 10.0f, 0.0f, -50.0f ));
-	vertices.push_back(Matrix3GLf( 0.0f,  0.0f, -50.0f ));
-
+	std::vector<Vec3f> vertices;
+	vertices.push_back(Vec3f( 0.0f,  0.0f, 0.0f   ));
+	vertices.push_back(Vec3f( 10.0f, 0.0f, 0.0f   ));
+	vertices.push_back(Vec3f( 10.0f, 0.0f, -50.0f ));
+	vertices.push_back(Vec3f( 0.0f,  0.0f, -50.0f ));
+    
 	// Assign members
 	_count = count;
 
-	Matrix3GLf basePosition = Matrix3GLf(10.0f, 0.0f, 0.0f);
+	Vec3f basePosition = Vec3f(10.0f, 0.0f, 0.0f);
 
 	// Fill the list of lanes
 	for(int i = 0; i < count; i++)
@@ -72,3 +73,4 @@ void Lanes::update()
 {
 	// TODO update
 }
+*/

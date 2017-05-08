@@ -1,4 +1,6 @@
 #include "View.h"
+#include <GL\freeglut.h>
+
 
 View::View(Model * model)
 {

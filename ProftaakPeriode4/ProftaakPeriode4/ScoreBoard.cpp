@@ -10,7 +10,7 @@ ScoreBoard::ScoreBoard()
 }
 
 //Adds the new score and directly sorts the list
-void ScoreBoard::addScore(Score score)
+void ScoreBoard::addScore(ScoreComponent score)
 {
     _scores.push_back(score.returnScore());
     std::sort(_scores.begin(), _scores.end(), std::greater<>());

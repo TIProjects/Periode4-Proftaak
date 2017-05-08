@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include "Player.h"
 
 class Model {
 	public:
@@ -12,5 +11,4 @@ class Model {
 
 		int deltaTime;
 		int lastTime;
-		std::vector<Player> _players;
 };
