@@ -5,47 +5,17 @@
 
 View::View(Model * model, int argc, char * argv[])
 {
-	_screenWidth = 1280;
-	_screenHeight = 720;
-
-	_camNear = 0.01f;
-	_camFar = 50.0f;
-
 	_modelPtr = model;
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(_screenWidth, _screenHeight);
+	glutInitWindowSize(1280, 720);
 	glutInit(&argc, argv);
 
-
 	glutCreateWindow("Cube_Runner");
-
-
-	// Test GameObjects
-	// TODO: remove
-	_modelPtr->_lastTime = 0;
-
-	GameObject * camera = new GameObject();
-	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 30.0f, 90.0f);
-	camera->AddComponent(cameraComponent);
-
-	_modelPtr->_gameObjects.push_back(camera);
-
-	GameObject * testObject = new GameObject();
-	DrawComponent * drawComponent = LoadComponent("Assets//Models//TestCube//Cube.obj");
-	testObject->_position.z -= 3;
-	testObject->AddComponent(drawComponent);
-
-	_modelPtr->_gameObjects.push_back(testObject);
 }
 
 View::View()
 {
-	_screenWidth = 1280;
-	_screenHeight = 720;
-
-	_camNear = 0.01f;
-	_camFar = 50.0f;
 	_modelPtr = nullptr;
 }
 

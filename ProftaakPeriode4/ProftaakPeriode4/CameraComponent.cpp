@@ -34,10 +34,6 @@ CameraComponent::~CameraComponent()
 {
 }
 
-void CameraComponent::LateUpdate(int deltaTime)
-{
-}
-
 void CameraComponent::Update(int deltaTime)
 {
 	Vec2i mousePos(Mouse::GetMousePos());
@@ -46,7 +42,7 @@ void CameraComponent::Update(int deltaTime)
 	// TODO not this...
 	if (deltaTime == 0) deltaTime = 1;
 
-	const float speed = 0.01;
+	const float speed = 0.01f;
 	if (keys['a']) Move(0, deltaTime*speed);
 	if (keys['d']) Move(180, deltaTime*speed);
 	if (keys['w']) Move(90, deltaTime*speed);

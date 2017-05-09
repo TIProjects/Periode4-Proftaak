@@ -1,5 +1,6 @@
 #pragma once
 
+// 3 dimensional float matrix
 class Vec3f
 {
 public:
@@ -17,6 +18,7 @@ public:
 	float& operator [](int);
 };
 
+// 2 dimensional float matrix
 class Vec2f
 {
 public:
@@ -34,6 +36,7 @@ public:
 	float& operator [](int);
 };
 
+// 2 dimensional int matrix
 class Vec2i
 {
 public:

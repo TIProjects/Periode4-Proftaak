@@ -14,6 +14,17 @@ public:
 	// of every GameObject present in the model
 	void update();
 
+	// Initialise a simple set of test objects
+	// by adding a few GameObjects to the GameObject vector
+	// NOTE: should ONLY be called AFTER an OpenGL context has been created
+	// and ONLY ONCE
+	void InitTestObjects();
+
+	// Initialise the gameLogic
+	// NOTE: should ONLY be called AFTER an OpenGL context has been created
+	// and ONLY ONCE
+	void Init();
+
 	// Vector of every GameObject present in the model
 	std::vector<GameObject*> _gameObjects;
 

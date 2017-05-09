@@ -14,9 +14,12 @@ class GameObject;
 class DrawComponent : public Component
 {
 public:
+	// Constructor
 	DrawComponent();
 	~DrawComponent();
 
+	// Function which will draw this object 
+	// using it's vertices and texcoords
 	void Draw();
 
 	std::vector<Vec3f>	vertices;
