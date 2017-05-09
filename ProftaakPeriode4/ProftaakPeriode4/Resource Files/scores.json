@@ -1,0 +1,21 @@
+{
+    "amount": 4,
+    "scores": [
+        {
+            "name": "Gijs",
+            "points": 400
+        },
+        {
+            "name": "Gijs",
+            "points": 300
+        },
+        {
+            "name": "Gijs",
+            "points": 200
+        },
+        {
+            "name": "Gijs",
+            "points": 100
+        }
+    ]
+}

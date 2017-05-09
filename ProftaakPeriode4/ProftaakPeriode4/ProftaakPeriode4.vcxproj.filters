@@ -67,6 +67,9 @@
     <Filter Include="Header Files\Components">
       <UniqueIdentifier>{e6682769-1283-4e33-960c-ff00774e6bc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Json">
+      <UniqueIdentifier>{6fb1ecfd-49ca-4aec-8583-b84930eb62f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="ScoreComponent.h">
       <Filter>Header Files\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Header Files\Json</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

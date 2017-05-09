@@ -1,31 +1,33 @@
 #include "ScoreBoard.h"
+#include "json.hpp"
 #include <iostream>
 #include <algorithm>
 #include <functional>
+#include <fstream>
+#include <iterator>
+#include <string>
 
+std::string path = "Resource Files/scores.json";
 
 ScoreBoard::ScoreBoard()
 {
     _amountOfScores = 0;
 }
 
-//Adds the new score and directly sorts the list
 void ScoreBoard::addScore(ScoreComponent score)
 {
-    _scores.push_back(score.returnScore());
+    _scores.push_back(score);
     std::sort(_scores.begin(), _scores.end(), std::greater<>());
 
     _amountOfScores++;
     ScoreBoard::checkArray();
 }
 
-//Checks the array for more than 10 items.
-//If the array has more than 10 items it deletes the items that are past place 10.
 void ScoreBoard::checkArray()
 {
     if(_amountOfScores > 10)
     {
-        _scores[_amountOfScores - 1] = '/0';
+        _scores.erase(_scores.end());
         _amountOfScores--;
         checkArray();
     }
@@ -35,9 +37,47 @@ void ScoreBoard::printScoreBoard()
 {
     for(int i = 0; i < _amountOfScores; i++)
     {
-        std::cout << i+1 << " Score: " << _scores[i] << std::endl;
+        std::cout << i+1 << " Score: " << _scores[i].returnScore() << std::endl;
     }
 }
 
+void ScoreBoard::saveScore()
+{
+    nlohmann::json j;
+    j["amount"] = _amountOfScores;
 
+    for(int i = 0; i < _amountOfScores; i++)
+    {
+        j["scores"][i]["name"] = _scores[i].returnName();
+        j["scores"][i]["points"] = _scores[i].returnScore();
+    }
+
+    std::ofstream file(path);
+    file << std::setw(4) << j << std::endl;
+}
+
+void ScoreBoard::loadScore()
+{
+    std::ifstream file(path);
+    nlohmann::json j;
+
+    if (file.is_open())
+    {
+        ScoreComponent score;
+        file >> j;
+        _amountOfScores = j["amount"];
+        for(int i = 0; i < _amountOfScores; i++)
+        {
+            score = ScoreComponent();
+            score.changeName(j["scores"][i]["name"]);
+            score.changeScore(j["scores"][i]["points"]);
+            _scores.push_back(score);
+        }
+        checkArray();
+    }
+    else
+    {
+        std::cout << "Unable to open file" << std::endl;
+    }
+}
 

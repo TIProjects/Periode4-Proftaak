@@ -1,10 +1,15 @@
 #pragma once
 #include <type_traits>
 #include "Component.h"
+#include <string>
 
 class ScoreComponent : Component
 {
     public:
+
+        unsigned int _score;
+        std::string _name;
+
         ScoreComponent();
 
         virtual ~ScoreComponent()
@@ -12,10 +17,16 @@ class ScoreComponent : Component
         }
 
         void changeScore(int);
+        void changeName(std::string name);
+
+        std::string returnName();
         int returnScore();
 
         void Update(int deltaTime) override;
         void LateUpdate(int deltaTime) override;
-    private:
-        unsigned int _score;
+
+        bool operator > (const ScoreComponent& temp) const
+        {
+            return (_score > temp._score);
+        }
 };

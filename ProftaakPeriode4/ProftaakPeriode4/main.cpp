@@ -4,6 +4,7 @@
 #include "ScoreComponent.h"
 #include <GL\freeglut.h>
 #include "Lanes.h"
+#include "ScoreBoard.h"
 
 Model model;
 View view;
@@ -34,6 +35,11 @@ int main(int argc, char* argv[]) {
 
 	Model model = Model();
 	View view = View(&model);
+    ScoreComponent score = ScoreComponent();
+    ScoreBoard board = ScoreBoard();
+
+    board.loadScore();
+    board.printScoreBoard(); 
 
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
