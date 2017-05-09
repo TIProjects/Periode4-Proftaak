@@ -1,6 +1,7 @@
 #include "View.h"
-#include <GL\freeglut.h>
-
+#include <GL/freeglut.h>
+#include "DrawComponent.h"
+#include <iostream>
 
 View::View(Model * model)
 {
@@ -27,56 +28,9 @@ View::View()
 	_camFar = 50.0f;
 }
 
-void drawCube()
+void View::UpdateView()
 {
-	glColor3f(1, 0, 0);
-	glBegin(GL_QUADS);
-	//front
-	glVertex3f(-0.5, -0.5, -0.5);
-	glVertex3f(0.5, -0.5, -0.5);
-	glVertex3f(0.5, 0.5, -0.5);
-	glVertex3f(-0.5, 0.5, -0.5);
 
-	//left
-	glColor3f(0, 1, 0);
-	glVertex3f(-0.5, -0.5, 0.5);
-	glVertex3f(-0.5, -0.5, -0.5);
-	glVertex3f(-0.5, 0.5, -0.5);
-	glVertex3f(-0.5, 0.5, 0.5);
-
-	//back
-	glColor3f(1, 0, 0);
-	glVertex3f(-0.5, -0.5, 0.5);
-	glVertex3f(0.5, -0.5, 0.5);
-	glVertex3f(0.5, 0.5, 0.5);
-	glVertex3f(-0.5, 0.5, 0.5);
-
-	//right
-	glColor3f(0, 1, 0);
-	glVertex3f(0.5, -0.5, 0.5);
-	glVertex3f(0.5, -0.5, -0.5);
-	glVertex3f(0.5, 0.5, -0.5);
-	glVertex3f(0.5, 0.5, 0.5);
-
-	//top
-	glColor3f(0, 0, 1);
-	glVertex3f(-0.5, 0.5, -0.5);
-	glVertex3f(0.5, 0.5, -0.5);
-	glVertex3f(0.5, 0.5, 0.5);
-	glVertex3f(-0.5, 0.5, 0.5);
-
-	//bottom
-	glColor3f(0, 0, 1);
-	glVertex3f(-0.5, -0.5, -0.5);
-	glVertex3f(0.5, -0.5, -0.5);
-	glVertex3f(0.5, -0.5, 0.5);
-	glVertex3f(-0.5, -0.5, 0.5);
-
-	glEnd();
-}
-
-void View::update()
-{
 	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -94,21 +48,20 @@ void View::update()
 		0, 0, 0,
 		0, 1, 0);
 
-	//Models are drawn here..
-//#ifdef DEBUG
-	glPushMatrix();
-	//glTranslatef(posX, posY, posZ);
-	//glRotatef(rotation, 0, 1, 0);
-	drawCube();
-	glPopMatrix();
-//#endif // DEBUG
-
+	/*
+	 * for DrawComponent in beautifullcomponents:
+	 * glPushMatrix();
+	 *		draw that!
+	 * glPopMatrix();	
+	 */
 
 
 	glEnable(GL_DEPTH_TEST);
 
 	glutSwapBuffers();
 }
+
+
 
 void View::reshape(int w, int h)
 {

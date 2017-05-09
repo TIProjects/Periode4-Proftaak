@@ -4,6 +4,7 @@
 enum ComponentID
 {
 	SCORE_COMPONENT
+	DRAW_COMPONENT
 };
 
 class Component

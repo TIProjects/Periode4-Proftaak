@@ -7,7 +7,7 @@ public:
 	View(Model * model);
 	View();
 
-	void update();
+	void UpdateView();
 	void reshape(int w, int h);
 private:
 	int _screenWidth;
