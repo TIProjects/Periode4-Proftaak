@@ -16,5 +16,5 @@ namespace Keyboard
 namespace Mouse
 {
 	void MoveMouse(int x, int y);
-	const Vec2i GetMousePos();
+	Vec2i GetMousePos();
 }

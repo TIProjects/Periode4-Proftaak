@@ -1,4 +1,4 @@
-#include "iostream"
+#include "Component.h"
 #include "Model.h"
 #include "View.h"
 #include "ScoreBoard.h"
@@ -7,6 +7,7 @@
 #include <GL\freeglut.h>
 #include "Lanes.h"
 #include "Input.h"
+#include "CameraComponent.h"
 
 Model model;
 View view;
@@ -34,16 +35,18 @@ void idle()
 
 
 int main(int argc, char* argv[]) {
-	glutInit(&argc, argv);
 
-	Model model = Model();
-	View view = View(&model);
-    ScoreComponent score = ScoreComponent();
-    ScoreBoard board = ScoreBoard();
+	view = View(&model, argc, argv);
+	// Call the test object initialiser 
+	// For testing...
+	// can be removed if testing is not necessary
+	model.InitTestObjects();
 
-    board.loadScore();
-    board.printScoreBoard(); 
-    
+	// Call the regular model init
+	// this will initialise the game
+	// do NOT remove
+	model.Init();
+
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);

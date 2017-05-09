@@ -1,4 +1,5 @@
 #include "DrawComponent.h"
+#include "GameObject.h"
 #include <GL/freeglut.h>
 
 DrawComponent::DrawComponent() : Component(DRAW_COMPONENT)
@@ -11,25 +12,34 @@ DrawComponent::~DrawComponent()
 }
 
 
-void DrawComponent::Update(int deltaTime)
+void DrawComponent::Draw()
 {
-	// todo deltaTime not implemented
+	glPushMatrix();
+
+	if(_parent != nullptr)
+	{
+		glTranslatef(_parent->_position.x, _parent->_position.y, _parent->_position.z);
+		// TODO rotate object
+	}
+
 	for (ObjGroup * group : groups)
 	{
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, materials.at(group->materialIndex)->texture->_id);
+		glBegin(GL_TRIANGLES);
+
 		for (Face face : group->faces)
 		{
-			glEnable(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D, materials.at(group->materialIndex)->texture->_id);
-			glBegin(GL_TRIANGLES);
 			for (Vertex vertex : face.vertices)
 			{
-				Vec3f vec = vertices.at(vertex.position);
-				Vec2f tex = texcoords.at(vertex.texcoord);
-				glTexCoord2f(tex.x, tex.y);
-				glVertex3f(vec.x, vec.y, vec.z);
+				glTexCoord2fv(texcoords[vertex.texcoord].v);
+				glVertex3fv(vertices[vertex.position].v);
 			}
-			glEnd();
-			glDisable(GL_TEXTURE_2D);
 		}
+
+		glEnd();
+		glDisable(GL_TEXTURE_2D);
 	}
+
+	glPopMatrix();
 }

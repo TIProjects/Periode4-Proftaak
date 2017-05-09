@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+// #include "Component.h"
 #include "GameObject.h"
 
 class Model {
@@ -17,10 +18,21 @@ public:
     // of every GameObject present in the model
     void update();
 
-private:
-    // Vector of every GameObject present in the model
-    std::vector<GameObject> _gameObjects;
+    // Initialise a simple set of test objects
+    // by adding a few GameObjects to the GameObject vector
+    // NOTE: should ONLY be called AFTER an OpenGL context has been created
+    // and ONLY ONCE
+    void InitTestObjects();
 
-    // The last time a frame was rendered in milliseconds
-    int _lastTime;
+    // Initialise the gameLogic
+    // NOTE: should ONLY be called AFTER an OpenGL context has been created
+    // and ONLY ONCE
+    void Init();
+
+private:
+	// Vector of every GameObject present in the model
+	std::vector<GameObject*> _gameObjects;
+
+	// The last time a frame was rendered in milliseconds
+	int _lastTime;
 };
