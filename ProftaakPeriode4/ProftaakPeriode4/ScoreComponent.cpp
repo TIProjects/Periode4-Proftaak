@@ -6,7 +6,6 @@ ScoreComponent::ScoreComponent() : Component(SCORE_COMPONENT)
     _name = "Gijs";
 }
 
-//Score can't get below zero.
 void ScoreComponent::changeScore(int difScore)
 {
     int score = _score + difScore;    
@@ -28,7 +27,7 @@ std::string ScoreComponent::returnName()
     return _name;
 }
 
-int ScoreComponent::returnScore()
+unsigned int ScoreComponent::returnScore()
 {
     return _score;
 }

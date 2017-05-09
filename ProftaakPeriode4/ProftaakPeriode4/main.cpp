@@ -1,11 +1,12 @@
 #include "iostream"
 #include "Model.h"
 #include "View.h"
+#include "ScoreBoard.h"
 #include "ScoreComponent.h"
 
 #include <GL\freeglut.h>
 #include "Lanes.h"
-#include "ScoreBoard.h"
+#include "Input.h"
 
 Model model;
 View view;
@@ -42,15 +43,17 @@ int main(int argc, char* argv[]) {
 
     board.loadScore();
     board.printScoreBoard(); 
-
+    
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);
+    /*
 	glutKeyboardFunc(Keyboard::KeyBoardDown);
 	glutKeyboardUpFunc(Keyboard::KeyBoardUp);
 	glutSpecialFunc(Keyboard::SKeyboardDown);
 	glutSpecialUpFunc(Keyboard::SKeyboardUp);
 	glutPassiveMotionFunc(Mouse::MoveMouse);
+    */
 
 
 	glutMainLoop();

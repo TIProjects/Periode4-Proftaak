@@ -9,6 +9,7 @@ class ScoreBoard
 
         /*
          * add a score component to the vector with scores
+         * after adding a score, the list will be sorted in decending order
          * @param ScoreComponent is the component
          */
         void addScore(ScoreComponent);

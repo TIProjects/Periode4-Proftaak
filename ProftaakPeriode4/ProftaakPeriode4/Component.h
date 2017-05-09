@@ -3,7 +3,7 @@
 // Enum which will indicate the functionality of a Component
 enum ComponentID
 {
-	SCORE_COMPONENT
+	SCORE_COMPONENT,
 	DRAW_COMPONENT
 };
 

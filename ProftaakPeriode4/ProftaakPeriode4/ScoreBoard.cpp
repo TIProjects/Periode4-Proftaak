@@ -4,8 +4,6 @@
 #include <algorithm>
 #include <functional>
 #include <fstream>
-#include <iterator>
-#include <string>
 
 std::string path = "Resource Files/scores.json";
 
@@ -17,17 +15,16 @@ ScoreBoard::ScoreBoard()
 void ScoreBoard::addScore(ScoreComponent score)
 {
     _scores.push_back(score);
-    std::sort(_scores.begin(), _scores.end(), std::greater<>());
-
     _amountOfScores++;
     ScoreBoard::checkArray();
 }
 
 void ScoreBoard::checkArray()
 {
+    std::sort(_scores.begin(), _scores.end(), std::greater<>());
     if(_amountOfScores > 10)
     {
-        _scores.erase(_scores.end());
+        _scores.pop_back();
         _amountOfScores--;
         checkArray();
     }
@@ -37,7 +34,7 @@ void ScoreBoard::printScoreBoard()
 {
     for(int i = 0; i < _amountOfScores; i++)
     {
-        std::cout << i+1 << " Score: " << _scores[i].returnScore() << std::endl;
+        std::cout << "[" << i+1 << "] " << _scores[i].returnName() << " got a score of " << _scores[i].returnScore() << std::endl;
     }
 }
 
