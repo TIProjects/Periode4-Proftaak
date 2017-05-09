@@ -21,14 +21,14 @@ View::View(Model * model, int argc, char * argv[])
 	glutCreateWindow("Cube_Runner");
 
 
+	// Test GameObjects
+	// TODO: remove
 	_modelPtr->_lastTime = 0;
 
 	GameObject * camera = new GameObject();
 	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 30.0f, 90.0f);
 	camera->AddComponent(cameraComponent);
 
-
-	camera->Update(2);
 	_modelPtr->_gameObjects.push_back(camera);
 
 	GameObject * testObject = new GameObject();
