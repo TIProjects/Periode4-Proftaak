@@ -1,9 +1,9 @@
 #include "Component.h"
 
-Component::Component(ComponentID id, GameObject * parent)
+Component::Component(ComponentID id)
 {
 	_id = id;
-	_parent = parent;
+	_parent = nullptr;
 }
 
 Component::~Component()
@@ -17,4 +17,9 @@ void Component::Update(int deltaTime)
 
 void Component::LateUpdate(int deltaTime)
 {
+}
+
+void Component::SetParent(GameObject* parent)
+{
+	_parent = parent;
 }

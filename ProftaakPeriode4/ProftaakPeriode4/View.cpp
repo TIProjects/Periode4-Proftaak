@@ -33,7 +33,7 @@ View::View()
 void View::UpdateView()
 {
 
-	glClearColor(100, 100, 150, 0);
+	glClearColor(0, 0.5, 1, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
@@ -44,9 +44,9 @@ void View::UpdateView()
 	glLoadIdentity();
 
 	// Use the Camera GameObject to create a view
-	for (GameObject gameObject : _modelPtr->_gameObjects)
+	for (GameObject * gameObject : _modelPtr->_gameObjects)
 	{
-		CameraComponent * camera = dynamic_cast<CameraComponent *>(gameObject.GetComponent(CAMERA_COMPONENT));
+		CameraComponent * camera = dynamic_cast<CameraComponent *>(gameObject->GetComponent(CAMERA_COMPONENT));
 		if(camera != nullptr)
 		{
 			// Found camera, apply it's view and stop looping the list
@@ -54,17 +54,30 @@ void View::UpdateView()
 			break;
 		}
 	}
-	gluPerspective(90.0f, _screenWidth / (float)_screenHeight, _camNear, _camFar);
-	glPolygonMode(GL_FRONT, GL_FILL);
+//	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glEnable(GL_DEPTH_TEST);
+
+	// Draw all the gameObject
+	for(GameObject * gameObject : _modelPtr->_gameObjects)
+	{
+		gameObject->Draw(); 
+	}
 
 	glutSwapBuffers();
 }
 
 void View::reshape(int w, int h)
 {
-	_screenWidth = w;
-	_screenHeight = h;
-	glViewport(0, 0, w, h);
+	for (GameObject * gameObject : _modelPtr->_gameObjects)
+	{
+		CameraComponent * camera = dynamic_cast<CameraComponent *>(gameObject->GetComponent(CAMERA_COMPONENT));
+		if (camera != nullptr)
+		{
+			camera->_screenWidth = float(w);
+			camera->_screenHeight = float(h);
+			break;
+		}
+	}
+	//	glViewport(0, 0, w, h);
 }

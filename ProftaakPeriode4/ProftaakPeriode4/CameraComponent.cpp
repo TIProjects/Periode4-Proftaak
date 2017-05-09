@@ -1,9 +1,11 @@
 #include <GL/freeglut.h>
 #include "CameraComponent.h"
+#include "GameObject.h"
 #include "Vec.h"
+#include "Input.h"
 
-CameraComponent::CameraComponent(int width, int height, int nearPlane, int farPlane, int fov, GameObject * parent) 
-: Component(CAMERA_COMPONENT, parent)
+CameraComponent::CameraComponent(float  width, float height, float nearPlane, float farPlane, float fov)
+: Component(CAMERA_COMPONENT)
 {
 	_screenWidth = width;
 	_screenHeight = height;
@@ -24,16 +26,17 @@ void CameraComponent::LateUpdate(int deltaTime)
 
 void CameraComponent::Update(int deltaTime)
 {
-	Vec2i mousePos(2, 2); // TODO get from input
+	Vec2i mousePos(Mouse::GetMousePos());
 
 	// Calculate mouse movement and reset mouse
-	int dx = mousePos.x - _screenWidth/ 2;
-	int dy = mousePos.y - _screenHeight/ 2;
+	float dx = float(mousePos.x) - _screenWidth/ 2;
+	float dy = float(mousePos.y) - _screenHeight/ 2;
 	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400)
 	{
-		_parent->_rotation.y += dx / 10.0f;
-		_parent->_rotation.x += dy / 10.0f;
-		glutWarpPointer(_screenWidth / 2, _screenHeight / 2);
+		// TODO: test
+//		_parent->_rotation.y += dx / 10.0f;
+//		_parent->_rotation.x += dy / 10.0f;
+//		glutWarpPointer(int(_screenWidth / 2), int(_screenHeight / 2));
 	}
 }
 

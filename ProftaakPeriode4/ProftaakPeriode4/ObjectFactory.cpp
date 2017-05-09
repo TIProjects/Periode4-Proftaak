@@ -159,9 +159,9 @@ void loadMaterialFile( const std::string &fileName, const std::string &dirName, 
 
 }
 
-DrawComponent * LoadComponent(const std::string &fileName, GameObject * gameObject)
+DrawComponent * LoadComponent(const std::string &fileName)
 	{
-		DrawComponent * component = new DrawComponent(gameObject);
+		DrawComponent * component = new DrawComponent();
 		std::cout << "Loading " << fileName << std::endl;
 		std::string dirName = fileName;
 		if (dirName.rfind("/") != std::string::npos)

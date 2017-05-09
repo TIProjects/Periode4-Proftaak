@@ -1,9 +1,11 @@
 #pragma once
 #include <list>
 #include "TextureLoader.h"
-#include "DrawComponent.h"
 
-// needed for unknown reasons todo find out why this is needed!
+// Forward decleration needed because DrawComponent needs this header
+// While this header also needs the DrawComponent header.
+// Since they both need eachother they should include one another, but 
+// this is impossible...
 class DrawComponent;
 
 /*

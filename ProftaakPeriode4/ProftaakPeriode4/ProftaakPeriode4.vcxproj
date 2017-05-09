@@ -163,6 +163,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Lanes.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ObjectFactory.h" />
@@ -170,6 +171,13 @@
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Vec.h" />
     <ClInclude Include="View.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Button.psd" />
+    <None Include="Assets\GUI-Design.psd" />
+    <None Include="Assets\LifeBar.psd" />
+    <None Include="Assets\LifeFrame.psd" />
+    <None Include="Assets\LifeFrameSegment.psd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

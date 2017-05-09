@@ -1,4 +1,5 @@
 ﻿#include "GameObject.h"
+#include "DrawComponent.h"
 
 
 GameObject::GameObject()
@@ -9,17 +10,17 @@ GameObject::GameObject()
 
 void GameObject::Update(int deltaTime)
 {
-	for (Component component : _components)
+	for (Component * component : _components)
 	{
-		component.Update(deltaTime);
+		component->Update(deltaTime);
 	}
 }
 
 void GameObject::LateUpdate(int deltaTime)
 {
-	for(Component component : _components)
+	for(Component * component : _components)
 	{
-		component.LateUpdate(deltaTime);
+		component->LateUpdate(deltaTime);
 	}
 }
 
@@ -41,21 +42,42 @@ void GameObject::SetRotation(Vec3f rotation)
 	_rotation = Vec3f(rotation);
 }
 
+void GameObject::Draw()
+{
+	// Return if there is no DrawComponent
+	if(_drawComponent == nullptr) return;
+
+	_drawComponent->Draw();
+}
+
 Component * GameObject::GetComponent(ComponentID id)
 {
-	int i = 0; // index used to determine the current Component
-	for (Component component : _components)
+	for (Component * component : _components)
 	{
-		// Store pointer to the current component so it can be returned
-		Component * current = &_components[i];
-		i++;
-
 		// Component is found so it's reference is returned
-		if (component._id == id)
+		if (component->_id == id)
 		{
-			return current;
+			return component;
 		}
 	}
 	// The component was not found so a nullptr is returned
 	return nullptr;
+}
+
+void GameObject::AddComponent(Component * component)
+{
+	component->SetParent(this);
+	_components.push_back(component);
+
+	// If the GameObject does not have a DrawComponent yet, add the new component as
+	// A draw component. if the new component is not a draw component, this GameObjects
+	// Draw component will simply be nullptr due to the dynamic_cast
+	if (_drawComponent == nullptr)
+		_drawComponent = dynamic_cast<DrawComponent*>(component);
+}
+
+bool GameObject::RemoveComponent(Component* component)
+{
+	// TODO implement
+	return false;
 }
