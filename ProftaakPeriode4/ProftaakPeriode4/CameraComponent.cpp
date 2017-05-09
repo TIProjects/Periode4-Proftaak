@@ -1,4 +1,5 @@
 #include <GL/freeglut.h>
+// #include "Component.h"
 #include "CameraComponent.h"
 #include "GameObject.h"
 #include "Vec.h"

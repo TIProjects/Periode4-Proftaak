@@ -7,6 +7,7 @@
 
 class DrawComponent;
 class Component;
+class DrawComponent;
 enum ComponentID;
 
 class GameObject {

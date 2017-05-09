@@ -1,3 +1,4 @@
+// #include "Component.h"
 #include "Input.h"
 /*
 * bool arrays, are read by components

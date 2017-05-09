@@ -1,9 +1,7 @@
 #include "View.h"
 #include <GL\freeglut.h>
+#include "Component.h"
 #include "CameraComponent.h"
-#include <GL/freeglut.h>
-#include "DrawComponent.h"
-#include <iostream>
 
 View::View(Model * model)
 {

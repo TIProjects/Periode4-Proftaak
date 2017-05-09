@@ -1,3 +1,4 @@
+#include "Component.h"
 #include "Model.h"
 #include "View.h"
 #include "Lanes.h"

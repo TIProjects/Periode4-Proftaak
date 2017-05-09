@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+// #include "Component.h"
 #include "TextureLoader.h"
 
 // Forward decleration needed because DrawComponent needs this header
@@ -7,6 +8,7 @@
 // Since they both need eachother they should include one another, but 
 // this is impossible...
 class DrawComponent;
+class GameObject;
 
 /*
  * Class needed for creating a gameobject

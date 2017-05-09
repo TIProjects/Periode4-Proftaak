@@ -1,6 +1,6 @@
 #pragma once
-#include "Component.h"
 #include <vector>
+#include "Component.h"
 #include "Vec.h"
 #include "ObjectFactory.h"
 
@@ -17,7 +17,6 @@ public:
 	DrawComponent();
 	~DrawComponent();
 
-	// drawing (deltaTime not implemented)
 	void Draw();
 
 	std::vector<Vec3f>	vertices;
