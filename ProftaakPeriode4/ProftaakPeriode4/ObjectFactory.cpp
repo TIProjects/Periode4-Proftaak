@@ -158,7 +158,7 @@ void loadMaterialFile( const std::string &fileName, const std::string &dirName, 
 	}
 
 }
-// please no GameObject parameter !! :(
+
 DrawComponent * LoadComponent(const std::string &fileName)
 	{
 		DrawComponent * component = new DrawComponent();
@@ -241,7 +241,7 @@ DrawComponent * LoadComponent(const std::string &fileName)
 				currentGroup = new ObjGroup();
 				currentGroup->materialIndex = -1;
 
-				for (size_t i = 0; i < component->materials.size(); i++)
+				for (int i = 0; i < component->materials.size(); i++)
 				{
 					MaterialInfo* info = component->materials[i];
 					if (info->name == params[1])

@@ -3,6 +3,12 @@
 #include "Vec.h"
 #include <vector>
 #include "Component.h"
+#include "DrawComponent.h"
+
+class DrawComponent;
+class Component;
+class DrawComponent;
+enum ComponentID;
 
 class GameObject {
 public:
@@ -10,7 +16,7 @@ public:
 	* Constructor for creating object
 	* @param vertices as Vector with Matrix3GLf
 	*/
-	GameObject(std::vector<Vec3f> vertices);
+	GameObject();
 	/*
 	* Update function will call the update function
 	* of every Component in this GameObject
@@ -43,6 +49,11 @@ public:
 	*/
 	void SetRotation(Vec3f rotation);
 	/*
+	 * Draw this GameObject using it's DrawComponent
+	 * if it has one
+	 */
+	void Draw();
+	/*
 	* Get the Component based on the parameter id
 	* if it is present
 	* @param ComponentID: The id which will be searched for
@@ -51,6 +62,22 @@ public:
 	* is present in this object
 	*/
 	Component * GetComponent(ComponentID id);
+	/*
+	 * Add a component to this GameObject. 
+	 * @param Component: The component which will be added
+	 */
+	void AddComponent(Component * component);
+	/*
+	 * Remove a component from this GameObject
+	 * @param Component *: The pointer to the component which will be removed
+	 * @return bool: True if removing the component was successful, or false
+	 * if the component wasn't removed, or it wasn't present in this GameObject 
+	 */
+	bool RemoveComponent(Component * component);
+	/*
+	 * The component used to draw this GameObject
+	 */
+	DrawComponent * _drawComponent = nullptr;
 	/*
 	* The current origin of the object
 	*/
@@ -63,6 +90,6 @@ private:
 	/*
 	 * Vector of every Component in this GameObject
 	 */
-	std::vector<Component> _components;
+	std::vector<Component *> _components;
 	
 };

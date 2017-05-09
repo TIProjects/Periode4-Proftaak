@@ -122,9 +122,12 @@
     </ClCompile>
     <ClCompile Include="ObjectFactory.cpp">
       <Filter>Source Files\Factory</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,12 +172,32 @@
     </ClInclude>
     <ClInclude Include="ObjectFactory.h">
       <Filter>Header Files\Factory</Filter>
-      </ClInclude>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>Header Files\Json</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Button.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\GUI-Design.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\LifeBar.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\LifeFrame.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\LifeFrameSegment.psd">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

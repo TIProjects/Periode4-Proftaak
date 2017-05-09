@@ -1,71 +1,62 @@
 #include "View.h"
-#include <GL/freeglut.h>
-#include "DrawComponent.h"
-#include <iostream>
+#include <GL\freeglut.h>
+#include "Component.h"
+#include "CameraComponent.h"
 
-View::View(Model * model)
+View::View(Model * model, int argc, char * argv[])
 {
-	_screenWidth = 1280;
-	_screenHeight = 720;
-
-	_camNear = 0.01f;
-	_camFar = 50.0f;
-
 	_modelPtr = model;
 
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-	glutInitWindowSize(_screenWidth, _screenHeight);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitWindowSize(1280, 720);
+	glutInit(&argc, argv);
 
 	glutCreateWindow("Cube_Runner");
 }
 
 View::View()
 {
-	_screenWidth = 1280;
-	_screenHeight = 720;
-
-	_camNear = 0.01f;
-	_camFar = 50.0f;
+	_modelPtr = nullptr;
 }
 
 void View::UpdateView()
 {
-
-	glClearColor(0, 0, 0, 0);
+	glClearColor(0, 0.5, 1, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	gluPerspective(90.0f, _screenWidth / (float)_screenHeight, _camNear, _camFar);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	gluLookAt(0, 5, 5,
-		0, 0, 0,
-		0, 1, 0);
-
-	/*
-	 * for DrawComponent in beautifullcomponents:
-	 * glPushMatrix();
-	 *		draw that!
-	 * glPopMatrix();	
-	 */
-
-
+	// Use the Camera GameObject to create a view
+	for (GameObject * gameObject : _modelPtr->_gameObjects)
+	{
+		CameraComponent * camera = dynamic_cast<CameraComponent *>(gameObject->GetComponent(CAMERA_COMPONENT));
+		if(camera != nullptr)
+		{
+			// Found camera, apply it's view and stop looping the list
+			camera->ApplyCamera();
+			break;
+		}
+	}
 	glEnable(GL_DEPTH_TEST);
+
+
+	// Draw all the gameObject
+	for(GameObject * gameObject : _modelPtr->_gameObjects)
+	{
+		gameObject->Draw(); 
+	}
 
 	glutSwapBuffers();
 }
 
-
-
 void View::reshape(int w, int h)
 {
-	_screenWidth = w;
-	_screenHeight = h;
-	glViewport(0, 0, w, h);
+	for (GameObject * gameObject : _modelPtr->_gameObjects)
+	{
+		CameraComponent * camera = dynamic_cast<CameraComponent *>(gameObject->GetComponent(CAMERA_COMPONENT));
+		if (camera != nullptr)
+		{
+			camera->_screenWidth = float(w);
+			camera->_screenHeight = float(h);
+			break;
+		}
+	}
 }
