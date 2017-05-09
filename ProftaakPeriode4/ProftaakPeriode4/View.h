@@ -5,7 +5,7 @@
 
 class View {
 public:
-	View(Model * model);
+	View(Model * model, int argc, char * argv[]);
 	View();
 
 	void UpdateView();

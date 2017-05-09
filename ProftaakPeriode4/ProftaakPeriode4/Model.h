@@ -16,7 +16,9 @@ public:
 
 	// Vector of every GameObject present in the model
 	std::vector<GameObject*> _gameObjects;
-private:
+
 	// The last time a frame was rendered in milliseconds
 	int _lastTime;
+private:
+	
 };

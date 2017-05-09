@@ -33,10 +33,9 @@ void idle()
 
 
 int main(int argc, char* argv[]) {
-	glutInit(&argc, argv);
 
-	model = Model();
-	view = View(&model);
+	view = View(&model, argc, argv);
+
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);

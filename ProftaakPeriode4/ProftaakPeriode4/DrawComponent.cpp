@@ -16,8 +16,11 @@ void DrawComponent::Draw()
 {
 	glPushMatrix();
 
-	glTranslatef(_parent->_position.x, _parent->_position.y, _parent->_position.z);
-	// TODO rotate object
+	if(_parent != nullptr)
+	{
+		glTranslatef(_parent->_position.x, _parent->_position.y, _parent->_position.z);
+		// TODO rotate object
+	}
 
 	for (ObjGroup * group : groups)
 	{

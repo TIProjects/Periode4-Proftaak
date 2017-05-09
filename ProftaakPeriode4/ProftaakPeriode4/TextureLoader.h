@@ -10,9 +10,9 @@
 class Texture
 {
 public:
-	Texture(int id, int width, int height, int bpp);
+	Texture(unsigned int id, int width, int height, int bpp);
 
-	int _id;
+	unsigned int _id;
 	int _width;
 	int _height;
 	int _bpp;

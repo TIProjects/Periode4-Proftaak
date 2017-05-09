@@ -19,5 +19,6 @@ public:
 
 	float _fov;
 private:
-	
+	void Move(float angle, float fac);
+	void Up(float fac);
 };
