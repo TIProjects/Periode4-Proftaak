@@ -21,18 +21,18 @@ public:
 	* Update function will call the update function
 	* of every Component in this GameObject
 	* Update should only be called by the idleFunc
-	* @param int deltaTime: the time in milliseconds between the current and last frame
+	* @param float deltaTime: the time in milliseconds between the current and last frame
 	*/
-	void Update(int deltaTime);
+	void Update(float deltaTime);
 	/*
 	* LateUpdate function will call the LateUpdate function
 	* of every Component in this GameObject
 	* 
 	* LateUpdate should only be called by the idleFunc, and only after
 	* calling every update
-	* @param int deltaTime: the time in milliseconds between the current and last frame
+	* @param float deltaTime: the time in milliseconds between the current and last frame
 	*/
-	void LateUpdate(int deltaTime);
+	void LateUpdate(float deltaTime);
 	/*
 	* Set current position
 	* @param position as new position

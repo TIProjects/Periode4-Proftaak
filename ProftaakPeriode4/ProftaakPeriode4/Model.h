@@ -29,7 +29,7 @@ public:
 	std::vector<GameObject*> _gameObjects;
 
 	// The last time a frame was rendered in milliseconds
-	int _lastTime;
+	float _lastTime;
 private:
 	
 };

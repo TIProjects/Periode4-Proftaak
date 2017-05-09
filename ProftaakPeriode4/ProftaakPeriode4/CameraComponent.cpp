@@ -21,8 +21,8 @@ CameraComponent::CameraComponent(float  width, float height, float nearPlane, fl
 
 void CameraComponent::Move(float angle, float fac)
 {
-	_parent->_position.x += (float)cos((_parent->_rotation.y + angle) / 180 * M_PI) * fac;
-	_parent->_position.y += (float)sin((_parent->_rotation.y + angle) / 180 * M_PI) * fac;
+	_parent->_position.x += (float)cos((_parent->_rotation.y + angle) / 180.0f * M_PI) * fac;
+	_parent->_position.y += (float)sin((_parent->_rotation.y + angle) / 180.0f * M_PI) * fac;
 }
 
 void CameraComponent::Up(float fac)
@@ -34,15 +34,12 @@ CameraComponent::~CameraComponent()
 {
 }
 
-void CameraComponent::Update(int deltaTime)
+void CameraComponent::Update(float deltaTime)
 {
 	Vec2i mousePos(Mouse::GetMousePos());
 	const bool * keys = Keyboard::GetKeyboard();
 
-	// TODO not this...
-	if (deltaTime == 0) deltaTime = 1;
-
-	const float speed = 0.01f;
+	const float speed = 10.0f;
 	if (keys['a']) Move(0, deltaTime*speed);
 	if (keys['d']) Move(180, deltaTime*speed);
 	if (keys['w']) Move(90, deltaTime*speed);

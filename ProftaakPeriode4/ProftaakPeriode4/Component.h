@@ -24,14 +24,14 @@ public:
 	virtual ~Component();
 
 	// Update is called as often as possible
-	// @param int deltaTime: the time in milliseconds between the current and last frame
-	virtual void Update(int deltaTime);
+	// @param float deltaTime: the time in milliseconds between the current and last frame
+	virtual void Update(float deltaTime);
 
 	// LateUpdate is also called as often as possible,
 	// but always after the Update of EVERY GameObject
 	// has been called
-	// @param int deltaTime: the time in milliseconds between the current and last frame
-	virtual void LateUpdate(int deltaTime);
+	// @param float deltaTime: the time in milliseconds between the current and last frame
+	virtual void LateUpdate(float deltaTime);
 
 	// Set the parent GameObject for this component
 	// This is usefull, because this allows the component
