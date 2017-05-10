@@ -4,6 +4,8 @@
 * bool arrays, are read by components
 */
 bool keyboard[255];
+bool sKeyoard[255];
+
 bool keyLeft = false;
 bool keyRight = false;
 bool keyUp = false;
@@ -15,23 +17,7 @@ Vec2i mousePos = Vec2i();
 */
 void Keyboard::SKeyboardDown(int key, int x, int y)
 {
-	switch (key)
-	{
-	case GLUT_KEY_LEFT:
-		keyLeft = true;
-		break;
-	case GLUT_KEY_RIGHT:
-		keyRight = true;
-		break;
-	case GLUT_KEY_UP:
-		keyUp = true;
-		break;
-	case GLUT_KEY_DOWN:
-		keyDown = true;
-		break;
-	default:
-		break;
-	}
+	sKeyoard[key] = true; 
 }
 
 /*
@@ -39,23 +25,7 @@ void Keyboard::SKeyboardDown(int key, int x, int y)
 */
 void Keyboard::SKeyboardUp(int key, int x, int y)
 {
-	switch (key)
-	{
-	case GLUT_KEY_LEFT:
-		keyLeft = false;
-		break;
-	case GLUT_KEY_RIGHT:
-		keyRight = false;
-		break;
-	case GLUT_KEY_UP:
-		keyUp = false;
-		break;
-	case GLUT_KEY_DOWN:
-		keyDown = false;
-		break;
-	default:
-		break;
-	}
+	sKeyoard[key] = false;
 }
 
 /*
@@ -82,16 +52,10 @@ const bool * Keyboard::GetKeyboard()
 	return keyboard;
 }
 
-/*
-* returns special keyboard array as contant pointer
-*/
-//void Keyboard::GetSKeyboard(bool* up, bool* down, bool* left, bool* right)
-//{
-//	*up = keyUp;
-//	*down = keyDown;
-//	*left = keyLeft;
-//	*right = keyRight;
-//}
+const bool* Keyboard::GetSKeyboard()
+{
+	return sKeyoard;
+}
 
 /*
 * detects mouse movement and updates coordinates

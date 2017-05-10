@@ -1,6 +1,9 @@
 #pragma once
 #include <GL\freeglut.h>
 #include "Vec.h"
+
+#define KEYBOARD_KEY_ESC 27
+
 namespace Keyboard
 {
 	void SKeyboardDown(int key, int x, int y);
@@ -9,8 +12,7 @@ namespace Keyboard
 	void KeyBoardUp(unsigned char key, int x, int y);
 
 	const bool* GetKeyboard();
-	//void GetSKeyboard(bool* up, bool* down, bool* left, bool* right);
-	
+	const bool * GetSKeyboard();
 }
 
 namespace Mouse
