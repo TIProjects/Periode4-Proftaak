@@ -68,7 +68,7 @@
 //	}
 //}
 //
-//void Lanes::UpdateView()
+//void Lanes::update()
 //{
-//	// TODO UpdateView
+//	// TODO update
 //}

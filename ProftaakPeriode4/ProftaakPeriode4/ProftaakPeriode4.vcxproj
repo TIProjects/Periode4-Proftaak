@@ -149,7 +149,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Lanes.cpp" />
+    <ClCompile Include="LaneGeneratorComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshDrawComponent.cpp" />
@@ -163,13 +163,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="LaneGeneratorComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="Lanes.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshDrawComponent.h" />
     <ClInclude Include="Model.h" />

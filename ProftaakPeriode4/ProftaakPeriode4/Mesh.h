@@ -82,6 +82,10 @@ public:
 	 * \brief Destructor for Mesh
 	 */
 	~Mesh();
+	
+	int _width;
+	int _length;
+
 	vector<Vec3f>	_vertices;
 	vector<Vec3f>	_normals;
 	vector<Vec2f>	_texcoords;
