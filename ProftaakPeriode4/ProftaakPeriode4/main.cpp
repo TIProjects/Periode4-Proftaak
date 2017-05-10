@@ -15,7 +15,7 @@ View view;
 // This function should only be called by OpenGL and NOT manually
 void window()
 {
-    view.UpdateView();
+	view.UpdateView();
 }
 
 // The reshapeFunc which will call the reshape of the view
@@ -29,33 +29,33 @@ void reshape(int w, int h)
 // This function should only be called by OpenGL and NOT manually
 void idle()
 {
-    model.update();
+	model.update();
 }
 
 
 int main(int argc, char* argv[]) {
 
-    view = View(&model, argc, argv);
-    // Call the test object initialiser 
-    // For testing...
-    // can be removed if testing is not necessary
-    model.InitTestObjects();
+	view = View(&model, argc, argv);
+	// Call the test object initialiser 
+	// For testing...
+	// can be removed if testing is not necessary
+	model.InitTestObjects();
 
-    // Call the regular model init
-    // this will initialise the game
-    // do NOT remove
-    model.Init();
+	// Call the regular model init
+	// this will initialise the game
+	// do NOT remove
+	model.Init();
 
-    glutDisplayFunc(window);
-    glutReshapeFunc(reshape);
-    glutIdleFunc(idle);
-    glutKeyboardFunc(Keyboard::KeyBoardDown);
-    glutKeyboardUpFunc(Keyboard::KeyBoardUp);
-    glutSpecialFunc(Keyboard::SKeyboardDown);
-    glutSpecialUpFunc(Keyboard::SKeyboardUp);
-    glutPassiveMotionFunc(Mouse::MoveMouse);
+	glutDisplayFunc(window);
+	glutReshapeFunc(reshape);
+	glutIdleFunc(idle);
+	glutKeyboardFunc(Keyboard::KeyBoardDown);
+	glutKeyboardUpFunc(Keyboard::KeyBoardUp);
+	glutSpecialFunc(Keyboard::SKeyboardDown);
+	glutSpecialUpFunc(Keyboard::SKeyboardUp);
+	glutPassiveMotionFunc(Mouse::MoveMouse);
 
 
-    glutMainLoop();
-    return 0;
+	glutMainLoop();
+	return 0;
 }

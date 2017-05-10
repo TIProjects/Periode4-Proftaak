@@ -10,6 +10,8 @@ MaterialInfo::MaterialInfo()
 
 Mesh::Mesh()
 {
+	_width = 1.0f;
+	_length = 1.0f;
 }
 
 
@@ -27,8 +29,10 @@ void Mesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
 
 	for (ObjGroup * group : _groups)
 	{
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, _materials.at(group->_materialIndex)->_texture->_id);
+		if (group->_materialIndex != -1 && _materials.at(group->_materialIndex)->_texture != nullptr) {
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, _materials.at(group->_materialIndex)->_texture->_id);
+		}
 		glBegin(GL_TRIANGLES);
 
 		for (Face face : group->_faces)

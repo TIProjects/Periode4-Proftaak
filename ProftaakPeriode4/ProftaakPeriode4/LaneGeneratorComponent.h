@@ -16,7 +16,7 @@ private:
 	int _laneAmount;
 	float _lengthMoved;
 	float _speed = 7.5f; // todo test accurate speed
-	float _spaceBetween = 2.0f;
+	float _spaceBetween = 1.0f;
 	int _lengthAmount = 20;
 };
 
