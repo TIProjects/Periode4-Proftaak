@@ -98,6 +98,7 @@ public:
 	 * \param rotationAngle the rotation angle that it should be drawn on
 	 */
 	void Draw(Vec3f position, Vec3f rotation, float rotationAngle);
+	void DrawRaw();
 
 };
 	

@@ -27,6 +27,13 @@ void Mesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
 	glTranslatef(position.x, position.y, position.z);
 	glRotatef(rotationAngle, rotation.x, rotation.y, rotation.z);
 
+	DrawRaw();
+
+	glPopMatrix();
+}
+
+void Mesh::DrawRaw()
+{
 	for (ObjGroup * group : _groups)
 	{
 		if (group->_materialIndex != -1 && _materials.at(group->_materialIndex)->_texture != nullptr) {
@@ -47,7 +54,5 @@ void Mesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
 	}
-
-	glPopMatrix();
 }
 
