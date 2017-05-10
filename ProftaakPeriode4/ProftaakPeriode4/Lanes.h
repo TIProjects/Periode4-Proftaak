@@ -6,7 +6,7 @@
 //class Lane : public GameObject
 //{
 //public:
-//	Lane(std::vector<Vec3f> vertices);
+//	Lane(std::vector<Vec3f> _vertices);
 //
 //	// Add a GameObject to the lane
 //	// @param GameObject *: The pointer to the gameObject wich will be added to the lane

@@ -16,12 +16,12 @@ public:
 	~CameraComponent();
 	
 	// Overriden Update function from component
-	// changes the parents position and rotation based
+	// changes the parents _position and rotation based
 	// on keyboard an mouse input
 	// @param float deltaTime: the time in milliseconds between this and the last frame
 	void Update(float deltaTime) override;
 	
-	// Apply the camera position and rotation to the view
+	// Apply the camera _position and rotation to the view
 	void ApplyCamera() const;
 
 	// The with and height of the openGL window

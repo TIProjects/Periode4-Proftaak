@@ -29,7 +29,7 @@ void Keyboard::SKeyboardUp(int key, int x, int y)
 }
 
 /*
-* normal key press detection
+* _normal key press detection
 */
 void Keyboard::KeyBoardDown(unsigned char key, int x, int y)
 {
@@ -37,7 +37,7 @@ void Keyboard::KeyBoardDown(unsigned char key, int x, int y)
 }
 
 /*
-* normal key release detection
+* _normal key release detection
 */
 void Keyboard::KeyBoardUp(unsigned char key, int x, int y)
 {

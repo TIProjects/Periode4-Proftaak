@@ -147,15 +147,16 @@
   <ItemGroup>
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Lanes.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshDrawComponent.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="MeshFactory.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
-    <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Vec.cpp" />
     <ClCompile Include="View.cpp" />
@@ -169,9 +170,11 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Lanes.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshDrawComponent.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="MeshFactory.h" />
     <ClInclude Include="ScoreBoard.h" />
-    <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Vec.h" />

@@ -2,11 +2,11 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include "DrawComponent.h"
 #include "TextureLoader.h"
 #include <string>
 #include "Vec.h"
-#include "ObjectFactory.h"
+#include "MeshFactory.h"
+#include "Mesh.h"
 
 /**
 * Replaces a substring in a string
@@ -78,7 +78,7 @@ static inline std::string cleanLine(std::string line)
 
 
 
-void loadMaterialFile( const std::string &fileName, const std::string &dirName, DrawComponent * component)
+void LoadMaterialFile(const std::string &fileName, const std::string &dirName, Mesh* mesh)
 {
 	std::cout << "Loading " << fileName << std::endl;
 	std::ifstream pFile(fileName.c_str());
@@ -105,10 +105,10 @@ void loadMaterialFile( const std::string &fileName, const std::string &dirName, 
 		{
 			if(currentMaterial != NULL)
 			{
-				component->materials.push_back(currentMaterial);
+				mesh->_materials.push_back(currentMaterial);
 			}
 			currentMaterial = new MaterialInfo();
-			currentMaterial->name = params[1];
+			currentMaterial->_name = params[1];
 		}
 		else if(params[0] == "map_kd")
 		{
@@ -118,7 +118,7 @@ void loadMaterialFile( const std::string &fileName, const std::string &dirName, 
 			if (tex.find("\\"))
 				tex = tex.substr(tex.rfind("\\") + 1);
 			std::string texture = dirName + "/" + tex;
-			currentMaterial->texture = LoadTexture(texture.c_str());
+			currentMaterial->_texture = LoadTexture(texture.c_str());
 			std::cout << dirName << "/" << tex << std::endl;
 
 
@@ -154,14 +154,14 @@ void loadMaterialFile( const std::string &fileName, const std::string &dirName, 
 			std::cout<<"Didn't parse "<<params[0]<<" in material file"<<std::endl;
 	}
 	if(currentMaterial != NULL){
-		component->materials.push_back(currentMaterial);
+		mesh->_materials.push_back(currentMaterial);
 	}
 
 }
 
-DrawComponent * LoadComponent(const std::string &fileName)
+Mesh* LoadMeshFile(const std::string& fileName)
 	{
-		DrawComponent * component = new DrawComponent();
+		Mesh* mesh = new Mesh();
 		std::cout << "Loading " << fileName << std::endl;
 		std::string dirName = fileName;
 		if (dirName.rfind("/") != std::string::npos)
@@ -177,12 +177,12 @@ DrawComponent * LoadComponent(const std::string &fileName)
 		if (!pFile.is_open())
 		{
 			std::cout << "Could not open file " << fileName << std::endl;
-			return component;
+			return nullptr;
 		}
 
 
 		ObjGroup* currentGroup = new ObjGroup();
-		currentGroup->materialIndex = -1;
+		currentGroup->_materialIndex = -1;
 
 
 		while (!pFile.eof())
@@ -197,11 +197,11 @@ DrawComponent * LoadComponent(const std::string &fileName)
 			params[0] = toLower(params[0]);
 
 			if (params[0] == "v")
-				component->vertices.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
+				mesh->_vertices.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
 			else if (params[0] == "vn")
-				component->normals.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
+				mesh->_normals.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
 			else if (params[0] == "vt")
-				component->texcoords.push_back(Vec2f((float)atof(params[1].c_str()), (float)atof(params[2].c_str())));
+				mesh->_texcoords.push_back(Vec2f((float)atof(params[1].c_str()), (float)atof(params[2].c_str())));
 			else if (params[0] == "f")
 			{
 				for (size_t ii = 4; ii <= params.size(); ii++)
@@ -213,18 +213,18 @@ DrawComponent * LoadComponent(const std::string &fileName)
 						Vertex vertex;
 						std::vector<std::string> indices = split(params[i == (ii - 3) ? 1 : i], "/");
 						if (indices.size() >= 1)	//er is een positie
-							vertex.position = atoi(indices[0].c_str()) - 1;
-						if (indices.size() == 2)		//alleen texture
-							vertex.texcoord = atoi(indices[1].c_str()) - 1;
+							vertex._position = atoi(indices[0].c_str()) - 1;
+						if (indices.size() == 2)		//alleen _texture
+							vertex._texcoord = atoi(indices[1].c_str()) - 1;
 						if (indices.size() == 3)		//v/t/n of v//n
 						{
 							if (indices[1] != "")
-								vertex.texcoord = atoi(indices[1].c_str()) - 1;
-							vertex.normal = atoi(indices[2].c_str()) - 1;
+								vertex._texcoord = atoi(indices[1].c_str()) - 1;
+							vertex._normal = atoi(indices[2].c_str()) - 1;
 						}
-						face.vertices.push_back(vertex);
+						face._vertices.push_back(vertex);
 					}
-					currentGroup->faces.push_back(face);
+					currentGroup->_faces.push_back(face);
 				}
 			}
 			else if (params[0] == "s")
@@ -232,30 +232,30 @@ DrawComponent * LoadComponent(const std::string &fileName)
 			}
 			else if (params[0] == "mtllib")
 			{
-				loadMaterialFile(dirName + "/" + params[1], dirName, component);
+				LoadMaterialFile(dirName + "/" + params[1], dirName, mesh);
 			}
 			else if (params[0] == "usemtl")
 			{
-				if (currentGroup->faces.size() != 0)
-					component->groups.push_back(currentGroup);
+				if (currentGroup->_faces.size() != 0)
+					mesh->_groups.push_back(currentGroup);
 				currentGroup = new ObjGroup();
-				currentGroup->materialIndex = -1;
+				currentGroup->_materialIndex = -1;
 
-				for (int i = 0; i < component->materials.size(); i++)
+				for (int i = 0; i < mesh->_materials.size(); i++)
 				{
-					MaterialInfo* info = component->materials[i];
-					if (info->name == params[1])
+					MaterialInfo* info = mesh->_materials[i];
+					if (info->_name == params[1])
 					{
-						currentGroup->materialIndex = i;
+						currentGroup->_materialIndex = i;
 						break;
 					}
 				}
-				if (currentGroup->materialIndex == -1)
-					std::cout << "Could not find material name " << params[1] << std::endl;
+				if (currentGroup->_materialIndex == -1)
+					std::cout << "Could not find material _name " << params[1] << std::endl;
 			}
 		}
-		component->groups.push_back(currentGroup);
-		return component;
+		mesh->_groups.push_back(currentGroup);
+		return mesh;
 	}
 
 

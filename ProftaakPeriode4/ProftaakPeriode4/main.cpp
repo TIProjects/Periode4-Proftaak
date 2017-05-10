@@ -16,7 +16,7 @@ View view;
 // This function should only be called by OpenGL and NOT manually
 void window()
 {
-	view.UpdateView();
+    view.UpdateView();
 }
 
 // The reshapeFunc which will call the reshape of the view
@@ -30,7 +30,7 @@ void reshape(int w, int h)
 // This function should only be called by OpenGL and NOT manually
 void idle()
 {
-	model.update();
+    model.update();
 }
 
 
