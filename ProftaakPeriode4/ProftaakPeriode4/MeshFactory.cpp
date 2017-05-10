@@ -233,6 +233,12 @@ Mesh* LoadMeshFile(const std::string& fileName)
 			else if (params[0] == "mtllib")
 			{
 				LoadMaterialFile(dirName + "/" + params[1], dirName, mesh);
+			}else if(params[0] == "w")
+			{
+				mesh->_width = std::stoi(params[1]);
+			}else if(params[0] == "l")
+			{
+				mesh->_length = std::stoi(params[1]);
 			}
 			else if (params[0] == "usemtl")
 			{
@@ -251,7 +257,7 @@ Mesh* LoadMeshFile(const std::string& fileName)
 					}
 				}
 				if (currentGroup->_materialIndex == -1)
-					std::cout << "Could not find material _name " << params[1] << std::endl;
+					cout << "Could not find material _name " << params[1] << endl;
 			}
 		}
 		mesh->_groups.push_back(currentGroup);

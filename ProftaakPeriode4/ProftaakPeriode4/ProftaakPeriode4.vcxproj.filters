@@ -37,9 +37,6 @@
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{d4976496-9021-491c-93b9-42d7fb0576ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Lanes">
-      <UniqueIdentifier>{c2f14859-e4a3-4b78-9f19-32712f107464}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Model">
       <UniqueIdentifier>{a1333fcc-87b2-494a-ab23-f4d9ad4a0c0d}</UniqueIdentifier>
     </Filter>
@@ -48,9 +45,6 @@
     </Filter>
     <Filter Include="Header Files\View">
       <UniqueIdentifier>{9dd1b347-790b-4e09-80bd-c5baced5a6ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Lanes">
-      <UniqueIdentifier>{25c3414b-1742-4321-b3ae-dcb8e519a5b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Score">
       <UniqueIdentifier>{614e0ca1-c9e5-4b12-9e1a-d96a68b9b731}</UniqueIdentifier>
@@ -80,9 +74,6 @@
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Lanes.cpp">
-      <Filter>Source Files\Lanes</Filter>
     </ClCompile>
     <ClCompile Include="View.cpp">
       <Filter>Source Files\View</Filter>
@@ -132,6 +123,9 @@
     <ClCompile Include="MeshFactory.cpp">
       <Filter>Source Files\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="LaneGeneratorComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -142,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Lanes.h">
-      <Filter>Header Files\Lanes</Filter>
     </ClInclude>
     <ClInclude Include="View.h">
       <Filter>Header Files\View</Filter>
@@ -190,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>Header Files\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="LaneGeneratorComponent.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
