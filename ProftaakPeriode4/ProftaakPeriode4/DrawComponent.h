@@ -1,30 +1,33 @@
 #pragma once
-#include <vector>
 #include "Component.h"
-#include "Vec.h"
-#include "ObjectFactory.h"
 
-class Component;
-class GameObject;
 
-/*
- * Class for drawing gameObjects
- * Created by ObjectFactory
+
+/** Interface for drawing to View
+ * \brief Drawing Interface
+ * Draw() needs to be implemented in subclasses
+ * Not for direct initialisation
  */
 class DrawComponent : public Component
 {
 public:
-	// Constructor
-	DrawComponent();
-	~DrawComponent();
+	/** Constructor for DrawComponent
+	 * \brief For creating DrawCompent as DRAW_COMPONENT type
+	 */
+	DrawComponent() : Component(DRAW_COMPONENT)
+	{
+		
+	};
+	/** Destructor of DrawComponent
+	 * \brief DrawComponent Destructor
+	 */
+	~DrawComponent(){};
 
-	// Function which will draw this object 
-	// using it's vertices and texcoords
-	void Draw();
-
-	std::vector<Vec3f>	vertices;
-	std::vector<Vec3f>	normals;
-	std::vector<Vec2f>	texcoords;
-	std::vector<ObjGroup*> groups;
-	std::vector<MaterialInfo*> materials;
+	/**
+	 *Function for drawing to view
+	 * \brief Drawing to View
+	 * Needs to be implemented in subclasses like MeshDrawComponent
+	 */
+	virtual void Draw() = 0;
 };
+

@@ -1,6 +1,6 @@
 //#include "Lanes.h"
 //
-//Lane::Lane(std::vector<Vec3f> vertices) : GameObject(vertices)
+//Lane::Lane(std::vector<Vec3f> _vertices) : GameObject(_vertices)
 //{
 //	
 //}
@@ -44,11 +44,11 @@
 //
 //Lanes::Lanes(int count)
 //{
-//	std::vector<Vec3f> vertices;
-//	vertices.push_back(Vec3f( 0.0f,  0.0f, 0.0f   ));
-//	vertices.push_back(Vec3f( 10.0f, 0.0f, 0.0f   ));
-//	vertices.push_back(Vec3f( 10.0f, 0.0f, -50.0f ));
-//	vertices.push_back(Vec3f( 0.0f,  0.0f, -50.0f ));
+//	std::vector<Vec3f> _vertices;
+//	_vertices.push_back(Vec3f( 0.0f,  0.0f, 0.0f   ));
+//	_vertices.push_back(Vec3f( 10.0f, 0.0f, 0.0f   ));
+//	_vertices.push_back(Vec3f( 10.0f, 0.0f, -50.0f ));
+//	_vertices.push_back(Vec3f( 0.0f,  0.0f, -50.0f ));
 //
 //	// Assign members
 //	_count = count;
@@ -60,7 +60,7 @@
 //	{
 //		basePosition.x += (i * 10.0f) + 4.0f;
 //
-//		Lane lane = Lane(vertices);
+//		Lane lane = Lane(_vertices);
 ////		lane.setPosition(basePosition);
 //
 //		_lanes.push_back(lane);

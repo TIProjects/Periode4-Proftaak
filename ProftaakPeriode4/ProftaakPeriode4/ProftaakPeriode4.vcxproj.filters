@@ -75,13 +75,7 @@
     <ClCompile Include="Vec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DrawComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="TextureLoader.cpp">
-      <Filter>Source Files\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectFactory.cpp">
       <Filter>Source Files\Factory</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
@@ -89,6 +83,15 @@
     </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshDrawComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshFactory.cpp">
+      <Filter>Source Files\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,14 +122,20 @@
     <ClInclude Include="TextureLoader.h">
       <Filter>Header Files\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectFactory.h">
-      <Filter>Header Files\Factory</Filter>
-    </ClInclude>
     <ClInclude Include="CameraComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshDrawComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshFactory.h">
+      <Filter>Header Files\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

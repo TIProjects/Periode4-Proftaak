@@ -3,6 +3,8 @@
 #include "DrawComponent.h"
 #include "CameraComponent.h"
 #include <iostream>
+#include "MeshDrawComponent.h"
+#include "MeshFactory.h"
 
 Model::Model()
 {
@@ -53,7 +55,7 @@ void Model::InitTestObjects()
 	_gameObjects.push_back(camera);
 
 	GameObject * testObject = new GameObject();
-	DrawComponent * drawComponent = LoadComponent("Assets//Models//TestCube//Cube.Cobj");
+	DrawComponent * drawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
 	testObject->_position.z -= 3;
 	testObject->AddComponent(drawComponent);
 
