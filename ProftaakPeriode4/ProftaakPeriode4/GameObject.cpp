@@ -8,7 +8,7 @@ GameObject::GameObject()
 	_rotation = Vec3f();
 }
 
-void GameObject::Update(int deltaTime)
+void GameObject::Update(float deltaTime)
 {
 	for (Component * component : _components)
 	{
@@ -16,7 +16,7 @@ void GameObject::Update(int deltaTime)
 	}
 }
 
-void GameObject::LateUpdate(int deltaTime)
+void GameObject::LateUpdate(float deltaTime)
 {
 	for(Component * component : _components)
 	{

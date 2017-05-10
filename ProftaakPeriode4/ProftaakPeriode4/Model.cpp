@@ -2,6 +2,7 @@
 #include <GL\freeglut.h>
 #include "DrawComponent.h"
 #include "CameraComponent.h"
+#include <iostream>
 
 Model::Model()
 {
@@ -16,9 +17,18 @@ int Model::getDeltaTime(const int* delta)
 void Model::update()
 {
 	// Calculate the deltaTime
-	int currentTime = glutGet(GLUT_ELAPSED_TIME);
-	int deltaTime = (currentTime - _lastTime) / 1000;
+	float currentTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
+	float deltaTime = currentTime - _lastTime;
 	_lastTime = currentTime;
+
+	// deltaTime should never be allowed to be 0 or negative...
+	if (deltaTime <= 0) deltaTime = 0.000001f;
+
+	// Calculate and display fps
+	// For performance profiling only
+	// should normally be commented
+//	int fps = int(1.0 / deltaTime);
+//	std::cout << "Fps: " << fps << "DT: " << deltaTime << std::endl;
 
 	// Call the Update of every GameObject
 	for (GameObject * gameObject : _gameObjects)
@@ -48,7 +58,7 @@ void Model::InitTestObjects()
 	_gameObjects.push_back(camera);
 
 	GameObject * testObject = new GameObject();
-	DrawComponent * drawComponent = LoadComponent("Assets//Models//TestCube//Cube.obj");
+	DrawComponent * drawComponent = LoadComponent("Assets//Models//TestCube//Cube.Cobj");
 	testObject->_position.z -= 3;
 	testObject->AddComponent(drawComponent);
 

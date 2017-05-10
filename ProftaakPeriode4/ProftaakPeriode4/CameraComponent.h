@@ -18,8 +18,8 @@ public:
 	// Overriden Update function from component
 	// changes the parents position and rotation based
 	// on keyboard an mouse input
-	// @param int deltaTime: the time in milliseconds between this and the last frame
-	void Update(int deltaTime) override;
+	// @param float deltaTime: the time in milliseconds between this and the last frame
+	void Update(float deltaTime) override;
 	
 	// Apply the camera position and rotation to the view
 	void ApplyCamera() const;

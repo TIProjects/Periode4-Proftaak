@@ -11,11 +11,11 @@ Component::~Component()
 	// TODO destructor stuff
 }
 
-void Component::Update(int deltaTime)
+void Component::Update(float deltaTime)
 {
 }
 
-void Component::LateUpdate(int deltaTime)
+void Component::LateUpdate(float deltaTime)
 {
 }
 

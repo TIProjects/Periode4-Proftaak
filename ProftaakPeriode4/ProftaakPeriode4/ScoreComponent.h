@@ -45,8 +45,8 @@ class ScoreComponent : Component
          */
         unsigned int returnScore();
 
-        void Update(int deltaTime) override;
-        void LateUpdate(int deltaTime) override;
+        void Update(int deltaTime);
+        void LateUpdate(int deltaTime);
 
         /*
          * Operator for sorting the score

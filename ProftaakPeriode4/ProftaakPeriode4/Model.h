@@ -29,10 +29,10 @@ public:
     // and ONLY ONCE
     void Init();
 
+    // Vector of every GameObject present in the model
+    std::vector<GameObject*> _gameObjects;
 private:
-	// Vector of every GameObject present in the model
-	std::vector<GameObject*> _gameObjects;
 
 	// The last time a frame was rendered in milliseconds
-	int _lastTime;
+	float _lastTime;
 };
