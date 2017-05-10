@@ -10,10 +10,6 @@ public:
     // Initialises _lastTime as 0
     Model();
 
-    int getDeltaTime(const int* delta);
-
-    int deltaTime;
-    int lastTime;
     // Update the model by calling Update and LateUpdate
     // of every GameObject present in the model
     void update();

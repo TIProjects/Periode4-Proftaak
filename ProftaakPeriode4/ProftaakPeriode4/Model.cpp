@@ -9,11 +9,6 @@ Model::Model()
 	_lastTime = 0;
 }
 
-int Model::getDeltaTime(const int* delta)
-{
-    return 0;
-}
-
 void Model::update()
 {
 	// Calculate the deltaTime
