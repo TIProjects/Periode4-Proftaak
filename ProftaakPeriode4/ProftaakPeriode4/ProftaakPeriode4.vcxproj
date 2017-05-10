@@ -155,11 +155,15 @@
     <ClCompile Include="MeshDrawComponent.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="MeshFactory.cpp" />
+    <ClCompile Include="ScoreComponent.cpp" />
+    <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Vec.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DrawComponent.h" />
@@ -170,6 +174,7 @@
     <ClInclude Include="MeshDrawComponent.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="MeshFactory.h" />
+    <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Vec.h" />

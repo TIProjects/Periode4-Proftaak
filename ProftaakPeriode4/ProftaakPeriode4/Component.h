@@ -5,6 +5,7 @@ class GameObject;
 // Enum which will indicate the functionality of a Component
 enum ComponentID
 {
+	SCORE_COMPONENT,
 	CAMERA_COMPONENT,
 	DRAW_COMPONENT
 };
