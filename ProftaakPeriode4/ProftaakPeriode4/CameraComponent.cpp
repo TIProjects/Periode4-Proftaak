@@ -46,6 +46,7 @@ void CameraComponent::Update(float deltaTime)
 	if (keys['s']) Move(270, deltaTime*speed);
 	if (keys['q']) Up(deltaTime*-speed);
 	if (keys['e']) Up(deltaTime*speed);
+	if (keys[KEYBOARD_KEY_ESC]) exit(0); 
 
 
 	// Calculate mouse movement and reset mouse
