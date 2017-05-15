@@ -16,7 +16,7 @@ public:
 	 * \brief Constructor for drawing IndexedMesh Objects
 	 * \param mesh IndexedMesh object that will be drawn
 	 */
-	MeshDrawComponent(IndexedMesh * mesh);
+	explicit MeshDrawComponent(Mesh * mesh);
 	/**
 	 * \brief 
 	 */
@@ -31,6 +31,6 @@ private:
 	/**
 	 * \brief IndexedMesh object that is drawn
 	 */
-	IndexedMesh * _mesh;
+	Mesh * _mesh;
 };
 

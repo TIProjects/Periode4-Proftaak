@@ -1,7 +1,7 @@
 #include "MeshDrawComponent.h"
 #include "GameObject.h"
 
-MeshDrawComponent::MeshDrawComponent(IndexedMesh* mesh) : DrawComponent()
+MeshDrawComponent::MeshDrawComponent(Mesh* mesh) : DrawComponent()
 {
 	_mesh = mesh;
 }
