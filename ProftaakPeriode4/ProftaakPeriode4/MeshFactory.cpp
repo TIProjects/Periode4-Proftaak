@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include "TextureLoader.h"
+#include "Texture.h"
 #include <string>
 #include "Vec.h"
 #include "MeshFactory.h"
@@ -78,7 +78,7 @@ static inline std::string cleanLine(std::string line)
 
 
 
-void LoadMaterialFile(const std::string &fileName, const std::string &dirName, Mesh* mesh)
+void LoadMaterialFile(const std::string &fileName, const std::string &dirName, IndexedMesh* mesh)
 {
 	std::cout << "Loading " << fileName << std::endl;
 	std::ifstream pFile(fileName.c_str());
@@ -161,7 +161,7 @@ void LoadMaterialFile(const std::string &fileName, const std::string &dirName, M
 
 Mesh* LoadMeshFile(const std::string& fileName)
 	{
-		Mesh* mesh = new Mesh();
+		IndexedMesh* indexedMesh = new IndexedMesh();
 		std::cout << "Loading " << fileName << std::endl;
 		std::string dirName = fileName;
 		if (dirName.rfind("/") != std::string::npos)
@@ -181,7 +181,7 @@ Mesh* LoadMeshFile(const std::string& fileName)
 		}
 
 
-		ObjGroup* currentGroup = new ObjGroup();
+		IndexedObjGroup* currentGroup = new IndexedObjGroup();
 		currentGroup->_materialIndex = -1;
 
 
@@ -197,11 +197,11 @@ Mesh* LoadMeshFile(const std::string& fileName)
 			params[0] = toLower(params[0]);
 
 			if (params[0] == "v")
-				mesh->_vertices.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
+				indexedMesh->_vertices.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
 			else if (params[0] == "vn")
-				mesh->_normals.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
+				indexedMesh->_normals.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
 			else if (params[0] == "vt")
-				mesh->_texcoords.push_back(Vec2f((float)atof(params[1].c_str()), (float)atof(params[2].c_str())));
+				indexedMesh->_texcoords.push_back(Vec2f((float)atof(params[1].c_str()), (float)atof(params[2].c_str())));
 			else if (params[0] == "f")
 			{
 				for (size_t ii = 4; ii <= params.size(); ii++)
@@ -210,7 +210,7 @@ Mesh* LoadMeshFile(const std::string& fileName)
 
 					for (size_t i = ii - 3; i < ii; i++)	//magische forlus om van quads triangles te maken ;)
 					{
-						Vertex vertex;
+						IndexedVertex vertex;
 						std::vector<std::string> indices = split(params[i == (ii - 3) ? 1 : i], "/");
 						if (indices.size() >= 1)	//er is een positie
 							vertex._position = atoi(indices[0].c_str()) - 1;
@@ -232,24 +232,28 @@ Mesh* LoadMeshFile(const std::string& fileName)
 			}
 			else if (params[0] == "mtllib")
 			{
-				LoadMaterialFile(dirName + "/" + params[1], dirName, mesh);
+				LoadMaterialFile(dirName + "/" + params[1], dirName, indexedMesh);
 			}else if(params[0] == "w")
 			{
-				mesh->_width = std::stoi(params[1]);
+				indexedMesh->_width = std::stoi(params[1]);
 			}else if(params[0] == "l")
 			{
-				mesh->_length = std::stoi(params[1]);
+				indexedMesh->_length = std::stoi(params[1]);
+			}
+			else if (params[0] == "h")
+			{
+				indexedMesh->_height = std::stoi(params[1]);
 			}
 			else if (params[0] == "usemtl")
 			{
 				if (currentGroup->_faces.size() != 0)
-					mesh->_groups.push_back(currentGroup);
-				currentGroup = new ObjGroup();
+					indexedMesh->_groups.push_back(currentGroup);
+				currentGroup = new IndexedObjGroup();
 				currentGroup->_materialIndex = -1;
 
-				for (int i = 0; i < mesh->_materials.size(); i++)
+				for (int i = 0; i < indexedMesh->_materials.size(); i++)
 				{
-					MaterialInfo* info = mesh->_materials[i];
+					MaterialInfo* info = indexedMesh->_materials[i];
 					if (info->_name == params[1])
 					{
 						currentGroup->_materialIndex = i;
@@ -260,8 +264,8 @@ Mesh* LoadMeshFile(const std::string& fileName)
 					cout << "Could not find material _name " << params[1] << endl;
 			}
 		}
-		mesh->_groups.push_back(currentGroup);
-		return mesh;
+		indexedMesh->_groups.push_back(currentGroup);
+		return new Mesh(indexedMesh);;
 	}
 
 

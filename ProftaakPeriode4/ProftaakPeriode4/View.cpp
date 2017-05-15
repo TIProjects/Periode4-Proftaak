@@ -38,12 +38,10 @@ void View::UpdateView()
 	}
 	glEnable(GL_DEPTH_TEST);
 
-    Colour colour = {0.1f, 0.1f, 0.1f, 0.5f};
-
 	// Draw all the gameObject
 	for(GameObject * gameObject : _modelPtr->_gameObjects)
 	{    
-        AlphaBlending::blendGameObject(gameObject, colour);
+        gameObject->Draw();
 	}
 
 	glutSwapBuffers();

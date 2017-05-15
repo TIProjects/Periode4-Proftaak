@@ -3,10 +3,8 @@
 #include "View.h"
 #include "ScoreBoard.h"
 #include "ScoreComponent.h"
-
 #include <GL\freeglut.h>
 #include "Input.h"
-#include "CameraComponent.h"
 
 Model model;
 View view;
@@ -22,7 +20,7 @@ void window()
 // This function should only be called by OpenGL and NOT manually
 void reshape(int w, int h)
 {
-    
+	view.reshape(w, h);
 }
 
 // The idleFunc which will call the UpdateView of the model
@@ -32,9 +30,15 @@ void idle()
 	model.update();
 }
 
+<<<<<<< HEAD
 
 int main(int argc, char* argv[]) {
+=======
+int main(int argc, char* argv[]) 
+{
+>>>>>>> edda52ef277f51b236acce2da3718f76509ca462
 	view = View(&model, argc, argv);
+
 	// Call the test object initialiser 
 	// For testing...
 	// can be removed if testing is not necessary
@@ -53,7 +57,6 @@ int main(int argc, char* argv[]) {
 	glutSpecialFunc(Keyboard::SKeyboardDown);
 	glutSpecialUpFunc(Keyboard::SKeyboardUp);
 	glutPassiveMotionFunc(Mouse::MoveMouse);
-
 
 	glutMainLoop();
 	return 0;

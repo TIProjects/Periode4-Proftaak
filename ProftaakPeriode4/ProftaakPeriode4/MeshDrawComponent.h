@@ -3,8 +3,8 @@
 #include "Mesh.h"
 
 
-/** Class for drawing Meshes [See Mesh.h for MeshInformation]
- * \brief Mesh Drawing
+/** Class for drawing Meshes [See IndexedMesh.h for MeshInformation]
+ * \brief IndexedMesh Drawing
  * Extends the DrawComponent class with its Draw() Function that is called by View (when drawn)
  */
 class MeshDrawComponent :
@@ -13,10 +13,10 @@ class MeshDrawComponent :
 public:
 	/**
 	 *Create a MeshDrawComponent
-	 * \brief Constructor for drawing Mesh Objects
-	 * \param mesh Mesh object that will be drawn
+	 * \brief Constructor for drawing IndexedMesh Objects
+	 * \param mesh IndexedMesh object that will be drawn
 	 */
-	MeshDrawComponent(Mesh * mesh);
+	explicit MeshDrawComponent(Mesh * mesh);
 	/**
 	 * \brief 
 	 */
@@ -29,7 +29,7 @@ public:
 
 private:
 	/**
-	 * \brief Mesh object that is drawn
+	 * \brief IndexedMesh object that is drawn
 	 */
 	Mesh * _mesh;
 };
