@@ -30,13 +30,8 @@ void idle()
 	model.update();
 }
 
-<<<<<<< HEAD
-
-int main(int argc, char* argv[]) {
-=======
 int main(int argc, char* argv[]) 
 {
->>>>>>> edda52ef277f51b236acce2da3718f76509ca462
 	view = View(&model, argc, argv);
 
 	// Call the test object initialiser 

@@ -47,6 +47,7 @@ void ScoreBoard::getLinuxDirectory()
     const char* temp_p = "$XDG_DATA_HOME/CubeRunner";
     if (_mkdir(temp_p) == -1)//creating a directory
     {
+        //ReSharper disable once CppDeprecatedEntity
         std::cerr << "Error :  " << strerror(errno) << std::endl;
         return;
     }

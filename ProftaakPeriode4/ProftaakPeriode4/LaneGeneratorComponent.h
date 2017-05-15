@@ -125,20 +125,6 @@ public:
 	void Update(float deltaTime) override;
 
 private:
-<<<<<<< HEAD
-	// the mesh to show todo multiple meshes showed randomly
-	Mesh * _mesh;
-	// the amount of lanes
-	int _laneAmount;
-	// the amount already moved (automaticly lowered)
-	float _lengthMoved;
-	// the movement speed
-	float _speed = 0.0f;  // todo test accurate speed
-	// the space between the lanes
-	float _spaceBetween = 1.0f;
-	// the amount of lanes (in length) 
-	int _lengthAmount = 20; // todo refactor to lengthamount as distance and not amount
-=======
 	/*
 	 * The lanes that are shown in the component
 	 * Are filled in constructor (given amount)
@@ -152,6 +138,5 @@ private:
 	 * The space between the lanes
 	 */
 	float _spaceBetween = 2.0f;
->>>>>>> edda52ef277f51b236acce2da3718f76509ca462
 };
 
