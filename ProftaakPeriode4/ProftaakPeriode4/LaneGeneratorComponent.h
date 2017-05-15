@@ -73,7 +73,7 @@ public:
 	 * todo test with multiple 3d models to be sure the alignment is correct
 	 * \return the Maximum width of the lane
 	 */
-	int getWidth();
+	float getWidth();
 
 	float getLength();
 

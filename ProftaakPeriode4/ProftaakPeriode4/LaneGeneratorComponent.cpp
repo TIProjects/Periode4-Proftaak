@@ -51,9 +51,9 @@ Mesh* Lane::RandomMesh()
 	return _meshes.at(index);
 }
 
-int Lane::getWidth()
+float Lane::getWidth()
 {
-	int largest = 1;
+	float largest = 1;
 	for (int i = 0; i < _queue.size(); i++)
 		if (_queue[i]->_width > largest)
 			largest = _queue[i]->_width;
@@ -83,7 +83,7 @@ LaneGeneratorComponent::~LaneGeneratorComponent()
 
 void LaneGeneratorComponent::Draw()
 {
-	int alreadyDrawn = 0;
+	float alreadyDrawn = 0;
 	for (int i = 0; i < _lanes.size(); i++) {
 		_lanes.at(i)->Draw(alreadyDrawn + (i*_spaceBetween));
 		alreadyDrawn += _lanes[i]->getWidth();
