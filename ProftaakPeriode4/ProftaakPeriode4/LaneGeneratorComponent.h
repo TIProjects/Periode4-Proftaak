@@ -41,7 +41,7 @@ private:
 	// the amount already moved (automaticly lowered)
 	float _lengthMoved;
 	// the movement speed
-	float _speed = 7.5f;  // todo test accurate speed
+	float _speed = 0.0f;  // todo test accurate speed
 	// the space between the lanes
 	float _spaceBetween = 1.0f;
 	// the amount of lanes (in length) 

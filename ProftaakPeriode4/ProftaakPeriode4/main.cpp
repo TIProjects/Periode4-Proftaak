@@ -34,11 +34,6 @@ void idle()
 
 
 int main(int argc, char* argv[]) {
-
-    ScoreBoard score;
-    score.loadScore();
-    score.printScoreBoard();
-
 	view = View(&model, argc, argv);
 	// Call the test object initialiser 
 	// For testing...

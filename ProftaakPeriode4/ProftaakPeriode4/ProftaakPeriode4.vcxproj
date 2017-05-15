@@ -162,6 +162,7 @@
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlpaBlend.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="LaneGeneratorComponent.h" />
     <ClInclude Include="ScoreComponent.h" />

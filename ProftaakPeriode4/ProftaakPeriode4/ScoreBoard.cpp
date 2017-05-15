@@ -44,7 +44,7 @@ void ScoreBoard::getLinuxDirectory()
     path = "Resource Files/scores.json";
 
     //TODO: test if this works
-    const char* temp_p = "$XDG_DATA_HOME/SubwaySurfer";
+    const char* temp_p = "$XDG_DATA_HOME/CubeRunner";
     if (_mkdir(temp_p) == -1)//creating a directory
     {
         std::cerr << "Error :  " << strerror(errno) << std::endl;
@@ -52,7 +52,7 @@ void ScoreBoard::getLinuxDirectory()
     }
 
     //Linux directory
-    path = "$XDG_DATA_HOME/SubwaySurfer/scores.json";
+    path = "$XDG_DATA_HOME/CubeRunner/scores.json";
 }
 
 void ScoreBoard::getWindowsDirectory()
@@ -64,7 +64,7 @@ void ScoreBoard::getWindowsDirectory()
         std::string temps(temp.begin(), temp.end());
         path = temps;
 
-        path += "\\SubwaySurfer";
+        path += "\\CubeRunner";
         const char* temp_p = path.c_str();
 
         struct stat info;
