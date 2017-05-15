@@ -2,6 +2,7 @@
 #include "DrawComponent.h"
 #include "Mesh.h"
 #include <queue>
+#include <ctime>
 
 
 /**
@@ -26,10 +27,15 @@ public:
 	 * WARNING! Drawn outside lane when given > 1.0 or < 0.0!
 	 */
 	float _position;
+	float _speed = 4.0f;
+
+
+	float _lengthMoved = 0.0f;
 	/*
 	 * The Mesh that will be drawn
 	 */
 	Mesh* _mesh;
+
 };
 
 class Lane
@@ -69,6 +75,8 @@ public:
 	 */
 	int getWidth();
 
+	float getLength();
+
 	/**
 	 * The meshes that are randomly chosen (loaded in constructor)
 	 */
@@ -89,8 +97,12 @@ public:
 	 */
 	vector<LaneObstacle*> _obstacles;
 
-	void update();
+	void update(float deltatime);
 
+	/*
+	* The speed that are moved every some time
+	*/
+	float _speed = 5.5f;
 };
 
 
@@ -126,16 +138,21 @@ public:
 	 */
 	void Update(float deltaTime) override;
 
+
+	void PlaceObstacle(Mesh * mesh)
+	{
+		srand(time(nullptr));
+		if (_lanes.size() == 0)
+			return;
+		_lanes[rand() % _lanes.size()]->_obstacles.push_back(new LaneObstacle(mesh, (float)(rand()%100/100.0)));
+	}
+
 private:
 	/*
 	 * The lanes that are shown in the component
 	 * Are filled in constructor (given amount)
 	 */
 	vector<Lane*> _lanes;
-	/*
-	 * The speed that are moved every some time
-	 */
-	float _speed = 8.5f;
 	/*
 	 * The space between the lanes
 	 */

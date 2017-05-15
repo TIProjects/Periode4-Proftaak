@@ -7,10 +7,12 @@ LaneObstacle::LaneObstacle(Mesh* mesh, float place)
 {
 	_position = place;
 	_mesh = mesh;
+	std::cout << place << std::endl;
 }
 
 Lane::Lane(int lengthAmount, std::vector<Mesh*> meshes)
 {
+	srand(time(nullptr));
 	_meshes = meshes;
 	for (int i = 0; i < lengthAmount; i++)
 		_queue.push_back(RandomMesh());
@@ -29,13 +31,16 @@ void Lane::Draw(float width)
 		drawObject->Draw(position, rotation, rotationAngle); // draw lane-mesh
 		for (int o = 0; o < _obstacles.size(); o++)
 		{
-			Vec3f obstaclePosition = Vec3f(width, 1.0f, -(_obstacles[o]->_mesh->_length * (_queue.size() * _obstacles[o]->_position)) + _lengthMoved);
+			LaneObstacle * obstacle = _obstacles[o];
+			Vec3f obstaclePosition = Vec3f(width, 1.0f,(-getLength()*obstacle->_position) + obstacle->_lengthMoved + (drawObject->_length));
+	
 			if (obstaclePosition.x > position.x - drawObject->_width && obstaclePosition.x < position.x + drawObject->_width
-				&& obstaclePosition.z < position.z + drawObject->_length && obstaclePosition.z > position.z - drawObject->_length)
+					&& obstaclePosition.z < position.z + drawObject->_length && obstaclePosition.z > position.z - drawObject->_length)
 			{
 				obstaclePosition.y = drawObject->_height; // set height of position to height of lane-mesh
 				_obstacles[o]->_mesh->Draw(obstaclePosition, rotation, rotationAngle); // draw obstacle
 			}
+			
 		}
 	}
 }
@@ -43,7 +48,6 @@ void Lane::Draw(float width)
 Mesh* Lane::RandomMesh()
 {
 	int index = rand() % _meshes.size();
-	//		std::cout << index << std::endl;
 	return _meshes.at(index);
 }
 
@@ -55,6 +59,14 @@ int Lane::getWidth()
 			largest = _queue[i]->_width;
 
 	return largest;
+}
+
+float Lane::getLength()
+{
+	float length = 0;
+	for (int i = 0; i < _queue.size(); i++)
+		length += _queue[i]->_length;
+	return length;
 }
 
 LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std::vector<Mesh*> meshes)
@@ -81,24 +93,24 @@ void LaneGeneratorComponent::Draw()
 void LaneGeneratorComponent::Update(float deltaTime)
 {
 	for (int i = 0; i < _lanes.size(); i++) {
-		_lanes.at(i)->_lengthMoved += deltaTime*_speed;
-		_lanes.at(i)->update();
+		_lanes.at(i)->update(deltaTime);
 	}
 }
 
-void Lane::update()
+void Lane::update(float deltatime)
 {
+	_lengthMoved += deltatime*_speed;
 	Mesh* mesh = _queue.front();
 	if (_lengthMoved > mesh->_length) // check if first mesh can be shifted to the back
 	{
 		_queue.pop_front();
 		_queue.push_back(RandomMesh()); // add new to back
 		_lengthMoved = 0;
-		for (int i = 0; i < _obstacles.size(); i++)
-		{
-			_obstacles[i]->_position -= 1.0f / _queue.size();
-			if (_obstacles[i]->_position < 0.0f)
-				_obstacles.erase(_obstacles.begin() + i);
-		}
+	}
+	for (int i = 0; i < _obstacles.size(); i++)
+	{
+		LaneObstacle * obstacle = _obstacles[i];
+		obstacle->_lengthMoved += deltatime*obstacle->_speed;
+		std::cout << obstacle->_lengthMoved << std::endl;
 	}
 }
