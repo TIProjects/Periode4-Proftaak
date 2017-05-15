@@ -2,6 +2,7 @@
 #include <GL\freeglut.h>
 #include "DrawComponent.h"
 #include "CameraComponent.h"
+#include "VisionComponent.h"
 #include <iostream>
 
 Model::Model()
@@ -22,8 +23,8 @@ void Model::update()
 	// Calculate and display fps
 	// For performance profiling only
 	// should normally be commented
-//	int fps = int(1.0 / deltaTime);
-//	std::cout << "Fps: " << fps << "DT: " << deltaTime << std::endl;
+	//int fps = int(1.0 / deltaTime);
+	//std::cout << "Fps: " << fps << "DT: " << deltaTime << std::endl;
 
 	// Call the Update of every GameObject
 	for (GameObject * gameObject : _gameObjects)
@@ -58,6 +59,12 @@ void Model::InitTestObjects()
 	testObject->AddComponent(drawComponent);
 
 	_gameObjects.push_back(testObject);
+
+	GameObject * vision = new GameObject();
+	VisionComponent * visionComponent = new VisionComponent();
+	vision->AddComponent(visionComponent);
+
+	_gameObjects.push_back(vision);
 }
 
 void Model::Init()
