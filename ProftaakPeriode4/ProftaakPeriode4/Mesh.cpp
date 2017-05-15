@@ -12,6 +12,7 @@ IndexedMesh::IndexedMesh()
 {
 	_width = 1.0f;
 	_length = 1.0f;
+	_height = 1.0f;
 }
 
 
@@ -20,13 +21,15 @@ IndexedMesh::~IndexedMesh()
 	// todo implement destructor
 }
 
+
 void IndexedMesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
 {
 	glPushMatrix();
 
 	glTranslatef(position.x, position.y, position.z);
 	glRotatef(rotationAngle, rotation.x, rotation.y, rotation.z);
-	
+
+
 	for (IndexedObjGroup * group : _groups)
 	{
 		if (group->_materialIndex != -1 && _materials.at(group->_materialIndex)->_texture != nullptr) {
@@ -48,6 +51,7 @@ void IndexedMesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
 		glDisable(GL_TEXTURE_2D);
 	}
 
+
 	glPopMatrix();
 }
 
@@ -60,12 +64,14 @@ Mesh::Mesh()
 {
 	_width = 0;
 	_length = 0;
+	_height = 0;
 }
 
 Mesh::Mesh(const IndexedMesh * indexedMesh)
 {
 	_width = indexedMesh->_width;
 	_length = indexedMesh->_length;
+	_height = indexedMesh->_height;
 
 	for(IndexedObjGroup * group : indexedMesh->_groups)
 	{
@@ -106,11 +112,11 @@ void Mesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
 
 		glBindTexture(GL_TEXTURE_2D, group._material->_texture->_id);
 
-		glVertexPointer(3, GL_FLOAT, sizeof(float) * 8.0f, ((float*)group._vertices.data()));
-		glNormalPointer(GL_FLOAT, sizeof(float) * 8.0f, ((float*)group._vertices.data()) + 5);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 8.0f, ((float*)group._vertices.data()) + 3);
+		glVertexPointer(3, GL_FLOAT, sizeof(float) * 8, ((float*)group._vertices.data()));
+		glNormalPointer(GL_FLOAT, sizeof(float) * 8, ((float*)group._vertices.data()) + 5);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 8, ((float*)group._vertices.data()) + 3);
 
-		glDrawArrays(GL_TRIANGLES, 0, group._vertices.size());
+		glDrawArrays(GL_TRIANGLES, 0, GLsizei(group._vertices.size()));
 
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_NORMAL_ARRAY);

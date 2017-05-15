@@ -85,6 +85,7 @@ public:
 	
 	float _width;
 	float _length;
+	float _height;
 
 	vector<Vec3f>	_vertices;
 	vector<Vec3f>	_normals;
@@ -143,6 +144,7 @@ public:
 
 	float _width;
 	float _length;
+	float _height;
 
 	vector<Group> _groups;
 

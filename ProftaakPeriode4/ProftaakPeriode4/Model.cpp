@@ -60,8 +60,10 @@ void Model::InitTestObjects()
 	_gameObjects.push_back(camera);
 
 	GameObject * laneGenerator = new GameObject();
-	//DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3,LoadMeshFile("Assets//Models//Lane//lane.Cobj"));
-	DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3, LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+	std::vector<Mesh*> meshes;
+	meshes.push_back(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+
+	DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3,30, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
 	_gameObjects.push_back(laneGenerator);
 }
