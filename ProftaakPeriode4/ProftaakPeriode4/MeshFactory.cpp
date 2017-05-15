@@ -261,8 +261,7 @@ Mesh* LoadMeshFile(const std::string& fileName)
 			}
 		}
 		indexedMesh->_groups.push_back(currentGroup);
-		Mesh * mesh = new Mesh(indexedMesh);
-		return mesh;
+		return new Mesh(indexedMesh);;
 	}
 
 
