@@ -12,6 +12,7 @@ Mesh::Mesh()
 {
 	_width = 1.0f;
 	_length = 1.0f;
+	_height = 1.0f;
 }
 
 

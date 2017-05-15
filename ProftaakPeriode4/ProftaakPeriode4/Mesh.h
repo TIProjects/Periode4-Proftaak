@@ -85,6 +85,7 @@ public:
 	
 	int _width;
 	int _length;
+	int _height;
 
 	vector<Vec3f>	_vertices;
 	vector<Vec3f>	_normals;

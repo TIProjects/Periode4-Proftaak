@@ -240,6 +240,10 @@ Mesh* LoadMeshFile(const std::string& fileName)
 			{
 				mesh->_length = std::stoi(params[1]);
 			}
+			else if (params[0] == "h")
+			{
+				mesh->_height = std::stoi(params[1]);
+			}
 			else if (params[0] == "usemtl")
 			{
 				if (currentGroup->_faces.size() != 0)

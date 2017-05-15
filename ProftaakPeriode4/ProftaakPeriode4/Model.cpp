@@ -63,7 +63,11 @@ void Model::InitTestObjects()
 
 	GameObject * laneGenerator = new GameObject();
 	//DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3,LoadMeshFile("Assets//Models//Lane//lane.Cobj"));
-	DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3, LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"), LoadMeshFile("c://steve/steve.obj"));
+	std::vector<Mesh*> meshes;
+	meshes.push_back(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+//	meshes.push_back(LoadMeshFile("c://steve/steve.obj"));
+
+	DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3, meshes, LoadMeshFile("c://steve/steve.obj"));
 	laneGenerator->AddComponent(laneDrawComponent);
 	_gameObjects.push_back(laneGenerator);
 }
