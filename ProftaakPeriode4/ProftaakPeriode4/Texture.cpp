@@ -1,4 +1,4 @@
-#include "TextureLoader.h"
+#include "Texture.h"
 #include <GL/freeglut.h>
 
 #include <ostream>

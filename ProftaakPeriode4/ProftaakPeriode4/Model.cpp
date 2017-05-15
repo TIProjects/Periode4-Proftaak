@@ -50,7 +50,7 @@ void Model::InitTestObjects()
 	_lastTime = 0;
 
 	GameObject * camera = new GameObject();
-	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 30.0f, 90.0f);
+	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f);
 	camera->AddComponent(cameraComponent);
 
 	_gameObjects.push_back(camera);
@@ -61,13 +61,12 @@ void Model::InitTestObjects()
 //	testObject->AddComponent(drawComponent);
 //	_gameObjects.push_back(testObject);
 
+	// laneGenerator
 	GameObject * laneGenerator = new GameObject();
-	//DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3,LoadMeshFile("Assets//Models//Lane//lane.Cobj"));
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
-//	meshes.push_back(LoadMeshFile("c://steve/steve.obj"));
 
-	DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3, meshes, LoadMeshFile("c://steve/steve.obj"));
+	DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3,30, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
 	_gameObjects.push_back(laneGenerator);
 }

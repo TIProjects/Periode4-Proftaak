@@ -63,7 +63,7 @@
     </Filter>
     <Filter Include="Header Files\Json">
       <UniqueIdentifier>{6fb1ecfd-49ca-4aec-8583-b84930eb62f9}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Source Files\Factory">
       <UniqueIdentifier>{490b45c6-5e90-46b4-a5dd-74bc97ce03e4}</UniqueIdentifier>
     </Filter>
@@ -84,9 +84,6 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
-    <ClCompile Include="Lanes.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
@@ -104,15 +101,6 @@
     </ClCompile>
     <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source Files\Score</Filter>
-      </ClCompile>
-    <ClCompile Include="DrawComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureLoader.cpp">
-      <Filter>Source Files\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectFactory.cpp">
-      <Filter>Source Files\Factory</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Control</Filter>
@@ -131,6 +119,12 @@
     </ClCompile>
     <ClCompile Include="LaneGeneratorComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Source Files\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +161,6 @@
     <ClInclude Include="DrawComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="TextureLoader.h">
-      <Filter>Header Files\Factory</Filter>
-    </ClInclude>
     <ClInclude Include="CameraComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -190,6 +181,12 @@
     </ClInclude>
     <ClInclude Include="LaneGeneratorComponent.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header Files\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -157,8 +157,9 @@
     <ClCompile Include="MeshFactory.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
-    <ClCompile Include="TextureLoader.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vec.cpp" />
+    <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,8 +177,9 @@
     <ClInclude Include="MeshFactory.h" />
     <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="TextureLoader.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Vec.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>

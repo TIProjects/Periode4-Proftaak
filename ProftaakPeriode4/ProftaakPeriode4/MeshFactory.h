@@ -8,7 +8,7 @@
  * \param dirName the directory of the materialFile
  * \param mesh is the component to add the _texture and material data
  */
-void LoadMaterialFile(const std::string &fileName, const std::string &dirName, Mesh* mesh);
+void LoadMaterialFile(const std::string &fileName, const std::string &dirName, IndexedMesh* mesh);
 
 /**
  * \brief Function for creating DrawComponent
