@@ -65,7 +65,7 @@ void Model::InitTestObjects()
 
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,10, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
-	laneDrawComponent->PlaceObstacle(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
 	_gameObjects.push_back(laneGenerator);
 }
 

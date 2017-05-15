@@ -3,6 +3,8 @@
 #include "Mesh.h"
 #include <queue>
 #include <ctime>
+// The speed of the objects moving (both LaneObstacle and Lane)
+#define SPEED 9.0f 
 
 
 /**
@@ -27,8 +29,14 @@ public:
 	 * WARNING! Drawn outside lane when given > 1.0 or < 0.0!
 	 */
 	float _position;
-	float _speed = 8.5f;
+	/*
+	 * The speed of the moving objects
+	 */
+	float _speed = SPEED; // do not change
 
+	/*
+	 * The amount already moved 
+	 */
 
 	float _lengthMoved = 0.0f;
 	/*
@@ -75,6 +83,10 @@ public:
 	 */
 	float getWidth();
 
+	/**
+	 * For getting the total length of the lane
+	 * \return the total length of the lane
+	 */
 	float getLength();
 
 	/**
@@ -97,12 +109,17 @@ public:
 	 */
 	vector<LaneObstacle*> _obstacles;
 
-	void update(float deltatime);
+
+	/**
+	 * For updating the LaneObstacle
+	 * \param deltatime the time between the updates
+	 */
+	void Update(float deltatime);
 
 	/*
 	* The speed that are moved every some time
 	*/
-	float _speed = 5.5f;
+	float _speed = SPEED; // do not change this one
 };
 
 
@@ -138,14 +155,12 @@ public:
 	 */
 	void Update(float deltaTime) override;
 
-
-	void PlaceObstacle(Mesh * mesh)
-	{
-		srand(time(nullptr));
-		if (_lanes.size() == 0)
-			return;
-		_lanes[rand() % _lanes.size()]->_obstacles.push_back(new LaneObstacle(mesh, (float)(rand()%100/100.0)));
-	}
+	/**
+	 * \brief For placing a Obstacle fully random
+	 * Places on a random place on a random lane
+	 * \param mesh the Mesh that will be added as Obstacle
+	 */
+	void PlaceObstacleFullyRandom(Mesh* mesh);
 
 private:
 	/*

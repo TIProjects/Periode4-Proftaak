@@ -94,11 +94,19 @@ void LaneGeneratorComponent::Draw()
 void LaneGeneratorComponent::Update(float deltaTime)
 {
 	for (int i = 0; i < _lanes.size(); i++) {
-		_lanes.at(i)->update(deltaTime);
+		_lanes.at(i)->Update(deltaTime);
 	}
 }
 
-void Lane::update(float deltatime)
+void LaneGeneratorComponent::PlaceObstacleFullyRandom(Mesh* mesh)
+{
+	srand(time(nullptr)); // set fully random (on time)
+	if (_lanes.size() == 0) // do nothing when no lanes visible
+		return;
+	_lanes[rand() % _lanes.size()]->_obstacles.push_back(new LaneObstacle(mesh, (float)(rand() % 100 / 100.0)));
+}
+
+void Lane::Update(float deltatime)
 {
 	_lengthMoved += deltatime*_speed;
 	Mesh* mesh = _queue.front();
