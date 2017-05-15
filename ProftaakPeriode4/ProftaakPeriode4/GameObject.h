@@ -14,7 +14,7 @@ class GameObject {
 public:
 	/*
 	* Constructor for creating object
-	* @param vertices as Vector with Matrix3GLf
+	* @param _vertices as Vector with Matrix3GLf
 	*/
 	GameObject();
 	/*
@@ -34,8 +34,8 @@ public:
 	*/
 	void LateUpdate(float deltaTime);
 	/*
-	* Set current position
-	* @param position as new position
+	* Set current _position
+	* @param _position as new _position
 	*/
 	void SetPosition(Vec3f position);
 	/*

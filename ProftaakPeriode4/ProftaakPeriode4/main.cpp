@@ -5,10 +5,8 @@
 #include "ScoreComponent.h"
 
 #include <GL\freeglut.h>
-#include "Lanes.h"
 #include "Input.h"
 #include "CameraComponent.h"
-#include <thread>
 
 Model model;
 View view;
