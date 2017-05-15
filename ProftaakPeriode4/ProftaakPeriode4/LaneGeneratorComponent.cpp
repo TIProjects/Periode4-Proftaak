@@ -22,20 +22,6 @@ void Lane::Draw(float width)
 	Vec3f rotation;
 	float rotationAngle = 0.0f;
 
-	Mesh* mesh = _queue.front();
-	if (_lengthMoved > mesh->_length) // check if first mesh can be shifted to the back
-	{
-		_queue.pop_front();
-		_queue.push_back(RandomMesh()); // add new to back
-		_lengthMoved = 0;
-		for (int i = 0; i < _obstacles.size(); i++)
-		{
-			_obstacles[i]->_position -= 1.0f / _queue.size();
-			if (_obstacles[i]->_position < 0.0f)
-				_obstacles.erase(_obstacles.begin() + i);
-		}
-	}
-
 	for (int i = 0; i < _queue.size(); i++)
 	{
 		Mesh* drawObject = _queue[i];
@@ -96,5 +82,23 @@ void LaneGeneratorComponent::Update(float deltaTime)
 {
 	for (int i = 0; i < _lanes.size(); i++) {
 		_lanes.at(i)->_lengthMoved += deltaTime*_speed;
+		_lanes.at(i)->update();
+	}
+}
+
+void Lane::update()
+{
+	Mesh* mesh = _queue.front();
+	if (_lengthMoved > mesh->_length) // check if first mesh can be shifted to the back
+	{
+		_queue.pop_front();
+		_queue.push_back(RandomMesh()); // add new to back
+		_lengthMoved = 0;
+		for (int i = 0; i < _obstacles.size(); i++)
+		{
+			_obstacles[i]->_position -= 1.0f / _queue.size();
+			if (_obstacles[i]->_position < 0.0f)
+				_obstacles.erase(_obstacles.begin() + i);
+		}
 	}
 }

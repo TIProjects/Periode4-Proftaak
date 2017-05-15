@@ -89,6 +89,8 @@ public:
 	 */
 	vector<LaneObstacle*> _obstacles;
 
+	void update();
+
 };
 
 
