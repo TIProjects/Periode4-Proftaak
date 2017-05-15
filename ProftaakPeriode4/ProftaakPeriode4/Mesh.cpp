@@ -112,11 +112,11 @@ void Mesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
 
 		glBindTexture(GL_TEXTURE_2D, group._material->_texture->_id);
 
-		glVertexPointer(3, GL_FLOAT, sizeof(float) * 8.0f, ((float*)group._vertices.data()));
-		glNormalPointer(GL_FLOAT, sizeof(float) * 8.0f, ((float*)group._vertices.data()) + 5);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 8.0f, ((float*)group._vertices.data()) + 3);
+		glVertexPointer(3, GL_FLOAT, sizeof(float) * 8, ((float*)group._vertices.data()));
+		glNormalPointer(GL_FLOAT, sizeof(float) * 8, ((float*)group._vertices.data()) + 5);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 8, ((float*)group._vertices.data()) + 3);
 
-		glDrawArrays(GL_TRIANGLES, 0, group._vertices.size());
+		glDrawArrays(GL_TRIANGLES, 0, GLsizei(group._vertices.size()));
 
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_NORMAL_ARRAY);
