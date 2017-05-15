@@ -40,7 +40,7 @@ void ScoreBoard::checkArray()
 
 void ScoreBoard::getLinuxDirectory()
 {
-    //Default path within the game directory itself
+    //Default path within the game directory itself, stays the same if the directory doesn't work.
     path = "Resource Files/scores.json";
 
     //TODO: test if this works
@@ -51,7 +51,7 @@ void ScoreBoard::getLinuxDirectory()
         return;
     }
 
-    //Linux directory I think
+    //Linux directory
     path = "$XDG_DATA_HOME/SubwaySurfer/scores.json";
 }
 

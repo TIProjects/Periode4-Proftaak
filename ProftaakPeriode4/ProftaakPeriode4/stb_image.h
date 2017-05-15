@@ -645,7 +645,7 @@ static int stbi__sse2_available()
    return ((info3 >> 26) & 1) != 0;
 }
 #else // assume GCC-style if not VC++
-#define STBI_SIMD_ALIGN(type, name) type name __attribute__((aligned(16)))
+#define STBI_SIMD_ALIGN(type, _name) type _name __attribute__((aligned(16)))
 
 static int stbi__sse2_available()
 {
@@ -665,11 +665,11 @@ static int stbi__sse2_available()
 #ifdef STBI_NEON
 #include <arm_neon.h>
 // assume GCC or Clang on ARM targets
-#define STBI_SIMD_ALIGN(type, name) type name __attribute__((aligned(16)))
+#define STBI_SIMD_ALIGN(type, _name) type _name __attribute__((aligned(16)))
 #endif
 
 #ifndef STBI_SIMD_ALIGN
-#define STBI_SIMD_ALIGN(type, name) type name
+#define STBI_SIMD_ALIGN(type, _name) type _name
 #endif
 
 ///////////////////////////////////////////////
@@ -1884,7 +1884,7 @@ stbi_inline static int stbi__jpeg_get_bit(stbi__jpeg *j)
    return k & 0x80000000;
 }
 
-// given a value that's at position X in the zigzag stream,
+// given a value that's at _position X in the zigzag stream,
 // where does it appear in the 8x8 matrix coded as row-major?
 static stbi_uc stbi__jpeg_dezigzag[64+15] =
 {
@@ -4031,7 +4031,7 @@ static int stbi__parse_uncompressed_block(stbi__zbuf *a)
       a->num_bits -= 8;
    }
    STBI_ASSERT(a->num_bits == 0);
-   // now fill header the normal way
+   // now fill header the _normal way
    while (k < 4)
       header[k++] = stbi__zget8(a);
    len  = header[1] * 256 + header[0];
@@ -5163,7 +5163,7 @@ static void *stbi__bmp_load(stbi__context *s, int *x, int *y, int *comp, int req
       }
       if (!easy) {
          if (!mr || !mg || !mb) { STBI_FREE(out); return stbi__errpuc("bad masks", "Corrupt BMP"); }
-         // right shift amt to put high bit in position #7
+         // right shift amt to put high bit in _position #7
          rshift = stbi__high_bit(mr)-7; rcount = stbi__bitcount(mr);
          gshift = stbi__high_bit(mg)-7; gcount = stbi__bitcount(mg);
          bshift = stbi__high_bit(mb)-7; bcount = stbi__bitcount(mb);
@@ -5270,7 +5270,7 @@ static int stbi__tga_info(stbi__context *s, int *x, int *y, int *comp)
         }
         stbi__skip(s,4);       // skip image x and y origin
         tga_colormap_bpp = sz;
-    } else { // "normal" image w/o colormap - only RGB or grey allowed, +/- RLE
+    } else { // "_normal" image w/o colormap - only RGB or grey allowed, +/- RLE
         if ( (tga_image_type != 2) && (tga_image_type != 3) && (tga_image_type != 10) && (tga_image_type != 11) ) {
             stbi__rewind(s);
             return 0; // only RGB or grey allowed, +/- RLE
@@ -5325,7 +5325,7 @@ static int stbi__tga_test(stbi__context *s)
       sz = stbi__get8(s);    //   check bits per palette color entry
       if ( (sz != 8) && (sz != 15) && (sz != 16) && (sz != 24) && (sz != 32) ) goto errorEnd;
       stbi__skip(s,4);       // skip image x and y origin
-   } else { // "normal" image w/o colormap
+   } else { // "_normal" image w/o colormap
       if ( (sz != 2) && (sz != 3) && (sz != 10) && (sz != 11) ) goto errorEnd; // only RGB or grey allowed, +/- RLE
       stbi__skip(s,9); // skip colormap specification and image x/y origin
    }
@@ -5416,7 +5416,7 @@ static void *stbi__tga_load(stbi__context *s, int *x, int *y, int *comp, int req
    tga_data = (unsigned char*)stbi__malloc_mad3(tga_width, tga_height, tga_comp, 0);
    if (!tga_data) return stbi__errpuc("outofmem", "Out of memory");
 
-   // skip to the data's starting position (offset usually = 0)
+   // skip to the data's starting _position (offset usually = 0)
    stbi__skip(s, tga_offset );
 
    if ( !tga_indexed && !tga_is_RLE && !tga_rgb16 ) {

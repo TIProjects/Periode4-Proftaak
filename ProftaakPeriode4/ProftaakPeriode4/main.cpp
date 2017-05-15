@@ -5,7 +5,6 @@
 #include "ScoreComponent.h"
 
 #include <GL\freeglut.h>
-#include "Lanes.h"
 #include "Input.h"
 #include "CameraComponent.h"
 
@@ -54,13 +53,11 @@ int main(int argc, char* argv[]) {
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);
-    /*
 	glutKeyboardFunc(Keyboard::KeyBoardDown);
 	glutKeyboardUpFunc(Keyboard::KeyBoardUp);
 	glutSpecialFunc(Keyboard::SKeyboardDown);
 	glutSpecialUpFunc(Keyboard::SKeyboardUp);
 	glutPassiveMotionFunc(Mouse::MoveMouse);
-    */
 
 
 	glutMainLoop();

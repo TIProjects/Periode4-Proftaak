@@ -46,6 +46,6 @@ Texture* LoadTexture(const char* fileName)
 	// free imagedata to save some precious memory
 	stbi_image_free(imgData);
 	
-	// return new texture
+	// return new _texture
 	return new Texture(textureId, width, height, bpp);
 }

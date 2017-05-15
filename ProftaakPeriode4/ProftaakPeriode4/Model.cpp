@@ -3,6 +3,9 @@
 #include "DrawComponent.h"
 #include "CameraComponent.h"
 #include <iostream>
+#include "MeshDrawComponent.h"
+#include "MeshFactory.h"
+#include "LaneGeneratorComponent.h"
 
 Model::Model()
 {
@@ -52,12 +55,17 @@ void Model::InitTestObjects()
 
 	_gameObjects.push_back(camera);
 
-	GameObject * testObject = new GameObject();
-	DrawComponent * drawComponent = LoadComponent("Assets//Models//TestCube//Cube.Cobj");
-	testObject->_position.z -= 3;
-	testObject->AddComponent(drawComponent);
+//	GameObject * testObject = new GameObject();
+//	DrawComponent * drawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+//	testObject->_position.z -= 3;
+//	testObject->AddComponent(drawComponent);
+//	_gameObjects.push_back(testObject);
 
-	_gameObjects.push_back(testObject);
+	GameObject * laneGenerator = new GameObject();
+	//DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3,LoadMeshFile("Assets//Models//Lane//lane.Cobj"));
+	DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3, LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+	laneGenerator->AddComponent(laneDrawComponent);
+	_gameObjects.push_back(laneGenerator);
 }
 
 void Model::Init()
