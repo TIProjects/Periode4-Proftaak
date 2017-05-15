@@ -29,13 +29,14 @@ void Lane::Draw(float width)
 		Mesh* drawObject = _queue[i];
 		Vec3f position = Vec3f(width, 0.0f, -(drawObject->_length * i) + _lengthMoved);
 		drawObject->Draw(position, rotation, rotationAngle); // draw lane-mesh
+
 		for (int o = 0; o < _obstacles.size(); o++)
 		{
 			LaneObstacle * obstacle = _obstacles[o];
-			Vec3f obstaclePosition = Vec3f(width, 1.0f,(-getLength()*obstacle->_position) + obstacle->_lengthMoved + (drawObject->_length));
+			Vec3f obstaclePosition = Vec3f(width, 1.0f,(-getLength()*obstacle->_position) + obstacle->_lengthMoved - (drawObject->_length));
 	
-			if (obstaclePosition.x > position.x - drawObject->_width && obstaclePosition.x < position.x + drawObject->_width
-					&& obstaclePosition.z < position.z + drawObject->_length && obstaclePosition.z > position.z - drawObject->_length)
+			if (obstaclePosition.x >= (position.x - drawObject->_width) && obstaclePosition.x <= (position.x + drawObject->_width)
+					&& obstaclePosition.z <= (position.z + drawObject->_length) && obstaclePosition.z >= (position.z - drawObject->_length))
 			{
 				obstaclePosition.y = drawObject->_height; // set height of position to height of lane-mesh
 				_obstacles[o]->_mesh->Draw(obstaclePosition, rotation, rotationAngle); // draw obstacle
@@ -111,6 +112,8 @@ void Lane::update(float deltatime)
 	{
 		LaneObstacle * obstacle = _obstacles[i];
 		obstacle->_lengthMoved += deltatime*obstacle->_speed;
-		std::cout << obstacle->_lengthMoved << std::endl;
+		if(obstacle->_lengthMoved > (getLength()*obstacle->_position + ((getLength()/_queue.size())*2)))
+			_obstacles.erase(_obstacles.begin() + i);
+		
 	}
 }

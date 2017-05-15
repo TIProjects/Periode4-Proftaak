@@ -27,7 +27,7 @@ public:
 	 * WARNING! Drawn outside lane when given > 1.0 or < 0.0!
 	 */
 	float _position;
-	float _speed = 4.0f;
+	float _speed = 8.5f;
 
 
 	float _lengthMoved = 0.0f;
