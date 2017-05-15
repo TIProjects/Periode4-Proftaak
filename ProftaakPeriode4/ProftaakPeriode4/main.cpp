@@ -3,10 +3,8 @@
 #include "View.h"
 #include "ScoreBoard.h"
 #include "ScoreComponent.h"
-
 #include <GL\freeglut.h>
 #include "Input.h"
-#include "CameraComponent.h"
 
 Model model;
 View view;
@@ -32,10 +30,10 @@ void idle()
 	model.update();
 }
 
-
-int main(int argc, char* argv[]) {
-
+int main(int argc, char* argv[]) 
+{
 	view = View(&model, argc, argv);
+
 	// Call the test object initialiser 
 	// For testing...
 	// can be removed if testing is not necessary
@@ -54,7 +52,6 @@ int main(int argc, char* argv[]) {
 	glutSpecialFunc(Keyboard::SKeyboardDown);
 	glutSpecialUpFunc(Keyboard::SKeyboardUp);
 	glutPassiveMotionFunc(Mouse::MoveMouse);
-
 
 	glutMainLoop();
 	return 0;

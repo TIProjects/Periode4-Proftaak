@@ -18,10 +18,6 @@ public:
 	int _bpp;
 };
 
-
-
-
-
 /**
 * Loading a _texture from a given fileName
 * \param fileName string filename of the texturefile
