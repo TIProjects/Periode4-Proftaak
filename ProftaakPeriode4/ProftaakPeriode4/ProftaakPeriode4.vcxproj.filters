@@ -70,6 +70,12 @@
     <Filter Include="Header Files\Factory">
       <UniqueIdentifier>{6b5dfa85-6916-413d-bab2-cd3cfda1f728}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Alpha Blend">
+      <UniqueIdentifier>{ccb14b30-8c5e-4a4f-981f-b07d9cfdffa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Alpha Blend">
+      <UniqueIdentifier>{9e1da7a8-6a81-4365-85b6-22aca2d07213}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -99,6 +105,9 @@
     <ClCompile Include="ScoreBoard.cpp">
       <Filter>Source Files\Score</Filter>
     </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
+      <Filter>Source Files\Factory</Filter>
+    </ClCompile>
     <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source Files\Score</Filter>
     </ClCompile>
@@ -118,6 +127,9 @@
       <Filter>Source Files\Factory</Filter>
     </ClCompile>
     <ClCompile Include="LaneGeneratorComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
@@ -158,9 +170,6 @@
     <ClInclude Include="ScoreBoard.h">
       <Filter>Header Files\Score</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreComponent.h">
-      <Filter>Header Files\Score</Filter>
-    </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Header Files\Factory</Filter>
     </ClInclude>
@@ -185,8 +194,14 @@
     <ClInclude Include="json.hpp">
       <Filter>Header Files\Json</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="LaneGeneratorComponent.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AlpaBlend.h">
+      <Filter>Header Files\Alpha Blend</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\Factory</Filter>

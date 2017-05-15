@@ -165,6 +165,7 @@
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlpaBlend.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="json.hpp" />

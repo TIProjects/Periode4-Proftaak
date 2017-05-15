@@ -2,6 +2,7 @@
 #include <GL\freeglut.h>
 #include "Component.h"
 #include "CameraComponent.h"
+#include "AlpaBlend.h"
 
 View::View(Model * model, int argc, char * argv[])
 {
@@ -12,7 +13,7 @@ View::View(Model * model, int argc, char * argv[])
 	glutInit(&argc, argv);
 
 	glutCreateWindow("Cube_Runner");
-
+	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 }
@@ -40,11 +41,10 @@ void View::UpdateView()
 	}
 	glEnable(GL_DEPTH_TEST);
 
-
 	// Draw all the gameObject
 	for(GameObject * gameObject : _modelPtr->_gameObjects)
-	{
-		gameObject->Draw(); 
+	{    
+        gameObject->Draw();
 	}
 
 	glutSwapBuffers();
@@ -62,5 +62,4 @@ void View::reshape(int w, int h)
 			break;
 		}
 	}
-	glViewport(0, 0, w, h);
 }
