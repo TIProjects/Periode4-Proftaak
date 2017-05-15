@@ -75,4 +75,7 @@ void CameraComponent::ApplyCamera() const
 	glRotatef(_parent->_rotation.x, 1, 0, 0);
 	glRotatef(_parent->_rotation.y, 0, 1, 0);
 	glTranslatef(_parent->_position.x * -1, _parent->_position.y * -1, _parent->_position.z * -1); // Times -1 because camera axis are inverted
+
+	float pos[4] = { 2.0f, 5.0f, 5.0f, 0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);
 }

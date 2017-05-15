@@ -12,6 +12,9 @@ View::View(Model * model, int argc, char * argv[])
 	glutInit(&argc, argv);
 
 	glutCreateWindow("Cube_Runner");
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 }
 
 View::View()
