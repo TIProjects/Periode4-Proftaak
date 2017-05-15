@@ -6,6 +6,8 @@
 #include "MeshDrawComponent.h"
 #include "MeshFactory.h"
 #include "LaneGeneratorComponent.h"
+#include "CollisionComponent.h"
+#include "Collision.h"
 
 Model::Model()
 {
@@ -34,6 +36,8 @@ void Model::update()
 		gameObject->Update(deltaTime);
 	}
 
+	Collision::CheckCollision(_gameObjects);
+
 	// Call the LateUpdate of every Gameobject afterwards
 	for(GameObject * gameObject : _gameObjects)
 	{
@@ -54,12 +58,6 @@ void Model::InitTestObjects()
 	camera->AddComponent(cameraComponent);
 
 	_gameObjects.push_back(camera);
-
-//	GameObject * testObject = new GameObject();
-//	DrawComponent * drawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
-//	testObject->_position.z -= 3;
-//	testObject->AddComponent(drawComponent);
-//	_gameObjects.push_back(testObject);
 
 	GameObject * laneGenerator = new GameObject();
 	//DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3,LoadMeshFile("Assets//Models//Lane//lane.Cobj"));
