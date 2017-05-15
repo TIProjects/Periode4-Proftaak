@@ -1,17 +1,10 @@
 # Blender v2.78 (sub 0) OBJ File: ''
 # www.blender.org
 mtllib Cube.mtl
-<<<<<<< HEAD
-w 2
-l 2
-h 2
-o Cube
-
-=======
 o Cube.003
 w 2
 l 2
->>>>>>> 97f62c367bb32709a4178349925ca3be40c4b78a
+h 2
 v 1.000000 -1.000000 -1.000000
 v 1.000000 -1.000000 1.000000
 v -1.000000 -1.000000 1.000000
