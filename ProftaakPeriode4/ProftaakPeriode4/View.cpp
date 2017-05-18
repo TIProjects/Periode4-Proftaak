@@ -8,7 +8,7 @@ View::View(Model * model, int argc, char * argv[])
 	_modelPtr = model;
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(1280, 720);
+	//glutInitWindowSize(1280, 720);
 	glutInit(&argc, argv);
 
 	glutCreateWindow("Cube_Runner");

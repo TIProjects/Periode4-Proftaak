@@ -67,7 +67,6 @@ void Model::InitTestObjects()
 	DrawComponent * laneDrawComponent = new LaneGeneratorComponent(3, LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
 	laneGenerator->AddComponent(laneDrawComponent);
 	_gameObjects.push_back(laneGenerator);
-	_gameObjects.push_back(testObject);
 
 	GameObject * vision = new GameObject();
 	VisionComponent * visionComponent = new VisionComponent();
