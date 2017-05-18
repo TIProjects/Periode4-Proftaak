@@ -6,6 +6,10 @@ ScoreComponent::ScoreComponent() : Component(SCORE_COMPONENT)
     _name = "Gijs";
 }
 
+ScoreComponent::~ScoreComponent()
+{
+}
+
 void ScoreComponent::changeScore(int difScore)
 {
     int score = _score + difScore;    
@@ -32,14 +36,14 @@ unsigned int ScoreComponent::returnScore()
     return _score;
 }
 
-void ScoreComponent::LateUpdate(int deltaTime)
+void ScoreComponent::LateUpdate(float deltaTime)
 {
     
 }
 
-void ScoreComponent::Update(int deltaTime)
+void ScoreComponent::Update(float deltaTime)
 {
-    
+    changeScore(1);
 }
 
 

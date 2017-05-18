@@ -1,6 +1,9 @@
 #include "Component.h"
 #include "Model.h"
 #include "View.h"
+#include "GUIComponent.h"
+#include "GUIElement.h"
+#include "Text.h"
 #include "ScoreBoard.h"
 #include "ScoreComponent.h"
 #include <GL\freeglut.h>
@@ -8,6 +11,15 @@
 
 Model model;
 View view;
+unsigned int fps = 20;
+
+
+// Function that will be called on exiting the game
+void onExit()
+{
+    //TODO: add here the methodes that you want to be called on close
+    model.scoreBoard.saveScore();
+}
 
 // The displayFunc which will call the UpdateView of the view
 // This function should only be called by OpenGL and NOT manually
@@ -30,6 +42,7 @@ void idle()
 	model.update();
 }
 
+
 int main(int argc, char* argv[]) 
 {
 	view = View(&model, argc, argv);
@@ -44,6 +57,7 @@ int main(int argc, char* argv[])
 	// do NOT remove
 	model.Init();
 
+    std::atexit(onExit);
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);

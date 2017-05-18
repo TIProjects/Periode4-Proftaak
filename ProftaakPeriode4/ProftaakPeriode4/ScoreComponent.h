@@ -3,7 +3,7 @@
 #include "Component.h"
 #include <string>
 
-class ScoreComponent : Component
+class ScoreComponent : public Component
 {
     public:
 
@@ -20,9 +20,7 @@ class ScoreComponent : Component
 
         ScoreComponent();
 
-        virtual ~ScoreComponent()
-        {
-        }
+        ~ScoreComponent();
 
         /*
          * Adds the score you fill in
@@ -45,14 +43,6 @@ class ScoreComponent : Component
          */
         unsigned int returnScore();
 
-        void Update(int deltaTime);
-        void LateUpdate(int deltaTime);
-
-        /*
-         * Operator for sorting the score
-         */ 
-        bool operator > (const ScoreComponent& temp) const
-        {
-            return (_score > temp._score);
-        }
+        void Update(float deltaTime) override;
+        void LateUpdate(float deltaTime) override;
 };

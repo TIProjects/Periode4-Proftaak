@@ -2,6 +2,9 @@
 #include "DrawComponent.h"
 #include "Mesh.h"
 #include <queue>
+#include <ctime>
+// The speed of the objects moving (both LaneObstacle and Lane)
+#define SPEED 9.0f 
 
 
 /**
@@ -27,9 +30,20 @@ public:
 	 */
 	float _position;
 	/*
+	 * The speed of the moving objects
+	 */
+	float _speed = SPEED; // do not change
+
+	/*
+	 * The amount already moved 
+	 */
+
+	float _lengthMoved = 0.0f;
+	/*
 	 * The Mesh that will be drawn
 	 */
 	Mesh* _mesh;
+
 };
 
 class Lane
@@ -70,6 +84,12 @@ public:
 	float getWidth();
 
 	/**
+	 * For getting the total length of the lane
+	 * \return the total length of the lane
+	 */
+	float getLength();
+
+	/*
 	 * The meshes that are randomly chosen (loaded in constructor)
 	 */
 	std::vector<Mesh*> _meshes;
@@ -89,6 +109,17 @@ public:
 	 */
 	vector<LaneObstacle*> _obstacles;
 
+
+	/**
+	 * For updating the LaneObstacle
+	 * \param deltatime the time between the updates
+	 */
+	void Update(float deltatime);
+
+	/*
+	* The speed that are moved every some time
+	*/
+	float _speed = SPEED; // do not change this one
 };
 
 
@@ -124,16 +155,19 @@ public:
 	 */
 	void Update(float deltaTime) override;
 
+	/**
+	 * \brief For placing a Obstacle fully random
+	 * Places on a random place on a random lane
+	 * \param mesh the Mesh that will be added as Obstacle
+	 */
+	void PlaceObstacleFullyRandom(Mesh* mesh);
+
 private:
 	/*
 	 * The lanes that are shown in the component
 	 * Are filled in constructor (given amount)
 	 */
 	vector<Lane*> _lanes;
-	/*
-	 * The speed that are moved every some time
-	 */
-	float _speed = 8.5f;
 	/*
 	 * The space between the lanes
 	 */

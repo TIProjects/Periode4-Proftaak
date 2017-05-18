@@ -61,6 +61,12 @@
     <Filter Include="Header Files\Components">
       <UniqueIdentifier>{e6682769-1283-4e33-960c-ff00774e6bc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\GUI">
+      <UniqueIdentifier>{bc95da28-afd9-4323-b4af-0b2a10ede7ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\GUI">
+      <UniqueIdentifier>{c4b2b699-7c3e-4cef-ae0f-e497ace514db}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Json">
       <UniqueIdentifier>{6fb1ecfd-49ca-4aec-8583-b84930eb62f9}</UniqueIdentifier>
     </Filter>
@@ -102,13 +108,13 @@
     <ClCompile Include="Vec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GUIComponent.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
     <ClCompile Include="ScoreBoard.cpp">
-      <Filter>Source Files\Score</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureLoader.cpp">
-      <Filter>Source Files\Factory</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source Files\Score</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
@@ -126,6 +132,12 @@
     <ClCompile Include="MeshFactory.cpp">
       <Filter>Source Files\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeBar.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
     <ClCompile Include="LaneGeneratorComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -142,6 +154,12 @@
       <Filter>Source Files\Model</Filter>
     </ClCompile>
     <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Lanes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -163,6 +181,15 @@
     </ClInclude>
     <ClInclude Include="Vec.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIComponent.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIElement.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Components\GUI</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\GameObjects</Filter>
@@ -194,14 +221,17 @@
     <ClInclude Include="json.hpp">
       <Filter>Header Files\Json</Filter>
     </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeBar.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
     <ClInclude Include="ScoreComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="LaneGeneratorComponent.h">
       <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="AlpaBlend.h">
-      <Filter>Header Files\Alpha Blend</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\Factory</Filter>
@@ -214,6 +244,12 @@
     </ClInclude>
     <ClInclude Include="CollisionComponent.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Lanes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AlphaBlend.h">
+      <Filter>Header Files\Alpha Blend</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +266,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Assets\LifeFrameSegment.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\LifeFrameBackground.psd">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

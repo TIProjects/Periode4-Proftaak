@@ -149,13 +149,18 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="GUIComponent.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Lanes.cpp" />
+    <ClCompile Include="LifeBar.cpp" />
     <ClCompile Include="LaneGeneratorComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshDrawComponent.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="MeshFactory.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
@@ -165,20 +170,26 @@
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AlpaBlend.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="LifeBar.h" />
+    <ClInclude Include="AlphaBlend.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionComponent.h" />
-    <ClInclude Include="json.hpp" />
     <ClInclude Include="LaneGeneratorComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GUIComponent.h" />
+    <ClInclude Include="GUIElement.h" />
+    <ClInclude Include="Lanes.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshDrawComponent.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="MeshFactory.h" />
     <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="stb_image.h" />
@@ -192,6 +203,7 @@
     <None Include="Assets\GUI-Design.psd" />
     <None Include="Assets\LifeBar.psd" />
     <None Include="Assets\LifeFrame.psd" />
+    <None Include="Assets\LifeFrameBackground.psd" />
     <None Include="Assets\LifeFrameSegment.psd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

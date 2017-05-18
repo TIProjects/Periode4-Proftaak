@@ -21,7 +21,7 @@ class ScoreBoard
          * after adding a score, the list will be sorted in decending order
          * @param ScoreComponent is the component
          */
-        void addScore(ScoreComponent);
+        void addScore(ScoreComponent * score);
 
         /*
          * Prints all the scores in the scoreboard
@@ -39,12 +39,13 @@ class ScoreBoard
          */
         void loadScore();
 
-    private:
         /*
-         * Checks the array.
-         * If there are more than 10 items it removes the lowest value.
-         */
+        * Checks the array.
+        * If there are more than 10 items it removes the lowest value.
+        */
         void checkArray();
+
+    private:
 
         /*
          * Sets the path to ..\Appdata\Roaming\SubwaySurfer
@@ -65,7 +66,7 @@ class ScoreBoard
         /*
          * The vector with the scores
          */
-        std::vector<ScoreComponent> _scores;
+        std::vector<ScoreComponent*> _scores;
 
         /*
          * The path used for saving and loading the scores
