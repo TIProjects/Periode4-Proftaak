@@ -39,6 +39,7 @@ void View::UpdateView()
 			break;
 		}
 	}
+	//DONT REMOVE!!!!!!!
 	glEnable(GL_DEPTH_TEST);
 
 	// Draw all the gameObject
