@@ -33,7 +33,7 @@ public:
 	//Gets the position of the GUIElement.
 	Vec3f GetPosition() { return _position; };
 	//Draws the GUIElement if visible
-	virtual void Draw() {};
+	virtual void Draw() = NULL;
 	//Update function for handling events by user
 	virtual void Update() {};
 

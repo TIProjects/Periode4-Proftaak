@@ -153,7 +153,6 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Lanes.cpp" />
     <ClCompile Include="LifeBar.cpp" />
     <ClCompile Include="LaneGeneratorComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -185,7 +184,6 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GUIComponent.h" />
     <ClInclude Include="GUIElement.h" />
-    <ClInclude Include="Lanes.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshDrawComponent.h" />

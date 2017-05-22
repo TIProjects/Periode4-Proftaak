@@ -20,6 +20,17 @@ public:
     // and ONLY ONCE
     void InitTestObjects();
 
+	/*
+	 * Initialise audio for game
+	 * Is static for not needing other data
+	 */
+	static void InitSound();
+
+	/*
+	 * Initialise the GUI elements to show in front
+	 */
+	void InitGUIElements();
+
     // Initialise the gameLogic
     // NOTE: should ONLY be called AFTER an OpenGL context has been created
     // and ONLY ONCE

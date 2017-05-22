@@ -1,28 +1,4 @@
 #include "LifeBar.h"
-//#define BACKGROUND_INDEX  1
-//#define IMAGE_SIZE 4
-//
-//LifeBar::LifeBar(Vec3f pos, float width, float height, std::string * paths, int sections) : GUIElement(pos)
-//{
-//	_Width = width;
-//	_Height = height;
-//	_Sections = sections;
-//	_Life = sections;
-//	_Images = new Image[IMAGE_SIZE];
-//
-//	for(int i = 0; i < IMAGE_SIZE; i++)
-//	{
-//		if(i != 2) _Images[i] = Image(pos, width, height, paths[i]);
-//		else {
-//			float x = pos.x;
-//			for (int i2 = 1; i2 < sections; i2++) {
-//				pos.x = x+(width / sections*i2);
-//				_Images[i] = Image(pos, (width/100), height, paths[i]);
-//			}
-//			pos.x = x;
-//		}
-//	}
-//}
 
 LifeBar::LifeBar(Vec3f pos, float width, float height, int sections, std::string background, std::string frame, std::string bar, std::string segment)
 {
