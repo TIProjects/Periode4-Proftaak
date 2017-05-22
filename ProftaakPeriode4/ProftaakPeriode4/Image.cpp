@@ -16,8 +16,6 @@ void Image::SetWidth(float width)
 
 void Image::Draw()
 {
-	glDisable(GL_LIGHTING);
-	glDisable(GL_LIGHT0);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glDisable(GL_DEPTH_TEST);
@@ -35,8 +33,6 @@ void Image::Draw()
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisable(GL_BLEND);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
 }
 
 void Image::CalculateVertices()

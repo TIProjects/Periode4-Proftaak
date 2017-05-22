@@ -32,6 +32,7 @@ public:
     //Scoreboard that keeps track of the scores
     ScoreBoard scoreBoard;
 
+    void play(int i);
 private:
 
 	// The last time a frame was rendered in milliseconds

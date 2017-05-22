@@ -47,19 +47,30 @@ void ScoreComponent::Update(float deltaTime)
     _updateTimer -= deltaTime;
     _mulitplierUpdateTimer -= deltaTime;
 
-    if (_updateTimer < 0.0f)
+    if (_updateTimer <= 0.0f)
     {
         changeScore(1);
         _updateTimer = 0.2f;
     }
 
-    if( _mulitplierUpdateTimer < 0.0f)
+    if( _mulitplierUpdateTimer <= 0.0f)
     {
         incMultiplier();
         _mulitplierUpdateTimer = 10.0f * _multiplier;
     }
-    _scoreText->Update("Score: " + std::to_string(_score) + " X" + std::to_string(_multiplier));
+
+    //#HeroClickerStyle 
+    if(_score % MILLION != _score)
+    {
+        unsigned int millionScore = _score / MILLION;
+        _scoreText->Update("Score: " + std::to_string(millionScore) + "M " + std::to_string(_multiplier) + "x");        
+    }
+
+    else if(_score % THOUSAND != _score)
+    {
+        unsigned int thousandScore = _score / THOUSAND;
+        _scoreText->Update("Score: " + std::to_string(thousandScore) + "K " + std::to_string(_multiplier) + "x");
+    }
+
+    else _scoreText->Update("Score: " + std::to_string(_score)+ " " + std::to_string(_multiplier) + "x");
 }
-
-
-

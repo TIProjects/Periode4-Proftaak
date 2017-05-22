@@ -101,13 +101,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\libs\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\libs\freeglut\include;$(SolutionDir)\libs\BASS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\libs\freeglut\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\libs\freeglut\lib\x64;$(SolutionDir)\libs\BASS\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;opengl32.lib;bass.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -160,6 +160,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshDrawComponent.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="MeshFactory.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshDrawComponent.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="MeshFactory.h" />
     <ClInclude Include="ScoreBoard.h" />
@@ -205,6 +207,10 @@
     <None Include="Assets\LifeFrame.psd" />
     <None Include="Assets\LifeFrameBackground.psd" />
     <None Include="Assets\LifeFrameSegment.psd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\cartoon001.wav" />
+    <Media Include="Assets\cartoon002.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
