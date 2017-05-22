@@ -3,7 +3,7 @@
 std::thread t;
 
 cv::Mat src; cv::Mat src_gray;
-int thresh = 100;
+int thresh = 50;
 int max_thresh = 255;
 
 void thresh_callback(int, void*);
@@ -37,62 +37,28 @@ void VisionComponent::CameraUpdate()
 	if (!cap.isOpened())  // check if we succeeded
 		return;
 
-	//cv::SimpleBlobDetector::Params params;
-	//
-	//////// Thresholds
-	////params.minThreshold = 100;
-	////params.maxThreshold = 200;
-
-	//// Filter by Area.
-	//params.filterByArea = false;
-	//params.minArea = 2000;
-
-	//// Filter by Circularity
-	//params.filterByCircularity = true;
-	//params.minCircularity = 0.0;
-
-	//// Filter by Convexity
-	//params.filterByConvexity = true;
-	//params.minConvexity = 0.8;
-
-	//// Filter by Inertia
-	//params.filterByInertia = true;
-	//params.minInertiaRatio = 0.20;
-
-	//cv::Ptr<cv::SimpleBlobDetector> detector = cv::SimpleBlobDetector::create(params); //creates smart pointer
-	//std::vector<cv::KeyPoint> keypoints; //storage for blob keybpoints
-
-	cv::Mat frame;
-	cv::Mat edges;
-
-	//frame = cv::imread("D:/Users/Joey/Desktop/pics/bodys.PNG", CV_LOAD_IMAGE_COLOR);
-
-	cv::namedWindow("edges", 1);
 	//loop for capturing images from camera and detecting
 	for (;;)
 	{
-		cap >> frame; // get a new frame from camera
-	
-		//cvtColor(frame, edges, CV_BGR2GRAY);
-		//GaussianBlur(edges, edges, cv::Size(7, 7), 1.5, 1.5);
+		cv::Mat img1;
+		cv::Mat img2;
+		cv::Mat diff;
 
-		////values between 90 and 180
-		//cv::threshold(edges, edges, 100, 170, CV_THRESH_BINARY);
+		cap >> img1;
+		cap >> img2;
 
-		//detector->detect(edges, keypoints); //detect blobs
+		cvtColor(img1, img1, CV_BGR2GRAY);
+		cvtColor(img2, img2, CV_BGR2GRAY);
 
-		//drawKeypoints(edges, keypoints, edges, cv::Scalar(0, 0, 255), cv::DrawMatchesFlags::DRAW_RICH_KEYPOINTS); //draw blobs
-
-		/// Convert image to gray and blur it
-		cv::cvtColor(frame, src_gray, CV_BGR2GRAY);
-		blur(src_gray, src_gray, cv::Size(10, 10));
-
-		/// Create Window
-		char* source_window = "Source";
-		cv::namedWindow(source_window, CV_WINDOW_AUTOSIZE);
-		cv::imshow(source_window, frame);
-
-		cv::createTrackbar(" Threshold:", "Source", &thresh, max_thresh, thresh_callback);
+		//difference between img1 and 2
+		cv::absdiff(img1, img2, diff);
+		//blur the difference
+		cv::medianBlur(diff, src_gray, 5);
+		//resize the difference
+		cv::resize(diff, diff, cv::Size(0, 0), 0.2, 0.2);
+		//threshold the difference
+		cv::threshold(diff, diff, 50, 255, CV_THRESH_BINARY);
+		//calculate 
 		thresh_callback(0, 0);
 
 		cv::waitKey(1);
@@ -104,16 +70,14 @@ void VisionComponent::CameraUpdate()
 /** @function thresh_callback */
 void thresh_callback(int, void*)
 {
-	cv::Mat src_copy = src.clone();
 	cv::Mat threshold_output;
 	std::vector<std::vector<cv::Point> > contours;
-	std::vector<cv::Vec4i> hierarchy;
 
 	/// Detect edges using Threshold
 	cv::threshold(src_gray, threshold_output, thresh, 255, cv::THRESH_BINARY);
 
 	/// Find contours
-	cv::findContours(threshold_output, contours, /*hierarchy,*/ CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE/*, cv::Point(0, 0)*/);
+	cv::findContours(threshold_output, contours, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
 
 	/// Find the convex hull object for each contour
 	std::vector<std::vector<cv::Point> >hull(contours.size());
@@ -122,14 +86,20 @@ void thresh_callback(int, void*)
 		cv::convexHull(cv::Mat(contours[i]), hull[i], false);
 	}
 
-	/// Draw contours + hull results
+	//filter contour area
+	// Draw contours + hull results
 	cv::Mat drawing = cv::Mat::zeros(threshold_output.size(), CV_8UC3);
-	for (int i = 0; i< contours.size(); i++)
+	for (int i = 0; i < contours.size(); i++)
 	{
-		cv::drawContours(threshold_output, hull, i, cv::Scalar(255,255,255), 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
+		//filter contour sizes
+		if (contours[i].size() < 70 || contours[i].size() > 200)
+		{
+			continue;
+		}
+		//draw and fill contours in mat
+		cv::drawContours(drawing, hull, i, cv::Scalar(255, 255, 255), CV_FILLED, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
+		cv::rectangle(drawing, cv::boundingRect(contours[i]), cv::Scalar(255, 0, 0), 1, 8, 0);
 	}
 
-	/// Show in a window
-	cv::namedWindow("Hull demo", CV_WINDOW_AUTOSIZE);
-	imshow("Hull demo", threshold_output);
+	imshow("drawing", drawing);
 }
