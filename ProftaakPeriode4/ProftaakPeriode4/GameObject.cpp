@@ -6,11 +6,8 @@ GameObject::GameObject(std::vector<GameObject *> * gameObjects)
 {
 	_position = Vec3f();
 	_rotation = Vec3f();
-<<<<<<< HEAD
     _gameObjects = gameObjects;
-=======
 	_scale = { 1.0f, 1.0f, 1.0f };
->>>>>>> 4e241ece7ac0a0db5dcc4804d55a5de1bc8c4f1a
 }
 
 void GameObject::Update(float deltaTime)

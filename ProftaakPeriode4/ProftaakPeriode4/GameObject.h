@@ -100,12 +100,10 @@ public:
 	* The current rotation of the object
 	*/
 	Vec3f _rotation;
-<<<<<<< HEAD
     /*
      * pointer to the vector containing all the gameObjects
      */
     std::vector<GameObject *>* _gameObjects;
-=======
 	/*
 	 * The scale of this object
 	 */
@@ -114,7 +112,6 @@ public:
 	 * Lighting of object
 	 */
 	bool _lighting;
->>>>>>> 4e241ece7ac0a0db5dcc4804d55a5de1bc8c4f1a
 private:	
 	/*
 	 * Vector of every Component in this GameObject

@@ -71,21 +71,16 @@ void Model::InitTestObjects()
 
 	_gameObjects.push_back(camera);
 
-<<<<<<< HEAD
-	GameObject * laneGenerator = new GameObject(&_gameObjects);
-=======
-	GameObject * skybox = new GameObject();
+	GameObject * skybox = new GameObject(&_gameObjects);
 	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
 	skybox->_scale = { 7.0f, 7.0f, 7.0f };
 	skybox->_lighting = false;
 	skybox->AddComponent(skyboxDrawComponent);
 	_gameObjects.push_back(skybox);
-
-	GameObject * laneGenerator = new GameObject();
->>>>>>> 4e241ece7ac0a0db5dcc4804d55a5de1bc8c4f1a
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
+    GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,10, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
 	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
