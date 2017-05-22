@@ -20,5 +20,6 @@ public:
 	//void Update(float deltaTime) override;
 	
 	void CameraUpdate();
+	void CalculatePosition();
 };
 
