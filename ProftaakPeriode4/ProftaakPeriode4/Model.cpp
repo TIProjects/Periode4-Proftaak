@@ -12,6 +12,7 @@
 
 //for testing purposes only, comment/delete when finished
 #include "Text.h"
+#include "PlayerComponent.h"
 Text fpstext;
 #include "LifeBar.h"
 LifeBar Lifebar;
@@ -70,7 +71,7 @@ void Model::InitTestObjects()
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
-	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,10, meshes);
+	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,20, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
 	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
 	_gameObjects.push_back(laneGenerator);

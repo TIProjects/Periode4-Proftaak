@@ -52,7 +52,7 @@ public:
 	 * Draw this GameObject using it's DrawComponent
 	 * if it has one
 	 */
-	void Draw();
+	void Draw() const;
 	/*
 	* Get the Component based on the parameter id
 	* if it is present
@@ -91,5 +91,4 @@ private:
 	 * Vector of every Component in this GameObject
 	 */
 	std::vector<Component *> _components;
-	
 };

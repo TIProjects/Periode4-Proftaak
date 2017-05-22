@@ -14,6 +14,8 @@ void GameObject::Update(float deltaTime)
 	{
 		component->Update(deltaTime);
 	}
+
+	if (_drawComponent != nullptr) _drawComponent->Update(deltaTime);
 }
 
 void GameObject::LateUpdate(float deltaTime)
@@ -42,7 +44,7 @@ void GameObject::SetRotation(Vec3f rotation)
 	_rotation = Vec3f(rotation);
 }
 
-void GameObject::Draw()
+void GameObject::Draw() const
 {
 	// Return if there is no DrawComponent
 	if(_drawComponent == nullptr) return;
