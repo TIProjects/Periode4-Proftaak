@@ -89,7 +89,7 @@ public:
 	 */
 	float getLength();
 
-	/*
+	/**
 	 * The meshes that are randomly chosen (loaded in constructor)
 	 */
 	std::vector<Mesh*> _meshes;
