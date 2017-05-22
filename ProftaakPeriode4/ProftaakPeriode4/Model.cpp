@@ -14,10 +14,7 @@
 
 //for testing purposes only, comment/delete when finished
 #include "Text.h"
-Text fpstext, scoreText;
 #include "LifeBar.h"
-LifeBar Lifebar; 
-Sound backgroundMusic;
 
 Model::Model()
 {
@@ -63,22 +60,11 @@ void Model::InitTestObjects()
 	// Test GameObjects
 	// TODO: remove
 
-    Vec3f pos = Vec3f(10, 10, 02);
-    Vec3f col = Vec3f(1, 0, 0);
-    scoreText = Text(pos, col);
-    ScoreComponent * score = new ScoreComponent(&scoreText);
-
-    scoreBoard.loadScore();
-    scoreBoard.addScore(score);
-
 	_lastTime = 0;
 
 	GameObject * camera = new GameObject(&_gameObjects);
 	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f);
 	camera->AddComponent(cameraComponent);
-
-    //dunno if this is good, but I'm doing it anyway :p <3 Gijs~
-    camera->AddComponent(score);
 
 	_gameObjects.push_back(camera);
 
@@ -91,44 +77,88 @@ void Model::InitTestObjects()
 	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
 	_gameObjects.push_back(laneGenerator);
 
+}
 
-	
-	GameObject * guiOb = new GameObject(&_gameObjects);
-	GUIComponent * GUI = new GUIComponent();
-
-	//for testing purposes only, comment/delete when finished
-	//example of GUI text
-    pos = Vec3f(10, 10, 02);
-    col = Vec3f(1, 0, 0);
-
-    GUI->AddElement(&scoreText);
-	//example of lifebar
-	Vec3f pos2 = Vec3f(10, 10, 0);
-	std::vector<std::string> paths{ "Assets/LifeFrameBackground.psd", "Assets/LifeBar.psd", "Assets/LifeFrameSegment.psd", "Assets/LifeFrame.psd"};
-	Lifebar = LifeBar(pos2, 600.0f, 50.0f, paths, 4, 3);
-	GUI->AddElement(&Lifebar);
-	Lifebar.Decrement();
-
-
-	guiOb->AddComponent(GUI);
-
-	_gameObjects.push_back(guiOb);
-
+void Model::InitSound()
+{
 	//Initialize audio
 	int device = -1; // Default Sounddevice (default playback device from windows settings)
 	int freq = 44100; // Sample rate (Hz)
 	BASS_Init(device, freq, 0, 0, NULL);
 
 	//example on how to start sound(s)
-	backgroundMusic = Sound("Assets/background.wav", true);
-	backgroundMusic.Play();
+	Sound * backgroundMusic = new Sound("Assets/background.wav", true);
+	backgroundMusic->Play();
 
 	//place this where the program closes
 	//BASS_Free();
+}
+
+void Model::InitGUIElements()
+{
+	// create GameObject for all elements
+	GameObject * guiOb = new GameObject(&_gameObjects);
+	GUIComponent * GUI = new GUIComponent();
+
+
+	Text * distanceCounter = new Text(Vec3f(30, 25, 0), Vec3f(0, 0, 0), "Distance: 0000 m");
+	GUI->AddElement(distanceCounter);
+
+	Text * speedCounter = new Text(Vec3f(30, 40, 0), Vec3f(0, 0, 0), "Speed: 0000 m/s");
+	GUI->AddElement(speedCounter);
+
+	Image * powerUpImage = new Image(Vec3f(1280.0f / 4.0 + 60.0f, 45, 0), 20.0f, 20.0f, "Assets/LifeBar.psd"); // Todo replace LifeBar Image
+	powerUpImage->Hide();
+	GUI->AddElement(powerUpImage);
+
+	Text * powerTimeLeft = new Text(Vec3f(1280.0f / 4.0 + 100.0f, 60, 0), Vec3f(0, 0, 0), "00:00");
+	powerTimeLeft->Hide();
+	GUI->AddElement(powerTimeLeft);
+
+	Text * scoreText = new Text(Vec3f(670.0f, 40, 0), Vec3f(0, 0, 0), "Score: 0000 0x");
+	GUI->AddElement(scoreText);
+
+    Text * highscore = new Text(Vec3f(670.0f, 25, 0), Vec3f(0, 0, 0), "HighScore: 0000");
+    GUI->AddElement(highscore);
+
+	Image * diededImage = new Image(Vec3f(0.0f, 0.0f, 0), 1280.0f, 720.0f, "Assets/LifeBar.psd"); // todo replace LifeBar Image
+	diededImage->Hide();
+	GUI->AddElement(diededImage);
+
+	LifeBar * lifebar = new LifeBar(
+		Vec3f(1280.0f / 4.0 - 100.0f, 20, 0),
+		400.0f, 20.0f, 3,
+		"Assets/LifeFrameBackground.psd",
+		"Assets/LifeFrame.psd",
+		"Assets/LifeBar.psd",
+		"Assets/LifeFrameSegment.psd");
+
+	GUI->AddElement(lifebar);
+
+	guiOb->AddComponent(GUI);
+
+	_gameObjects.push_back(guiOb);
+
+    GameObject * scoreObject = new GameObject(&_gameObjects);
+
+    scoreBoard.loadScore();
+    ScoreComponent * score;
+
+    if(!scoreBoard._scores.empty())
+        score = new ScoreComponent(scoreText, highscore, scoreBoard._scores[0]->returnScore());
+    else
+        score = new ScoreComponent(scoreText, highscore, 0);
+
+    scoreObject->AddComponent(score);
+    scoreBoard.addScore(score);
+
+    _gameObjects.push_back(scoreObject);
 
 }
 
 void Model::Init()
 {
 	// TODO initialise gamelogic 
+	InitGUIElements();
+	InitSound();
 }

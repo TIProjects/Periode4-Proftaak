@@ -1,9 +1,11 @@
 #include "ScoreComponent.h"
 #include "Text.h"
 
-ScoreComponent::ScoreComponent(Text * scoreText) : Component(SCORE_COMPONENT)
+ScoreComponent::ScoreComponent(Text * scoreText, Text * highscoreText, int highscore) : Component(SCORE_COMPONENT)
 {
     _scoreText = scoreText;
+    _highscoreText = highscoreText;
+    _highScore = highscore;
 }
 
 ScoreComponent::~ScoreComponent()
@@ -41,6 +43,16 @@ void ScoreComponent::LateUpdate(float deltaTime)
     
 }
 
+void ScoreComponent::drawScore(int score, Text* text)
+{
+    text->Update("Score: " + std::to_string(score) + " " + std::to_string(_multiplier) + "x");
+}
+
+void ScoreComponent::drawHighscore(int score, Text* text)
+{
+    text->Update("Highscore: " + std::to_string(score));
+}
+
 void ScoreComponent::Update(float deltaTime)
 {
     //TODO: convert this to the distance not time
@@ -50,6 +62,7 @@ void ScoreComponent::Update(float deltaTime)
     if (_updateTimer <= 0.0f)
     {
         changeScore(1);
+        if (_score >= _highScore) _highScore = _score;
         _updateTimer = 0.2f;
     }
 
@@ -59,18 +72,7 @@ void ScoreComponent::Update(float deltaTime)
         _mulitplierUpdateTimer = 10.0f * _multiplier;
     }
 
-    //#HeroClickerStyle 
-    if(_score % MILLION != _score)
-    {
-        unsigned int millionScore = _score / MILLION;
-        _scoreText->Update("Score: " + std::to_string(millionScore) + "M " + std::to_string(_multiplier) + "x");        
-    }
-
-    else if(_score % THOUSAND != _score)
-    {
-        unsigned int thousandScore = _score / THOUSAND;
-        _scoreText->Update("Score: " + std::to_string(thousandScore) + "K " + std::to_string(_multiplier) + "x");
-    }
-
-    else _scoreText->Update("Score: " + std::to_string(_score)+ " " + std::to_string(_multiplier) + "x");
+    drawScore(_score, _scoreText);
+    drawHighscore(_highScore, _highscoreText);
 }
+

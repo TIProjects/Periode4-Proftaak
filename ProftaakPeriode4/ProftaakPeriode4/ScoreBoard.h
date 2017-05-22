@@ -45,6 +45,11 @@ class ScoreBoard
         */
         void checkArray();
 
+        /*
+        * The vector with the scores
+        */
+        std::vector<ScoreComponent*> _scores;
+
     private:
 
         /*
@@ -62,11 +67,6 @@ class ScoreBoard
          * amount of scores that is stored
          */
         int _amountOfScores;
-
-        /*
-         * The vector with the scores
-         */
-        std::vector<ScoreComponent*> _scores;
 
         /*
          * The path used for saving and loading the scores

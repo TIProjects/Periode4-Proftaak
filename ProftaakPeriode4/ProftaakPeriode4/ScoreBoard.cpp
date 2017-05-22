@@ -117,7 +117,7 @@ void ScoreBoard::loadScore()
         _amountOfScores = j["amount"];
         for(int i = 0; i < _amountOfScores; i++)
         {
-            ScoreComponent* score = new ScoreComponent(NULL);
+            ScoreComponent* score = new ScoreComponent(nullptr, nullptr, 0);
             score->changeName(j["scores"][i]["name"]);
             score->changeScore(j["scores"][i]["points"]);
             _scores.push_back(score);

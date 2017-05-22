@@ -29,11 +29,11 @@ public:
 	//Sets _enabled to false disabling the GUIElement.
 	void Disable() { _enabled = false; };
 	//Sets the position of the GUIElement.
-	void SetPosition(Vec3f position) { _position = position; };
+	virtual void SetPosition(Vec3f position) { _position = position; };
 	//Gets the position of the GUIElement.
 	Vec3f GetPosition() { return _position; };
 	//Draws the GUIElement if visible
-	virtual void Draw() {};
+	virtual void Draw() = NULL;
 	//Update function for handling events by user
 	virtual void Update() {};
 

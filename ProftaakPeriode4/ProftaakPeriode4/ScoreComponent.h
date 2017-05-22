@@ -10,7 +10,7 @@
 class ScoreComponent : public Component
 {
 public:
-    Text* _scoreText;
+    Text* _scoreText, *_highscoreText;
 
     /**
     * Name of the person holding the score
@@ -18,7 +18,7 @@ public:
     */
     std::string _name = "Gijs";
 
-    ScoreComponent(Text* scoreText);
+    ScoreComponent(Text* scoreText, Text* highscoreText, int highScore);
 
     ~ScoreComponent();
 
@@ -72,7 +72,7 @@ private:
     /**
     * Score can't get below zero
     */
-    unsigned int _score = 0;
+    unsigned int _score = 0, _highScore = 0;
 
     /**
      * amount of time left for the score and the multiplier are getting updated.
@@ -83,4 +83,8 @@ private:
     * Multieplier for the score
     */
     unsigned int _multiplier = 1;
+
+    void drawScore(int score, Text* text);
+    void drawHighscore(int score, Text* text);
+
 };

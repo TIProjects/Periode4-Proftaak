@@ -11,27 +11,42 @@ class LifeBar : public GUIElement
 {
 public:
 	//Default constructor
-	LifeBar() {};
+	LifeBar()
+	{
+		_background = nullptr;
+		_segment = nullptr;
+		_frame = nullptr;
+		_bar = nullptr;
+
+		float _width =  _height;
+		Vec3f _pos;
+		int _sections;
+		int _life;
+	}
 	/*
 	Constructor with variables
 	Vec3f pos, position of GUIElement, this will be passed to the constructor of GUIElement
 	float width, width of the GUIElement
 	float Height, height of the GUIElement
 	std::vector<std::string> paths, the paths of all the images of the lifebar
-	int size, amount of strings in paths
 	int sections, the amount of sections needed to be put in the lifebar
 	*/
-	LifeBar(Vec3f pos, float width, float height, std::vector<std::string> paths, int size, int sections);
+	LifeBar(Vec3f pos, float width, float height, int sections, std::string background, std::string _frame, std::string _bar, std::string _segment);
 	//Increments the LifeBar one segment if acceptable
-	void Increment();
+	int Increment();
 	//Decrements the LifeBar one segment if acceptable
-	void Decrement();
+	int Decrement();
 	//draws the lifebar
 	void Draw() override;
 
 protected:
-	std::vector<Image> _Images;
-	float _Width, _Height;
-	int _Sections;
-	int _Life;
+	Image * _background;
+	Image * _segment;
+	Image * _frame;
+	Image * _bar;
+
+	float _width, _height;
+	Vec3f _pos;
+	int _sections;
+	int _life;
 };
