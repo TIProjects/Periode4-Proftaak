@@ -82,17 +82,22 @@ void Model::InitTestObjects()
 
 	//for testing purposes only, comment/delete when finished
 	//example of GUI text
-	Vec3f pos = Vec3f(10, 10, 02);
-	Vec3f col = Vec3f(1, 0, 0);
-	fpstext = Text(pos, col);
-	GUI->AddElement(&fpstext);
+	fpstext = Text(Vec3f(10, 10, 02), Vec3f(1, 0, 0));
+//	GUI->AddElement(&fpstext);
+
+
+
 	//example of lifebar
-	Vec3f pos2 = Vec3f(10, 10, 0);
-	std::vector<std::string> paths{ "Assets/LifeFrameBackground.psd", "Assets/LifeBar.psd", "Assets/LifeFrameSegment.psd", "Assets/LifeFrame.psd"};
-	Lifebar = LifeBar(pos2, 600.0f, 50.0f, paths, 4, 3);
+	Lifebar = LifeBar(
+		Vec3f(10, 10, 0), 
+		600.0f, 20.0f,3, 
+		"Assets/LifeFrameBackground.psd", 
+		"Assets/LifeFrame.psd", 
+		"Assets/LifeBar.psd", 
+		"Assets/LifeFrameSegment.psd");
+
 	GUI->AddElement(&Lifebar);
 	Lifebar.Decrement();
-
 
 	guiOb->AddComponent(GUI);
 

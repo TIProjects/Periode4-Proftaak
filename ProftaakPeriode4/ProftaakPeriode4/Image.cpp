@@ -14,6 +14,7 @@ void Image::SetWidth(float width)
 	CalculateVertices();
 }
 
+
 void Image::Draw()
 {
 	glDisable(GL_LIGHTING);

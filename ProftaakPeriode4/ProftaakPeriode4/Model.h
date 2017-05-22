@@ -30,6 +30,6 @@ public:
 
 private:
 
-	// The last time a frame was rendered in milliseconds
-	float _lastTime;
+    // The last time a frame was rendered in milliseconds
+    float _lastTime;
 };

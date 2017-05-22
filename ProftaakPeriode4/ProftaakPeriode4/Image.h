@@ -23,6 +23,11 @@ public:
 	Image(Vec3f pos, float width, float height, std::string path);
 	//Sets the width of the image with the value given
 	void SetWidth(float width);
+
+	void SetPosition(Vec3f pos) override{
+		_position = pos;
+		CalculateVertices();
+	};
 	//Draws the image on the screen with the current variables
 	void Draw() override;
 

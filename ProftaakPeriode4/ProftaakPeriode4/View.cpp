@@ -63,4 +63,5 @@ void View::reshape(int w, int h)
 			break;
 		}
 	}
+	glViewport(0, 0, w, h);
 }
