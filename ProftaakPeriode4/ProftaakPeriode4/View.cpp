@@ -2,7 +2,7 @@
 #include <GL\freeglut.h>
 #include "Component.h"
 #include "CameraComponent.h"
-#include "AlpaBlend.h"
+#include "AlphaBlend.h"
 
 View::View(Model * model, int argc, char * argv[])
 {
@@ -63,4 +63,5 @@ void View::reshape(int w, int h)
 			break;
 		}
 	}
+	glViewport(0, 0, w, h);
 }

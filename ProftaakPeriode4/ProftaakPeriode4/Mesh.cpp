@@ -22,13 +22,15 @@ IndexedMesh::~IndexedMesh()
 }
 
 
-void IndexedMesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
+void IndexedMesh::Draw(Vec3f position, Vec3f rotation, Vec3f scale, bool lighting)
 {
+	if (!lighting) glDisable(GL_LIGHTING);
 	glPushMatrix();
 
 	glTranslatef(position.x, position.y, position.z);
-	glRotatef(rotationAngle, rotation.x, rotation.y, rotation.z);
-
+	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
+	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
+	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
 
 	for (IndexedObjGroup * group : _groups)
 	{
@@ -50,9 +52,8 @@ void IndexedMesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
 	}
-
-
 	glPopMatrix();
+	if (!lighting) glEnable(GL_LIGHTING);
 }
 
 Mesh::Group::Group(MaterialInfo* material)
@@ -94,15 +95,18 @@ Mesh::Mesh(const IndexedMesh * indexedMesh)
 	}
 }
 
-void Mesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
+void Mesh::Draw(Vec3f position, Vec3f rotation, Vec3f scale, bool lighting)
 {
-
 	glEnable(GL_TEXTURE_2D);
+	if (!lighting) { glDisable(GL_LIGHTING); }
 
 	glPushMatrix();
 
 	glTranslatef(position.x, position.y, position.z);
-	glRotatef(rotationAngle, rotation.x, rotation.y, rotation.z);
+	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
+	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
+	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
+	glScalef(scale.x, scale.y, scale.z);
 
 	for(Group group : _groups)
 	{
@@ -127,5 +131,6 @@ void Mesh::Draw(Vec3f position, Vec3f rotation, float rotationAngle)
 	glDisable(GL_TEXTURE_2D);
 
 	glPopMatrix();
+	if (!lighting) glEnable(GL_LIGHTING);
 }
 

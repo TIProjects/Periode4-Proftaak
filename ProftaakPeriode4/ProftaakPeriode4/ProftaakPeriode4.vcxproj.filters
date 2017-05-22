@@ -82,6 +82,12 @@
     <Filter Include="Source Files\Alpha Blend">
       <UniqueIdentifier>{9e1da7a8-6a81-4365-85b6-22aca2d07213}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SFX">
+      <UniqueIdentifier>{9a9caa9e-c1a9-42ff-b941-d618213b9d92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SFX">
+      <UniqueIdentifier>{095e73fe-e9e1-41ba-b48f-fd6d06db2c55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -171,6 +177,12 @@
     <ClCompile Include="LaneComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\SFX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -242,9 +254,6 @@
     <ClInclude Include="LaneGeneratorComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="AlpaBlend.h">
-      <Filter>Header Files\Alpha Blend</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\Factory</Filter>
     </ClInclude>
@@ -257,9 +266,6 @@
     <ClInclude Include="CollisionComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Lanes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -268,6 +274,15 @@
     </ClInclude>
     <ClInclude Include="LaneComponent.h">
       <Filter>Header Files\Components</Filter>
+  </ClInclude>
+    <ClInclude Include="AlphaBlend.h">
+      <Filter>Header Files\Alpha Blend</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\SFX</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -289,5 +304,13 @@
     <None Include="Assets\LifeFrameBackground.psd">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\cartoon001.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Assets\cartoon002.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

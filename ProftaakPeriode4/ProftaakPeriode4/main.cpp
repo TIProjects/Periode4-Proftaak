@@ -4,14 +4,20 @@
 #include "GUIComponent.h"
 #include "GUIElement.h"
 #include "Text.h"
-#include "ScoreBoard.h"
-#include "ScoreComponent.h"
 #include <GL\freeglut.h>
 #include "Input.h"
 
 Model model;
 View view;
 unsigned int fps = 20;
+
+
+// Function that will be called on exiting the game
+void onExit()
+{
+    //TODO: add here the methodes that you want to be called on exit
+    model.scoreBoard.saveScore();
+}
 
 // The displayFunc which will call the UpdateView of the view
 // This function should only be called by OpenGL and NOT manually
@@ -49,6 +55,7 @@ int main(int argc, char* argv[])
 	// do NOT remove
 	model.Init();
 
+    std::atexit(onExit);
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);

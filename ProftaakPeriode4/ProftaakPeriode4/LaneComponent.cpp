@@ -18,7 +18,7 @@ void LaneComponent::Update(float deltatime)
 LaneComponent::LaneComponent(int lengthAmount, std::vector<Mesh*> meshes)
 	: Component(LANE_COMPONENT)
 {
-	srand(time(nullptr));
+	srand(unsigned int(time(nullptr)));
 	_meshes = meshes;
 	for (int i = 0; i < lengthAmount; i++)
 		_queue.push_back(RandomMesh());
@@ -34,7 +34,7 @@ void LaneComponent::Draw()
 	{
 		Mesh* drawObject = _queue[i];
 		Vec3f position = Vec3f(_parent->_position.x, _parent->_position.y, -(drawObject->_length * i) + _lengthMoved);
-		drawObject->Draw(position, rotation, rotationAngle); // draw lane-mesh
+		drawObject->Draw(position, rotation); // draw lane-mesh
 	}
 }
 

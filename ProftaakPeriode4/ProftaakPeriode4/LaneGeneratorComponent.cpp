@@ -15,16 +15,16 @@ float meshTime = 0.0f;
 
 LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std::vector<Mesh*> meshes)
 {
-	srand(time(nullptr)); // set fully random (on time)
+	srand(unsigned int(time(nullptr))); // set fully random (on time)
 
-	// Testing
+						  // Testing
 	mesh = LoadMeshFile("Assets//Models//TestCube//Cube.Cobj");
-	
+
 	_spaceBetween = 2.0f;
 
 	for (int i = 0; i < laneAmount; i++)
 	{
-		GameObject * lane = new GameObject();
+		GameObject * lane = new GameObject(&_lanes);
 		lane->AddComponent(new LaneComponent(laneSize, meshes));
 		lane->_position.x += i * (meshes[0]->_width + _spaceBetween);
 
@@ -32,9 +32,9 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std
 	}
 
 	// Create and add the player GameObject
-	_player = new GameObject();
-	_player->AddComponent(new PlayerComponent(1,laneAmount, false));	
-	_player->AddComponent(new CollisionComponent(Hitbox({2,2,2})));
+	_player = new GameObject(&_obstacles);
+	_player->AddComponent(new PlayerComponent(1, laneAmount, false));
+	_player->AddComponent(new CollisionComponent(Hitbox({ 2,2,2 })));
 	_player->AddComponent(new MeshDrawComponent(mesh));
 	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(1);
 	lanePlayer->_speed = 0.0f;
@@ -126,7 +126,7 @@ void LaneGeneratorComponent::PlaceObstacleFullyRandom(Mesh* mesh)
 		lenght = -200.0f;
 
 	// Create the obstacle
-	GameObject * obstacle = new GameObject();
+	GameObject * obstacle = new GameObject(&_obstacles);
 	obstacle->AddComponent(new MeshDrawComponent(mesh));
 	obstacle->AddComponent(new LaneObstacleComponent(laneIndex));
 	obstacle->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));

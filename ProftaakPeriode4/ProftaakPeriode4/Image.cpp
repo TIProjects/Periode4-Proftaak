@@ -10,33 +10,34 @@ Image::Image(Vec3f pos, float width, float height, std::string path) : GUIElemen
 
 void Image::SetWidth(float width)
 {
-	_Width = width;
-	CalculateVertices();
+	if (_enabled) {
+		_Width = width;
+		CalculateVertices();
+	}
 }
+
 
 void Image::Draw()
 {
-	glDisable(GL_LIGHTING);
-	glDisable(GL_LIGHT0);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glDisable(GL_DEPTH_TEST);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glBindTexture(GL_TEXTURE_2D, _Texture->_id);
+	if (_visible) {
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glDisable(GL_DEPTH_TEST);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glBindTexture(GL_TEXTURE_2D, _Texture->_id);
 
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	glVertexPointer(3, GL_FLOAT, sizeof(Vertex), ((float*)_Vertices.data()) + 0);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), ((float*)_Vertices.data()) + 3);
+		glVertexPointer(3, GL_FLOAT, sizeof(Vertex), ((float*)_Vertices.data()) + 0);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), ((float*)_Vertices.data()) + 3);
 
-	glDrawArrays(GL_QUADS, 0, _Vertices.size());
+		glDrawArrays(GL_QUADS, 0, GLsizei(_Vertices.size()));
 
-	glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisable(GL_BLEND);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+		glDisableClientState(GL_COLOR_ARRAY);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisable(GL_BLEND);
+	}
 }
 
 void Image::CalculateVertices()

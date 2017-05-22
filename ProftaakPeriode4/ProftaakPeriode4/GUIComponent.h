@@ -20,6 +20,4 @@ public:
 	//list of all the elements
 	std::vector<GUIElement *> _elements;
 
-private:
-
 };
