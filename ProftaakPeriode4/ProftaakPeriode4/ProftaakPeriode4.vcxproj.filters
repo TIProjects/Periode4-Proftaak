@@ -257,6 +257,9 @@
     <ClInclude Include="Sound.h">
       <Filter>Header Files\SFX</Filter>
     </ClInclude>
+    <ClInclude Include="LaneObstacleGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Button.psd">

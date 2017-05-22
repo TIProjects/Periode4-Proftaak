@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="Image.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="LaneObstacleGenerator.h" />
     <ClInclude Include="LifeBar.h" />
     <ClInclude Include="AlpaBlend.h" />
     <ClInclude Include="Collision.h" />
