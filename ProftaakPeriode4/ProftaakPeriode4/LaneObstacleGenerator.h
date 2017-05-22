@@ -35,16 +35,22 @@ public:
 		return objects;
 	}
 
+	void PlaceRandomAt(float target)
+	{
+		
+	}
 
 	void Update(float lengthMoved)
 	{
 		_lengthMovedSince += lengthMoved;
 
 		float randomAdd = float(rand() % int(_maximalDistanceBetween - _lengthMovedSince));
-		if(_lengthMovedSince >= _maximalDistanceBetween)
-		
+		if (_lengthMovedSince >= _maximalDistanceBetween)
 		{
-			// add new obstacles
+			PlaceRandomAt(_lengthMovedSince);
+		}
+		else if(_lengthMovedSince + randomAdd >= _minimalDistanceBetween){
+			PlaceRandomAt(_lengthMovedSince + randomAdd);
 		}
 	}
 };
