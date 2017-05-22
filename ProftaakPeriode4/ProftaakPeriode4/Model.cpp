@@ -9,12 +9,15 @@
 #include "CollisionComponent.h"
 #include "Collision.h"
 #include "GUIComponent.h"
+#include "bass.h"
+#include "Sound.h"
 
 //for testing purposes only, comment/delete when finished
 #include "Text.h"
 Text fpstext;
 #include "LifeBar.h"
-LifeBar Lifebar;
+LifeBar Lifebar; 
+Sound backgroundMusic;
 
 Model::Model()
 {
@@ -50,6 +53,7 @@ void Model::update()
 	{
 		gameObject->LateUpdate(deltaTime);
 	}
+
 
 	glutPostRedisplay();
 }
@@ -102,6 +106,18 @@ void Model::InitTestObjects()
 	guiOb->AddComponent(GUI);
 
 	_gameObjects.push_back(guiOb);
+
+	//Initialize audio
+	int device = -1; // Default Sounddevice (default playback device from windows settings)
+	int freq = 44100; // Sample rate (Hz)
+	BASS_Init(device, freq, 0, 0, NULL);
+
+	//example on how to start sound(s)
+	backgroundMusic = Sound("Assets/background.wav", true);
+	backgroundMusic.Play();
+
+	//place this where the program closes
+	//BASS_Free();
 
 }
 
