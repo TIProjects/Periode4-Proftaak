@@ -12,7 +12,7 @@
 
 //for testing purposes only, comment/delete when finished
 #include "Text.h"
-Text fpstext;
+Text fpstext, scoreText;
 #include "LifeBar.h"
 LifeBar Lifebar;
 
@@ -58,14 +58,18 @@ void Model::InitTestObjects()
 {
 	// Test GameObjects
 	// TODO: remove
-    ScoreComponent * score = new ScoreComponent;
+
+    Vec3f pos = Vec3f(10, 10, 02);
+    Vec3f col = Vec3f(1, 0, 0);
+    scoreText = Text(pos, col);
+    ScoreComponent * score = new ScoreComponent(&scoreText);
 
     scoreBoard.loadScore();
     scoreBoard.addScore(score);
 
 	_lastTime = 0;
 
-	GameObject * camera = new GameObject();
+	GameObject * camera = new GameObject(&_gameObjects);
 	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f);
 	camera->AddComponent(cameraComponent);
 
@@ -74,7 +78,7 @@ void Model::InitTestObjects()
 
 	_gameObjects.push_back(camera);
 
-	GameObject * laneGenerator = new GameObject();
+	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
@@ -85,15 +89,15 @@ void Model::InitTestObjects()
 
 
 	
-	GameObject * guiOb = new GameObject();
+	GameObject * guiOb = new GameObject(&_gameObjects);
 	GUIComponent * GUI = new GUIComponent();
 
 	//for testing purposes only, comment/delete when finished
 	//example of GUI text
-	Vec3f pos = Vec3f(10, 10, 02);
-	Vec3f col = Vec3f(1, 0, 0);
-	fpstext = Text(pos, col);
-	GUI->AddElement(&fpstext);
+    pos = Vec3f(10, 10, 02);
+    col = Vec3f(1, 0, 0);
+
+    GUI->AddElement(&scoreText);
 	//example of lifebar
 	Vec3f pos2 = Vec3f(10, 10, 0);
 	std::vector<std::string> paths{ "Assets/LifeFrameBackground.psd", "Assets/LifeBar.psd", "Assets/LifeFrameSegment.psd", "Assets/LifeFrame.psd"};

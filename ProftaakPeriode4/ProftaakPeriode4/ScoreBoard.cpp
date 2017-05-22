@@ -59,7 +59,8 @@ void ScoreBoard::getLinuxDirectory()
     }
 
     //Linux directory
-    path = "$XDG_DATA_HOME/CubeRunner/scores.cr";
+    path = temp_p;
+    path += "/scores.cr";
 }
 
 void ScoreBoard::getWindowsDirectory()
@@ -116,7 +117,7 @@ void ScoreBoard::loadScore()
         _amountOfScores = j["amount"];
         for(int i = 0; i < _amountOfScores; i++)
         {
-            ScoreComponent* score = new ScoreComponent();
+            ScoreComponent* score = new ScoreComponent(NULL);
             score->changeName(j["scores"][i]["name"]);
             score->changeScore(j["scores"][i]["points"]);
             _scores.push_back(score);
@@ -124,6 +125,6 @@ void ScoreBoard::loadScore()
         checkArray();
     }
 
-    else std::cout << "Unable to open file" << std::endl;
+    else std::cout << "Unable to open file: " << path << std::endl;
 }
 

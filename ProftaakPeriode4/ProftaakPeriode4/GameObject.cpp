@@ -2,10 +2,11 @@
 #include "DrawComponent.h"
 
 
-GameObject::GameObject()
+GameObject::GameObject(std::vector<GameObject *> * gameObjects)
 {
 	_position = Vec3f();
 	_rotation = Vec3f();
+    _gameObjects = gameObjects;
 }
 
 void GameObject::Update(float deltaTime)

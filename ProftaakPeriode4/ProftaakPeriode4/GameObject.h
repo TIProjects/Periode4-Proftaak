@@ -16,7 +16,7 @@ public:
 	* Constructor for creating object
 	* @param _vertices as Vector with Matrix3GLf
 	*/
-	GameObject();
+	GameObject(std::vector<GameObject *> * gameObjects);
 	/*
 	* Update function will call the update function
 	* of every Component in this GameObject
@@ -86,6 +86,10 @@ public:
 	* The current rotation of the object
 	*/
 	Vec3f _rotation;
+    /*
+     * pointer to the vector containing all the gameObjects
+     */
+    std::vector<GameObject *>* _gameObjects;
 private:	
 	/*
 	 * Vector of every Component in this GameObject

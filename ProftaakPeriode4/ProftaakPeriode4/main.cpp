@@ -4,8 +4,6 @@
 #include "GUIComponent.h"
 #include "GUIElement.h"
 #include "Text.h"
-#include "ScoreBoard.h"
-#include "ScoreComponent.h"
 #include <GL\freeglut.h>
 #include "Input.h"
 
@@ -17,7 +15,7 @@ unsigned int fps = 20;
 // Function that will be called on exiting the game
 void onExit()
 {
-    //TODO: add here the methodes that you want to be called on close
+    //TODO: add here the methodes that you want to be called on exit
     model.scoreBoard.saveScore();
 }
 
