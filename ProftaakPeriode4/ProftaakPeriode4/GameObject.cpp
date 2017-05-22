@@ -6,6 +6,7 @@ GameObject::GameObject()
 {
 	_position = Vec3f();
 	_rotation = Vec3f();
+	_scale = { 1.0f, 1.0f, 1.0f };
 }
 
 void GameObject::Update(float deltaTime)
@@ -40,6 +41,23 @@ void GameObject::Rotate(Vec3f rotation)
 void GameObject::SetRotation(Vec3f rotation)
 {
 	_rotation = Vec3f(rotation);
+}
+
+void GameObject::Scale(Vec3f scale)
+{
+	_scale.x += scale.x;
+	_scale.y += scale.y;
+	_scale.z += scale.z;
+}
+
+void GameObject::SetScale(Vec3f scale)
+{
+	_scale = Vec3f(scale);
+}
+
+void GameObject::SetLighting(bool lighting)
+{
+	_lighting = lighting;
 }
 
 void GameObject::Draw()

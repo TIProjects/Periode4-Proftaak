@@ -96,9 +96,9 @@ public:
 	 * \brief Function for drawing IndexedMesh
 	 * \param position The position to be drawn on
 	 * \param rotation The rotation that it should be drawn on
-	 * \param rotationAngle the rotation angle that it should be drawn on
+	 * \param scale The scale it should be drawn on
 	 */
-	void Draw(Vec3f position, Vec3f rotation, float rotationAngle);
+	void Draw(Vec3f position = { 0.0f, 0.0f, 0.0f }, Vec3f rotation = { 0.0f, 0.0f, 0.0f }, Vec3f scale = { 1.0f, 1.0f, 1.0f }, bool lighting = true);
 
 };
 
@@ -152,8 +152,8 @@ public:
 	* \brief Function for drawing IndexedMesh
 	* \param position The position to be drawn on
 	* \param rotation The rotation that it should be drawn on
-	* \param rotationAngle the rotation angle that it should be drawn on
+	* \param scale The scale it should be drawn on
 	*/
-	void Draw(Vec3f position, Vec3f rotation, float rotationAngle);
+	void Draw(Vec3f position = { 0.0f, 0.0f, 0.0f }, Vec3f rotation = { 0.0f, 0.0f, 0.0f }, Vec3f scale = { 1.0f, 1.0f, 1.0f }, bool lighting = true);
 };
 	

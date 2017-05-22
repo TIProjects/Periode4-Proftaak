@@ -47,7 +47,6 @@ void Model::update()
 		gameObject->LateUpdate(deltaTime);
 	}
 
-
 	glutPostRedisplay();
 }
 
@@ -59,9 +58,18 @@ void Model::InitTestObjects()
 
 	GameObject * camera = new GameObject();
 	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f);
+	camera->_position = { 3.65f, 3.3f, 0.0f };
+	camera->_rotation.x = 30.0f;
 	camera->AddComponent(cameraComponent);
 
 	_gameObjects.push_back(camera);
+
+	GameObject * skybox = new GameObject();
+	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
+	skybox->_scale = { 7.0f, 7.0f, 7.0f };
+	skybox->_lighting = false;
+	skybox->AddComponent(skyboxDrawComponent);
+	_gameObjects.push_back(skybox);
 
 	GameObject * laneGenerator = new GameObject();
 	std::vector<Mesh*> meshes;
@@ -69,7 +77,7 @@ void Model::InitTestObjects()
 
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,10, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
-	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	_gameObjects.push_back(laneGenerator);
 
 
@@ -98,25 +106,25 @@ void Model::InitGUIElements()
 	GUIComponent * GUI = new GUIComponent();
 
 
-	Text * distanceCounter = new Text(Vec3f(30, 25, 0), Vec3f(0, 0, 0), "Distance: 0000 m");
+	Text * distanceCounter = new Text(Vec3f(30, 25, 0), Vec3f(1, 1, 1), "Distance: 0000 m");
 	GUI->AddElement(distanceCounter);
 
-	Text * speedCounter = new Text(Vec3f(30, 40, 0), Vec3f(0, 0, 0), "Speed: 0000 m/s");
+	Text * speedCounter = new Text(Vec3f(30, 40, 0), Vec3f(1, 1, 1), "Speed: 0000 m/s");
 	GUI->AddElement(speedCounter);
 
 	Image * powerUpImage = new Image(Vec3f(1280.0f / 4.0 + 60.0f, 45, 0), 20.0f, 20.0f, "Assets/LifeBar.psd"); // Todo replace LifeBar Image
 	powerUpImage->Hide();
 	GUI->AddElement(powerUpImage);
 
-	Text * powerTimeLeft = new Text(Vec3f(1280.0f / 4.0 + 100.0f, 60, 0), Vec3f(0, 0, 0), "00:00");
+	Text * powerTimeLeft = new Text(Vec3f(1280.0f / 4.0 + 100.0f, 60, 0), Vec3f(1, 1, 1), "00:00");
 	powerTimeLeft->Hide();
 	GUI->AddElement(powerTimeLeft);
 
-
-	Text * highscore = new Text(Vec3f(670.0f, 25, 0), Vec3f(0, 0, 0), "HighScore: 0000");
+	
+	Text * highscore = new Text(Vec3f(670.0f, 25, 0), Vec3f(1, 1, 1), "HighScore: 0000");
 	GUI->AddElement(highscore);
 
-	Text * score = new Text(Vec3f(670.0f, 40, 0), Vec3f(0, 0, 0), "Score: 0000 0x");
+	Text * score = new Text(Vec3f(670.0f, 40, 0), Vec3f(1, 1, 1), "Score: 0000 0x");
 	GUI->AddElement(score);
 
 	Image * diededImage = new Image(Vec3f(0.0f, 0.0f, 0), 1280.0f, 720.0f, "Assets/LifeBar.psd"); // todo replace LifeBar Image

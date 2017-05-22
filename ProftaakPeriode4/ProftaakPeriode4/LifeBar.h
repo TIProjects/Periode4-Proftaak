@@ -25,7 +25,6 @@ public:
 		_life = 0;
 	}
 
-
 	/*
 	Constructor with variables
 	Vec3f pos, position of GUIElement, this will be passed to the constructor of GUIElement

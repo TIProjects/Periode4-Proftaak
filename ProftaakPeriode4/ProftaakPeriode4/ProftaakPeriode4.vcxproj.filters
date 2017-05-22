@@ -259,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="LaneObstacleGenerator.h">
       <Filter>Header Files</Filter>
+</ClInclude>
+    <ClInclude Include="DrawComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

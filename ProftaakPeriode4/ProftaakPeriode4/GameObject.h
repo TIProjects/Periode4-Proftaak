@@ -49,6 +49,20 @@ public:
 	*/
 	void SetRotation(Vec3f rotation);
 	/*
+	* Scale the object (add new values to current scale)
+	* @param scale to add to the current scale
+	*/
+	void Scale(Vec3f scale);
+	/*
+	* Set the current scale of the object
+	* @param scale as new scale
+	*/
+	void SetScale(Vec3f scale);
+	/*
+	* Set lighting from object on or off
+	*/
+	void SetLighting(bool lighting);
+	/*
 	 * Draw this GameObject using it's DrawComponent
 	 * if it has one
 	 */
@@ -86,6 +100,14 @@ public:
 	* The current rotation of the object
 	*/
 	Vec3f _rotation;
+	/*
+	 * The scale of this object
+	 */
+	Vec3f _scale;
+	/*
+	 * Lighting of object
+	 */
+	bool _lighting;
 private:	
 	/*
 	 * Vector of every Component in this GameObject
