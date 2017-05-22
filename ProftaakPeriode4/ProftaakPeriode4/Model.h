@@ -27,7 +27,7 @@ public:
 	static void InitSound();
 
 	/*
-	 * Initialise the GUI elements to show in front
+	 * Initialise the GUI elements
 	 */
 	void InitGUIElements();
 

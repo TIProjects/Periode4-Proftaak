@@ -13,6 +13,15 @@ public:
 	//Default constructor
 	LifeBar()
 	{
+		_background = nullptr;
+		_segment = nullptr;
+		_frame = nullptr;
+		_bar = nullptr;
+
+		float _width =  _height;
+		Vec3f _pos;
+		int _sections;
+		int _life;
 	}
 	/*
 	Constructor with variables
