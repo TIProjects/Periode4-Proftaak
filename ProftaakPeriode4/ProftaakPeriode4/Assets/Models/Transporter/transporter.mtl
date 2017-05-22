@@ -2,8 +2,8 @@ newmtl blinn1SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
-Tf 0.48 0.48 0.48
-map_Kd glass.jpg
+Tf 1.00 1.00 1.00
+map_Kd backandfront.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 newmtl blinn2SG
@@ -11,6 +11,14 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd laneColor.jpg
+map_Kd middlepart.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd circle.png
 Ni 1.00
 Ks 0.50 0.50 0.50

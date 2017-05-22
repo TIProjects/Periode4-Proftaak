@@ -6,7 +6,11 @@ GameObject::GameObject(std::vector<GameObject *> * gameObjects)
 {
 	_position = Vec3f();
 	_rotation = Vec3f();
+<<<<<<< HEAD
     _gameObjects = gameObjects;
+=======
+	_scale = { 1.0f, 1.0f, 1.0f };
+>>>>>>> 4e241ece7ac0a0db5dcc4804d55a5de1bc8c4f1a
 }
 
 void GameObject::Update(float deltaTime)
@@ -41,6 +45,23 @@ void GameObject::Rotate(Vec3f rotation)
 void GameObject::SetRotation(Vec3f rotation)
 {
 	_rotation = Vec3f(rotation);
+}
+
+void GameObject::Scale(Vec3f scale)
+{
+	_scale.x += scale.x;
+	_scale.y += scale.y;
+	_scale.z += scale.z;
+}
+
+void GameObject::SetScale(Vec3f scale)
+{
+	_scale = Vec3f(scale);
+}
+
+void GameObject::SetLighting(bool lighting)
+{
+	_lighting = lighting;
 }
 
 void GameObject::Draw()

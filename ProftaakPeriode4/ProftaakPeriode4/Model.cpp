@@ -15,6 +15,8 @@
 //for testing purposes only, comment/delete when finished
 #include "Text.h"
 #include "LifeBar.h"
+Text fpstext;
+LifeBar Lifebar;
 
 Model::Model()
 {
@@ -51,7 +53,6 @@ void Model::update()
 		gameObject->LateUpdate(deltaTime);
 	}
 
-
 	glutPostRedisplay();
 }
 
@@ -64,17 +65,30 @@ void Model::InitTestObjects()
 
 	GameObject * camera = new GameObject(&_gameObjects);
 	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f);
+	camera->_position = { 3.65f, 3.3f, 0.0f };
+	camera->_rotation.x = 30.0f;
 	camera->AddComponent(cameraComponent);
 
 	_gameObjects.push_back(camera);
 
+<<<<<<< HEAD
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
+=======
+	GameObject * skybox = new GameObject();
+	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
+	skybox->_scale = { 7.0f, 7.0f, 7.0f };
+	skybox->_lighting = false;
+	skybox->AddComponent(skyboxDrawComponent);
+	_gameObjects.push_back(skybox);
+
+	GameObject * laneGenerator = new GameObject();
+>>>>>>> 4e241ece7ac0a0db5dcc4804d55a5de1bc8c4f1a
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,10, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
-	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	_gameObjects.push_back(laneGenerator);
 
 }
