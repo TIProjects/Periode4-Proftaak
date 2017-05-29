@@ -24,7 +24,6 @@ public:
 	* \param xCoord
 	*/
 	void MovePlayer(float xCoord);
-	void Collision(float deltaTime);
 
 	/**
 	 * \brief Wether the player is crouching or not
@@ -49,7 +48,7 @@ public:
 	/**
 	 * \brief Time of invincibility after a collision
 	 */
-	float _invicibilityTime;
+	bool _collided;
 	/**
 	 * \brief Wether the last keyboard key was released
 	 */
@@ -84,5 +83,8 @@ private:
 	 */
 	void KeyBoardUpdate(float deltaTime);
 
+	/**
+	 * \brief Keeping track of time to make sure the player can only be hit once
+	 */
 	float _hitTime;
 };

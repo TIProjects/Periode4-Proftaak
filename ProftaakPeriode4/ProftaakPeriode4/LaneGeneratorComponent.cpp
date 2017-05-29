@@ -104,10 +104,6 @@ void LaneGeneratorComponent::Update(float deltaTime)
 	Collision::CheckCollision(_obstacles);
 	CollisionComponent * collider
 		= dynamic_cast<CollisionComponent*>(_player->GetComponent(COLLISION_COMPONENT));
-	if(collider->_collided.size() > 0)
-	{
-		player->Collision(deltaTime);
-	}
 }
 
 void LaneGeneratorComponent::PlaceObstacleFullyRandom(Mesh* mesh)

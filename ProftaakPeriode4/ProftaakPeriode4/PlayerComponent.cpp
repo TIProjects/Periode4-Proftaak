@@ -1,4 +1,5 @@
 #include "PlayerComponent.h"
+#include "CollisionComponent.h"
 #include "Input.h"
 #include "GameObject.h"
 
@@ -12,7 +13,6 @@ PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar
 	_keyReleased = true;
 	_lastLane = _laneIndex;
 	_lifeBar = lifeBar;
-	_invicibilityTime = 0.5f;
 	_hitTime = 0.0f;
 	_model = model;
 	_gameOverScreen = gameOverScreen;
@@ -32,6 +32,27 @@ void PlayerComponent::Update(float deltaTime)
 		}
 	}
 
+	CollisionComponent * collider = static_cast<CollisionComponent*>(_parent->GetComponent(COLLISION_COMPONENT));
+	if(collider != nullptr)
+	{
+		if(collider->_collided.size() > 0)
+		{
+			if (!_collided)
+			{
+				_collided = true;
+				int hp = _lifeBar->Decrement();
+				if (hp <= 0)
+				{
+					_gameOverScreen->Show();
+					_model->_gameOver = true;
+				}
+			}
+		} else
+		{
+			_collided = false;
+		}
+	}
+
 	if(_useOpenCV)
 		OpenCVUpdate(deltaTime);
 	else
@@ -41,24 +62,6 @@ void PlayerComponent::Update(float deltaTime)
 void PlayerComponent::MovePlayer(float xCoord)
 {
 	_targetPosition.x = xCoord;
-}
-
-void PlayerComponent::Collision(float deltaTime)
-{
-	if(_hitTime == 0.0f)
-	{
-		int hp = _lifeBar->Decrement();
-		if(hp <= 0)
-		{
-			_gameOverScreen->Show();
-			_model->_gameOver = true;
-		}
-	}
-	_hitTime += deltaTime;
-	if(_hitTime >= _invicibilityTime && !_model->_gameOver)
-	{
-		_hitTime = 0.0f;
-	}
 }
 
 void PlayerComponent::OpenCVUpdate(float deltaTime)
