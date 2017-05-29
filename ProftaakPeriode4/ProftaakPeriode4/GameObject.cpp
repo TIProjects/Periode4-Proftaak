@@ -4,6 +4,7 @@
 
 GameObject::GameObject(std::vector<GameObject *> * gameObjects)
 {
+	_lighting = true;
 	_position = Vec3f();
 	_rotation = Vec3f();
     _gameObjects = gameObjects;
@@ -16,6 +17,8 @@ void GameObject::Update(float deltaTime)
 	{
 		component->Update(deltaTime);
 	}
+
+	if (_drawComponent != nullptr) _drawComponent->Update(deltaTime);
 }
 
 void GameObject::LateUpdate(float deltaTime)
@@ -61,7 +64,7 @@ void GameObject::SetLighting(bool lighting)
 	_lighting = lighting;
 }
 
-void GameObject::Draw()
+void GameObject::Draw() const
 {
 	// Return if there is no DrawComponent
 	if(_drawComponent == nullptr) return;

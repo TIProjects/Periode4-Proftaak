@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 	// do NOT remove
 	model.Init();
 
-    std::atexit(onExit);
+    atexit(onExit);
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);

@@ -17,7 +17,6 @@ public:
 		_segment = nullptr;
 		_frame = nullptr;
 		_bar = nullptr;
-
 		_width = 0;
 		_height = 0;
 		_pos = Vec3f(0,0,0);
