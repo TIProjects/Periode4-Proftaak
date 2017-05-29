@@ -15,6 +15,7 @@
 //for testing purposes only, comment/delete when finished
 #include "Text.h"
 #include "LifeBar.h"
+#include "LaneObstacleGenerator.h"
 
 Model::Model()
 {
@@ -79,11 +80,16 @@ void Model::InitTestObjects()
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
     GameObject * laneGenerator = new GameObject(&_gameObjects);
-	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,20, meshes);
+
+	std::vector<Mesh*> obstacles;
+//	obstacles.push_back(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
+	obstacles.push_back(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+
+	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,20, meshes, LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
 	laneGenerator->AddComponent(laneDrawComponent);
-	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator();
+	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles);
 	laneGenerator->AddComponent(lane_obstacle_generator);
-	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
+//	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	_gameObjects.push_back(laneGenerator);
 
 }

@@ -2,9 +2,7 @@
 #include <vector>
 #include "GameObject.h"
 #include "Component.h"
-#include "LaneObstacleComponent.h"
-#include "LaneGeneratorComponent.h"
-#include "LaneComponent.h"
+#include "MeshDrawComponent.h"
 
 
 class LaneObstacleGenerator : public Component
@@ -13,36 +11,24 @@ class LaneObstacleGenerator : public Component
 
 
 public:
-	LaneObstacleGenerator() : Component(LANE_OBSTACLE_GENERATOR)
-	{
-	}
+	LaneObstacleGenerator(std::vector<Mesh*> meshes);
 
+
+	void addObstacle(int laneIndex, Mesh* mesh, float speed = 0.0f);
 
 	float _lengthMovedSince = 0.0f;
-	float _minimalDistanceBetween = 1.0f;
+	float _minimalDistanceBetween = 0.0f;
 	float _maximalDistanceBetween = 5.0f;
+	float _speed = 9.0f;//&component->_speed;
+	int lastLane = 0;
+	float distance = 0.9f;
+	std::vector<Mesh*> _meshes;
+	std::vector<GameObject*> * _lanes;
+	std::vector<GameObject*> * _obstacles;
 
-	int _lanes = 3;
-	std::vector<GameObject*> _obstacles;
-	
-
-	void PlaceRandomAt(float target)
-	{
-		
-	}
+	std::vector<int> laneAmountSkipped;
+	int maxSkip = 3;
 
 
-	void Update(float nanotime) override
-	{
-//		_lengthMovedSince += nanotime;
-//
-//		float randomAdd = float(rand() % int(_maximalDistanceBetween - _lengthMovedSince));
-//		if (_lengthMovedSince >= _maximalDistanceBetween)
-//		{
-//			PlaceRandomAt(_lengthMovedSince);
-//		}
-//		else if(_lengthMovedSince + randomAdd >= _minimalDistanceBetween){
-//			PlaceRandomAt(_lengthMovedSince + randomAdd);
-//		}
-	}
+	void Update(float nanotime) override;
 };
