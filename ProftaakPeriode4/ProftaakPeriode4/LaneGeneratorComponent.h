@@ -18,24 +18,20 @@ public:
 	 * \param meshes The meshes that are chosen randomly over all the lanes
 	 */
 	LaneGeneratorComponent(int laneCount, int laneSize, std::vector<Mesh*> meshes);
-
 	/**
 	 * \brief Destructor
 	 * todo implement
 	 */
 	~LaneGeneratorComponent();
-	
 	/**
 	 * \brief Draw the lanes
 	 */
 	void Draw() override;
-
 	/**
 	 * \brief Update the laneLogics (move the lanes)
 	 * \param deltaTime The difference between the updates
 	 */
 	void Update(float deltaTime) override;
-
 	/**
 	 * \brief For placing a Obstacle fully random
 	 * Places on a random place on a random lane
@@ -43,10 +39,15 @@ public:
 	 */
 	void PlaceObstacleFullyRandom(Mesh* mesh);
 
+	/**
+	 * \brief List of obstacles present on the lanes
+	 */
 	std::vector<GameObject*> _obstacles;
 private:
+	/**
+	 * \brief Pointer to the player object on the lane
+	 */
 	GameObject * _player;
-
 	/*
 	 * The lanes that are shown in the component
 	 * Are filled in constructor (given amount)
