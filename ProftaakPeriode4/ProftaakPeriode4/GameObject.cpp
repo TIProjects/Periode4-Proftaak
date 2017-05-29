@@ -1,13 +1,13 @@
 ﻿#include "GameObject.h"
 #include "DrawComponent.h"
 
-
-GameObject::GameObject(std::vector<GameObject *> * gameObjects)
+GameObject::GameObject(std::vector<GameObject *> * gameObjects, Vec3f position, Vec3f rotation, Vec3f scale)
 {
-	_position = Vec3f();
-	_rotation = Vec3f();
+	_lighting = true;
+	_position = position;
+	_rotation = rotation;
     _gameObjects = gameObjects;
-	_scale = { 1.0f, 1.0f, 1.0f };
+	_scale = scale;
 }
 
 void GameObject::Update(float deltaTime)
@@ -16,6 +16,8 @@ void GameObject::Update(float deltaTime)
 	{
 		component->Update(deltaTime);
 	}
+
+	if (_drawComponent != nullptr) _drawComponent->Update(deltaTime);
 }
 
 void GameObject::LateUpdate(float deltaTime)
@@ -61,7 +63,7 @@ void GameObject::SetLighting(bool lighting)
 	_lighting = lighting;
 }
 
-void GameObject::Draw()
+void GameObject::Draw() const
 {
 	// Return if there is no DrawComponent
 	if(_drawComponent == nullptr) return;

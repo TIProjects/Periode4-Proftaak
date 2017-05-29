@@ -14,7 +14,7 @@ ScoreComponent::~ScoreComponent()
 
 void ScoreComponent::ChangeScore(int difScore)
 {
-    int score = _score->score + difScore * _multiplier;    
+    int score = _score->score + difScore * _multiplier;  
     if (score <= 0)
     {
         _score->score = 0;
@@ -45,7 +45,6 @@ unsigned int ScoreComponent::ReturnScore()
 
 void ScoreComponent::LateUpdate(float deltaTime)
 {
-    
 }
 
 void ScoreComponent::DrawScore(int score, Text* text)

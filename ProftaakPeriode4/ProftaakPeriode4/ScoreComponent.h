@@ -12,7 +12,7 @@ struct Score {
 class ScoreComponent : public Component
 {
 public:
-    Score * _score = new Score{ 0, "Gijs" };
+    Score* _score = new Score{ 0, "Gijs" };
 
     Text* _scoreText, *_highscoreText;
 
@@ -68,6 +68,9 @@ public:
     void LateUpdate(float deltaTime) override;
     
 private:
+    /**
+    * Score can't get below zero
+    */
     unsigned int _highScore = 0;
 
     /**

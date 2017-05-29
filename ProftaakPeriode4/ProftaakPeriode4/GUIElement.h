@@ -11,6 +11,8 @@
 class GUIElement
 {
 public:
+	virtual ~GUIElement() = default;
+
 	GUIElement(const GUIElement &obj) {
 		_position = obj._position;
 		_enabled = obj._enabled;

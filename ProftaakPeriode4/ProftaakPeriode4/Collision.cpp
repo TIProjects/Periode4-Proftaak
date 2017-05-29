@@ -16,7 +16,7 @@ void Collision::CheckCollision(std::vector<GameObject*> gameObjects)
 		// Check if gameObject has a CollisionComponent
 		// if it doesn't continue to the next GameObject
 		CollisionComponent * collider = dynamic_cast<CollisionComponent*>(gameObject->GetComponent(COLLISION_COMPONENT));
-		if (collider == nullptr) continue;
+		if (collider == nullptr || !collider->_isCollider) continue;
 
 		// Clear the list so old data won't be reused
 		collider->_collided.clear();

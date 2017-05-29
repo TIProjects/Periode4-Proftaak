@@ -73,7 +73,7 @@ void Model::InitTestObjects()
 
 	GameObject * skybox = new GameObject(&_gameObjects);
 	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
-	skybox->_scale = { 7.0f, 7.0f, 7.0f };
+	skybox->_scale = { 25.0f, 25.0f, 25.0f };
 	skybox->_lighting = false;
 	skybox->AddComponent(skyboxDrawComponent);
 	_gameObjects.push_back(skybox);
@@ -81,7 +81,7 @@ void Model::InitTestObjects()
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
     GameObject * laneGenerator = new GameObject(&_gameObjects);
-	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,10, meshes);
+	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,20, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
 	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	_gameObjects.push_back(laneGenerator);

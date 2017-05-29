@@ -32,7 +32,7 @@ void Image::Draw()
 		glVertexPointer(3, GL_FLOAT, sizeof(Vertex), ((float*)_Vertices.data()) + 0);
 		glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), ((float*)_Vertices.data()) + 3);
 
-		glDrawArrays(GL_QUADS, 0, _Vertices.size());
+		glDrawArrays(GL_QUADS, 0, GLsizei(_Vertices.size()));
 
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);

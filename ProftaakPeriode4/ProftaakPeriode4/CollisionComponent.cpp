@@ -18,13 +18,15 @@ Hitbox::Hitbox()
 	_offset = Vec3f();
 }
 
-CollisionComponent::CollisionComponent(Hitbox hitbox) : Component(COLLISION_COMPONENT)
+CollisionComponent::CollisionComponent(Hitbox hitbox, bool isCollder) : Component(COLLISION_COMPONENT)
 {
+	_isCollider = isCollder;
 	_hitboxes.push_back(hitbox);
 }
 
-CollisionComponent::CollisionComponent(std::vector<Hitbox> hitboxes) : Component(COLLISION_COMPONENT)
+CollisionComponent::CollisionComponent(std::vector<Hitbox> hitboxes, bool isCollider) : Component(COLLISION_COMPONENT)
 {
+	_isCollider = isCollider;
 	_hitboxes = hitboxes;
 }
 

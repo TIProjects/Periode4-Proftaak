@@ -63,8 +63,7 @@ int main(int argc, char* argv[])
 	// this will initialise the game
 	// do NOT remove
 	model.Init();
-
-    std::atexit(onExit);
+    atexit(onExit);
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);
