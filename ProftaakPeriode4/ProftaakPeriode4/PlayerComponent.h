@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
 #include "Vec.h"
+#include "LifeBar.h"
+#include "Model.h"
 
 class PlayerComponent : public Component
 {
@@ -11,7 +13,7 @@ public:
 	* \param laneCount the amount of lanes
 	* \param useOpenCV Wether the
 	*/
-	explicit PlayerComponent(int laneIndex, int laneCount, bool useOpenCV = true);
+	explicit PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Model * model, bool useOpenCV = true);
 	/**
 	* \brief Overriden update from Component
 	* \param deltaTime Update the playercomponent by changing position and checking user input
@@ -22,6 +24,7 @@ public:
 	* \param xCoord
 	*/
 	void MovePlayer(float xCoord);
+	void Collision(float deltaTime);
 
 	/**
 	 * \brief Wether the player is crouching or not
@@ -44,16 +47,32 @@ public:
 	 */
 	int _lastLane;
 	/**
+	 * \brief Time of invincibility after a collision
+	 */
+	float _invicibilityTime;
+	/**
 	 * \brief Wether the last keyboard key was released
 	 */
 	bool _keyReleased;
+
+	/**
+	 * \brief Model used to reset the game
+	 */
+	Model * _model;
+	/**
+	 * \brief The gameOverscreen which will be shwon
+	 */
+	Image * _gameOverScreen;
 	/**
 	 * \brief The position to which the player will be moved
 	 * NOTE: only the x coord is acounted for
 	 */
 	Vec3f _targetPosition;
+	/**
+	 * \brief the lifeBar which will be updated
+	 */
+	LifeBar * _lifeBar;
 private:
-
 	/**
 	 * \brief Update the player based on openCV input
 	 * \param deltaTime the deltaTime
@@ -64,4 +83,6 @@ private:
 	 * \param deltaTime the deltaTime
 	 */
 	void KeyBoardUpdate(float deltaTime);
+
+	float _hitTime;
 };

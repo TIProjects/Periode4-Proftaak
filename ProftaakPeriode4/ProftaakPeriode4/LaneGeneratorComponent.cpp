@@ -13,10 +13,9 @@
 Mesh * mesh;
 float meshTime = 0.0f;
 
-LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std::vector<Mesh*> meshes)
+LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std::vector<Mesh*> meshes, PlayerComponent * playerComponent)
 {
 	srand(unsigned int(time(nullptr))); // set fully random (on time)
-
 						  // Testing
 	mesh = LoadMeshFile("Assets//Models//TestCube//Cube.Cobj");
 
@@ -33,7 +32,8 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std
 
 	// Create and add the player GameObject
 	_player = new GameObject(&_obstacles, {0.0f,0.0f,-1.0f});
-	PlayerComponent * playerComponent = new PlayerComponent(1, laneAmount, false);
+	int laneIndex = laneAmount / 2;
+	_player->_position.x = _lanes[laneIndex]->_position.x;
 	playerComponent->_targetPosition = _player->_position;
 	_player->AddComponent(playerComponent);
 	_player->AddComponent(new CollisionComponent(Hitbox({ 2,2,2 })));
@@ -106,9 +106,7 @@ void LaneGeneratorComponent::Update(float deltaTime)
 		= dynamic_cast<CollisionComponent*>(_player->GetComponent(COLLISION_COMPONENT));
 	if(collider->_collided.size() > 0)
 	{
-		// Player collided with an obstacle
-		// TODO reduce health
-		std::cout << "player collision" << std::endl;
+		player->Collision(deltaTime);
 	}
 }
 

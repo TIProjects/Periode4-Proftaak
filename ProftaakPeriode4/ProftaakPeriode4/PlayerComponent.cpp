@@ -2,7 +2,7 @@
 #include "Input.h"
 #include "GameObject.h"
 
-PlayerComponent::PlayerComponent(int laneIndex, int laneCount, bool useOpenCV)
+PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Model * model, bool useOpenCV)
 : Component(PLAYER_COMPONENT)
 {
 	_laneCount = laneCount;
@@ -11,6 +11,11 @@ PlayerComponent::PlayerComponent(int laneIndex, int laneCount, bool useOpenCV)
 	_useOpenCV = useOpenCV;
 	_keyReleased = true;
 	_lastLane = _laneIndex;
+	_lifeBar = lifeBar;
+	_invicibilityTime = 0.5f;
+	_hitTime = 0.0f;
+	_model = model;
+	_gameOverScreen = gameOverScreen;
 }
 
 void PlayerComponent::Update(float deltaTime)
@@ -36,6 +41,24 @@ void PlayerComponent::Update(float deltaTime)
 void PlayerComponent::MovePlayer(float xCoord)
 {
 	_targetPosition.x = xCoord;
+}
+
+void PlayerComponent::Collision(float deltaTime)
+{
+	if(_hitTime == 0.0f)
+	{
+		int hp = _lifeBar->Decrement();
+		if(hp <= 0)
+		{
+			_gameOverScreen->Show();
+			_model->_gameOver = true;
+		}
+	}
+	_hitTime += deltaTime;
+	if(_hitTime >= _invicibilityTime && !_model->_gameOver)
+	{
+		_hitTime = 0.0f;
+	}
 }
 
 void PlayerComponent::OpenCVUpdate(float deltaTime)

@@ -40,12 +40,17 @@ public:
     // Vector of every GameObject present in the model
     std::vector<GameObject*> _gameObjects;
 
+	std::vector<GameObject*> _guiObjects;
+
     //Scoreboard that keeps track of the scores
     ScoreBoard scoreBoard;
-
-    void play(int i);
+	bool _gameOver;
 private:
+	void Reset();
 
+	bool GameOverState(float deltaTime);
     // The last time a frame was rendered in milliseconds
     float _lastTime;
+
+	float _gameOverTime = 0.0f;
 };
