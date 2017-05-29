@@ -11,14 +11,14 @@
 #include <sys/stat.h>
 #include <direct.h>
 
-ScoreBoard::ScoreBoard()
+ScoreBoardComponent::ScoreBoardComponent() : Component(SCOREBOARD_COMPONENT)
 {
     _amountOfScores = 0;
-    if(WIN) getWindowsDirectory();
-    else getLinuxDirectory();
+    if(WIN) GetWindowsDirectory();
+    else GetLinuxDirectory();
 }
 
-void ScoreBoard::addScore(ScoreComponent * score)
+void ScoreBoardComponent::AddScore(Score * score)
 {
     _scores.push_back(score);
     _amountOfScores++;
@@ -31,9 +31,9 @@ void ScoreBoard::addScore(ScoreComponent * score)
  * \param b score pointer two
  * \return true id pointer a is bigger than pointer b
  */
-bool comparePtrToScore(ScoreComponent* a, ScoreComponent* b) { return a->returnScore() > b->returnScore(); }
+bool comparePtrToScore(Score* a, Score* b) { return a->score > b->score; }
 
-void ScoreBoard::checkArray()
+void ScoreBoardComponent::CheckArray()
 {
     std::sort(_scores.begin(), _scores.end(), comparePtrToScore);
     while(_amountOfScores > 10)
@@ -44,7 +44,15 @@ void ScoreBoard::checkArray()
     }
 }
 
-void ScoreBoard::getLinuxDirectory()
+void ScoreBoardComponent::Update(float deltaTime)
+{
+}
+
+void ScoreBoardComponent::LateUpdate(float deltaTime)
+{
+}
+
+void ScoreBoardComponent::GetLinuxDirectory()
 {
     //Default path within the game directory itself, stays the same if the directory doesn't work.
     path = "Resource Files/scores.cr";
@@ -63,7 +71,7 @@ void ScoreBoard::getLinuxDirectory()
     path += "/scores.cr";
 }
 
-void ScoreBoard::getWindowsDirectory()
+void ScoreBoardComponent::GetWindowsDirectory()
 {
     TCHAR szPath[MAX_PATH];
     if (SUCCEEDED(SHGetFolderPath(HWND_DESKTOP, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, szPath)))
@@ -82,31 +90,31 @@ void ScoreBoard::getWindowsDirectory()
 
 }
 
-void ScoreBoard::printScoreBoard()
+void ScoreBoardComponent::PrintScoreBoard()
 {
     for(int i = 0; i < _amountOfScores; i++)
     {
-        std::cout << "[" << i+1 << "] " << _scores[i]->returnName() << " got a score of " << _scores[i]->returnScore() << std::endl;
+        std::cout << "[" << i+1 << "] " << _scores[i]->name << " got a score of " << _scores[i]->score << std::endl;
     }
 }
 
-void ScoreBoard::saveScore()
+void ScoreBoardComponent::SaveScore()
 {
-    checkArray();
+    CheckArray();
     nlohmann::json j;
     j["amount"] = _amountOfScores;
 
     for(int i = 0; i < _amountOfScores; i++)
     {
-        j["scores"][i]["name"] = _scores[i]->returnName();
-        j["scores"][i]["points"] = _scores[i]->returnScore();
+        j["scores"][i]["name"] = _scores[i]->name;
+        j["scores"][i]["points"] = _scores[i]->score;
     }
 
     std::ofstream file(path);
     file << std::setw(4) << j << std::endl;
 }
 
-void ScoreBoard::loadScore()
+void ScoreBoardComponent::LoadScore()
 {
     std::ifstream file(path);
     nlohmann::json j;
@@ -117,12 +125,10 @@ void ScoreBoard::loadScore()
         _amountOfScores = j["amount"];
         for(int i = 0; i < _amountOfScores; i++)
         {
-            ScoreComponent* score = new ScoreComponent(nullptr, nullptr, 0);
-            score->changeName(j["scores"][i]["name"]);
-            score->changeScore(j["scores"][i]["points"]);
+            Score * score = new Score{ j["scores"][i]["points"], j["scores"][i]["name"] };
             _scores.push_back(score);
         }
-        checkArray();
+        CheckArray();
     }
 
     else std::cout << "Unable to open file: " << path << std::endl;

@@ -16,7 +16,16 @@ unsigned int fps = 20;
 void onExit()
 {
     //TODO: add here the methodes that you want to be called on exit
-    model.scoreBoard.saveScore();
+    ScoreBoardComponent * tempBoard;
+
+    for (auto m : model._gameObjects)
+    {
+        tempBoard = static_cast<ScoreBoardComponent *>(m->GetComponent(SCOREBOARD_COMPONENT));
+        if (tempBoard != nullptr) {
+            tempBoard->SaveScore();
+            break;
+        }        
+    }
 }
 
 // The displayFunc which will call the UpdateView of the view

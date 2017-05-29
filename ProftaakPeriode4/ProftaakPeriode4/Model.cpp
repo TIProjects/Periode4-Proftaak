@@ -150,16 +150,20 @@ void Model::InitGUIElements()
 
     GameObject * scoreObject = new GameObject(&_gameObjects);
 
-    scoreBoard.loadScore();
-    ScoreComponent * score;
+    //Scoreboard that keeps track of the scores
+    ScoreBoardComponent * scoreBoard = new ScoreBoardComponent();
 
-    if(!scoreBoard._scores.empty())
-        score = new ScoreComponent(scoreText, highscore, scoreBoard._scores[0]->returnScore());
+    scoreBoard->LoadScore();
+    ScoreComponent * tempScore;
+
+    if(!scoreBoard->_scores.empty())
+        tempScore = new ScoreComponent(scoreText, highscore, scoreBoard->_scores[0]->score);
     else
-        score = new ScoreComponent(scoreText, highscore, 0);
+        tempScore = new ScoreComponent(scoreText, highscore, 0);
 
-    scoreObject->AddComponent(score);
-    scoreBoard.addScore(score);
+    scoreObject->AddComponent(scoreBoard);
+    scoreObject->AddComponent(tempScore);
+    scoreBoard->AddScore(tempScore->ReturnScoreStruct());
 
     _gameObjects.push_back(scoreObject);
 

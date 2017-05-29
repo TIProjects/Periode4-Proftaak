@@ -40,8 +40,6 @@ public:
     // Vector of every GameObject present in the model
     std::vector<GameObject*> _gameObjects;
 
-    //Scoreboard that keeps track of the scores
-    ScoreBoard scoreBoard;
 
     void play(int i);
 private:
