@@ -16,7 +16,7 @@ public:
 	* Constructor for creating object
 	* @param _vertices as Vector with Matrix3GLf
 	*/
-	GameObject(std::vector<GameObject *> * gameObjects);
+	explicit GameObject(std::vector<GameObject *> * gameObjects);
 	/*
 	* Update function will call the update function
 	* of every Component in this GameObject
