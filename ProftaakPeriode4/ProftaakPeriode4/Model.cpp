@@ -86,6 +86,24 @@ void Model::InitTestObjects()
 	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	_gameObjects.push_back(laneGenerator);
 
+    GameObject * scoreObject = new GameObject(&_gameObjects);
+
+    //Scoreboard that keeps track of the scores
+    ScoreBoardComponent * scoreBoard = new ScoreBoardComponent();
+    ScoreComponent * tempScore;
+
+    scoreBoard->LoadScore();
+
+    if (!scoreBoard->_scores.empty())
+        tempScore = new ScoreComponent(&laneDrawComponent->_speed , scoreBoard->_scores[0]->score);
+    else
+        tempScore = new ScoreComponent(&laneDrawComponent->_speed, 0);
+
+    scoreObject->AddComponent(tempScore);
+    scoreObject->AddComponent(scoreBoard);
+    scoreBoard->AddScore(tempScore->ReturnScoreStruct());
+
+    _gameObjects.push_back(scoreObject);
 }
 
 void Model::InitSound()
@@ -148,25 +166,15 @@ void Model::InitGUIElements()
 
 	_gameObjects.push_back(guiOb);
 
-    GameObject * scoreObject = new GameObject(&_gameObjects);
+    for (auto go : _gameObjects)
+    {
+        auto tempScore = static_cast<ScoreComponent*>(go->GetComponent(SCORE_COMPONENT));
+        if (tempScore == nullptr) continue;
 
-    //Scoreboard that keeps track of the scores
-    ScoreBoardComponent * scoreBoard = new ScoreBoardComponent();
-
-    scoreBoard->LoadScore();
-    ScoreComponent * tempScore;
-
-    if(!scoreBoard->_scores.empty())
-        tempScore = new ScoreComponent(scoreText, highscore, scoreBoard->_scores[0]->score);
-    else
-        tempScore = new ScoreComponent(scoreText, highscore, 0);
-
-    scoreObject->AddComponent(scoreBoard);
-    scoreObject->AddComponent(tempScore);
-    scoreBoard->AddScore(tempScore->ReturnScoreStruct());
-
-    _gameObjects.push_back(scoreObject);
-
+        tempScore->_scoreText = scoreText;
+        tempScore->_highscoreText = highscore;
+        break;
+    }
 }
 
 void Model::Init()

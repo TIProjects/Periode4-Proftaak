@@ -8,6 +8,6 @@ LaneObstacleComponent::LaneObstacleComponent(int laneIndex) : Component(LANE_OBS
 
 void LaneObstacleComponent::Update(float deltaTime)
 {
-	_parent->_position.z += _speed * deltaTime;
+    if(_speed != nullptr) _parent->_position.z += *_speed * deltaTime;
 }
 

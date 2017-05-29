@@ -43,6 +43,10 @@ public:
     * \brief List of obstacles present on the lanes
     */
     std::vector<GameObject*> _obstacles;
+    /*
+    * The speed of the moving objects
+    */
+    float _speed = 9.0f; // do not change
 private:
     /**
     * \brief Pointer to the player object on the lane

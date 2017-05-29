@@ -17,7 +17,7 @@ void onExit()
 {
     //TODO: add here the methodes that you want to be called on exit
     ScoreBoardComponent * tempBoard;
-
+    
     for (auto m : model._gameObjects)
     {
         tempBoard = static_cast<ScoreBoardComponent *>(m->GetComponent(SCOREBOARD_COMPONENT));
@@ -26,6 +26,8 @@ void onExit()
             break;
         }        
     }
+
+    delete tempBoard;
 }
 
 // The displayFunc which will call the UpdateView of the view

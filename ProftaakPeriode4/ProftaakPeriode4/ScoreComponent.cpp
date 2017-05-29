@@ -1,11 +1,10 @@
 #include "ScoreComponent.h"
 #include "Text.h"
 
-ScoreComponent::ScoreComponent(Text * scoreText, Text * highscoreText, unsigned int highscore) : Component(SCORE_COMPONENT)
+ScoreComponent::ScoreComponent(float * speed, unsigned int highscore) : Component(SCORE_COMPONENT)
 {
-    _scoreText = scoreText;
-    _highscoreText = highscoreText;
     _highScore = highscore;
+    _speed = speed;
 }
 
 ScoreComponent::~ScoreComponent()
@@ -60,14 +59,15 @@ void ScoreComponent::DrawHighscore(int score, Text* text)
 void ScoreComponent::Update(float deltaTime)
 {
     //TODO: convert this to the distance not time
-    _updateTimer -= deltaTime;
+    _updateTimer += deltaTime;
     _mulitplierUpdateTimer -= deltaTime;
 
-    if (_updateTimer <= 0.0f)
+    if (_updateTimer * *_speed >= 9.0f)
     {
-        ChangeScore(1);
+        ChangeScore(10);
         if (_score->score >= _highScore) _highScore = _score->score;
-        _updateTimer = 0.2f;
+        _updateTimer = 0.0f;
+        *_speed += 1.0f;
     }
 
     if( _mulitplierUpdateTimer <= 0.0f)

@@ -39,7 +39,7 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std
     _player->AddComponent(new CollisionComponent(Hitbox({ 2,2,2 })));
     _player->AddComponent(new MeshDrawComponent(mesh));
     LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(1);
-    lanePlayer->_speed = 0.0f;
+    lanePlayer->_speed = nullptr;
     _player->AddComponent(lanePlayer);
 
     _obstacles.push_back(_player);
@@ -127,9 +127,12 @@ void LaneGeneratorComponent::PlaceObstacleFullyRandom(Mesh* mesh)
         lenght = -200.0f;
 
     // Create the obstacle
+    auto tempLane = new LaneObstacleComponent(laneIndex);
+    tempLane->_speed = &_speed;
+
     GameObject * obstacle = new GameObject(&_obstacles);
     obstacle->AddComponent(new MeshDrawComponent(mesh));
-    obstacle->AddComponent(new LaneObstacleComponent(laneIndex));
+    obstacle->AddComponent(tempLane);
     obstacle->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
     obstacle->_position = {
         _lanes[laneIndex]->_position.x,

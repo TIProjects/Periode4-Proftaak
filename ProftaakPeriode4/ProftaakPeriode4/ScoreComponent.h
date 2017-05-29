@@ -12,11 +12,13 @@ struct Score {
 class ScoreComponent : public Component
 {
 public:
+    float* _speed;
+
     Score* _score = new Score{ 0, "Gijs" };
 
     Text* _scoreText, *_highscoreText;
 
-    ScoreComponent(Text* scoreText, Text* highscoreText, unsigned int highScore);
+    ScoreComponent(float* speed, unsigned int highScore);
 
     ~ScoreComponent();
 
@@ -76,7 +78,7 @@ private:
     /**
      * amount of time left for the score and the multiplier are getting updated.
      */
-    float _updateTimer = 0.2f, _mulitplierUpdateTimer = 10.0f;
+    float _updateTimer = 0.0f, _mulitplierUpdateTimer = 10.0f;
 
     /**
     * Multieplier for the score

@@ -15,6 +15,7 @@ class ScoreBoardComponent : public Component
 {
     public: 
         ScoreBoardComponent();
+        ~ScoreBoardComponent();
 
         /*
          * add a score component to the vector with scores

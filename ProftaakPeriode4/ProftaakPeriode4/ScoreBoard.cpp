@@ -18,6 +18,11 @@ ScoreBoardComponent::ScoreBoardComponent() : Component(SCOREBOARD_COMPONENT)
     else GetLinuxDirectory();
 }
 
+ScoreBoardComponent::~ScoreBoardComponent()
+{
+    SaveScore();
+}
+
 void ScoreBoardComponent::AddScore(Score * score)
 {
     _scores.push_back(score);
