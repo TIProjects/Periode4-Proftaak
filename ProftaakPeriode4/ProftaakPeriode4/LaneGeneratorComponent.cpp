@@ -32,14 +32,15 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std
 	}
 
 	// Create and add the player GameObject
-	_player = new GameObject(&_obstacles);
-	_player->AddComponent(new PlayerComponent(1, laneAmount, false));
+	_player = new GameObject(&_obstacles, {0.0f,0.0f,-1.0f});
+	PlayerComponent * playerComponent = new PlayerComponent(1, laneAmount, false);
+	playerComponent->_targetPosition = _player->_position;
+	_player->AddComponent(playerComponent);
 	_player->AddComponent(new CollisionComponent(Hitbox({ 2,2,2 })));
 	_player->AddComponent(new MeshDrawComponent(mesh));
 	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(1);
 	lanePlayer->_speed = 0.0f;
 	_player->AddComponent(lanePlayer);
-	_player->_position = { 0.0f,0.0f,-1.0f };
 
 	_obstacles.push_back(_player);
 }
@@ -80,7 +81,7 @@ void LaneGeneratorComponent::Update(float deltaTime)
 		= dynamic_cast<PlayerComponent*>(_player->GetComponent(PLAYER_COMPONENT));
 	if(player != nullptr && player->_lastLane != player->_laneIndex)
 	{
-		_player->_position.x = _lanes[player->_laneIndex]->_position.x;
+		player->MovePlayer(_lanes[player->_laneIndex]->_position.x);
 		player->_lastLane = player->_laneIndex;
 	}
 
