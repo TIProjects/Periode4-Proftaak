@@ -3,6 +3,7 @@
 #include "Mesh.h"
 #include <queue>
 #include <ctime>
+#include "LaneObstacleGenerator.h"
 
 /**
  * \brief Class for generating and showing lanes
@@ -46,6 +47,7 @@ public:
 	std::vector<GameObject*> _obstacles;
 private:
 	GameObject * _player;
+
 
 	/*
 	 * The lanes that are shown in the component

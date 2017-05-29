@@ -18,7 +18,7 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std
 	srand(unsigned int(time(nullptr))); // set fully random (on time)
 
 						  // Testing
-	mesh = LoadMeshFile("Assets//Models//Transporter/Transporter.cobj");
+	mesh = LoadMeshFile("Assets//Models//TestCube//Cube.Cobj");
 
 	_spaceBetween = 2.0f;
 
@@ -55,14 +55,16 @@ void LaneGeneratorComponent::Draw()
 		LaneComponent * lane = dynamic_cast<LaneComponent*>(
 			_lanes.at(i)->GetComponent(LANE_COMPONENT));
 		if(lane == nullptr) continue;
-
 		lane->Draw();
+
+		// Draw the obstacles
+		
+		LaneObstacleGenerator * generator = dynamic_cast<LaneObstacleGenerator*>(_parent->GetComponent(LANE_OBSTACLE_GENERATOR));
+		if (generator != nullptr) {
+			for (GameObject * obstacle : generator->_obstacles)
+				obstacle->Draw();
 	}
-	// Draw the obstacles
-	for(GameObject * obstacle : _obstacles)
-	{
-		obstacle->Draw();
-	}
+	
 }
 
 void LaneGeneratorComponent::Update(float deltaTime)
@@ -83,7 +85,6 @@ void LaneGeneratorComponent::Update(float deltaTime)
 		_player->_position.x = _lanes[player->_laneIndex]->_position.x;
 		player->_lastLane = player->_laneIndex;
 	}
-
 	for(int i = 0; i < _obstacles.size(); i++)
 	{
 		_obstacles[i]->Update(deltaTime);

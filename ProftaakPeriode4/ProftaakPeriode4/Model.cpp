@@ -81,6 +81,8 @@ void Model::InitTestObjects()
     GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,20, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
+	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator();
+	laneGenerator->AddComponent(lane_obstacle_generator);
 	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	_gameObjects.push_back(laneGenerator);
 
