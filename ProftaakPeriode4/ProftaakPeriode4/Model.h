@@ -3,6 +3,7 @@
 #include <vector>
 // #include "Component.h"
 #include "GameObject.h"
+#include "ScoreBoard.h"
 
 class Model {
 public:
@@ -39,7 +40,10 @@ public:
     // Vector of every GameObject present in the model
     std::vector<GameObject*> _gameObjects;
 
-	void play(int i);
+    //Scoreboard that keeps track of the scores
+    ScoreBoard scoreBoard;
+
+    void play(int i);
 private:
 
     // The last time a frame was rendered in milliseconds

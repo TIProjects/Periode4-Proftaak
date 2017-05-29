@@ -31,7 +31,11 @@ void Model::update()
 	// deltaTime should never be allowed to be 0 or negative...
 	if (deltaTime <= 0) deltaTime = 0.000001f;
 
-//	std::cout << "Fps: " << fps << "DT: " << deltaTime << std::endl;
+	// Calculate and display fps
+	// For performance profiling only
+	// should normally be commented
+    //	int fps = int(1.0 / deltaTime);
+    //	std::cout << "Fps: " << fps << "DT: " << deltaTime << std::endl;
 
 	// Call the Update of every GameObject
 	for (GameObject * gameObject : _gameObjects)
@@ -54,9 +58,10 @@ void Model::InitTestObjects()
 {
 	// Test GameObjects
 	// TODO: remove
+
 	_lastTime = 0;
 
-	GameObject * camera = new GameObject();
+	GameObject * camera = new GameObject(&_gameObjects);
 	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f);
 	camera->_position = { 3.65f, 3.3f, 0.0f };
 	camera->_rotation.x = 30.0f;
@@ -64,23 +69,20 @@ void Model::InitTestObjects()
 
 	_gameObjects.push_back(camera);
 
-	GameObject * skybox = new GameObject();
+	GameObject * skybox = new GameObject(&_gameObjects);
 	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
 	skybox->_scale = { 7.0f, 7.0f, 7.0f };
 	skybox->_lighting = false;
 	skybox->AddComponent(skyboxDrawComponent);
 	_gameObjects.push_back(skybox);
-
-	GameObject * laneGenerator = new GameObject();
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
+    GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,10, meshes);
 	laneGenerator->AddComponent(laneDrawComponent);
 	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	_gameObjects.push_back(laneGenerator);
-
-
 
 }
 
@@ -102,7 +104,7 @@ void Model::InitSound()
 void Model::InitGUIElements()
 {
 	// create GameObject for all elements
-	GameObject * guiOb = new GameObject();
+	GameObject * guiOb = new GameObject(&_gameObjects);
 	GUIComponent * GUI = new GUIComponent();
 
 
@@ -120,12 +122,11 @@ void Model::InitGUIElements()
 	powerTimeLeft->Hide();
 	GUI->AddElement(powerTimeLeft);
 
-	
-	Text * highscore = new Text(Vec3f(670.0f, 25, 0), Vec3f(1, 1, 1), "HighScore: 0000");
-	GUI->AddElement(highscore);
+	Text * scoreText = new Text(Vec3f(670.0f, 40, 0), Vec3f(1, 1, 1), "Score: 0000 0x");
+	GUI->AddElement(scoreText);
 
-	Text * score = new Text(Vec3f(670.0f, 40, 0), Vec3f(1, 1, 1), "Score: 0000 0x");
-	GUI->AddElement(score);
+    Text * highscore = new Text(Vec3f(670.0f, 25, 0), Vec3f(1, 1, 1), "HighScore: 0000");
+    GUI->AddElement(highscore);
 
 	Image * diededImage = new Image(Vec3f(0.0f, 0.0f, 0), 1280.0f, 720.0f, "Assets/LifeBar.psd"); // todo replace LifeBar Image
 	diededImage->Hide();
@@ -144,6 +145,22 @@ void Model::InitGUIElements()
 	guiOb->AddComponent(GUI);
 
 	_gameObjects.push_back(guiOb);
+
+    GameObject * scoreObject = new GameObject(&_gameObjects);
+
+    scoreBoard.loadScore();
+    ScoreComponent * score;
+
+    if(!scoreBoard._scores.empty())
+        score = new ScoreComponent(scoreText, highscore, scoreBoard._scores[0]->returnScore());
+    else
+        score = new ScoreComponent(scoreText, highscore, 0);
+
+    scoreObject->AddComponent(score);
+    scoreBoard.addScore(score);
+
+    _gameObjects.push_back(scoreObject);
+
 }
 
 void Model::Init()

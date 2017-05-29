@@ -2,10 +2,11 @@
 #include "DrawComponent.h"
 
 
-GameObject::GameObject()
+GameObject::GameObject(std::vector<GameObject *> * gameObjects)
 {
 	_position = Vec3f();
 	_rotation = Vec3f();
+    _gameObjects = gameObjects;
 	_scale = { 1.0f, 1.0f, 1.0f };
 }
 

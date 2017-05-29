@@ -175,7 +175,7 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="LaneObstacleGenerator.h" />
     <ClInclude Include="LifeBar.h" />
-    <ClInclude Include="AlpaBlend.h" />
+    <ClInclude Include="AlphaBlend.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="LaneGeneratorComponent.h" />
