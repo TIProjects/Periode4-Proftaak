@@ -67,6 +67,12 @@
     <Filter Include="Header Files\Components">
       <UniqueIdentifier>{e6682769-1283-4e33-960c-ff00774e6bc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\GUI">
+      <UniqueIdentifier>{bc95da28-afd9-4323-b4af-0b2a10ede7ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\GUI">
+      <UniqueIdentifier>{c4b2b699-7c3e-4cef-ae0f-e497ace514db}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Json">
       <UniqueIdentifier>{6fb1ecfd-49ca-4aec-8583-b84930eb62f9}</UniqueIdentifier>
     </Filter>
@@ -75,6 +81,18 @@
     </Filter>
     <Filter Include="Header Files\Factory">
       <UniqueIdentifier>{6b5dfa85-6916-413d-bab2-cd3cfda1f728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Alpha Blend">
+      <UniqueIdentifier>{ccb14b30-8c5e-4a4f-981f-b07d9cfdffa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Alpha Blend">
+      <UniqueIdentifier>{9e1da7a8-6a81-4365-85b6-22aca2d07213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SFX">
+      <UniqueIdentifier>{9a9caa9e-c1a9-42ff-b941-d618213b9d92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SFX">
+      <UniqueIdentifier>{095e73fe-e9e1-41ba-b48f-fd6d06db2c55}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,11 +120,18 @@
     <ClCompile Include="Vec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GUIComponent.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
     <ClCompile Include="ScoreBoard.cpp">
       <Filter>Source Files\Score</Filter>
     </ClCompile>
     <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source Files\Score</Filter>
+    </ClCompile>
     </ClCompile>
     <ClCompile Include="TextureLoader.cpp">
       <Filter>Source Files\Factory</Filter>
@@ -130,7 +155,50 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeshFactory.cpp">
+      <Filter>Source Files\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeBar.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="LaneGeneratorComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Source Files\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Lanes.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LaneObstacleComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LaneComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\SFX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,13 +220,19 @@
     <ClInclude Include="Vec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GUIComponent.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIElement.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="ScoreBoard.h">
-      <Filter>Header Files\Score</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreComponent.h">
       <Filter>Header Files\Score</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
@@ -166,9 +240,6 @@
     </ClInclude>
     <ClInclude Include="DrawComponent.h">
       <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureLoader.h">
-      <Filter>Header Files\Factory</Filter>
     </ClInclude>
     <ClInclude Include="CameraComponent.h">
       <Filter>Header Files\Components</Filter>
@@ -192,7 +263,52 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeshFactory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Header Files\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeBar.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LaneGeneratorComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header Files\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LaneObstacleComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LaneComponent.h">
+      <Filter>Header Files\Components</Filter>
+  </ClInclude>
+    <ClInclude Include="AlphaBlend.h">
+      <Filter>Header Files\Alpha Blend</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\SFX</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,5 +327,16 @@
     <None Include="Assets\LifeFrameSegment.psd">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Assets\LifeFrameBackground.psd">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\cartoon001.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Assets\cartoon002.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

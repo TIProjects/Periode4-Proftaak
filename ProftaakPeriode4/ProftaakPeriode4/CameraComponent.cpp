@@ -21,13 +21,13 @@ CameraComponent::CameraComponent(float  width, float height, float nearPlane, fl
 
 void CameraComponent::Move(float angle, float fac)
 {
-	_parent->_position.x += (float)cos((_parent->_rotation.y + angle) / 180.0f * M_PI) * fac;
-	_parent->_position.y += (float)sin((_parent->_rotation.y + angle) / 180.0f * M_PI) * fac;
+	_parent->_position.x -= (float)cos((_parent->_rotation.y + angle) / 180.0f * M_PI) * fac;
+	_parent->_position.z -= (float)sin((_parent->_rotation.y + angle) / 180.0f * M_PI) * fac;
 }
 
 void CameraComponent::Up(float fac)
 {
-	_parent->_position.z -= fac;
+	_parent->_position.y += fac;
 }
 
 CameraComponent::~CameraComponent()
@@ -74,5 +74,8 @@ void CameraComponent::ApplyCamera() const
 	// Rotate and translate the camera
 	glRotatef(_parent->_rotation.x, 1, 0, 0);
 	glRotatef(_parent->_rotation.y, 0, 1, 0);
-	glTranslatef(_parent->_position.x, _parent->_position.z, _parent->_position.y);
+	glTranslatef(_parent->_position.x * -1, _parent->_position.y * -1, _parent->_position.z * -1); // Times -1 because camera axis are inverted
+
+	float pos[4] = { 2.0f, 5.0f, 5.0f, 0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);
 }

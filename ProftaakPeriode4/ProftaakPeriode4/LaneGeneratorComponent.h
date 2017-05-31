@@ -1,6 +1,8 @@
 #pragma once
 #include "DrawComponent.h"
 #include "Mesh.h"
+#include <queue>
+#include <ctime>
 
 /**
  * \brief Class for generating and showing lanes
@@ -12,9 +14,10 @@ public:
 	/**
 	 * \brief Constructor for creating a LaneGaneratorComponent
 	 * \param laneAmount The amount of lanes to show
-	 * \param mesh The mesh that will be drawn on the lanes
+	 * \param laneSize the amount of blocks inside the lane (the length)
+	 * \param meshes The meshes that are chosen randomly over all the lanes
 	 */
-	LaneGeneratorComponent(int laneAmount, Mesh * mesh);
+	LaneGeneratorComponent(int laneCount, int laneSize, std::vector<Mesh*> meshes);
 
 	/**
 	 * \brief Destructor
@@ -33,18 +36,25 @@ public:
 	 */
 	void Update(float deltaTime) override;
 
+	/**
+	 * \brief For placing a Obstacle fully random
+	 * Places on a random place on a random lane
+	 * \param mesh the Mesh that will be added as Obstacle
+	 */
+	void PlaceObstacleFullyRandom(Mesh* mesh);
+
+	std::vector<GameObject*> _obstacles;
 private:
-	// the mesh to show todo multiple meshes showed randomly
-	Mesh * _mesh;
-	// the amount of lanes
-	int _laneAmount;
-	// the amount already moved (automaticly lowered)
-	float _lengthMoved;
-	// the movement speed
-	float _speed = 7.5f;  // todo test accurate speed
-	// the space between the lanes
-	float _spaceBetween = 1.0f;
-	// the amount of lanes (in length) 
-	int _lengthAmount = 20; // todo refactor to lengthamount as distance and not amount
+	GameObject * _player;
+
+	/*
+	 * The lanes that are shown in the component
+	 * Are filled in constructor (given amount)
+	 */
+	vector<GameObject*> _lanes;
+	/*
+	 * The space between the lanes
+	 */
+	float _spaceBetween = 2.0f;
 };
 

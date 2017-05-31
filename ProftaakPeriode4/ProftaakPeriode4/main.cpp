@@ -1,15 +1,23 @@
 #include "Component.h"
 #include "Model.h"
 #include "View.h"
-#include "ScoreBoard.h"
-#include "ScoreComponent.h"
-
+#include "GUIComponent.h"
+#include "GUIElement.h"
+#include "Text.h"
 #include <GL\freeglut.h>
 #include "Input.h"
-#include "CameraComponent.h"
 
 Model model;
 View view;
+unsigned int fps = 20;
+
+
+// Function that will be called on exiting the game
+void onExit()
+{
+    //TODO: add here the methodes that you want to be called on exit
+    model.scoreBoard.saveScore();
+}
 
 // The displayFunc which will call the UpdateView of the view
 // This function should only be called by OpenGL and NOT manually
@@ -22,7 +30,7 @@ void window()
 // This function should only be called by OpenGL and NOT manually
 void reshape(int w, int h)
 {
-    
+	view.reshape(w, h);
 }
 
 // The idleFunc which will call the UpdateView of the model
@@ -33,9 +41,10 @@ void idle()
 }
 
 
-int main(int argc, char* argv[]) {
-
+int main(int argc, char* argv[]) 
+{
 	view = View(&model, argc, argv);
+
 	// Call the test object initialiser 
 	// For testing...
 	// can be removed if testing is not necessary
@@ -46,6 +55,7 @@ int main(int argc, char* argv[]) {
 	// do NOT remove
 	model.Init();
 
+    atexit(onExit);
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);
@@ -56,7 +66,6 @@ int main(int argc, char* argv[]) {
 	glutSpecialUpFunc(Keyboard::SKeyboardUp);
 	glutPassiveMotionFunc(Mouse::MoveMouse);
     
-
 
 	glutMainLoop();
 	return 0;
