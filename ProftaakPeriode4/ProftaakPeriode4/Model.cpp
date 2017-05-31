@@ -80,7 +80,7 @@ void Model::InitSound()
 
 	//example on how to start sound(s)
 	Sound * backgroundMusic = new Sound("Assets/background.wav", true);
-	//backgroundMusic->Play();
+	backgroundMusic->Play();
 
 	//place this where the program closes
 	//BASS_Free();
