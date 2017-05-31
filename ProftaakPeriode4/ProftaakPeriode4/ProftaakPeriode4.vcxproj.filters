@@ -192,6 +192,9 @@
     <ClCompile Include="LifeUp.cpp">
       <Filter>Source Files\Power ups</Filter>
     </ClCompile>
+    <ClCompile Include="LaneObstacleGenerator.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -298,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="LifeUp.h">
       <Filter>Header Files\Power ups</Filter>
+    </ClInclude>
+    <ClInclude Include="LaneObstacleGenerator.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstaclePatterns.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

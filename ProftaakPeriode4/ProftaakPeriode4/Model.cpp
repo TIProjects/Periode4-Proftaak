@@ -15,12 +15,14 @@
 //for testing purposes only, comment/delete when finished
 #include "Text.h"
 #include "LifeBar.h"
-Text fpstext;
-LifeBar Lifebar;
+#include "LaneObstacleGenerator.h"
 
 Model::Model()
 {
+	_gameOverTime = 0.0f;
 	_lastTime = 0;
+	_gameOver = false;
+	
 }
 
 void Model::update()
@@ -43,6 +45,8 @@ void Model::update()
 	for (GameObject * gameObject : _gameObjects)
 	{
 		gameObject->Update(deltaTime);
+		if(!_gameOver) continue;
+		if(GameOverState(deltaTime)) return;
 	}
 
 	Collision::CheckCollision(_gameObjects);
@@ -53,11 +57,92 @@ void Model::update()
 		gameObject->LateUpdate(deltaTime);
 	}
 
+	// Update the GUI
+	for (GameObject * gameObject : _guiObjects)
+	{
+		gameObject->Update(deltaTime);
+	}
+
+	for(GameObject * gameObject : _guiObjects)
+	{
+		gameObject->LateUpdate(deltaTime);
+	}
 	glutPostRedisplay();
 }
 
-void Model::InitTestObjects()
+void Model::InitSound()
 {
+	//Initialize audio
+	int device = -1; // Default Sounddevice (default playback device from windows settings)
+	int freq = 44100; // Sample rate (Hz)
+	BASS_Init(device, freq, 0, nullptr, nullptr);
+
+	//example on how to start sound(s)
+	Sound * backgroundMusic = new Sound("Assets/background.wav", true);
+	backgroundMusic->Play();
+
+	//place this where the program closes
+	//BASS_Free();
+}
+
+void Model::Init()
+{
+	Reset();
+
+	// Create GUI object
+	GameObject * guiOb = new GameObject(&_gameObjects);
+	GUIComponent * GUI = new GUIComponent();
+
+
+	Text * distanceCounter = new Text(Vec3f(30, 25, 0), Vec3f(255, 255, 255), "Distance: 0000 m");
+	GUI->AddElement(distanceCounter);
+
+	Text * speedCounter = new Text(Vec3f(30, 40, 0), Vec3f(255, 255, 255), "Speed: 0000 m/s");
+	GUI->AddElement(speedCounter);
+
+	Image * powerUpImage = new Image(Vec3f(1280.0f / 4.0 + 60.0f, 45, 0), 20.0f, 20.0f, "Assets/LifeBar.psd"); // Todo replace LifeBar Image
+	powerUpImage->Hide();
+	GUI->AddElement(powerUpImage);
+
+
+	Text * powerTimeLeft = new Text(Vec3f(1280.0f / 4.0 + 100.0f, 60, 0), Vec3f(255, 255, 255), "00:00");
+	powerTimeLeft->Hide();
+	GUI->AddElement(powerTimeLeft);
+
+	Text * scoreText = new Text(Vec3f(670.0f, 40, 0), Vec3f(255, 255, 255), "Score: 0000 0x");
+	GUI->AddElement(scoreText);
+
+	Text * highscore = new Text(Vec3f(670.0f, 25, 0), Vec3f(255, 255, 255), "HighScore: 0000");
+	GUI->AddElement(highscore);
+
+	Image * diededImage = new Image(Vec3f(0.0f, 0.0f, 0), 1280.0f, 720.0f, "Assets/LifeBar.psd"); // todo replace LifeBar Image
+	diededImage->Hide();
+	GUI->AddElement(diededImage);
+
+	LifeBar * lifebar = new LifeBar(
+		Vec3f(1280.0f / 4.0 - 100.0f, 20, 0),
+		400.0f, 20.0f, 3,
+		"Assets/LifeFrameBackground.psd",
+		"Assets/LifeFrame.psd",
+		"Assets/LifeBar.psd",
+		"Assets/LifeFrameSegment.psd");
+
+	GUI->AddElement(lifebar);
+
+	guiOb->AddComponent(GUI);
+
+	_guiObjects.push_back(guiOb);
+
+    for (auto go : _gameObjects)
+    {
+        auto tempScore = static_cast<ScoreComponent*>(go->GetComponent(SCORE_COMPONENT));
+        if (tempScore == nullptr) continue;
+
+        tempScore->_scoreText = scoreText;
+        tempScore->_highscoreText = highscore;
+        break;
+    }
+
 	// Test GameObjects
 	// TODO: remove
 
@@ -80,14 +165,21 @@ void Model::InitTestObjects()
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
-    GameObject * laneGenerator = new GameObject(&_gameObjects);
-	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3,20, meshes);
+	std::vector<Mesh*> obstacles;
+	obstacles.push_back(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+
+
+	int laneAmount = 3;
+	PlayerComponent * playerComponent = new PlayerComponent(laneAmount/2, laneAmount, lifebar, diededImage, this,false);
+
+	GameObject * laneGenerator = new GameObject(&_gameObjects);
+	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, meshes, playerComponent);
+    LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles, &laneDrawComponent->_speed);
 	laneGenerator->AddComponent(laneDrawComponent);
-	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
+	laneGenerator->AddComponent(lane_obstacle_generator);
 	_gameObjects.push_back(laneGenerator);
 
     GameObject * scoreObject = new GameObject(&_gameObjects);
-
     //Scoreboard that keeps track of the scores
     ScoreBoardComponent * scoreBoard = new ScoreBoardComponent();
     ScoreComponent * tempScore;
@@ -95,91 +187,36 @@ void Model::InitTestObjects()
     scoreBoard->LoadScore();
 
     if (!scoreBoard->_scores.empty())
-        tempScore = new ScoreComponent(&laneDrawComponent->_speed , scoreBoard->_scores[0]->score);
+        tempScore = new ScoreComponent(&laneDrawComponent->_speed, scoreBoard->_scores[0]->score);
     else
         tempScore = new ScoreComponent(&laneDrawComponent->_speed, 0);
+
+    tempScore->_scoreText = scoreText;
+    tempScore->_highscoreText = highscore;
 
     scoreObject->AddComponent(tempScore);
     scoreObject->AddComponent(scoreBoard);
     scoreBoard->AddScore(tempScore->ReturnScoreStruct());
 
     _gameObjects.push_back(scoreObject);
+
 }
 
-void Model::InitSound()
+void Model::Reset()
 {
-	//Initialize audio
-	int device = -1; // Default Sounddevice (default playback device from windows settings)
-	int freq = 44100; // Sample rate (Hz)
-	BASS_Init(device, freq, 0, 0, NULL);
-
-	//example on how to start sound(s)
-	Sound * backgroundMusic = new Sound("Assets/background.wav", true);
-	backgroundMusic->Play();
-
-	//place this where the program closes
-	//BASS_Free();
+	_gameOver = false;
+	_gameOverTime = 0.0f;
+	_gameObjects.clear();
+	_guiObjects.clear();
 }
 
-void Model::InitGUIElements()
+bool Model::GameOverState(float deltaTime)
 {
-	// create GameObject for all elements
-	GameObject * guiOb = new GameObject(&_gameObjects);
-	GUIComponent * GUI = new GUIComponent();
-
-
-	Text * distanceCounter = new Text(Vec3f(30, 25, 0), Vec3f(0, 0, 0), "Distance: 0000 m");
-	GUI->AddElement(distanceCounter);
-
-	Text * speedCounter = new Text(Vec3f(30, 40, 0), Vec3f(0, 0, 0), "Speed: 0000 m/s");
-	GUI->AddElement(speedCounter);
-
-	Image * powerUpImage = new Image(Vec3f(1280.0f / 4.0 + 60.0f, 45, 0), 20.0f, 20.0f, "Assets/LifeBar.psd"); // Todo replace LifeBar Image
-	powerUpImage->Hide();
-	GUI->AddElement(powerUpImage);
-
-	Text * powerTimeLeft = new Text(Vec3f(1280.0f / 4.0 + 100.0f, 60, 0), Vec3f(0, 0, 0), "00:00");
-	powerTimeLeft->Hide();
-	GUI->AddElement(powerTimeLeft);
-
-	Text * scoreText = new Text(Vec3f(670.0f, 40, 0), Vec3f(0, 0, 0), "Score: 0000 0x");
-	GUI->AddElement(scoreText);
-
-    Text * highscore = new Text(Vec3f(670.0f, 25, 0), Vec3f(0, 0, 0), "HighScore: 0000");
-    GUI->AddElement(highscore);
-
-	Image * diededImage = new Image(Vec3f(0.0f, 0.0f, 0), 1280.0f, 720.0f, "Assets/LifeBar.psd"); // todo replace LifeBar Image
-	diededImage->Hide();
-	GUI->AddElement(diededImage);
-
-	LifeBar * lifebar = new LifeBar(
-		Vec3f(1280.0f / 4.0 - 100.0f, 20, 0),
-		400.0f, 20.0f, 3,
-		"Assets/LifeFrameBackground.psd",
-		"Assets/LifeFrame.psd",
-		"Assets/LifeBar.psd",
-		"Assets/LifeFrameSegment.psd");
-
-	GUI->AddElement(lifebar);
-
-	guiOb->AddComponent(GUI);
-
-	_gameObjects.push_back(guiOb);
-
-    for (auto go : _gameObjects)
-    {
-        auto tempScore = static_cast<ScoreComponent*>(go->GetComponent(SCORE_COMPONENT));
-        if (tempScore == nullptr) continue;
-
-        tempScore->_scoreText = scoreText;
-        tempScore->_highscoreText = highscore;
-        break;
-    }
-}
-
-void Model::Init()
-{
-	// TODO initialise gamelogic 
-	InitGUIElements();
-	InitSound();
+	_gameOverTime += deltaTime;
+	if(_gameOverTime >= 5.0f)
+	{
+		Init();
+		return true;
+	}
+	return false;
 }

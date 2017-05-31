@@ -48,6 +48,12 @@ void View::UpdateView()
         gameObject->Draw();
 	}
 
+	// Draw all gui objects
+	for(GameObject * gameObject : _modelPtr->_guiObjects)
+	{
+		gameObject->Draw();
+	}
+
 	glutSwapBuffers();
 }
 

@@ -5,6 +5,7 @@ ScoreComponent::ScoreComponent(float * speed, unsigned int highscore) : Componen
 {
     _highScore = highscore;
     _speed = speed;
+    ResetMultiplier();
 }
 
 ScoreComponent::~ScoreComponent()
@@ -58,7 +59,6 @@ void ScoreComponent::DrawHighscore(int score, Text* text)
 
 void ScoreComponent::Update(float deltaTime)
 {
-    //TODO: convert this to the distance not time
     _updateTimer += deltaTime;
     _mulitplierUpdateTimer -= deltaTime;
 
@@ -67,7 +67,6 @@ void ScoreComponent::Update(float deltaTime)
         ChangeScore(10);
         if (_score->score >= _highScore) _highScore = _score->score;
         _updateTimer = 0.0f;
-        *_speed += 1.0f;
     }
 
     if( _mulitplierUpdateTimer <= 0.0f)

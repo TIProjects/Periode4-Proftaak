@@ -17,12 +17,13 @@ public:
 		_segment = nullptr;
 		_frame = nullptr;
 		_bar = nullptr;
-		
-		_height = 0;
 		_width = 0;
+		_height = 0;
+		_pos = Vec3f(0,0,0);
 		_sections = 0;
 		_life = 0;
 	}
+
 	/*
 	Constructor with variables
 	Vec3f pos, position of GUIElement, this will be passed to the constructor of GUIElement

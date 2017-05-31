@@ -81,7 +81,7 @@ private:
     float _updateTimer = 0.0f, _mulitplierUpdateTimer = 10.0f;
 
     /**
-    * Multieplier for the score
+    * Multiplier for the score
     */
     unsigned int _multiplier = 1;
 
