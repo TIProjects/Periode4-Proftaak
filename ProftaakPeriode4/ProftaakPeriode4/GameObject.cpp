@@ -1,7 +1,6 @@
 ﻿#include "GameObject.h"
 #include "DrawComponent.h"
 
-
 GameObject::GameObject(std::vector<GameObject *> * gameObjects, Vec3f position, Vec3f rotation, Vec3f scale)
 {
 	_lighting = true;

@@ -68,7 +68,6 @@ void Model::update()
 	{
 		gameObject->LateUpdate(deltaTime);
 	}
-
 	glutPostRedisplay();
 }
 
@@ -135,21 +134,15 @@ void Model::Init()
 
 	_guiObjects.push_back(guiOb);
 
-	// Create every other GameObject
-	GameObject * scoreObject = new GameObject(&_gameObjects);
+    for (auto go : _gameObjects)
+    {
+        auto tempScore = static_cast<ScoreComponent*>(go->GetComponent(SCORE_COMPONENT));
+        if (tempScore == nullptr) continue;
 
-	scoreBoard.loadScore();
-	ScoreComponent * score;
-
-	if (!scoreBoard._scores.empty())
-		score = new ScoreComponent(scoreText, highscore, scoreBoard._scores[0]->returnScore());
-	else
-		score = new ScoreComponent(scoreText, highscore, 0);
-
-	scoreObject->AddComponent(score);
-	scoreBoard.addScore(score);
-
-	_gameObjects.push_back(scoreObject);
+        tempScore->_scoreText = scoreText;
+        tempScore->_highscoreText = highscore;
+        break;
+    }
 
 	// Test GameObjects
 	// TODO: remove
@@ -176,16 +169,38 @@ void Model::Init()
 	std::vector<Mesh*> obstacles;
 	obstacles.push_back(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
 
-	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles);
 
 	int laneAmount = 3;
 	PlayerComponent * playerComponent = new PlayerComponent(laneAmount/2, laneAmount, lifebar, diededImage, this,true);
 
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, meshes, playerComponent);
+    LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles, &laneDrawComponent->_speed);
 	laneGenerator->AddComponent(laneDrawComponent);
 	laneGenerator->AddComponent(lane_obstacle_generator);
 	_gameObjects.push_back(laneGenerator);
+
+    GameObject * scoreObject = new GameObject(&_gameObjects);
+    //Scoreboard that keeps track of the scores
+    ScoreBoardComponent * scoreBoard = new ScoreBoardComponent();
+    ScoreComponent * tempScore;
+
+    scoreBoard->LoadScore();
+
+    if (!scoreBoard->_scores.empty())
+        tempScore = new ScoreComponent(&laneDrawComponent->_speed, scoreBoard->_scores[0]->score);
+    else
+        tempScore = new ScoreComponent(&laneDrawComponent->_speed, 0);
+
+    tempScore->_scoreText = scoreText;
+    tempScore->_highscoreText = highscore;
+
+    scoreObject->AddComponent(tempScore);
+    scoreObject->AddComponent(scoreBoard);
+    scoreBoard->AddScore(tempScore->ReturnScoreStruct());
+
+    _gameObjects.push_back(scoreObject);
+
 }
 
 void Model::Reset()

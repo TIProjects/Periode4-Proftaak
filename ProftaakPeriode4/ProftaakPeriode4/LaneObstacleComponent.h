@@ -26,7 +26,7 @@ public:
 	/*
 	* The speed of the moving objects
 	*/
-	float _speed = 9.0f; // do not change
+    float * _speed;
 	/*
 	* The amount already moved
 	*/

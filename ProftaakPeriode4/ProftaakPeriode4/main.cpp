@@ -17,7 +17,18 @@ unsigned int fps = 20;
 void onExit()
 {
     //TODO: add here the methodes that you want to be called on exit
-    model.scoreBoard.saveScore();
+    ScoreBoardComponent * tempBoard;
+    
+    for (auto m : model._gameObjects)
+    {
+        tempBoard = static_cast<ScoreBoardComponent *>(m->GetComponent(SCOREBOARD_COMPONENT));
+        if (tempBoard != nullptr) {
+            tempBoard->SaveScore();
+            break;
+        }        
+    }
+
+    delete tempBoard;
 
 
 	for (GameObject* g : model._gameObjects)
@@ -73,13 +84,11 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);
 	glutIdleFunc(idle);
-    
 	glutKeyboardFunc(Keyboard::KeyBoardDown);
 	glutKeyboardUpFunc(Keyboard::KeyBoardUp);
 	glutSpecialFunc(Keyboard::SKeyboardDown);
 	glutSpecialUpFunc(Keyboard::SKeyboardUp);
 	glutPassiveMotionFunc(Mouse::MoveMouse);
-    
 
 	glutMainLoop();
 	return 0;

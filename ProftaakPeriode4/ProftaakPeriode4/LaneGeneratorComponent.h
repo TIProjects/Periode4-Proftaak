@@ -7,12 +7,16 @@
 #include "PlayerComponent.h"
 
 /**
- * \brief Class for generating and showing lanes
- */
+* \brief Class for generating and showing lanes
+*/
 class LaneGeneratorComponent :
-	public DrawComponent
+    public DrawComponent
 {
 public:
+    /*
+    * The speed of the moving objects
+    */
+    float _speed = 9.0f;
 	/**
 	 * \brief Constructor for creating a LaneGaneratorComponent
 	 * \param laneSize The amount of lanes to show
@@ -53,4 +57,3 @@ private:
 	 */
 	float _spaceBetween = 2.0f;
 };
-
