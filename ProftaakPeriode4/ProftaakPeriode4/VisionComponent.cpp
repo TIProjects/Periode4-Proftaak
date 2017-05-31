@@ -118,7 +118,7 @@ void VisionComponent::CalculatePosition()
 		std::vector<cv::Point2f> mc(filteredContours.size());
 		for (int i = 0; i < filteredContours.size(); i++)
 		{
-			mc[i] = cv::Point2f(mu[i].m10 / mu[i].m00, mu[i].m01 / mu[i].m00);
+			mc[i] = cv::Point2f((float)mu[i].m10 / (float)mu[i].m00, (float)mu[i].m01 / (float)mu[i].m00);
 			cv::circle(drawing, mc[i], _radius, cv::Scalar(255, 255, 0), CV_FILLED, 8, 0);
 		}
 		
@@ -173,7 +173,7 @@ void VisionComponent::GetControls(int *lane, bool *crouch, bool *jump)
 	}
 	else 
 	{
-		*lane = ceil(_laneCount / 2);
+		*lane = (int)ceil(_laneCount / 2);
 	}
 
 	if (_position.y < _jumpBound)
