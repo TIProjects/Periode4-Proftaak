@@ -11,6 +11,19 @@ GameObject::GameObject(std::vector<GameObject *> * gameObjects, Vec3f position, 
 	_scale = scale;
 }
 
+GameObject::GameObject(const GameObject & game_object)
+{
+	
+	_position = game_object._position;
+	_drawComponent = game_object._drawComponent;
+	_components = game_object._components;
+	_rotation = game_object._rotation;
+	_gameObjects = game_object._gameObjects;
+	_scale = game_object._scale;
+	_lighting = game_object._lighting;
+
+}
+
 void GameObject::Update(float deltaTime)
 {
 	for (Component * component : _components)

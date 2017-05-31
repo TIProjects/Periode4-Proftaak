@@ -172,10 +172,9 @@ void Model::Init()
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
-	std::vector<Mesh*> obstacles;
-	obstacles.push_back(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+	
 
-	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles);
+	
 
 	int laneAmount = 3;
 	PlayerComponent * playerComponent = new PlayerComponent(laneAmount/2, laneAmount, lifebar, diededImage, this,false);
@@ -183,6 +182,22 @@ void Model::Init()
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, meshes, playerComponent);
 	laneGenerator->AddComponent(laneDrawComponent);
+
+
+	std::vector<GameObject*> obstacles;
+	GameObject * game_object = new GameObject(&_gameObjects);
+	game_object->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj")));
+	game_object->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
+	obstacles.push_back(game_object);
+
+//	GameObject * game_object2 = new GameObject(laneGenerator->_gameObjects);
+//	game_object2->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj")));
+//	game_object2->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
+//	obstacles.push_back(game_object2);
+
+
+	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles);
+
 	laneGenerator->AddComponent(lane_obstacle_generator);
 	_gameObjects.push_back(laneGenerator);
 }

@@ -16,7 +16,6 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std
 {
 	srand(unsigned int(time(nullptr))); // set fully random (on time)
 						  // Testing
-//	mesh = LoadMeshFile("Assets//Models//TestCube//Cube.Cobj");
 
 	_spaceBetween = 2.0f;
 

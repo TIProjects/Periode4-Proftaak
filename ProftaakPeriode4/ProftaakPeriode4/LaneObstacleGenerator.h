@@ -16,7 +16,7 @@ public:
 	 * \brief 
 	 * \param meshes 
 	 */
-	LaneObstacleGenerator(std::vector<Mesh*> meshes);
+	LaneObstacleGenerator(std::vector<GameObject*> obstacleModels);
 
 
 	/**
@@ -25,12 +25,15 @@ public:
 	 * \param mesh 
 	 * \param speed 
 	 */
-	void addObstacle(int laneIndex, Mesh* mesh, float speed = 0.0f);
+	void addObstacle(int laneIndex, GameObject* game_object, float speed = 0.0f);
 
+	GameObject * getRandomGameObject();
+
+	static float* gameObjectSize(GameObject* game_object);
 	/**
 	 * \brief Keep score of distance already moved since last placement
 	 */
-	float _lengthMovedSince = 0.0f;
+	std::vector<float> _lengthMovedSince;
 	/**
 	 * \brief The minimal distance between two placements (used for slow start)
 	 */
@@ -45,10 +48,6 @@ public:
 	 */
 	int lastLane = 0;
 	/**
-	 * The meshes that are used for placing a obstacle
-	 */
-	std::vector<Mesh*> _meshes;
-	/**
 	 * The list of lanes from the LaneGenerator (used for placing new obstacles) 
 	 * The pointer of the vector from LaneGenerator
 	 */
@@ -58,7 +57,7 @@ public:
 	 * The pointer of the obstacles from LaneGenerator
 	 */
 	std::vector<GameObject*> * _obstacles;
-
+	std::vector<GameObject*> _obstacleModels;
 	/**
 	 * List of skipped amount 
 	 * The size is equal to the amount of lanes in _lanes
@@ -75,4 +74,6 @@ public:
 	 * Updating the obstacles (looking for placing obstacle)
 	 */
 	void Update(float nanotime) override;
+
+	int getNewLane();
 };
