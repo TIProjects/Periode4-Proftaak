@@ -2,6 +2,8 @@
 #include "Model.h"
 #include "View.h"
 #include "GUIComponent.h"
+#include "VisionComponent.h"
+#include "LaneGeneratorComponent.h"
 #include "GUIElement.h"
 #include "Text.h"
 #include <GL\freeglut.h>
@@ -27,6 +29,24 @@ void onExit()
     }
 
     delete tempBoard;
+
+
+	for (GameObject* g : model._gameObjects)
+	{
+		LaneGeneratorComponent* lane = dynamic_cast<LaneGeneratorComponent*>(g->GetComponent(ComponentID::DRAW_COMPONENT));
+		if (lane != nullptr)
+		{
+			for (GameObject* c : lane->_obstacles)
+			{
+				VisionComponent* vision = dynamic_cast<VisionComponent*>(c->GetComponent(ComponentID::VISION_COMPONENT));
+				if (vision != nullptr)
+				{
+					vision->stopVisionThread();
+					break;
+				}
+			}
+		}
+	}
 }
 
 // The displayFunc which will call the UpdateView of the view

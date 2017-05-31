@@ -7,6 +7,7 @@
 #include "MeshDrawComponent.h"
 #include "PlayerComponent.h"
 #include "CollisionComponent.h"
+#include "VisionComponent.h"
 #include "Collision.h"
 #include "MeshFactory.h"
 
@@ -32,6 +33,8 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, flo
 	int laneIndex = laneAmount / 2;
 	_player->_position.x = _lanes[laneIndex]->_position.x;
 	PlayerComponent * playerComponent = dynamic_cast<PlayerComponent*>(_player->GetComponent(PLAYER_COMPONENT));
+	if(playerComponent->_useOpenCV)
+		_player->AddComponent(new VisionComponent(laneAmount));
 	if(playerComponent != nullptr)
 		playerComponent->_targetPosition = _player->_position;
 	_obstacles.push_back(_player);

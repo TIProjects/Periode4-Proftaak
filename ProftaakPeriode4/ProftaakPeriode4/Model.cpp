@@ -2,6 +2,7 @@
 #include <GL\freeglut.h>
 #include "DrawComponent.h"
 #include "CameraComponent.h"
+#include "VisionComponent.h"
 #include <iostream>
 #include "MeshDrawComponent.h"
 #include "MeshFactory.h"
@@ -183,6 +184,8 @@ void Model::Init()
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 	std::vector<Mesh*> obstacles;
 	obstacles.push_back(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj"));
+
+
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 2.0f, meshes, player);
 	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles, &laneDrawComponent->_speed);
