@@ -23,12 +23,13 @@ void PlayerComponent::Update(float deltaTime)
 	if(_targetPosition.x != _parent->_position.x)
 	{
 		float diff = _targetPosition.x - _parent->_position.x;
-		if(diff <= 0.5 && diff >= -0.5f)
+		if(diff <= 0.01f && diff >= -0.01f)
 		{
 			_parent->_position.x = _targetPosition.x;
 		} else
 		{
-			_parent->_position.x += diff * 0.025f;
+			float speed = diff * deltaTime * 3.0f;
+			_parent->_position.x += speed;
 		}
 	}
 
