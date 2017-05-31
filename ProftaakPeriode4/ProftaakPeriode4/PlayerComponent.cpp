@@ -1,5 +1,7 @@
 #include "PlayerComponent.h"
 #include "Input.h"
+#include "GameObject.h"
+#include "VisionComponent.h"
 
 PlayerComponent::PlayerComponent(int laneIndex, int laneCount, bool useOpenCV)
 : Component(PLAYER_COMPONENT)
@@ -22,6 +24,11 @@ void PlayerComponent::Update(float deltaTime)
 
 void PlayerComponent::OpenCVUpdate(float deltaTime)
 {
+	VisionComponent *vision = dynamic_cast<VisionComponent *>(_parent->GetComponent(VISION_COMPONENT));
+	if (vision != nullptr)
+	{
+		vision->GetControls(&_laneIndex, &_isCrouching, &_isJumping);
+	}
 	// TODO Update laneIndex using openCV
 }
 

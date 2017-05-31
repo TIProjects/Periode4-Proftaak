@@ -15,11 +15,68 @@
 class VisionComponent : public Component
 {
 public:
-	VisionComponent();
+	explicit VisionComponent(int laneAmount);
 	~VisionComponent();
 	//void Update(float deltaTime) override;
 	
+	/*
+	*Captures video, applies filters and detects motion
+	*/
 	void CameraUpdate();
+
+	/*
+	*Calculates position from the largest motion detected, updates _position to this value
+	*/
 	void CalculatePosition();
+
+	/*
+	*returns booleans for crouching jumping and int for lanes
+	*/
+	void GetControls(int *lane, bool *crouch, bool *jump);
+
+	/*
+	*Position of the point based on motion detection
+	*/
+	cv::Point2f _position;
+
+	/*
+	*Boolean to draw debug lines for camera
+	*/
+	bool _debugMotion = true;
+
+	/*
+	*Size of the captured image
+	*/
+	cv::Size _imageSize = cv::Size(480, 360);
+
+	/*
+	*
+	*/
+	int _heightDiv;
+	int _widthDiv;
+
+	/*
+	*Boundary heights for jumping and crouching,
+	*/
+	int _jumpBound;
+	int _crouchBound;
+
+	/*
+	*Boundary widths for moving left and right,
+	*/
+	int _leftBound;
+	int _rightBound;
+
+	/*
+	*
+	*/
+	int _laneCount;
+
+private:
+	std::thread _visionThread;
+	cv::Mat _src_gray;
+	int _thresh = 50;
+	int max_thresh = 255;
+	float _radius = 10;
 };
 

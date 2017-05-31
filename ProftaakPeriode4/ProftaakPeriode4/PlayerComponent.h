@@ -9,6 +9,7 @@ public:
 	void Update(float deltaTime) override;
 
 	bool _isCrouching;
+	bool _isJumping;
 
 	bool _useOpenCV;
 
@@ -17,6 +18,7 @@ public:
 	int _lastLane;
 
 	bool _keyReleased;
+
 private:
 	void OpenCVUpdate(float deltaTime);
 	void KeyBoardUpdate(float deltaTime);

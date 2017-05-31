@@ -7,6 +7,7 @@
 #include "MeshDrawComponent.h"
 #include "PlayerComponent.h"
 #include "CollisionComponent.h"
+#include "VisionComponent.h"
 #include "Collision.h"
 #include "MeshFactory.h"
 
@@ -33,9 +34,10 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std
 
 	// Create and add the player GameObject
 	_player = new GameObject(&_obstacles);
-	_player->AddComponent(new PlayerComponent(1, laneAmount, false));
+	_player->AddComponent(new PlayerComponent(1, laneAmount));
 	_player->AddComponent(new CollisionComponent(Hitbox({ 2,2,2 })));
 	_player->AddComponent(new MeshDrawComponent(mesh));
+	_player->AddComponent(new VisionComponent(laneAmount));
 	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(1);
 	lanePlayer->_speed = 0.0f;
 	_player->AddComponent(lanePlayer);

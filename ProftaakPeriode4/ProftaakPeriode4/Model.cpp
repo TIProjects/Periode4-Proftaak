@@ -86,12 +86,6 @@ void Model::InitTestObjects()
 	laneGenerator->AddComponent(laneDrawComponent);
 	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	_gameObjects.push_back(laneGenerator);
-
-	GameObject * vision = new GameObject();
-	VisionComponent * visionComponent = new VisionComponent();
-	vision->AddComponent(visionComponent);
-
-	_gameObjects.push_back(vision);
 }
 
 void Model::InitSound()
@@ -103,12 +97,10 @@ void Model::InitSound()
 
 	//example on how to start sound(s)
 	Sound * backgroundMusic = new Sound("Assets/background.wav", true);
-	backgroundMusic->Play();
+	//backgroundMusic->Play();
 
 	//place this where the program closes
 	//BASS_Free();
-
-	
 }
 
 void Model::InitGUIElements()
