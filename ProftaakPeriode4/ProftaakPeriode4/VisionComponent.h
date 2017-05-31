@@ -83,7 +83,7 @@ private:
 	* terminate thread for terminating the thread and closing opencv windows if openend
 	*/
 	std::thread _visionThread;
-	bool _terminateThead = false;
+	bool _terminateThread = false;
 
 	/*
 	* opencv data

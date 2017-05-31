@@ -41,7 +41,7 @@ void VisionComponent::CameraUpdate()
 	if (!cap.isOpened())  // check if we succeeded
 		return;
 	//loop for capturing images from camera and detecting
-	while (!_terminateThead)
+	while (!_terminateThread)
 	{
 
 		cv::Mat img1;
@@ -197,6 +197,6 @@ void VisionComponent::GetControls(int *lane, bool *crouch, bool *jump)
 
 void VisionComponent::stopVisionThread()
 {
-	_terminateThead = true;
+	_terminateThread = true;
 	cv::destroyAllWindows();
 }
