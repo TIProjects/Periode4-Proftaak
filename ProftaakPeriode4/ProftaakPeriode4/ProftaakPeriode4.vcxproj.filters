@@ -198,9 +198,10 @@
     <ClCompile Include="AsteroidComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="RotateComponent.cpp">
-    </ClCompile>
     <ClCompile Include="VisionComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RotateComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -320,7 +321,7 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="RotateComponent.h">
-        <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="VisionComponent.h">
       <Filter>Header Files\Components</Filter>
