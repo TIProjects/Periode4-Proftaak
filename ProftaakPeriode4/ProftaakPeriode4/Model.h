@@ -39,11 +39,8 @@ public:
 
     // Vector of every GameObject present in the model
     std::vector<GameObject*> _gameObjects;
-
 	std::vector<GameObject*> _guiObjects;
 
-    //Scoreboard that keeps track of the scores
-    ScoreBoard scoreBoard;
 	bool _gameOver;
 private:
 

@@ -18,8 +18,9 @@ std::vector<ObstaclePattern *> patterns;
 ObstaclePattern * pattern;
 
 
-LaneObstacleGenerator::LaneObstacleGenerator(std::vector<Mesh*> meshes): Component(LANE_OBSTACLE_GENERATOR)
+LaneObstacleGenerator::LaneObstacleGenerator(std::vector<Mesh*> meshes, float * speed): Component(LANE_OBSTACLE_GENERATOR)
 {
+    _speed = speed;
 	_meshes = meshes;
 	srand(time(nullptr));
 	_lanes = nullptr;
@@ -28,13 +29,13 @@ LaneObstacleGenerator::LaneObstacleGenerator(std::vector<Mesh*> meshes): Compone
 //	patterns.push_back(new MovingPattern());
 }
 
-void LaneObstacleGenerator::addObstacle(int laneIndex, Mesh* mesh, float speed)
+void LaneObstacleGenerator::addObstacle(int laneIndex, Mesh* mesh)
 {
 	GameObject* obstacle = new GameObject(_obstacles);
 	obstacle->AddComponent(new MeshDrawComponent(mesh));
 	LaneObstacleComponent * component = new LaneObstacleComponent(laneIndex);
-	if(speed != 0.0f)
-		component->_speed = speed;
+	if(*_speed != 0.0f)
+		component->_speed = _speed;
 	obstacle->AddComponent(component);
 	obstacle->AddComponent(new CollisionComponent(Hitbox({2.0f,2.0f,2.0f}), false));
 	obstacle->AddComponent(new AsteroidComponent());
@@ -63,8 +64,7 @@ void LaneObstacleGenerator::addObstacle(int laneIndex, Mesh* mesh, float speed)
 
 void LaneObstacleGenerator::Update(float nanotime)
 {
-	_lengthMovedSince += nanotime * _speed;
-
+	_lengthMovedSince += nanotime * *_speed;
 
 	LaneGeneratorComponent* component = dynamic_cast<LaneGeneratorComponent*>(_parent->GetComponent(DRAW_COMPONENT));
 	if (component != nullptr)

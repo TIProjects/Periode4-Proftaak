@@ -55,12 +55,12 @@ public:
 	void Init(LaneObstacleGenerator* lane_obstacle_generator, int newLane) override
 	{
 		_newLane = newLane;
-		_speed = (rand() % (int)(lane_obstacle_generator->_speed - 2.0f)) + 2.0f;
+		_speed = (rand() % (int)(*lane_obstacle_generator->_speed - 2.0f)) + 2.0f;
 
 		GameObject * lane_object = (*lane_obstacle_generator->_lanes)[newLane];
 		LaneComponent * lane_component = dynamic_cast<LaneComponent*>(lane_object->GetComponent(LANE_COMPONENT));
 		float total_lane_length = lane_component->getLength();
-		float time_till_end = total_lane_length / lane_obstacle_generator->_speed;
+		float time_till_end = total_lane_length / *lane_obstacle_generator->_speed;
 		_distance = time_till_end*_speed;
 		std::cout << _distance << " DISTANCE!" << std::endl;
 		
@@ -76,7 +76,7 @@ public:
 		
 
 		for (int i = 0; i < lane_obstacle_generator->_lanes->size(); i++) {
-			lane_obstacle_generator->addObstacle(i, mesh, _speed);
+			lane_obstacle_generator->addObstacle(i, mesh);
 		}
 	};
 

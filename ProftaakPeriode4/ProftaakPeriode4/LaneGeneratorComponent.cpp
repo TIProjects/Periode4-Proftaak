@@ -35,7 +35,6 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, flo
 	if(playerComponent != nullptr)
 		playerComponent->_targetPosition = _player->_position;
 	_obstacles.push_back(_player);
-
 }
 
 LaneGeneratorComponent::~LaneGeneratorComponent()
@@ -54,8 +53,6 @@ void LaneGeneratorComponent::Draw()
 	// Draw the obstacles
 	for (GameObject * obstacle : _obstacles) 
 		obstacle->Draw();
-	
-	
 }
 
 void LaneGeneratorComponent::Update(float deltaTime)
@@ -126,5 +123,3 @@ void LaneGeneratorComponent::Update(float deltaTime)
 //		-100.0f};
 //	_obstacles.push_back(obstacle);
 //}
-
-

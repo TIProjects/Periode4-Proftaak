@@ -16,7 +16,7 @@ public:
 	 * \brief 
 	 * \param meshes 
 	 */
-	LaneObstacleGenerator(std::vector<Mesh*> meshes);
+	LaneObstacleGenerator(std::vector<Mesh*> meshes, float * speed);
 
 
 	/**
@@ -25,7 +25,7 @@ public:
 	 * \param mesh 
 	 * \param speed 
 	 */
-	void addObstacle(int laneIndex, Mesh* mesh, float speed = 0.0f);
+	void addObstacle(int laneIndex, Mesh* mesh);
 
 	/**
 	 * \brief Keep score of distance already moved since last placement
@@ -39,7 +39,7 @@ public:
 	/**
 	 * \brief the speed of the lanes (todo replace with speed of LaneGenerator when changed by @gijs
 	 */
-	float _speed = 9.0f;//&component->_speed;
+    float * _speed;//&component->_speed;
 	/**
 	 * The lastLane that is placed
 	 */
