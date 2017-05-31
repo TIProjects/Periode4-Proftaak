@@ -15,14 +15,14 @@
 //for testing purposes only, comment/delete when finished
 #include "Text.h"
 #include "LifeBar.h"
-Text fpstext;
-LifeBar Lifebar;
+#include "LaneObstacleGenerator.h"
 
 Model::Model()
 {
 	_gameOverTime = 0.0f;
 	_lastTime = 0;
 	_gameOver = false;
+	
 }
 
 void Model::update()
@@ -94,6 +94,7 @@ void Model::Init()
 	GameObject * guiOb = new GameObject(&_gameObjects);
 	GUIComponent * GUI = new GUIComponent();
 
+
 	Text * distanceCounter = new Text(Vec3f(30, 25, 0), Vec3f(255, 255, 255), "Distance: 0000 m");
 	GUI->AddElement(distanceCounter);
 
@@ -103,6 +104,7 @@ void Model::Init()
 	Image * powerUpImage = new Image(Vec3f(1280.0f / 4.0 + 60.0f, 45, 0), 20.0f, 20.0f, "Assets/LifeBar.psd"); // Todo replace LifeBar Image
 	powerUpImage->Hide();
 	GUI->AddElement(powerUpImage);
+
 
 	Text * powerTimeLeft = new Text(Vec3f(1280.0f / 4.0 + 100.0f, 60, 0), Vec3f(255, 255, 255), "00:00");
 	powerTimeLeft->Hide();
@@ -170,6 +172,10 @@ void Model::Init()
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
+	std::vector<Mesh*> obstacles;
+	obstacles.push_back(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"));
+
+	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles);
 
 	int laneAmount = 3;
 	PlayerComponent * playerComponent = new PlayerComponent(laneAmount/2, laneAmount, lifebar, diededImage, this,false);
@@ -177,7 +183,7 @@ void Model::Init()
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, meshes, playerComponent);
 	laneGenerator->AddComponent(laneDrawComponent);
-	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
+	laneGenerator->AddComponent(lane_obstacle_generator);
 	_gameObjects.push_back(laneGenerator);
 
 	GameObject * test = new GameObject(&_gameObjects);
