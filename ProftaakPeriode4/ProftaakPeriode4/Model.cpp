@@ -170,7 +170,7 @@ void Model::Init()
 	PlayerComponent * playerComponent = new PlayerComponent(laneAmount / 2, laneAmount, lifebar, diededImage, this, false);
 	player->AddComponent(playerComponent);
 	player->AddComponent(new CollisionComponent(Hitbox({ 1,1,1 }))); // Hitbox
-	player->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//silver-hawk-next//shawk13.obj"))); // todo move out of scope
+	player->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//silver-hawk-next//shawk13.Cobj"))); // todo move out of scope
 	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(laneAmount/2);
 	lanePlayer->_speed = nullptr;
 	player->_position.y = 2.0f;
