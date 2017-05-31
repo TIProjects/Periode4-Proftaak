@@ -157,12 +157,14 @@
     <ClCompile Include="LaneObstacleComponent.cpp" />
     <ClCompile Include="LifeBar.cpp" />
     <ClCompile Include="LaneGeneratorComponent.cpp" />
+    <ClCompile Include="LifeUp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshDrawComponent.cpp" />
     <ClInclude Include="DrawComponent.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="PowerUpComponent.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="MeshFactory.cpp" />
@@ -183,7 +185,9 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="LaneGeneratorComponent.h" />
+    <ClInclude Include="LifeUp.h" />
     <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="PowerUpComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />

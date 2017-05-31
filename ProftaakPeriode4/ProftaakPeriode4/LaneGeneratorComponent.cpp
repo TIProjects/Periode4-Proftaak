@@ -16,7 +16,6 @@ float meshTime = 0.0f;
 LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std::vector<Mesh*> meshes)
 {
     srand(unsigned int(time(nullptr))); // set fully random (on time)
-
                                         // Testing
     mesh = LoadMeshFile("Assets//Models//TestCube//Cube.Cobj");
 
