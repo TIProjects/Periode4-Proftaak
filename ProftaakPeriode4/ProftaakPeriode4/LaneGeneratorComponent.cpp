@@ -8,13 +8,15 @@
 #include "PlayerComponent.h"
 #include "CollisionComponent.h"
 #include "Collision.h"
+#include "MeshFactory.h"
 
 float meshTime = 0.0f;
 
-LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std::vector<Mesh*> meshes, Mesh * playerMesh)
+LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std::vector<Mesh*> meshes, PlayerComponent * playerComponent)
 {
 	srand(unsigned int(time(nullptr))); // set fully random (on time)
-
+						  // Testing
+//	mesh = LoadMeshFile("Assets//Models//TestCube//Cube.Cobj");
 
 	_spaceBetween = 2.0f;
 
@@ -26,13 +28,15 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std
 
 		_lanes.push_back(lane);
 	}
-	//	 Create and add the player GameObject
-	_player = new GameObject(&_obstacles, { 0.0f,0.0f,-1.0f });
-	PlayerComponent * playerComponent = new PlayerComponent(1, _lanes.size(), false);
+
+	// Create and add the player GameObject
+	_player = new GameObject(&_obstacles, {0.0f,0.0f,-1.0f});
+	int laneIndex = laneAmount / 2;
+	_player->_position.x = _lanes[laneIndex]->_position.x;
 	playerComponent->_targetPosition = _player->_position;
 	_player->AddComponent(playerComponent);
 	_player->AddComponent(new CollisionComponent(Hitbox({ 2,2,2 })));
-	_player->AddComponent(new MeshDrawComponent(playerMesh));
+	_player->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"))); // todo move out of scope
 	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(1);
 	lanePlayer->_speed = 0.0f;
 	_player->AddComponent(lanePlayer);
@@ -102,12 +106,6 @@ void LaneGeneratorComponent::Update(float deltaTime)
 	
 	CollisionComponent * collider
 		= dynamic_cast<CollisionComponent*>(_player->GetComponent(COLLISION_COMPONENT));
-	if(collider->_collided.size() > 0)
-	{
-		// Player collided with an obstacle
-		// TODO reduce health
-		std::cout << "player collision" << std::endl;
-	}
 }
 
 //void LaneGeneratorComponent::PlaceObstacleFullyRandom(Mesh* mesh)

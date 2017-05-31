@@ -1,8 +1,10 @@
 #pragma once
 #include "DrawComponent.h"
+#include "LifeBar.h"
 #include "Mesh.h"
 #include <queue>
 #include <ctime>
+#include "PlayerComponent.h"
 
 /**
  * \brief Class for generating and showing lanes
@@ -13,11 +15,13 @@ class LaneGeneratorComponent :
 public:
 	/**
 	 * \brief Constructor for creating a LaneGaneratorComponent
-	 * \param laneAmount The amount of lanes to show
+	 * \param laneSize The amount of lanes to show
 	 * \param laneSize the amount of blocks inside the lane (the length)
 	 * \param meshes The meshes that are chosen randomly over all the lanes
+	 * \param playerComponent pointer to the playerComponent which is used on the lanes
 	 */
-	LaneGeneratorComponent(int laneCount, int laneSize, std::vector<Mesh*> meshes, Mesh * playerMesh);
+
+	LaneGeneratorComponent(int laneCount, int laneSize, std::vector<Mesh*> meshes, PlayerComponent * playerComponent);
 	/**
 	 * \brief Destructor
 	 * todo implement

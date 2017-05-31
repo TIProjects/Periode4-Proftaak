@@ -7,9 +7,14 @@
 #include "ObstaclePatterns.h"
 #include "LaneGeneratorComponent.h"
 
+/**
+ * Used for selecting a pattern, is placed here because of errors in usage (generator uses Pattern and Pattern uses generator)
+ */
 std::vector<ObstaclePattern *> patterns;
+/**
+ * The current/previous pattern used.. nullptr when no pattern is used
+ */
 ObstaclePattern * pattern;
-float levelDistance = 10.0f;
 
 
 LaneObstacleGenerator::LaneObstacleGenerator(std::vector<Mesh*> meshes): Component(LANE_OBSTACLE_GENERATOR)
@@ -70,32 +75,29 @@ void LaneObstacleGenerator::Update(float nanotime)
 				laneAmountSkipped.push_back(0);
 
 
-		Mesh* obstacleMesh = _meshes[0];
+		Mesh* obstacleMesh = _meshes[0]; // todo implement multiple meshes
 		MeshDrawComponent* meshDraw = dynamic_cast<MeshDrawComponent*>(component->_player->GetComponent(DRAW_COMPONENT));
-		float minNeeded = meshDraw->_mesh->_length + obstacleMesh->_length + _minimalDistanceBetween + levelDistance;
-//		float minNeeded = obstacleMesh->_length; for testing
+		float minNeeded = meshDraw->_mesh->_length + obstacleMesh->_length + _minimalDistanceBetween;
+//		float minNeeded = obstacleMesh->_length; for testing purposes
 
-		levelDistance -= nanotime/1000;
+		_minimalDistanceBetween -= nanotime/1000;
 
+		// randomly select the new lane
 		int newLane = rand() % component->_lanes.size();
 		for (int i = 0; i < laneAmountSkipped.size(); i++)
-		{
-			if (laneAmountSkipped[i] > maxSkip)
-			{
-				newLane = i;
-			}
-		}
+			if (laneAmountSkipped[i] > maxSkip) // check if randomly chosen lane can be used or..
+				newLane = i;					// a lane that has a lot of empty places
+			
+		
 
+		// look at previous pattern and add the pattern required length to the needed distance
 		if (pattern != nullptr)
 		{
 			minNeeded += pattern->getLength();
 		}
 
-		
 
-			
-	
-		if (_lengthMovedSince / minNeeded >= 1.0f && float(rand() % 100) >= distance)
+		if (_lengthMovedSince / minNeeded >= 1.0f) //&& rand() % 100 >= 50) // todo add randomness
 		{
 			// check if pattern used or random
 			float patternChange = float(rand() % 100) / 100.0f;
@@ -115,12 +117,9 @@ void LaneObstacleGenerator::Update(float nanotime)
 			_lengthMovedSince = 0;
 			lastLane = newLane;
 		}
-
-		if (distance > 0)
-			distance -= 0.01f;
 	}
 }
-
+//			todo implmement the minNeeded when switching multiple lanes
 //			int laneMove = lastLane - newLane;
 //			if (abs(laneMove) > 1)
 //				minNeeded = laneMove*meshDraw->_mesh->_length;
