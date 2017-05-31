@@ -9,15 +9,17 @@
 
 std::vector<ObstaclePattern *> patterns;
 ObstaclePattern * pattern;
+float levelDistance = 10.0f;
 
 
 LaneObstacleGenerator::LaneObstacleGenerator(std::vector<Mesh*> meshes): Component(LANE_OBSTACLE_GENERATOR)
 {
 	_meshes = meshes;
 	srand(time(nullptr));
-
+	_lanes = nullptr;
+	_obstacles = nullptr;
 	patterns.push_back(new TwoPattern());
-	patterns.push_back(new MovingPattern());
+//	patterns.push_back(new MovingPattern());
 }
 
 void LaneObstacleGenerator::addObstacle(int laneIndex, Mesh* mesh, float speed)
@@ -70,10 +72,10 @@ void LaneObstacleGenerator::Update(float nanotime)
 
 		Mesh* obstacleMesh = _meshes[0];
 		MeshDrawComponent* meshDraw = dynamic_cast<MeshDrawComponent*>(component->_player->GetComponent(DRAW_COMPONENT));
-		float minNeeded = meshDraw->_mesh->_length + obstacleMesh->_length + _minimalDistanceBetween;
+		float minNeeded = meshDraw->_mesh->_length + obstacleMesh->_length + _minimalDistanceBetween + levelDistance;
 //		float minNeeded = obstacleMesh->_length; for testing
 
-		
+		levelDistance -= nanotime/1000;
 
 		int newLane = rand() % component->_lanes.size();
 		for (int i = 0; i < laneAmountSkipped.size(); i++)
