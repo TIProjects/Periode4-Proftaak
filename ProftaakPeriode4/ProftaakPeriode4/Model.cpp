@@ -179,6 +179,13 @@ void Model::Init()
 	laneGenerator->AddComponent(laneDrawComponent);
 	laneDrawComponent->PlaceObstacleFullyRandom(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	_gameObjects.push_back(laneGenerator);
+
+	GameObject * test = new GameObject(&_gameObjects);
+	test->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//silver-hawk-next//shawk13.Cobj")));
+	test->_position = { -10.0f,0.0f,-10.0f };
+
+	_gameObjects.push_back(test);
+	
 }
 
 void Model::Reset()
