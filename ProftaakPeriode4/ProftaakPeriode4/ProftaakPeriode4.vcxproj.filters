@@ -195,6 +195,18 @@
     <ClCompile Include="LaneObstacleGenerator.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="SpeedUp.cpp">
+      <Filter>Source Files\Power ups</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedDown.cpp">
+      <Filter>Source Files\Power ups</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplierUp.cpp">
+      <Filter>Source Files\Power ups</Filter>
+    </ClCompile>
+    <ClCompile Include="Invinsible.cpp">
+      <Filter>Source Files\Power ups</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -307,6 +319,18 @@
     </ClInclude>
     <ClInclude Include="ObstaclePatterns.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedDown.h">
+      <Filter>Header Files\Power ups</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedUp.h">
+      <Filter>Header Files\Power ups</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplierUp.h">
+      <Filter>Header Files\Power ups</Filter>
+    </ClInclude>
+    <ClInclude Include="Invinsible.h">
+      <Filter>Header Files\Power ups</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,9 @@
 #include <cmath>
 // #include "Component.h"
 #include "CameraComponent.h"
+
+#include "PowerUpComponent.h"
+
 #include "GameObject.h"
 #include "Vec.h"
 #include "Input.h"
@@ -46,6 +49,68 @@ void CameraComponent::Update(float deltaTime)
 	if (keys['s']) Move(270, deltaTime*speed);
 	if (keys['q']) Up(deltaTime*-speed);
 	if (keys['e']) Up(deltaTime*speed);
+
+    if (keys['1']) {
+        auto tempList = *_parent->_gameObjects;
+        for (auto go : tempList)
+        {
+            PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+            if (pu != nullptr)
+            {
+                pu->GetPowerUp(LIFE_UP)->Activate();
+            }
+        }
+    }
+
+    if (keys['2']) {
+        auto tempList = *_parent->_gameObjects;
+        for (auto go : tempList)
+        {
+            PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+            if (pu != nullptr)
+            {
+                pu->GetPowerUp(SPEED_UP)->Activate();
+            }
+        }
+    }
+
+    if (keys['3']) {
+        auto tempList = *_parent->_gameObjects;
+        for (auto go : tempList)
+        {
+            PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+            if (pu != nullptr)
+            {
+                pu->GetPowerUp(SPEED_DOWN)->Activate();
+            }
+        }
+    }
+
+    if (keys['4']) {
+        auto tempList = *_parent->_gameObjects;
+        for (auto go : tempList)
+        {
+            PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+            if (pu != nullptr)
+            {
+                pu->GetPowerUp(MULTIPLIER_UP)->Activate();
+            }
+        }
+    }
+
+    if (keys['5']) {
+        auto tempList = *_parent->_gameObjects;
+        for (auto go : tempList)
+        {
+            PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+            if (pu != nullptr)
+            {
+                pu->GetPowerUp(INVINSIBLE)->Activate();
+            }
+        }
+    }
+
+
 	if (keys[KEYBOARD_KEY_ESC]) exit(0); 
 
 

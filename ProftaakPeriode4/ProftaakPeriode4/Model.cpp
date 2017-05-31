@@ -11,6 +11,8 @@
 #include "GUIComponent.h"
 #include "bass.h"
 #include "Sound.h"
+#include "PowerUpComponent.h"
+
 
 //for testing purposes only, comment/delete when finished
 #include "Text.h"
@@ -200,6 +202,14 @@ void Model::Init()
 
     _gameObjects.push_back(scoreObject);
 
+    GameObject * powerUps = new GameObject(&_gameObjects);
+
+    PowerUpComponent * pu = new PowerUpComponent(0.0f, OWN);
+    pu->SetParent(powerUps);
+    pu->Init();
+    powerUps->AddComponent(pu);
+
+    _gameObjects.push_back(powerUps);
 }
 
 void Model::Reset()

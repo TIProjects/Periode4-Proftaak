@@ -3,12 +3,12 @@
 #include "GameObject.h"
 
 enum PowerUpId {
+    OWN,
     LIFE_UP,
     SPEED_UP,
     SPEED_DOWN,
     MULTIPLIER_UP,
-    MULTIPLIER_DOWN,
-    INVINCIBLE
+    INVINSIBLE
 };
 
 class PowerUpComponent : public Component
@@ -22,7 +22,8 @@ public:
     * Deconstruct of PowerUpComponent
     */
     ~PowerUpComponent();
-
+    
+    void Init();
     /**
     * Update methode
     */
@@ -36,22 +37,29 @@ public:
     */
     void Activate();
     /**
+    * Deactivates the powerup
+    */
+    void DeActivate();
+    PowerUpComponent * GetPowerUp(PowerUpId id);
+    /**
     * Id of the powerup
     */
     PowerUpId _id;
+    std::vector<PowerUpComponent*> powerUps;
 
 private:
     /**
     * Time the powerup is active after the powerup is activated
     * 0 for one time effect
     */
-    float _timeActive;
+    float _timeActive, _resetTime;
     /**
     * Bool determining the powerup being active or not
     */
-    bool isActive = false; 
+    bool _isActive;
     /**
     * Applies whatever effect you want a powerup to do
     */
     virtual void Effect();
+    virtual void ReverseEffect();
 };
