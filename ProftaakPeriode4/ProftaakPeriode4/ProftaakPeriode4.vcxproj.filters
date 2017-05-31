@@ -181,14 +181,8 @@
     <ClCompile Include="CollisionComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Lanes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerComponent.cpp">
       <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="LaneObstacleComponent.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LaneComponent.cpp">
       <Filter>Source Files\Components</Filter>
@@ -199,6 +193,12 @@
     </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Source Files\SFX</Filter>
+    </ClCompile>
+    <ClCompile Include="LaneObstacleComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LaneObstacleGenerator.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -300,7 +300,7 @@
     </ClInclude>
     <ClInclude Include="LaneComponent.h">
       <Filter>Header Files\Components</Filter>
-  </ClInclude>
+    </ClInclude>
     <ClInclude Include="AlphaBlend.h">
       <Filter>Header Files\Alpha Blend</Filter>
     </ClInclude>
@@ -309,6 +309,12 @@
     </ClInclude>
     <ClInclude Include="DrawComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LaneObstacleGenerator.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstaclePatterns.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

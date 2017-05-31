@@ -27,10 +27,10 @@ public:
 	 */
 	void Draw() override;
 
-private:
 	/**
-	 * \brief IndexedMesh object that is drawn
-	 */
+	* \brief IndexedMesh object that is drawn
+	*/
 	Mesh * _mesh;
+	
 };
 
