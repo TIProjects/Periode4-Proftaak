@@ -179,7 +179,7 @@ void Model::Init()
 	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles);
 
 	int laneAmount = 3;
-	PlayerComponent * playerComponent = new PlayerComponent(laneAmount/2, laneAmount, lifebar, diededImage, this,false);
+	PlayerComponent * playerComponent = new PlayerComponent(laneAmount/2, laneAmount, lifebar, diededImage, this,true);
 
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, meshes, playerComponent);

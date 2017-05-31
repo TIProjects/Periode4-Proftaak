@@ -37,9 +37,6 @@
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{d4976496-9021-491c-93b9-42d7fb0576ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Lanes">
-      <UniqueIdentifier>{c2f14859-e4a3-4b78-9f19-32712f107464}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Model">
       <UniqueIdentifier>{a1333fcc-87b2-494a-ab23-f4d9ad4a0c0d}</UniqueIdentifier>
     </Filter>
@@ -48,9 +45,6 @@
     </Filter>
     <Filter Include="Header Files\View">
       <UniqueIdentifier>{9dd1b347-790b-4e09-80bd-c5baced5a6ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Lanes">
-      <UniqueIdentifier>{25c3414b-1742-4321-b3ae-dcb8e519a5b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Score">
       <UniqueIdentifier>{614e0ca1-c9e5-4b12-9e1a-d96a68b9b731}</UniqueIdentifier>
@@ -132,27 +126,17 @@
     <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source Files\Score</Filter>
     </ClCompile>
-    </ClCompile>
-    <ClCompile Include="TextureLoader.cpp">
-      <Filter>Source Files\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="VisionComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="LaneGeneratorComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Factory</Filter>
     </ClCompile>
     <ClCompile Include="MeshDrawComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="MeshFactory.cpp">
       <Filter>Source Files\Factory</Filter>
@@ -189,7 +173,6 @@
     </ClCompile>
     <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source Files\Components</Filter>
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Source Files\SFX</Filter>
@@ -198,6 +181,9 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="LaneObstacleGenerator.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="VisionComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -247,20 +233,11 @@
     <ClInclude Include="Input.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
-    <ClInclude Include="json.hpp">
-      <Filter>Header Files\Json</Filter>
-    </ClInclude>
-    <ClInclude Include="VisionComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="LaneGeneratorComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Factory</Filter>
     </ClInclude>
     <ClInclude Include="MeshDrawComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="MeshFactory.h">
       <Filter>Header Files\Factory</Filter>
@@ -314,6 +291,9 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="ObstaclePatterns.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="VisionComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,6 +7,7 @@
 #include "MeshDrawComponent.h"
 #include "PlayerComponent.h"
 #include "CollisionComponent.h"
+#include "VisionComponent.h"
 #include "Collision.h"
 #include "MeshFactory.h"
 
@@ -37,6 +38,7 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, std
 	_player->AddComponent(playerComponent);
 	_player->AddComponent(new CollisionComponent(Hitbox({ 2,2,2 })));
 	_player->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj"))); // todo move out of scope
+	_player->AddComponent(new VisionComponent(laneAmount));
 	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(1);
 	lanePlayer->_speed = 0.0f;
 	_player->AddComponent(lanePlayer);

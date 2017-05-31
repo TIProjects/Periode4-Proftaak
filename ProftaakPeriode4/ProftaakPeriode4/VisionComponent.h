@@ -35,6 +35,11 @@ public:
 	void GetControls(int *lane, bool *crouch, bool *jump);
 
 	/*
+	* stops the vision thread
+	*/
+	void stopVisionThread();
+
+	/*
 	*Position of the point based on motion detection
 	*/
 	cv::Point2f _position;
@@ -73,10 +78,20 @@ public:
 	int _laneCount;
 
 private:
+	/*
+	* vision thread handles all vision processing
+	* terminate thread for terminating the thread and closing opencv windows if openend
+	*/
 	std::thread _visionThread;
+	bool _terminateThead = false;
+
+	/*
+	* opencv data
+	* 
+	*/
 	cv::Mat _src_gray;
-	int _thresh = 50;
-	int max_thresh = 255;
-	float _radius = 10;
+	const int _thresh = 50;
+	const int max_thresh = 255;
+	const float _radius = 10;
 };
 
