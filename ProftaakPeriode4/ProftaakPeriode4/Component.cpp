@@ -1,4 +1,5 @@
 #include "Component.h"
+#include "Sound.h"
 
 Component::Component(ComponentID id)
 {

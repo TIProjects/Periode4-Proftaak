@@ -16,19 +16,16 @@ unsigned int fps = 20;
 // Function that will be called on exiting the game
 void onExit()
 {
-    //TODO: add here the methodes that you want to be called on exit
-    ScoreBoardComponent * tempBoard;
-    
-    for (auto m : model._gameObjects)
+	for (auto m : model._gameObjects)
     {
-        tempBoard = static_cast<ScoreBoardComponent *>(m->GetComponent(SCOREBOARD_COMPONENT));
+        ScoreBoardComponent * tempBoard = static_cast<ScoreBoardComponent *>(m->GetComponent(SCOREBOARD_COMPONENT));
         if (tempBoard != nullptr) {
             tempBoard->SaveScore();
-            break;
+			delete tempBoard;
+        	break;
         }        
     }
 
-    delete tempBoard;
 
 
 	for (GameObject* g : model._gameObjects)
@@ -47,6 +44,8 @@ void onExit()
 			}
 		}
 	}
+
+	BASS_Free();
 }
 
 // The displayFunc which will call the UpdateView of the view
@@ -78,8 +77,8 @@ int main(int argc, char* argv[])
 	// Call the regular model init
 	// this will initialise the game
 	// do NOT remove
-	model.Init();
 	model.InitSound();
+	model.Init();
     atexit(onExit);
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);

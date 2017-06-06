@@ -26,6 +26,7 @@ Model::Model()
 	_gameOverTime = 0.0f;
 	_lastTime = 0;
 	_gameOver = false;
+	_backgroundMusic = nullptr;
 }
 
 void Model::update()
@@ -80,9 +81,7 @@ void Model::InitSound()
 	int freq = 44100; // Sample rate (Hz)
 	BASS_Init(device, freq, 0, nullptr, nullptr);
 
-	//example on how to start sound(s)
-	Sound * backgroundMusic = new Sound("Assets/background.wav", true);
-	backgroundMusic->Play();
+	_backgroundMusic = new Sound("Assets/Sounds/background.wav", true);
 
 	//place this where the program closes
 	//BASS_Free();
@@ -179,7 +178,8 @@ void Model::Init()
 
 	int laneAmount = 3;
 	GameObject * player = new GameObject(nullptr, { 0.0f,0.0f,-1.0f });
-	PlayerComponent * playerComponent = new PlayerComponent(laneAmount / 2, laneAmount, lifebar, diededImage, this, false);
+	PlayerComponent * playerComponent = new PlayerComponent(
+		laneAmount / 2, laneAmount, lifebar, diededImage, this, new Sound("Assets/Sounds/Thud.wav", false), new Sound("Assets/Sounds/Death.wav", false),false);
 	player->AddComponent(playerComponent);
 	player->AddComponent(new CollisionComponent(Hitbox({ 1,1,1 }))); // Hitbox
 	player->AddComponent(new MeshDrawComponent(GetNextMesh())); // todo move out of scope
@@ -251,6 +251,7 @@ bool Model::MeshHasNext() const
 
 void Model::Reset()
 {
+	_backgroundMusic->Restart();
 	_gameOver = false;
 	_gameOverTime = 0.0f;
 	_gameObjects.clear();
@@ -260,7 +261,7 @@ void Model::Reset()
 bool Model::GameOverState(float deltaTime)
 {
 	_gameOverTime += deltaTime;
-	if(_gameOverTime >= 5.0f)
+	if(_gameOverTime >= 12.0f)
 	{
 		Init();
 		return true;

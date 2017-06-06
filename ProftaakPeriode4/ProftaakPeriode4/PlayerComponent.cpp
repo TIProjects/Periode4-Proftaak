@@ -4,10 +4,13 @@
 #include "GameObject.h"
 #include "VisionComponent.h"
 #include "CameraComponent.h"
+#include "LaneObstacleComponent.h"
 
-PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Model * model, bool useOpenCV)
+PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Model * model, Sound * collisionSound, Sound * deathSound ,bool useOpenCV)
 : Component(PLAYER_COMPONENT)
 {
+	_deathSound = deathSound;
+	_collisionSound = collisionSound;
 	_laneCount = laneCount;
 	_isCrouching = false;
 	_laneIndex = laneIndex;
@@ -60,8 +63,11 @@ void PlayerComponent::Update(float deltaTime)
 			{
 				_collided = true;
 				int hp = _lifeBar->Decrement();
+				_collisionSound->Restart();
 				if (hp <= 0)
 				{
+					_deathSound->Play();
+					_model->_backgroundMusic->Pause();
 					_gameOverScreen->Show();
 					_model->_gameOver = true;
 					VisionComponent *vision = dynamic_cast<VisionComponent *>(_parent->GetComponent(VISION_COMPONENT));
