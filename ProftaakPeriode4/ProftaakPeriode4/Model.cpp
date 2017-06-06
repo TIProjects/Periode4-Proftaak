@@ -149,17 +149,14 @@ void Model::Init()
 
 	_gameObjects.push_back(camera);
 
-	// Create and add the skybox GameObject
+	// Create and add the skybox to the camera
 	if (!MeshHasNext())
 		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
 
-	GameObject * skybox = new GameObject(&_gameObjects);
 	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(GetNextMesh());
-	skybox->_scale = { 25.0f, 25.0f, 25.0f };
-	skybox->_lighting = false;
-	skybox->AddComponent(skyboxDrawComponent);
-	
-	_gameObjects.push_back(skybox);
+	camera->_scale = { 30.0f, 30.0f, 30.0f };
+	camera->_lighting = false;
+	camera->AddComponent(skyboxDrawComponent);
 
 	// Create and add the Mars GameObject
 	if (!MeshHasNext())
@@ -207,10 +204,8 @@ void Model::Init()
 		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	obstaclesNormal.push_back(GetNextMesh());
 
-	
-
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
-	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 1.5f, meshes, player);
+	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 1.5f, meshes, player, speedCounter, distanceCounter);
 
 
 	laneGenerator->AddComponent(laneDrawComponent);
@@ -253,7 +248,7 @@ void Model::Init()
     scoreBoard->AddScore(tempScore->ReturnScoreStruct());
 
     _gameObjects.push_back(scoreObject);
-
+	_lastTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 }
 
 Mesh* Model::GetNextMesh()
