@@ -17,6 +17,7 @@ public:
     * The speed of the moving objects
     */
     float _speed = 9.0f;
+	double _distance = 0.0f;
 	/**
 	 * \brief Constructor for creating a LaneGaneratorComponent
 	 * \param laneSize The amount of lanes to show
@@ -25,7 +26,7 @@ public:
 	 * \param playerComponent pointer to the playerComponent which is used on the lanes
 	 */
 
-	LaneGeneratorComponent(int laneCount, int laneSize, float spaceBetweem, std::vector<Mesh*> meshes, GameObject * playerObject);
+	LaneGeneratorComponent(int laneCount, int laneSize, float spaceBetweem, std::vector<Mesh*> meshes, GameObject * playerObject, Text * distanceText, Text * speedText);
 	/**
 	 * \brief Destructor
 	 * todo implement
@@ -50,6 +51,15 @@ public:
 	vector<GameObject*> _obstacles;
 	GameObject * _player;
 
+	
+	/**
+	 * \brief Pointer to the speed gui element
+	 */
+	Text * _speedText;
+	/**
+	 * \brief Pointer to the distance gui eleement
+	 */
+	Text * _distanceText;
 private:
 	
 	/*

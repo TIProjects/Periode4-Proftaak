@@ -28,12 +28,8 @@ void Text::Update(std::string text) {
 // This prints a string to the screen
 void Text::Sprint()
 {
-	if (_visible) {
+	if (!_visible) return;
 		
-		Vec3f pos = GetPosition();
-		glRasterPos2f(pos.x, pos.y); // location to start printing text
-	
-		const char* chars = _text.c_str();
-		glutBitmapString(GLUT_BITMAP_HELVETICA_18, (unsigned char *)chars);
-	}
+	glRasterPos2fv(GetPosition().v); // location to start printing text
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (unsigned char*)_text.c_str());
 }

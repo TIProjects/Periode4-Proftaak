@@ -13,12 +13,14 @@
 
 float meshTime = 0.0f;
 
-LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, float spaceBetween, std::vector<Mesh*> meshes, GameObject * playerObject)
+LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, float spaceBetween, std::vector<Mesh*> meshes, GameObject * playerObject, Text * distanceText, Text * speedText)
 {
 	srand(unsigned int(time(nullptr))); // set fully random (on time)
 						  // Testing
-
+	_distanceText = distanceText;
+	_speedText = speedText;
 	_spaceBetween = spaceBetween;
+	_distance = 0.0f;
 
 	for (int i = 0; i < laneAmount; i++)
 	{
@@ -69,6 +71,10 @@ void LaneGeneratorComponent::Update(float deltaTime)
 		// todo place random
 	}
 
+	// Update the distance and speed
+	_distance += (_speed * 10)* deltaTime;
+	_speedText->Update("Speed: " + std::to_string(int((_speed * 10)*3.6)) + " km/h");
+	_distanceText->Update("Distance: " + std::to_string(int(_distance)) + " m");
 	
 	// Update the lanes
 	for (int i = 0; i < _lanes.size(); i++) {
