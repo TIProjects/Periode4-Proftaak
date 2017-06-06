@@ -4,6 +4,7 @@
 // #include "Component.h"
 #include "GameObject.h"
 #include "ScoreBoard.h"
+#include "Mesh.h"
 
 class Model {
 public:
@@ -32,6 +33,10 @@ public:
 
 	bool _gameOver;
 private:
+	/**
+	 * \brief A list of preloaded meshes, so they won't have to be reloaded
+	 */
+	std::vector<Mesh*> _loadedMeshes;
 
 	/**
 	 * \brief Reset the Model by clearing all the list and resetting the variables
