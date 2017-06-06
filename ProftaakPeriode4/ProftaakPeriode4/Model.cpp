@@ -207,8 +207,6 @@ void Model::Init()
 	float speed = 10.0f;
 	std::vector<Mesh*> meshes;
 
-<<<<<<< HEAD
-=======
 	if (!MeshHasNext())
 		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 	meshes.push_back(GetNextMesh());
@@ -224,9 +222,6 @@ void Model::Init()
 		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	obstaclesNormal.push_back(GetNextMesh());
 
-	
-
->>>>>>> 76ffd3fb441e8ca99bb562115ed9e6873cb60148
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 1.5f, meshes, player);
 

@@ -15,15 +15,11 @@ std::vector<ObstaclePattern *> patterns;
 /**
  * The current/previous pattern used.. nullptr when no pattern is used
  */
-<<<<<<< HEAD
-ObstaclePattern * pattern; 
-=======
 ObstaclePattern * pattern;
 /**
  * The next pattern that is going to be used (nullptr when using random obstacle)
  */
 ObstaclePattern * nextPattern;
->>>>>>> 76ffd3fb441e8ca99bb562115ed9e6873cb60148
 
 LaneObstacleGenerator::LaneObstacleGenerator(std::vector<Mesh*> obstacleModelsAsteroid, std::vector<Mesh*> obstacleModelsNormal) : Component(LANE_OBSTACLE_GENERATOR)
 {

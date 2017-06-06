@@ -9,12 +9,9 @@
 PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Model * model, Sound * collisionSound, Sound * deathSound ,bool useOpenCV)
 : Component(PLAYER_COMPONENT)
 {
-<<<<<<< HEAD
     _isInvinsible = false;
-=======
 	_deathSound = deathSound;
 	_collisionSound = collisionSound;
->>>>>>> 76ffd3fb441e8ca99bb562115ed9e6873cb60148
 	_laneCount = laneCount;
 	_isCrouching = false;
 	_laneIndex = laneIndex;
@@ -66,26 +63,15 @@ void PlayerComponent::Update(float deltaTime)
 		{
 			if (collider->_collided.size() > 0)
 			{
-<<<<<<< HEAD
 				if (!_collided)
 				{
 					_collided = true;
 					int hp = _lifeBar->Decrement();
+					_collisionSound->Restart();
 					if (hp <= 0)
-=======
-				_collided = true;
-				int hp = _lifeBar->Decrement();
-				_collisionSound->Restart();
-				if (hp <= 0)
-				{
-					_deathSound->Play();
-					_model->_backgroundMusic->Pause();
-					_gameOverScreen->Show();
-					_model->_gameOver = true;
-					VisionComponent *vision = dynamic_cast<VisionComponent *>(_parent->GetComponent(VISION_COMPONENT));
-					if (vision != nullptr)
->>>>>>> 76ffd3fb441e8ca99bb562115ed9e6873cb60148
 					{
+						_deathSound->Play();
+						_model->_backgroundMusic->Pause();
 						_gameOverScreen->Show();
 						_model->_gameOver = true;
 						VisionComponent *vision = dynamic_cast<VisionComponent *>(_parent->GetComponent(VISION_COMPONENT));
