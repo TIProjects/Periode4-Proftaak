@@ -171,6 +171,7 @@
     <ClInclude Include="DrawComponent.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="MultiplierUp.cpp" />
+    <ClCompile Include="ObstaclePatterns.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RotateComponent.cpp" />

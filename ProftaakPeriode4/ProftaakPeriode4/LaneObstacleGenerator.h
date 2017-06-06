@@ -16,26 +16,28 @@ public:
 	 * \brief 
 	 * \param meshes 
 	 */
-	LaneObstacleGenerator(std::vector<Mesh*> meshes, float * speed);
-
+	LaneObstacleGenerator(std::vector<Mesh*> obstacleModelsAsteroid, std::vector<Mesh*> obstacleModelsNormal);
+	/*
+	 * Add a obstacle to the lane on the given lane with the given mesh and a speed
+	 * When speed = -1 then the lane speed is used!
+	 */
+	void addObstacle(int laneIndex, Mesh* mesh_object, float speed = -1.0f);
+	
 
 	/**
-	 * \brief 
-	 * \param laneIndex 
-	 * \param mesh 
-	 * \param speed 
+	 * Get a new random mesh object from all meshes
 	 */
-	void addObstacle(int laneIndex, Mesh* mesh);
+	Mesh * getRandomMeshObject();
 
 	/**
 	 * \brief Keep score of distance already moved since last placement
 	 */
-	float _lengthMovedSince = 0.0f;
+	std::vector<float> _lengthMovedSince;
 	/**
 	 * \brief The minimal distance between two placements (used for slow start)
 	 */
-	float _minimalDistanceBetween = 5.0f;
-	float _maximalDistanceBetween = 5.0f;
+	float _minimalDistanceBetween = 7.5f;
+	float _maximalDistanceBetween = 7.5f;
 	/**
 	 * \brief the speed of the lanes (todo replace with speed of LaneGenerator when changed by @gijs
 	 */
@@ -44,10 +46,6 @@ public:
 	 * The lastLane that is placed
 	 */
 	int lastLane = 0;
-	/**
-	 * The meshes that are used for placing a obstacle
-	 */
-	std::vector<Mesh*> _meshes;
 	/**
 	 * The list of lanes from the LaneGenerator (used for placing new obstacles) 
 	 * The pointer of the vector from LaneGenerator
@@ -58,7 +56,8 @@ public:
 	 * The pointer of the obstacles from LaneGenerator
 	 */
 	std::vector<GameObject*> * _obstacles;
-
+	std::vector<Mesh*> _obstacleModelsNormal;
+	std::vector<Mesh*> _obstacleModelsAsteroid;
 	/**
 	 * List of skipped amount 
 	 * The size is equal to the amount of lanes in _lanes
@@ -75,4 +74,6 @@ public:
 	 * Updating the obstacles (looking for placing obstacle)
 	 */
 	void Update(float nanotime) override;
+
+	int getNewLane();
 };

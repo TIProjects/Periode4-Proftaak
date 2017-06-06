@@ -77,8 +77,8 @@ int main(int argc, char* argv[])
 	// Call the regular model init
 	// this will initialise the game
 	// do NOT remove
-	model.Init();
 	model.InitSound();
+	model.Init();
     atexit(onExit);
 	glutDisplayFunc(window);
 	glutReshapeFunc(reshape);

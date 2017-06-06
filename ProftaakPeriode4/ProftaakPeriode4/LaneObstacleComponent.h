@@ -26,7 +26,9 @@ public:
 	/*
 	* The speed of the moving objects
 	*/
-    float * _speed;
+//    float * _speed;
+	float _speed;
+	float * _laneSpeed;
 	/*
 	* The amount already moved
 	*/

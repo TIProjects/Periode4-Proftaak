@@ -133,6 +133,13 @@ void LoadMaterialFile(const std::string &fileName, const std::string &dirName, I
 		else if (params[0] == "ks")
 		{//TODO, specular color
 		}
+		else if (params[0] == "tf")
+		{
+			currentMaterial->_alpha.red = atof(params[1].c_str());
+			currentMaterial->_alpha.green = atof(params[2].c_str());
+			currentMaterial->_alpha.blue = atof(params[3].c_str());
+			currentMaterial->_alpha.alpha = atof(params[1].c_str());
+		}
 		else if (
 			params[0] == "illum" || 
 			params[0] == "map_bump" || 
@@ -144,7 +151,6 @@ void LoadMaterialFile(const std::string &fileName, const std::string &dirName, I
 			params[0] == "ns" ||
 			params[0] == "ni" ||
 			params[0] == "td" ||
-			params[0] == "tf" ||
 			params[0] == "tr" ||
 			false)
 		{

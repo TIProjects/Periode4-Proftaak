@@ -92,6 +92,6 @@ private:
 	cv::Mat _src_gray;
 	const int _thresh = 50;
 	const int max_thresh = 255;
-	const int _radius = 10;
+	const float _radius = 10;
 };
 

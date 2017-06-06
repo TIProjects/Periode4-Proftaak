@@ -4,6 +4,7 @@
 #include <list>
 #include "Texture.h"
 #include "Vertex.h"
+#include "AlphaBlend.h"
 
 using namespace std;
 
@@ -49,6 +50,7 @@ public:
 	;
 	string _name;
 	Texture * _texture;
+	Colour _alpha;
 };
 
 

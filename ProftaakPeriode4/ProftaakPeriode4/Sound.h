@@ -17,7 +17,7 @@ public:
 	//default deconstructor
 	~Sound() {};
 	//default constructor
-	Sound() {};
+	Sound() { _Stream = HSTREAM(); _Dir = "";};
 	//Stop function: this functions stops the sound and frees the stream THIS SOUND IS NOT USABLE AFTER THIS FUNCTION
 	//Use Restart to start using this sound again
 	void Stop();

@@ -24,10 +24,11 @@
 
 Model::Model()
 {
+	_meshIndex = 0;
 	_gameOverTime = 0.0f;
 	_lastTime = 0;
 	_gameOver = false;
-	
+	_backgroundMusic = nullptr;
 }
 
 void Model::update()
@@ -82,9 +83,7 @@ void Model::InitSound()
 	int freq = 44100; // Sample rate (Hz)
 	BASS_Init(device, freq, 0, nullptr, nullptr);
 
-	//example on how to start sound(s)
-	Sound * backgroundMusic = new Sound("Assets/background.wav", true);
-	backgroundMusic->Play();
+	_backgroundMusic = new Sound("Assets/Sounds/background.wav", true);
 
 	//place this where the program closes
 	//BASS_Free();
@@ -92,6 +91,7 @@ void Model::InitSound()
 
 void Model::Init()
 {
+	_meshIndex = 0;
 	_lastTime = 0;
 
 	Reset();
@@ -158,37 +158,47 @@ void Model::Init()
 	// Create and add the camera GameObject
 	GameObject * camera = new GameObject(&_gameObjects);
 	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f, false);
-	camera->_position = { 3.65f, 3.3f, -8.0f};
+	camera->_position = { 4.7f, 3.7f, -8.0f };
 	camera->_rotation.x = 30.0f;
 	camera->AddComponent(cameraComponent);
 
 	_gameObjects.push_back(camera);
 
 	// Create and add the skybox GameObject
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
+
 	GameObject * skybox = new GameObject(&_gameObjects);
-	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
+	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(GetNextMesh());
 	skybox->_scale = { 25.0f, 25.0f, 25.0f };
 	skybox->_lighting = false;
 	skybox->AddComponent(skyboxDrawComponent);
-	_gameObjects.push_back(skybox);
 	
+	_gameObjects.push_back(skybox);
+
 	// Create and add the Mars GameObject
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Mars//planet.Cobj"));
+
 	GameObject * mars = new GameObject(&_gameObjects);
-	mars->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//Mars//planet.Cobj")));
+	mars->AddComponent(new MeshDrawComponent(GetNextMesh()));
 	mars->AddComponent(new RotateComponent({ 0.0f,1.0f,0.0f }));
 	mars->_position = { -25.0f,5.0F,-75.0F};
 
 	_gameObjects.push_back(mars);
 
 	// Create and add the player GameObject
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//silver-hawk-next//shawk13.Cobj"));
+
 	int laneAmount = 3;
 	GameObject * player = new GameObject(nullptr, { 0.0f,0.0f,-1.0f });
-	PlayerComponent * playerComponent = new PlayerComponent(laneAmount / 2, laneAmount, lifebar, diededImage, this, false);
+
+	PlayerComponent * playerComponent = new PlayerComponent(laneAmount / 2, laneAmount, lifebar, diededImage, this, new Sound("Assets/Sounds/Thud.wav", false), new Sound("Assets/Sounds/Death.wav", false),false);
 	player->AddComponent(playerComponent);
 	player->AddComponent(new CollisionComponent(Hitbox({ 1,1,1 }))); // Hitbox
-	player->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//silver-hawk-next//shawk13.Cobj"))); // todo move out of scope
+	player->AddComponent(new MeshDrawComponent(GetNextMesh())); // todo move out of scope
 	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(laneAmount/2);
-	lanePlayer->_speed = nullptr;
 	player->_position.y = 2.0f;
 	player->_position.z = -10.0f;
 	player->AddComponent(lanePlayer);
@@ -196,15 +206,48 @@ void Model::Init()
 	// Create and add the LaneGenerator GameObject
 	float speed = 10.0f;
 	std::vector<Mesh*> meshes;
-	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
-	std::vector<Mesh*> obstacles;
-	obstacles.push_back(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj"));
 
+<<<<<<< HEAD
+=======
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
+	meshes.push_back(GetNextMesh());
+
+	std::vector<Mesh*> obstaclesAsteroid;
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj"));
+	obstaclesAsteroid.push_back(GetNextMesh());
+
+
+	std::vector<Mesh*> obstaclesNormal;
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
+	obstaclesNormal.push_back(GetNextMesh());
+
+	
+
+>>>>>>> 76ffd3fb441e8ca99bb562115ed9e6873cb60148
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
-	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 2.0f, meshes, player);
-	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstacles, &laneDrawComponent->_speed);
+	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 1.5f, meshes, player);
+
 
 	laneGenerator->AddComponent(laneDrawComponent);
+
+
+//	std::vector<GameObject*> obstacles;
+//	GameObject * game_object = new GameObject(&_gameObjects);
+//	game_object->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj")));
+//	game_object->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
+//	obstacles.push_back(game_object);
+//
+//	GameObject * game_object2 = new GameObject(laneGenerator->_gameObjects);
+//	game_object2->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj")));
+//	game_object2->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
+//	obstacles.push_back(game_object2);
+
+
+	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstaclesAsteroid, obstaclesNormal);
+
 	laneGenerator->AddComponent(lane_obstacle_generator);
 	_gameObjects.push_back(laneGenerator);
 
@@ -239,8 +282,27 @@ void Model::Init()
     _gameObjects.push_back(powerUps);
 }
 
+Mesh* Model::GetNextMesh()
+{
+	if(_loadedMeshes.size() > _meshIndex)
+	{
+		Mesh * mesh = _loadedMeshes[_meshIndex];
+		_meshIndex += 1;
+		return mesh;
+	} else
+	{
+		return nullptr;
+	}
+}
+
+bool Model::MeshHasNext() const
+{
+	return _loadedMeshes.size() > _meshIndex + 1;
+}
+
 void Model::Reset()
 {
+	_backgroundMusic->Restart();
 	_gameOver = false;
 	_gameOverTime = 0.0f;
 	_gameObjects.clear();
@@ -250,7 +312,7 @@ void Model::Reset()
 bool Model::GameOverState(float deltaTime)
 {
 	_gameOverTime += deltaTime;
-	if(_gameOverTime >= 5.0f)
+	if(_gameOverTime >= 12.0f)
 	{
 		Init();
 		return true;

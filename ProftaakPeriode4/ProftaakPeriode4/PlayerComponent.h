@@ -13,7 +13,7 @@ public:
 	* \param laneCount the amount of lanes
 	* \param useOpenCV Wether the
 	*/
-	explicit PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Model * model, bool useOpenCV = true);
+	explicit PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Model * model, Sound * collisionSound, Sound * deathSound, bool useOpenCV = true);
 	/**
 	* \brief Overriden update from Component
 	* \param deltaTime Update the playercomponent by changing position and checking user input
@@ -78,6 +78,8 @@ public:
 	 */
 	LifeBar * _lifeBar;
 private:
+	Sound * _deathSound;
+	Sound * _collisionSound;
 	/**
 	 * \brief Update the player based on openCV input
 	 * \param deltaTime the deltaTime

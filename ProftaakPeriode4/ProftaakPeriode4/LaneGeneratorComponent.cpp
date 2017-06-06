@@ -17,6 +17,7 @@ LaneGeneratorComponent::LaneGeneratorComponent(int laneAmount, int laneSize, flo
 {
 	srand(unsigned int(time(nullptr))); // set fully random (on time)
 						  // Testing
+
 	_spaceBetween = spaceBetween;
 
 	for (int i = 0; i < laneAmount; i++)

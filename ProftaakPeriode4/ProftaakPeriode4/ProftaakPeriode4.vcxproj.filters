@@ -218,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="PowerUp.cpp">
       <Filter>Source Files\Power ups</Filter>
+	</ClCompile>
+    <ClCompile Include="ObstaclePatterns.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

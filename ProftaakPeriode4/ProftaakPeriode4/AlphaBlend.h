@@ -10,13 +10,39 @@
  * \param blue Amount of blue
  * \param alpha The transparentie
  */
-struct Colour
+class Colour
 {
-    float red;
-    float green;
-    float blue;
-    float alpha;
+public:
+	union
+	{
+		struct
+		{
+			float red;
+			float green;
+			float blue;
+			float alpha;
+		};
+		float v[4];
+	};
+	Colour();
+	Colour(const Colour& other);
 };
+
+inline Colour::Colour()
+{
+	red = 1.0f;
+	green = 1.0f;
+	blue = 1.0f;
+	alpha = 1.0f;
+}
+
+inline Colour::Colour(const Colour& other)
+{
+	red = other.red;
+	green = other.green;
+	blue = other.blue;
+	alpha = other.alpha;
+}
 
 namespace AlphaBlending
 {
@@ -28,7 +54,7 @@ namespace AlphaBlending
      */
     inline void beginAlphaBlending()
     {
-        glEnable(GL_BLEND);
+        glEnableClientState(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
 
@@ -39,7 +65,7 @@ namespace AlphaBlending
      */
     inline void endAlphaBlending()
     {
-        glDisable(GL_BLEND);
+        glDisableClientState(GL_BLEND);
         glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
@@ -51,7 +77,7 @@ namespace AlphaBlending
     inline void blendGameObject(GameObject* gameObject, Colour c)
     {
         beginAlphaBlending();
-        glColor4f(c.red, c.green, c.blue, c.alpha);
+        glColor4fv(c.v);
         gameObject->Draw();
         endAlphaBlending();
     }
