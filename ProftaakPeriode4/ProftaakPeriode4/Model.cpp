@@ -13,19 +13,19 @@
 #include "bass.h"
 #include "Sound.h"
 
-	//for testing purposes only, comment/delete when finished
+//for testing purposes only, comment/delete when finished
 #include "Text.h"
 #include "LifeBar.h"
 #include "LaneObstacleGenerator.h"
 #include "LaneObstacleComponent.h"
 #include "RotateComponent.h"
 
-	Model::Model()
+Model::Model()
 {
+	_meshIndex = 0;
 	_gameOverTime = 0.0f;
 	_lastTime = 0;
 	_gameOver = false;
-
 }
 
 void Model::update()
@@ -41,21 +41,21 @@ void Model::update()
 	// Calculate and display fps
 	// For performance profiling only
 	// should normally be commented
-	//	int fps = int(1.0 / deltaTime);
-	//	std::cout << "Fps: " << fps << "DT: " << deltaTime << std::endl;
+    //	int fps = int(1.0 / deltaTime);
+    //	std::cout << "Fps: " << fps << "DT: " << deltaTime << std::endl;
 
 	// Call the Update of every GameObject
 	for (GameObject * gameObject : _gameObjects)
 	{
 		gameObject->Update(deltaTime);
-		if (!_gameOver) continue;
-		if (GameOverState(deltaTime)) return;
+		if(!_gameOver) continue;
+		if(GameOverState(deltaTime)) return;
 	}
 
 	Collision::CheckCollision(_gameObjects);
 
 	// Call the LateUpdate of every Gameobject afterwards
-	for (GameObject * gameObject : _gameObjects)
+	for(GameObject * gameObject : _gameObjects)
 	{
 		gameObject->LateUpdate(deltaTime);
 	}
@@ -66,7 +66,7 @@ void Model::update()
 		gameObject->Update(deltaTime);
 	}
 
-	for (GameObject * gameObject : _guiObjects)
+	for(GameObject * gameObject : _guiObjects)
 	{
 		gameObject->LateUpdate(deltaTime);
 	}
@@ -90,6 +90,7 @@ void Model::InitSound()
 
 void Model::Init()
 {
+	_meshIndex = 0;
 	_lastTime = 0;
 
 	Reset();
@@ -143,36 +144,46 @@ void Model::Init()
 	// Create and add the camera GameObject
 	GameObject * camera = new GameObject(&_gameObjects);
 	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f, false);
-	camera->_position = { 3.65f, 3.3f, -8.0f };
+	camera->_position = { 3.65f, 3.3f, -8.0f};
 	camera->_rotation.x = 30.0f;
 	camera->AddComponent(cameraComponent);
 
 	_gameObjects.push_back(camera);
 
 	// Create and add the skybox GameObject
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
+
 	GameObject * skybox = new GameObject(&_gameObjects);
-	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
+	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(GetNextMesh());
 	skybox->_scale = { 25.0f, 25.0f, 25.0f };
 	skybox->_lighting = false;
 	skybox->AddComponent(skyboxDrawComponent);
+	
 	_gameObjects.push_back(skybox);
 
 	// Create and add the Mars GameObject
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Mars//planet.Cobj"));
+
 	GameObject * mars = new GameObject(&_gameObjects);
-	mars->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//Mars//planet.Cobj")));
+	mars->AddComponent(new MeshDrawComponent(GetNextMesh()));
 	mars->AddComponent(new RotateComponent({ 0.0f,1.0f,0.0f }));
-	mars->_position = { -25.0f,5.0F,-75.0F };
+	mars->_position = { -25.0f,5.0F,-75.0F};
 
 	_gameObjects.push_back(mars);
 
 	// Create and add the player GameObject
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//silver-hawk-next//shawk13.Cobj"));
+
 	int laneAmount = 3;
 	GameObject * player = new GameObject(nullptr, { 0.0f,0.0f,-1.0f });
 	PlayerComponent * playerComponent = new PlayerComponent(laneAmount / 2, laneAmount, lifebar, diededImage, this, false);
 	player->AddComponent(playerComponent);
 	player->AddComponent(new CollisionComponent(Hitbox({ 1,1,1 }))); // Hitbox
-	player->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//silver-hawk-next//shawk13.Cobj"))); // todo move out of scope
-	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(laneAmount / 2);
+	player->AddComponent(new MeshDrawComponent(GetNextMesh())); // todo move out of scope
+	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(laneAmount/2);
 	lanePlayer->_speed = nullptr;
 	player->_position.y = 2.0f;
 	player->_position.z = -10.0f;
@@ -181,10 +192,13 @@ void Model::Init()
 	// Create and add the LaneGenerator GameObject
 	float speed = 10.0f;
 	std::vector<Mesh*> meshes;
-	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
+	meshes.push_back(GetNextMesh());
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj"));
 	std::vector<Mesh*> obstacles;
-	obstacles.push_back(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj"));
-
+	obstacles.push_back(GetNextMesh());
 
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 2.0f, meshes, player);
@@ -199,22 +213,40 @@ void Model::Init()
 	ScoreBoardComponent * scoreBoard = new ScoreBoardComponent();
 	ScoreComponent * tempScore;
 
-	scoreBoard->LoadScore();
+    scoreBoard->LoadScore();
 
-	if (!scoreBoard->_scores.empty())
-		tempScore = new ScoreComponent(&laneDrawComponent->_speed, scoreBoard->_scores[0]->score);
-	else
-		tempScore = new ScoreComponent(&laneDrawComponent->_speed, 0);
+    if (!scoreBoard->_scores.empty())
+        tempScore = new ScoreComponent(&laneDrawComponent->_speed, scoreBoard->_scores[0]->score);
+    else
+        tempScore = new ScoreComponent(&laneDrawComponent->_speed, 0);
 
-	tempScore->_scoreText = scoreText;
-	tempScore->_highscoreText = highscore;
+    tempScore->_scoreText = scoreText;
+    tempScore->_highscoreText = highscore;
 
-	scoreObject->AddComponent(tempScore);
-	scoreObject->AddComponent(scoreBoard);
-	scoreBoard->AddScore(tempScore->ReturnScoreStruct());
+    scoreObject->AddComponent(tempScore);
+    scoreObject->AddComponent(scoreBoard);
+    scoreBoard->AddScore(tempScore->ReturnScoreStruct());
 
-	_gameObjects.push_back(scoreObject);
+    _gameObjects.push_back(scoreObject);
 
+}
+
+Mesh* Model::GetNextMesh()
+{
+	if(_loadedMeshes.size() > _meshIndex)
+	{
+		Mesh * mesh = _loadedMeshes[_meshIndex];
+		_meshIndex += 1;
+		return mesh;
+	} else
+	{
+		return nullptr;
+	}
+}
+
+bool Model::MeshHasNext() const
+{
+	return _loadedMeshes.size() > _meshIndex + 1;
 }
 
 void Model::Reset()
@@ -228,7 +260,7 @@ void Model::Reset()
 bool Model::GameOverState(float deltaTime)
 {
 	_gameOverTime += deltaTime;
-	if (_gameOverTime >= 5.0f)
+	if(_gameOverTime >= 5.0f)
 	{
 		Init();
 		return true;
