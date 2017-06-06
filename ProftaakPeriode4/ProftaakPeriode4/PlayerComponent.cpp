@@ -64,6 +64,11 @@ void PlayerComponent::Update(float deltaTime)
 				{
 					_gameOverScreen->Show();
 					_model->_gameOver = true;
+					VisionComponent *vision = dynamic_cast<VisionComponent *>(_parent->GetComponent(VISION_COMPONENT));
+					if (vision != nullptr)
+					{
+						vision->stopVisionThread();
+					}
 				}
 			}
 		} else

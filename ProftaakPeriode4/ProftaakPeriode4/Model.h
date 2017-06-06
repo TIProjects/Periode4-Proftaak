@@ -4,6 +4,7 @@
 // #include "Component.h"
 #include "GameObject.h"
 #include "ScoreBoard.h"
+#include "Mesh.h"
 
 class Model {
 public:
@@ -34,6 +35,22 @@ public:
 private:
 
 	/**
+	 * \brief Get the next mesh in the _loadedMesges list
+	 * \return pointer to the next Mesh
+	 */
+	Mesh * GetNextMesh();
+
+	/**
+	 * \brief wether the _loadedMeshes list has a next
+	 * \return wether the _loadedMeshes list has a next
+	 */
+	bool MeshHasNext() const;
+	/**
+	 * \brief A list of preloaded meshes, so they won't have to be reloaded
+	 */
+	std::vector<Mesh*> _loadedMeshes;
+
+	/**
 	 * \brief Reset the Model by clearing all the list and resetting the variables
 	 */
 	void Reset();
@@ -46,7 +63,10 @@ private:
 	bool GameOverState(float deltaTime);
     // The last time a frame was rendered in milliseconds
     float _lastTime;
-
+	/**
+	 * \brief The current index in the _LoadedMeshes list
+	 */
+	int _meshIndex;
 	/**
 	 * \brief the time spent in the gameOverstate
 	 */

@@ -16,14 +16,13 @@ public:
 	 * \brief 
 	 * \param meshes 
 	 */
-	LaneObstacleGenerator(std::vector<GameObject*> obstacleModels);
-	void addObstacle(int laneIndex, GameObject* game_object, float speed = -1.0f, bool rotation = true);
+	LaneObstacleGenerator(std::vector<Mesh*> obstacleModelsAsteroid, std::vector<Mesh*> obstacleModelsNormal);
+	void addObstacle(int laneIndex, Mesh* mesh_object, float speed = -1.0f);
 	
 
 
-	GameObject * getRandomGameObject();
+	Mesh * getRandomMeshObject();
 
-	static float* gameObjectSize(GameObject* game_object);
 	/**
 	 * \brief Keep score of distance already moved since last placement
 	 */
@@ -51,7 +50,8 @@ public:
 	 * The pointer of the obstacles from LaneGenerator
 	 */
 	std::vector<GameObject*> * _obstacles;
-	std::vector<GameObject*> _obstacleModels;
+	std::vector<Mesh*> _obstacleModelsNormal;
+	std::vector<Mesh*> _obstacleModelsAsteroid;
 	/**
 	 * List of skipped amount 
 	 * The size is equal to the amount of lanes in _lanes
