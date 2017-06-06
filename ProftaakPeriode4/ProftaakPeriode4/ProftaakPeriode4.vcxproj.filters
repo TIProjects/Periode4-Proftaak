@@ -88,6 +88,12 @@
     <Filter Include="Header Files\SFX">
       <UniqueIdentifier>{095e73fe-e9e1-41ba-b48f-fd6d06db2c55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Power ups">
+      <UniqueIdentifier>{7f7703b2-fa57-4478-928d-ec22b30500d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Power ups">
+      <UniqueIdentifier>{07093f12-993c-4b13-9d68-8ded0492b5f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -180,7 +186,22 @@
     <ClCompile Include="LaneObstacleComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUpComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeUp.cpp">
+      <Filter>Source Files\Power ups</Filter>
+    </ClCompile>
     <ClCompile Include="LaneObstacleGenerator.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AsteroidComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="VisionComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RotateComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -284,10 +305,25 @@
     <ClInclude Include="DrawComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="PowerUpComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeUp.h">
+      <Filter>Header Files\Power ups</Filter>
+    </ClInclude>
     <ClInclude Include="LaneObstacleGenerator.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="ObstaclePatterns.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AsteroidComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RotateComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="VisionComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>

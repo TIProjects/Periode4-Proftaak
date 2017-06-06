@@ -101,6 +101,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\libs\vc14\include;$(SolutionDir)\libs\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(SolutionDir)\libs\freeglut\include;$(SolutionDir)\libs\BASS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -108,6 +109,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\libs\freeglut\lib\x64;$(SolutionDir)\libs\BASS\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>freeglut.lib;opengl32.lib;bass.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\libs\vc14\lib;$(SolutionDir)\libs\freeglut\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;opengl32.lib;glu32.lib;opencv_world320d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -145,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AsteroidComponent.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
@@ -158,12 +162,16 @@
     <ClCompile Include="LaneObstacleGenerator.cpp" />
     <ClCompile Include="LifeBar.cpp" />
     <ClCompile Include="LaneGeneratorComponent.cpp" />
+    <ClCompile Include="LifeUp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshDrawComponent.cpp" />
+    <ClInclude Include="AsteroidComponent.h" />
     <ClInclude Include="DrawComponent.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="RotateComponent.cpp" />
+    <ClCompile Include="PowerUpComponent.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="MeshFactory.cpp" />
@@ -173,6 +181,7 @@
     <ClCompile Include="Vec.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="View.cpp" />
+    <ClCompile Include="VisionComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h" />
@@ -185,8 +194,11 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="LaneGeneratorComponent.h" />
+    <ClInclude Include="LifeUp.h" />
     <ClInclude Include="ObstaclePatterns.h" />
     <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="RotateComponent.h" />
+    <ClInclude Include="PowerUpComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
@@ -207,6 +219,7 @@
     <ClInclude Include="Vec.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="View.h" />
+    <ClInclude Include="VisionComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Button.psd" />

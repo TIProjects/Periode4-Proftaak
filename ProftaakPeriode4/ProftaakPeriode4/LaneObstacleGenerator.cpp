@@ -6,6 +6,7 @@
 #include "CollisionComponent.h"
 #include "ObstaclePatterns.h"
 #include "LaneGeneratorComponent.h"
+#include "AsteroidComponent.h"
 
 /**
  * Used for selecting a pattern, is placed here because of errors in usage (generator uses Pattern and Pattern uses generator)
@@ -30,16 +31,18 @@ LaneObstacleGenerator::LaneObstacleGenerator(std::vector<GameObject*> obstacleMo
 		patterns.push_back(new MovingPattern());
 	}
 }
-
 void LaneObstacleGenerator::addObstacle(int laneIndex, GameObject* game_object, float speed)
 {
-	GameObject* obstacle = new GameObject(*game_object);
-//	obstacle->AddComponent(game_object->_drawComponent);
+	GameObject* obstacle = new GameObject(game_object->_parentList);
+	MeshDrawComponent * meshDrawer = dynamic_cast<MeshDrawComponent*>(game_object->GetComponent(DRAW_COMPONENT));
+	obstacle->AddComponent(new MeshDrawComponent(meshDrawer->_mesh));
+//	obstacle->AddComponent()
 	LaneObstacleComponent * component = new LaneObstacleComponent(laneIndex);
-	if(speed != 0.0f)
-		component->_speed = speed;
+	if(*_speed != 0.0f)
+		component->_speed = _speed;
 	obstacle->AddComponent(component);
-//	obstacle->AddComponent(new CollisionComponent(Hitbox({1.0f,1.0f,1.0f}), false));
+	obstacle->AddComponent(new CollisionComponent(Hitbox({2.0f,2.0f,2.0f}), false));
+//	obstacle->AddComponent(new AsteroidComponent());
 
 	GameObject* lane = (*_lanes)[laneIndex];
 	float heightOffset = 0.0f;
@@ -85,16 +88,17 @@ void LaneObstacleGenerator::Update(float nanotime)
 	{
 		_lanes = &component->_lanes;
 		_obstacles = &component->_obstacles;
+		_speed = &component->_speed;
 
 		if (laneAmountSkipped.size() < component->_lanes.size())
 			for (int i = 0; i < component->_lanes.size(); i++)
 				laneAmountSkipped.push_back(0);
 
-		for(int i = 0; i < component->_lanes.size(); i++)
+		for (int i = 0; i < component->_lanes.size(); i++)
 		{
 			if (_lengthMovedSince.size() <= i)
 				_lengthMovedSince.push_back(0.0f);
-			_lengthMovedSince[i] += nanotime * _speed;
+			_lengthMovedSince[i] += nanotime * *_speed;
 		}
 
 
@@ -122,6 +126,8 @@ void LaneObstacleGenerator::Update(float nanotime)
 				}
 			}
 		}
+
+		
 
 		if (pattern != nullptr  && _lengthMovedSince[pattern->_newLane] / minNeededPattern < 1.0f) // so wait for pattern to end
 		{

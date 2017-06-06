@@ -2,6 +2,7 @@
 #include <GL\freeglut.h>
 #include "DrawComponent.h"
 #include "CameraComponent.h"
+#include "VisionComponent.h"
 #include <iostream>
 #include "MeshDrawComponent.h"
 #include "MeshFactory.h"
@@ -16,6 +17,8 @@
 #include "Text.h"
 #include "LifeBar.h"
 #include "LaneObstacleGenerator.h"
+#include "LaneObstacleComponent.h"
+#include "RotateComponent.h"
 
 Model::Model()
 {
@@ -67,7 +70,6 @@ void Model::update()
 	{
 		gameObject->LateUpdate(deltaTime);
 	}
-
 	glutPostRedisplay();
 }
 
@@ -88,6 +90,8 @@ void Model::InitSound()
 
 void Model::Init()
 {
+	_lastTime = 0;
+
 	Reset();
 
 	// Create GUI object
@@ -135,58 +139,68 @@ void Model::Init()
 	_guiObjects.push_back(guiOb);
 
 	// Create every other GameObject
-	GameObject * scoreObject = new GameObject(&_gameObjects);
 
-	scoreBoard.loadScore();
-	ScoreComponent * score;
-
-	if (!scoreBoard._scores.empty())
-		score = new ScoreComponent(scoreText, highscore, scoreBoard._scores[0]->returnScore());
-	else
-		score = new ScoreComponent(scoreText, highscore, 0);
-
-	scoreObject->AddComponent(score);
-	scoreBoard.addScore(score);
-
-	_gameObjects.push_back(scoreObject);
-
-	// Test GameObjects
-	// TODO: remove
-
-	_lastTime = 0;
-
+	// Create and add the camera GameObject
 	GameObject * camera = new GameObject(&_gameObjects);
-	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f);
-	camera->_position = { 3.65f, 3.3f, 0.0f };
+	CameraComponent * cameraComponent = new CameraComponent(1280.0f, 720.0f, 0.1f, 300.0f, 90.0f, false);
+	camera->_position = { 3.65f, 3.3f, -8.0f};
 	camera->_rotation.x = 30.0f;
 	camera->AddComponent(cameraComponent);
 
 	_gameObjects.push_back(camera);
 
+	// Create and add the skybox GameObject
 	GameObject * skybox = new GameObject(&_gameObjects);
 	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
 	skybox->_scale = { 25.0f, 25.0f, 25.0f };
 	skybox->_lighting = false;
 	skybox->AddComponent(skyboxDrawComponent);
 	_gameObjects.push_back(skybox);
+	
+	// Create and add the Mars GameObject
+	GameObject * mars = new GameObject(&_gameObjects);
+	mars->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//Mars//planet.Cobj")));
+	mars->AddComponent(new RotateComponent({ 0.0f,1.0f,0.0f }));
+	mars->_position = { -25.0f,5.0F,-75.0F};
+
+	_gameObjects.push_back(mars);
+
+	// Create and add the player GameObject
+	int laneAmount = 3;
+	GameObject * player = new GameObject(nullptr, { 0.0f,0.0f,-1.0f });
+	PlayerComponent * playerComponent = new PlayerComponent(laneAmount / 2, laneAmount, lifebar, diededImage, this, false);
+	player->AddComponent(playerComponent);
+	player->AddComponent(new CollisionComponent(Hitbox({ 1,1,1 }))); // Hitbox
+	player->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//silver-hawk-next//shawk13.Cobj"))); // todo move out of scope
+	LaneObstacleComponent * lanePlayer = new LaneObstacleComponent(laneAmount/2);
+	lanePlayer->_speed = nullptr;
+	player->_position.y = 2.0f;
+	player->_position.z = -10.0f;
+	player->AddComponent(lanePlayer);
+
+	// Create and add the LaneGenerator GameObject
+	float speed = 10.0f;
 	std::vector<Mesh*> meshes;
 	meshes.push_back(LoadMeshFile("Assets//Models//Lane//lanePart.Cobj"));
 
 	
 
-	
+//	int laneAmount = 3;
+//	PlayerComponent * playerComponent = new PlayerComponent(laneAmount/2, laneAmount, lifebar, diededImage, this,false);
 
-	int laneAmount = 3;
-	PlayerComponent * playerComponent = new PlayerComponent(laneAmount/2, laneAmount, lifebar, diededImage, this,false);
+//	std::vector<Mesh*> obstacles;
+//	obstacles.push_back(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj"));
 
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
-	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, meshes, playerComponent);
+	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 2.0f, meshes, player);
+	
+
 	laneGenerator->AddComponent(laneDrawComponent);
 
 
 	std::vector<GameObject*> obstacles;
 	GameObject * game_object = new GameObject(&_gameObjects);
-	game_object->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj")));
+	game_object->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj")));
 	game_object->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
 	obstacles.push_back(game_object);
 
@@ -200,6 +214,28 @@ void Model::Init()
 
 	laneGenerator->AddComponent(lane_obstacle_generator);
 	_gameObjects.push_back(laneGenerator);
+
+	GameObject * scoreObject = new GameObject(&_gameObjects);
+	//Scoreboard that keeps track of the scores
+	ScoreBoardComponent * scoreBoard = new ScoreBoardComponent();
+	ScoreComponent * tempScore;
+
+    scoreBoard->LoadScore();
+
+    if (!scoreBoard->_scores.empty())
+        tempScore = new ScoreComponent(&laneDrawComponent->_speed, scoreBoard->_scores[0]->score);
+    else
+        tempScore = new ScoreComponent(&laneDrawComponent->_speed, 0);
+
+    tempScore->_scoreText = scoreText;
+    tempScore->_highscoreText = highscore;
+
+    scoreObject->AddComponent(tempScore);
+    scoreObject->AddComponent(scoreBoard);
+    scoreBoard->AddScore(tempScore->ReturnScoreStruct());
+
+    _gameObjects.push_back(scoreObject);
+
 }
 
 void Model::Reset()

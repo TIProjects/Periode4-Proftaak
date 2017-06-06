@@ -15,7 +15,7 @@ public:
 
 	virtual void Init(LaneObstacleGenerator * lane_obstacle_generator)
 	{
-		_speed = lane_obstacle_generator->_speed;
+		_speed = *lane_obstacle_generator->_speed;
 	};
 
 
@@ -65,7 +65,7 @@ public:
 
 	void Init(LaneObstacleGenerator* lane_obstacle_generator) override
 	{
-		_speed = (rand() % (int)(lane_obstacle_generator->_speed - 5.0f)) + 5.0f;
+		_speed = (rand() % (int)(*lane_obstacle_generator->_speed - 5.0f)) + 5.0f;
 //
 //		GameObject * lane_object = (*lane_obstacle_generator->_lanes)[newLane];
 //		LaneComponent * lane_component = dynamic_cast<LaneComponent*>(lane_object->GetComponent(LANE_COMPONENT));

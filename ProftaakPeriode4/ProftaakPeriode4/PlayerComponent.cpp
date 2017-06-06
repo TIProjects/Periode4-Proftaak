@@ -2,6 +2,8 @@
 #include "CollisionComponent.h"
 #include "Input.h"
 #include "GameObject.h"
+#include "VisionComponent.h"
+#include "CameraComponent.h"
 
 PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Model * model, bool useOpenCV)
 : Component(PLAYER_COMPONENT)
@@ -16,6 +18,7 @@ PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar
 	_hitTime = 0.0f;
 	_model = model;
 	_gameOverScreen = gameOverScreen;
+	_isJumping = false;
 }
 
 void PlayerComponent::Update(float deltaTime)
@@ -23,14 +26,30 @@ void PlayerComponent::Update(float deltaTime)
 	if(_targetPosition.x != _parent->_position.x)
 	{
 		float diff = _targetPosition.x - _parent->_position.x;
-		if(diff <= 0.5 && diff >= -0.5f)
+		if(diff <= 0.01f && diff >= -0.01f)
 		{
 			_parent->_position.x = _targetPosition.x;
 		} else
 		{
-			_parent->_position.x += diff * 0.025f;
+			float speed = diff * deltaTime * 2.0f;
+			_parent->_rotation.z += speed * 10.0f;
+			_parent->_position.x += speed;
+
+			// Use the Camera GameObject to create a view
+			for (GameObject * gameObject : _model->_gameObjects)
+			{
+				CameraComponent * camera = dynamic_cast<CameraComponent *>(gameObject->GetComponent(CAMERA_COMPONENT));
+				if (camera != nullptr)
+				{
+					// Found camera, apply it's view and stop looping the list
+					gameObject->_position.x += speed * 0.50f;
+					break;
+				}
+			}
 		}
 	}
+
+	
 
 	CollisionComponent * collider = static_cast<CollisionComponent*>(_parent->GetComponent(COLLISION_COMPONENT));
 	if(collider != nullptr)
@@ -66,6 +85,11 @@ void PlayerComponent::MovePlayer(float xCoord)
 
 void PlayerComponent::OpenCVUpdate(float deltaTime)
 {
+	VisionComponent *vision = dynamic_cast<VisionComponent *>(_parent->GetComponent(VISION_COMPONENT));
+	if (vision != nullptr)
+	{
+		vision->GetControls(&_laneIndex, &_isCrouching, &_isJumping);
+	}
 	// TODO Update laneIndex using openCV
 }
 
