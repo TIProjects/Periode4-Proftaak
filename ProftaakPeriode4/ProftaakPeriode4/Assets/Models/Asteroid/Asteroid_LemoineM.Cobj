@@ -1,5 +1,8 @@
 # Blender v2.78 (sub 0) OBJ File: ''
 # www.blender.org
+w 2
+h 2
+l 2
 mtllib Asteroid_LemoineM.mtl
 o Volume15_copy000.001
 v 0.554814 -0.768995 0.694734

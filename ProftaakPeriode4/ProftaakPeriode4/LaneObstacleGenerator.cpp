@@ -7,6 +7,7 @@
 #include "ObstaclePatterns.h"
 #include "LaneGeneratorComponent.h"
 #include "AsteroidComponent.h"
+#include "MeshFactory.h"
 
 /**
  * Used for selecting a pattern, is placed here because of errors in usage (generator uses Pattern and Pattern uses generator)
@@ -25,27 +26,31 @@ LaneObstacleGenerator::LaneObstacleGenerator(std::vector<GameObject*> obstacleMo
 	srand(time(nullptr));
 	_lanes = nullptr;
 	_obstacles = nullptr;
+	_speed = nullptr;
 	pattern = nullptr;
 	if (patterns.size() == 0) {
 		patterns.push_back(new TwoPattern());
 		patterns.push_back(new MovingPattern());
 	}
 }
-void LaneObstacleGenerator::addObstacle(int laneIndex, GameObject* game_object, float speed)
+void LaneObstacleGenerator::addObstacle(int laneIndex, GameObject* game_object, float speed, bool rotation)
 {
 	GameObject* obstacle = new GameObject(game_object->_parentList);
 	MeshDrawComponent * meshDrawer = dynamic_cast<MeshDrawComponent*>(game_object->GetComponent(DRAW_COMPONENT));
 	obstacle->AddComponent(new MeshDrawComponent(meshDrawer->_mesh));
-//	obstacle->AddComponent()
 	LaneObstacleComponent * component = new LaneObstacleComponent(laneIndex);
-	if(*_speed != 0.0f)
-		component->_speed = _speed;
+	
+
+	component->_speed = speed;
+	component->_laneSpeed = _speed;
+
 	obstacle->AddComponent(component);
 	obstacle->AddComponent(new CollisionComponent(Hitbox({2.0f,2.0f,2.0f}), false));
-//	obstacle->AddComponent(new AsteroidComponent());
+	if(rotation)
+		obstacle->AddComponent(new AsteroidComponent());
 
 	GameObject* lane = (*_lanes)[laneIndex];
-	float heightOffset = 0.0f;
+	float heightOffset = 1.0f;
 	LaneComponent * lane_component = dynamic_cast<LaneComponent*>(lane->GetComponent(LANE_COMPONENT));
 
 
@@ -109,41 +114,49 @@ void LaneObstacleGenerator::Update(float nanotime)
 //		float minNeeded = obstacleMesh->_length;// for testing purposes
 
 		if(_minimalDistanceBetween > 0.0f)
-			_minimalDistanceBetween -= nanotime/20.0;
+			_minimalDistanceBetween -= nanotime/40.0;
 //		std::cout << _minimalDistanceBetween << std::endl;
 
 
 		float minNeededPattern = minNeeded;
-		if (nextPattern != nullptr) {
-			GameObject * laneObject = (*_lanes)[nextPattern->_newLane];
-			LaneComponent * lane_component = dynamic_cast<LaneComponent*>(laneObject->GetComponent(LANE_COMPONENT));
-			if (lane_component != nullptr) {
-				float speed = 9.0f;
-//				if (nextPattern != nullptr && nextPattern->_speed >= 0.0f)
-//					speed = nextPattern->_speed;
-				if (pattern != nullptr) {
-					minNeededPattern = pattern->getLengthAfter(speed, lane_component->getLength());
+		int newLane;
+		if (nextPattern != nullptr)
+			newLane = nextPattern->_newLane;
+		else
+			newLane = getNewLane();
+
+		GameObject * laneObject = (*_lanes)[newLane];
+		LaneComponent * lane_component = dynamic_cast<LaneComponent*>(laneObject->GetComponent(LANE_COMPONENT));
+		if (lane_component != nullptr) {
+			float speed = *_speed;
+			if (nextPattern != nullptr && nextPattern->_speed != -1.0f)
+				speed = nextPattern->_speed;
+			if (pattern != nullptr) {
+				float length = pattern->getLengthAfter(speed, lane_component->getLength());
+				if (length != 0.0f) {
+					minNeededPattern = length;
+					std::cout << _lengthMovedSince[pattern->_newLane] << " - " << minNeededPattern << std::endl;
 				}
 			}
 		}
 
+//		std::cout << minNeededPattern << " " << minNeeded << std::endl;
 		
 
-		if (pattern != nullptr  && _lengthMovedSince[pattern->_newLane] / minNeededPattern < 1.0f) // so wait for pattern to end
-		{
-			int newLane = getNewLane();
-			while (newLane == pattern->_newLane)
-				newLane = rand() % (*_lanes).size();
-			if (_lengthMovedSince[newLane] / minNeeded >= 1.0f) //&& rand() % 100 >= 50) // todo add randomness
-			{
-				std::cout << minNeededPattern << " - " << _lengthMovedSince[pattern->_newLane] << std::endl;
-//				std::cout << "NORMAL " << _lengthMovedSince[pattern->_newLane] / minNeededPattern << std::endl;
-				addObstacle(newLane, obstacleMesh);
-				for (int i = 0; i < component->_lanes.size(); i++)
-					if (i != pattern->_newLane)
-						_lengthMovedSince[i] = 0;
-				lastLane = newLane;
-			}
+		if (minNeededPattern != 0.0f && pattern != nullptr && _lengthMovedSince[pattern->_newLane] < minNeededPattern) {
+				int newLane = getNewLane();
+				while (newLane == pattern->_newLane)
+					newLane = rand() % (*_lanes).size();
+				if (_lengthMovedSince[newLane] / minNeeded >= 1.0f) //&& rand() % 100 >= 50) // todo add randomness
+				{
+					//				std::cout << minNeededPattern << " - " << _lengthMovedSince[pattern->_newLane] << std::endl;
+					std::cout << "NORMAL " << _lengthMovedSince[pattern->_newLane] / minNeededPattern << std::endl;
+					addObstacle(newLane, obstacleMesh);
+					for (int i = 0; i < component->_lanes.size(); i++)
+						if (i != pattern->_newLane)
+							_lengthMovedSince[i] = 0;
+					lastLane = newLane;
+				}
 		}
 		else {
 			int newLane;
@@ -151,32 +164,36 @@ void LaneObstacleGenerator::Update(float nanotime)
 				newLane = nextPattern->_newLane;
 			else
 				newLane = getNewLane();
-			if (_lengthMovedSince[newLane] / minNeededPattern >= 1.0f) {
+
+
+			if (_lengthMovedSince[newLane] >= minNeededPattern) {
 				if (nextPattern != nullptr) {
-//					std::cout << "PATTERN " << newLane << std::endl;
+					std::cout << "PATTERN " << newLane << std::endl;
 					nextPattern->Execute(this);
 					pattern = nextPattern;
 					lastLane = nextPattern->_newLane;
 					nextPattern = nullptr;
-				}
-				else {
-//					std::cout << "RANDOM " << newLane << std::endl;
-					if (_lengthMovedSince[newLane] / minNeeded >= 1.0f) //&& rand() % 100 >= 50) // todo add randomness
+				} else {
+					
+					if (_lengthMovedSince[newLane] >= minNeeded) //&& rand() % 100 >= 50) // todo add randomness
 					{
+						std::cout << "RANDOM " << newLane << _lengthMovedSince[newLane] << ":" << minNeeded << std::endl;
+						pattern = nullptr; // todo solution
 						addObstacle(newLane, obstacleMesh);
-						for (int i = 0; i < component->_lanes.size(); i++)
-							_lengthMovedSince[i] = 0;
 
 						lastLane = newLane;
-
+						nextPattern = nullptr;
 						float patternChange = float(rand() % 100) / 100.0f;
 						float used = 0.0f;
-						for (ObstaclePattern* aPattern : patterns)
-							if (patternChange - (aPattern->change + used) <= 0.0f) {
+						for (ObstaclePattern* aPattern : patterns) {
+							if (patternChange < aPattern->change + used && patternChange > used) {
 								nextPattern = aPattern;
 								nextPattern->_newLane = getNewLane();
 								nextPattern->Init(this);
+								std::cout << "PATTERN CHOSEN" << std::endl;
 							}
+							used += aPattern->change;
+						}
 
 					}
 				}

@@ -17,15 +17,9 @@ public:
 	 * \param meshes 
 	 */
 	LaneObstacleGenerator(std::vector<GameObject*> obstacleModels);
+	void addObstacle(int laneIndex, GameObject* game_object, float speed = -1.0f, bool rotation = true);
 
 
-	/**
-	 * \brief 
-	 * \param laneIndex 
-	 * \param mesh 
-	 * \param speed 
-	 */
-	void addObstacle(int laneIndex, GameObject* game_object, float speed = 0.0f);
 
 	GameObject * getRandomGameObject();
 
@@ -37,12 +31,13 @@ public:
 	/**
 	 * \brief The minimal distance between two placements (used for slow start)
 	 */
-	float _minimalDistanceBetween = 5.0f;
-	float _maximalDistanceBetween = 5.0f;
+	float _minimalDistanceBetween = 7.5f;
+	float _maximalDistanceBetween = 7.5f;
 	/**
 	 * \brief the speed of the lanes (todo replace with speed of LaneGenerator when changed by @gijs
 	 */
     float * _speed;//&component->_speed;
+	float * _obstacleSpeed;
 	/**
 	 * The lastLane that is placed
 	 */

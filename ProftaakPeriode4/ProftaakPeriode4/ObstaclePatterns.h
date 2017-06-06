@@ -21,7 +21,7 @@ public:
 
 	virtual void Execute(LaneObstacleGenerator * lane_obstacle_generator)
 	{
-		lane_obstacle_generator->addObstacle(_newLane, lane_obstacle_generator->getRandomGameObject(), _speed);
+		lane_obstacle_generator->addObstacle(_newLane, lane_obstacle_generator->getRandomGameObject(), _speed, false);
 	};
 
 	virtual float getLengthBefore(float speedBefore, float lengthLane) {
@@ -47,7 +47,7 @@ public:
 			if (_newLane != i && otherLane != i)
 				lane_obstacle_generator->laneAmountSkipped[i] += lane_obstacle_generator->maxSkip;
 			else 
-				lane_obstacle_generator->addObstacle(i, lane_obstacle_generator->getRandomGameObject());
+				lane_obstacle_generator->addObstacle(i, lane_obstacle_generator->getRandomGameObject(), *lane_obstacle_generator->_speed,false);
 		}
 	};
 
@@ -61,11 +61,12 @@ public:
 class MovingPattern : public ObstaclePattern
 {
 public:
-
+	
 
 	void Init(LaneObstacleGenerator* lane_obstacle_generator) override
 	{
 		_speed = (rand() % (int)(*lane_obstacle_generator->_speed - 5.0f)) + 5.0f;
+		std::cout << "MOVING " << _speed << std::endl;
 //
 //		GameObject * lane_object = (*lane_obstacle_generator->_lanes)[newLane];
 //		LaneComponent * lane_component = dynamic_cast<LaneComponent*>(lane_object->GetComponent(LANE_COMPONENT));
@@ -76,15 +77,6 @@ public:
 //		_distance /= 3.0;
 	};
 
-
-	float getLengthBefore(float speedBefore, float lengthLane) override{
-//		float distance = ((lengthLane / _speed) - (lengthLane / speedBefore))*speedBefore / 3.0f;
-//		std::cout << "BEFORE: " << distance << std::endl;
-//		if (distance > 0.0f)
-//			return distance;
-		return 0.0f;
-	};
-
 	float getLengthAfter(float speedAfter, float lengthLane) override{
 
 		float dist1 = lengthLane / _speed;
@@ -92,14 +84,13 @@ public:
 		float dist3 = dist1 - dist2;
 		float dist4 = dist3*speedAfter;
 		float distance = dist4;
-		std::cout << "AFTER: " << distance << std::endl;
 		if(distance > 0.0f)
 			return distance;
-		return 2.0f;
+		return 0.0f;
 	};
 
 	MovingPattern()
 	{
-		change = 0.10f;
+		change = 0.25f;
 	}
 };
