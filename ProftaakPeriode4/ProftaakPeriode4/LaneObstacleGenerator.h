@@ -17,10 +17,16 @@ public:
 	 * \param meshes 
 	 */
 	LaneObstacleGenerator(std::vector<Mesh*> obstacleModelsAsteroid, std::vector<Mesh*> obstacleModelsNormal);
+	/*
+	 * Add a obstacle to the lane on the given lane with the given mesh and a speed
+	 * When speed = -1 then the lane speed is used!
+	 */
 	void addObstacle(int laneIndex, Mesh* mesh_object, float speed = -1.0f);
 	
 
-
+	/**
+	 * Get a new random mesh object from all meshes
+	 */
 	Mesh * getRandomMeshObject();
 
 	/**
