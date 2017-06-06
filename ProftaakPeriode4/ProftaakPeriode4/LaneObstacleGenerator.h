@@ -18,7 +18,7 @@ public:
 	 */
 	LaneObstacleGenerator(std::vector<GameObject*> obstacleModels);
 	void addObstacle(int laneIndex, GameObject* game_object, float speed = -1.0f, bool rotation = true);
-
+	
 
 
 	GameObject * getRandomGameObject();
@@ -37,7 +37,6 @@ public:
 	 * \brief the speed of the lanes (todo replace with speed of LaneGenerator when changed by @gijs
 	 */
     float * _speed;//&component->_speed;
-	float * _obstacleSpeed;
 	/**
 	 * The lastLane that is placed
 	 */
