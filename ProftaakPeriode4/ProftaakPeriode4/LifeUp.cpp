@@ -12,11 +12,10 @@ void LifeUp::Effect() {
     auto tempList = *_parent->_parentList;
 	for (auto go : tempList)
 	{
-		LaneObstacleGenerator* pc = static_cast<LaneObstacleGenerator*>(go->GetComponent(LANE_OBSTACLE_GENERATOR));
+		LaneGeneratorComponent* pc = dynamic_cast<LaneGeneratorComponent*>(go->GetComponent(DRAW_COMPONENT));
 		if (pc != nullptr)
 		{
-			LaneGeneratorComponent* component = dynamic_cast<LaneGeneratorComponent*>(pc->GetParent()->GetComponent(DRAW_COMPONENT));
-			PlayerComponent * player = static_cast<PlayerComponent*>(component->_player->GetComponent(PLAYER_COMPONENT));
+			PlayerComponent * player = static_cast<PlayerComponent*>(pc->_player->GetComponent(PLAYER_COMPONENT));
 			player->_lifeBar->Increment();
 			return;
 		}

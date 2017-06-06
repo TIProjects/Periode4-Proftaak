@@ -53,9 +53,6 @@ public:
 	// to communicate with other components in it's parent GameObject
 	// @param GameObject *: the pointer to the parent GameObject
 	virtual void SetParent(GameObject * parent);
-
-    virtual GameObject * GetParent();
-
 	// The identifier of the component
 	ComponentID _id;
 protected:
