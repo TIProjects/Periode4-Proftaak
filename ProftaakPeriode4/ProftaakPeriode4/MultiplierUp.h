@@ -1,12 +1,12 @@
 #pragma once
 #include "PowerUP.h"
 
-class LifeUp : public PowerUp {
+class MultiplierUp : public PowerUp
+{
 public:
-    LifeUp(GameObject * parent);
+    MultiplierUp(GameObject * parent);
 
 private:
     void Effect() override;
 	GameObject * _parent;
-
 };

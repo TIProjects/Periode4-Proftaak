@@ -1,9 +1,13 @@
 #include "PowerUpComponent.h"
+#include "LifeUp.h"
+#include "SpeedUp.h"
+#include "SpeedDown.h"
+#include "Invinsible.h"
+#include "MultiplierUp.h"
+#include <iostream>
 
-PowerUpComponent::PowerUpComponent(float timeActive, PowerUpId id) : Component(POWER_UP_COMPONENT)
+PowerUpComponent::PowerUpComponent() : Component(POWER_UP_COMPONENT)
 {
-    _timeActive = timeActive;
-    _id = id;
 }
 
 PowerUpComponent::~PowerUpComponent()
@@ -12,24 +16,25 @@ PowerUpComponent::~PowerUpComponent()
 
 void PowerUpComponent::Update(float deltaTime)
 {
-    if (isActive)
-    {
-        _timeActive -= deltaTime;
-        Effect();
-        if (_timeActive <= 0) isActive = false;
-    }
+	for (auto pu : _powerUps) pu->Update(deltaTime);
 }
 
 void PowerUpComponent::LateUpdate(float deltaTime)
 {
 }
 
-void PowerUpComponent::Activate()
+void PowerUpComponent::Init()
 {
-    if (_timeActive == 0.0f) Effect();
-    else isActive = true;
+	_powerUps.push_back(new LifeUp(_parent));
+	_powerUps.push_back(new SpeedUp(_parent));
+	_powerUps.push_back(new SpeedDown(_parent));
+	_powerUps.push_back(new MultiplierUp(_parent));
+	_powerUps.push_back(new Invinsible(_parent));
 }
 
-void PowerUpComponent::Effect()
+PowerUp * PowerUpComponent::GetPowerUp(PowerUpId id)
 {
+	for (auto pu : _powerUps) if (pu->_id == id) return pu;
+	return nullptr;
 }
+

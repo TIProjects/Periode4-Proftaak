@@ -47,6 +47,10 @@ public:
 	 * \brief The last lane the player was on
 	 */
 	int _lastLane;
+    /**
+    * \brief time of the invincibility powerup
+    */
+    bool _isInvinsible;
 	/**
 	 * \brief Time of invincibility after a collision
 	 */

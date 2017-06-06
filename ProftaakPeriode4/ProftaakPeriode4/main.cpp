@@ -30,7 +30,6 @@ void onExit()
 
     delete tempBoard;
 
-
 	for (GameObject* g : model._gameObjects)
 	{
 		LaneGeneratorComponent* lane = dynamic_cast<LaneGeneratorComponent*>(g->GetComponent(ComponentID::DRAW_COMPONENT));

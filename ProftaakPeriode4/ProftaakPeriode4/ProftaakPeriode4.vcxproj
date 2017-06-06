@@ -157,6 +157,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Invinsible.cpp" />
     <ClCompile Include="LaneComponent.cpp" />
     <ClCompile Include="LaneObstacleComponent.cpp" />
     <ClCompile Include="LaneObstacleGenerator.cpp" />
@@ -169,11 +170,15 @@
     <ClInclude Include="AsteroidComponent.h" />
     <ClInclude Include="DrawComponent.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="MultiplierUp.cpp" />
     <ClCompile Include="ObstaclePatterns.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RotateComponent.cpp" />
     <ClCompile Include="PowerUpComponent.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SpeedDown.cpp" />
+    <ClCompile Include="SpeedUp.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="MeshFactory.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
@@ -186,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h" />
+    <ClInclude Include="Invinsible.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="LaneObstacleGenerator.h" />
     <ClInclude Include="LaneComponent.h" />
@@ -196,8 +202,12 @@
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="LaneGeneratorComponent.h" />
     <ClInclude Include="LifeUp.h" />
+    <ClInclude Include="MultiplierUp.h" />
     <ClInclude Include="ObstaclePatterns.h" />
     <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="ObstaclePatterns.h" />
+    <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="PowerUP.h" />
     <ClInclude Include="RotateComponent.h" />
     <ClInclude Include="PowerUpComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
@@ -212,6 +222,8 @@
     <ClInclude Include="MeshDrawComponent.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="SpeedDown.h" />
+    <ClInclude Include="SpeedUp.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="MeshFactory.h" />
     <ClInclude Include="ScoreBoard.h" />

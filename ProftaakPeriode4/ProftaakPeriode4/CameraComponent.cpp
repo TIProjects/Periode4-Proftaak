@@ -3,9 +3,18 @@
 #include <cmath>
 // #include "Component.h"
 #include "CameraComponent.h"
+
+#include "PowerUpComponent.h"
+
 #include "GameObject.h"
 #include "Vec.h"
 #include "Input.h"
+#include "LifeUp.h"
+#include "SpeedUp.h"
+#include "SpeedDown.h"
+#include "Invinsible.h"
+#include "MultiplierUp.h"
+
 
 CameraComponent::CameraComponent(float  width, float height, float nearPlane, float farPlane, float fov, bool useKeys)
 : Component(CAMERA_COMPONENT)
@@ -41,6 +50,75 @@ void CameraComponent::Update(float deltaTime)
 	const bool * keys = Keyboard::GetKeyboard();
 
 	const float speed = 10.0f;
+
+
+	if (keys['1']) {
+		auto tempList = *_parent->_parentList;
+		for (auto go : tempList)
+		{
+			PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+			if (pu != nullptr)
+			{
+				auto tempPu = dynamic_cast<LifeUp*>(pu->GetPowerUp(LIFE_UP));
+				if (tempPu != nullptr) tempPu->Activate();
+			}
+		}
+	}
+
+	if (keys['2']) {
+		auto tempList = *_parent->_parentList;
+		for (auto go : tempList)
+		{
+			PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+			if (pu != nullptr)
+			{
+				auto tempPu = dynamic_cast<SpeedUp*>(pu->GetPowerUp(SPEED_UP));
+				if (tempPu != nullptr) tempPu->Activate();
+			}
+		}
+	}
+
+	if (keys['3']) {
+		auto tempList = *_parent->_parentList;
+		for (auto go : tempList)
+		{
+			PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+			if (pu != nullptr)
+			{
+				auto tempPu = dynamic_cast<SpeedDown*>(pu->GetPowerUp(SPEED_DOWN));
+				if (tempPu != nullptr) tempPu->Activate();
+			}
+		}
+	}
+
+	if (keys['4']) {
+		auto tempList = *_parent->_parentList;
+		for (auto go : tempList)
+		{
+			PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+			if (pu != nullptr)
+			{
+				auto tempPu = dynamic_cast<MultiplierUp*>(pu->GetPowerUp(MULTIPLIER_UP));
+				if (tempPu != nullptr) tempPu->Activate();
+			}
+		}
+	}
+
+	if (keys['5']) {
+		auto tempList = *_parent->_parentList;
+		for (auto go : tempList)
+		{
+			PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
+			if (pu != nullptr)
+			{
+				auto tempPu = dynamic_cast<Invinsible*>(pu->GetPowerUp(INVINSIBLE));
+				if (tempPu != nullptr) tempPu->Activate();
+			}
+		}
+	}
+
+
+	if (keys[KEYBOARD_KEY_ESC]) exit(0); 
 	if (_useKeys) {
 		if (keys['a']) Move(0, deltaTime*speed);
 		if (keys['d']) Move(180, deltaTime*speed);

@@ -59,5 +59,5 @@ public:
 protected:
 	// Pointer to the parent GameObject of this Component
 	GameObject * _parent;
-};
+};	
 
