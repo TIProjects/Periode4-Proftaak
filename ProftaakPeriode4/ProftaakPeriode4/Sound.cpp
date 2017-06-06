@@ -1,4 +1,5 @@
 #include "Sound.h"
+#include <iostream>
 
 Sound::Sound(std::string dir, bool loop)
 {
@@ -7,6 +8,13 @@ Sound::Sound(std::string dir, bool loop)
 	if (loop) _Loop = BASS_SAMPLE_LOOP;
 	//Loads the soundfile
 	_Stream = BASS_StreamCreateFile(FALSE, dir.c_str(), 0, 0, _Loop);
+	if(_Stream == 0)
+	{
+		std::cout << "Failed to load sound: " << dir.c_str() << std::endl;
+	} else
+	{
+		std::cout << "Loaded sound: " << dir.c_str() << std::endl;
+	}
 }
 
 void Sound::Stop()

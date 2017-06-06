@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "ScoreBoard.h"
 #include "Mesh.h"
+#include "Sound.h"
 
 class Model {
 public:
@@ -20,7 +21,7 @@ public:
 	 * Initialise audio for game
 	 * Is static for not needing other data
 	 */
-	static void InitSound();
+	void InitSound();
 
     // Initialise the gameLogic
     // NOTE: should ONLY be called AFTER an OpenGL context has been created
@@ -32,6 +33,8 @@ public:
 	std::vector<GameObject*> _guiObjects;
 
 	bool _gameOver;
+
+	Sound * _backgroundMusic;
 private:
 
 	/**

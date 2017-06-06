@@ -49,7 +49,7 @@ void LaneObstacleGenerator::addObstacle(int laneIndex, Mesh * mesh_object, float
 	component->_laneSpeed = _speed;
 
 	obstacle->AddComponent(component);
-	obstacle->AddComponent(new CollisionComponent(Hitbox({ mesh_object->_width,mesh_object->_length,mesh_object->_height}), false));
+	obstacle->AddComponent(new CollisionComponent(Hitbox({ mesh_object->_width,mesh_object->_height,mesh_object->_length}), false));
 	if(std::find(_obstacleModelsAsteroid.begin(), _obstacleModelsAsteroid.end(), mesh_object) != _obstacleModelsAsteroid.end())
 		obstacle->AddComponent(new AsteroidComponent());
 
