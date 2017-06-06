@@ -222,6 +222,12 @@ void Model::Init()
 		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	obstaclesNormal.push_back(GetNextMesh());
 
+	std::vector<Mesh*> obstaclesPowerUp;
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Coin//coin.Cobj"));
+	obstaclesPowerUp.push_back(GetNextMesh());
+
+
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 1.5f, meshes, player);
 
@@ -229,19 +235,7 @@ void Model::Init()
 	laneGenerator->AddComponent(laneDrawComponent);
 
 
-//	std::vector<GameObject*> obstacles;
-//	GameObject * game_object = new GameObject(&_gameObjects);
-//	game_object->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj")));
-//	game_object->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
-//	obstacles.push_back(game_object);
-//
-//	GameObject * game_object2 = new GameObject(laneGenerator->_gameObjects);
-//	game_object2->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj")));
-//	game_object2->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
-//	obstacles.push_back(game_object2);
-
-
-	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstaclesAsteroid, obstaclesNormal);
+	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstaclesAsteroid, obstaclesNormal, obstaclesPowerUp);
 
 	laneGenerator->AddComponent(lane_obstacle_generator);
 	_gameObjects.push_back(laneGenerator);
