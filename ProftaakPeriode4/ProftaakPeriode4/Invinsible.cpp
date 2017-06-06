@@ -3,36 +3,37 @@
 #include "PlayerComponent.h"
 #include "LaneObstacleGenerator.h"
 
-Invinsible::Invinsible() : PowerUpComponent(5.0f, INVINSIBLE)
+Invinsible::Invinsible(GameObject * parent) : PowerUp(5.0f, INVINSIBLE)
 {
+	_parent = parent;
 }
 
 void Invinsible::Effect()
 {
-    auto tempList = *_parent->_gameObjects;
+    auto tempList = *_parent->_parentList;
     for (auto go : tempList)
     {
-        LaneObstacleGenerator* pc = static_cast<LaneObstacleGenerator*>(go->GetComponent(LANE_OBSTACLE_GENERATOR));
-        if (pc != nullptr)
+		LaneGeneratorComponent* lgc = dynamic_cast<LaneGeneratorComponent*>(go->GetComponent(DRAW_COMPONENT));
+		if (lgc != nullptr)
         {
-            LaneGeneratorComponent* component = static_cast<LaneGeneratorComponent*>(pc->GetParent()->GetComponent(DRAW_COMPONENT));
-            PlayerComponent * player = static_cast<PlayerComponent*>(component->_player->GetComponent(PLAYER_COMPONENT));
+            PlayerComponent * player = static_cast<PlayerComponent*>(lgc->_player->GetComponent(PLAYER_COMPONENT));
             player->_isInvinsible = true;
+			return;
         }
     }
 }
 
 void Invinsible::ReverseEffect()
 {
-    auto tempList = *_parent->_gameObjects;
+    auto tempList = *_parent->_parentList;
     for (auto go : tempList)
     {
-        LaneObstacleGenerator* pc = static_cast<LaneObstacleGenerator*>(go->GetComponent(LANE_OBSTACLE_GENERATOR));
-        if (pc != nullptr)
-        {
-            LaneGeneratorComponent* component = static_cast<LaneGeneratorComponent*>(pc->GetParent()->GetComponent(DRAW_COMPONENT));
-            PlayerComponent * player = static_cast<PlayerComponent*>(component->_player->GetComponent(PLAYER_COMPONENT));
-            player->_isInvinsible = false;
-        }
+		LaneGeneratorComponent* lgc = dynamic_cast<LaneGeneratorComponent*>(go->GetComponent(DRAW_COMPONENT));
+		if (lgc != nullptr)
+		{
+			PlayerComponent * player = static_cast<PlayerComponent*>(lgc->_player->GetComponent(PLAYER_COMPONENT));
+			player->_isInvinsible = false;
+			return;
+		}
     }
 }

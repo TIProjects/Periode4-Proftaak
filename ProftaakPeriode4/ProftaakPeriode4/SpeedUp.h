@@ -1,10 +1,10 @@
 #pragma once
-#include "PowerUpComponent.h"
+#include "PowerUP.h"
 
-class SpeedUp : public PowerUpComponent
+class SpeedUp : public PowerUp
 {
 public:
-    SpeedUp();
+    SpeedUp(GameObject * parent);
 
 private:
     void Effect() override;
@@ -14,4 +14,5 @@ private:
     * Difference in speed for speeding up effect
     */
     float _speedDif = 9.0f;
+	GameObject * _parent;
 };

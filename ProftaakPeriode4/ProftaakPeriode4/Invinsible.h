@@ -1,12 +1,14 @@
 #pragma once
-#include "PowerUpComponent.h"
+#include "PowerUP.h"
 
-class Invinsible : public PowerUpComponent
+
+class Invinsible : public PowerUp
 {
 public:
-    Invinsible();
+    Invinsible(GameObject * parent);
 
 private:
     void Effect() override;
     void ReverseEffect() override;
+	GameObject * _parent;
 };

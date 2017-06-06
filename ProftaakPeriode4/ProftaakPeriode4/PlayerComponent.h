@@ -32,6 +32,8 @@ public:
 	/**
 	 * \brief Wether OpenCV is used for input or not
 	 */
+	bool _isJumping;
+
 	bool _useOpenCV;
 	/**
 	 * \brief The amount of lanes present
