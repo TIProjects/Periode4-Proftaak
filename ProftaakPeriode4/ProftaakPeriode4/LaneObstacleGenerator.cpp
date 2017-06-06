@@ -94,7 +94,7 @@ Mesh * LaneObstacleGenerator::getRandomMeshObject()
 {
 	int randomPercentage = rand() % 100;
 
-	if (randomPercentage <= 80)
+	if (randomPercentage <= 95)
 		return _obstacleModelsAsteroid[rand() % _obstacleModelsAsteroid.size()];
 	if (randomPercentage <= 98)
 		return _obstacleModelsNormal[rand() % _obstacleModelsNormal.size()];
