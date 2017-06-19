@@ -12,6 +12,6 @@ private:
     /**
     * Difference in speed for slowing down effect
     */
-    float _speedDif = 9.0f;
+    float _speedDif = 4.5f;
 	GameObject * _parent;
 };

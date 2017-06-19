@@ -1,7 +1,7 @@
 #include "SpeedUp.h"
 #include "LaneGeneratorComponent.h"
 
-SpeedUp::SpeedUp(GameObject* parent) : PowerUp(10.0f, SPEED_UP)
+SpeedUp::SpeedUp(GameObject* parent) : PowerUp(30.0f, SPEED_UP, "Speed boost")
 {
 	_parent = parent;
 } 
@@ -14,7 +14,7 @@ void SpeedUp::Effect()
 		LaneGeneratorComponent* lgc = dynamic_cast<LaneGeneratorComponent*>(go->GetComponent(DRAW_COMPONENT));
 		if (lgc != nullptr)
 		{
-			lgc->_speed += _speedDif;
+			lgc->_speed += _speedDifUp;
 			return;
 		}
     }
@@ -28,7 +28,7 @@ void SpeedUp::ReverseEffect()
 		LaneGeneratorComponent* lgc = dynamic_cast<LaneGeneratorComponent*>(go->GetComponent(DRAW_COMPONENT));
 		if (lgc != nullptr)
 		{
-			lgc->_speed -= _speedDif;
+			lgc->_speed -= _speedDifUp;
 			return;
 		}
     }

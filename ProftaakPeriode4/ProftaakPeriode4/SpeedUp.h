@@ -13,6 +13,6 @@ private:
     /**
     * Difference in speed for speeding up effect
     */
-    float _speedDif = 9.0f;
+    float _speedDifUp = 9.0f;
 	GameObject * _parent;
 };

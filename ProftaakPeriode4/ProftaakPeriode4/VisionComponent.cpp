@@ -141,7 +141,7 @@ void VisionComponent::CalculatePosition()
 	}
 	
 		
-	if (_debugMotion)
+	if (false)
 	{
 		cv::Scalar color = cv::Scalar(0, 255, 0);
 		//draw debug lines

@@ -15,11 +15,11 @@ enum ComponentID
 	LANE_OBSTACLE_COMPONENT,
 	PLAYER_COMPONENT,
 	LANE_COMPONENT,
-	LANE_OBSTACLE_GENERATOR,
-	ASTEROID_COMPONENT,
-	ROTATE_COMPONENT,
     LANE_GENERATOR_COMPONENT,
     POWER_UP_COMPONENT,
+	LANE_OBSTACLE_GENERATOR,
+	ASTEROID_COMPONENT,
+	ROTATE_COMPONENT
 };
 
 class Component
@@ -53,7 +53,6 @@ public:
 	// to communicate with other components in it's parent GameObject
 	// @param GameObject *: the pointer to the parent GameObject
 	virtual void SetParent(GameObject * parent);
-
 	// The identifier of the component
 	ComponentID _id;
 protected:

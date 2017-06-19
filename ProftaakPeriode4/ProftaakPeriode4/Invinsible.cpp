@@ -3,7 +3,7 @@
 #include "PlayerComponent.h"
 #include "LaneObstacleGenerator.h"
 
-Invinsible::Invinsible(GameObject * parent) : PowerUp(5.0f, INVINSIBLE)
+Invinsible::Invinsible(GameObject * parent) : PowerUp(25.0f, INVINCIBLE, "Invincible")
 {
 	_parent = parent;
 }

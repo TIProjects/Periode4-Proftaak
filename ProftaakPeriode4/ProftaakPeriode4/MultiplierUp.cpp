@@ -1,7 +1,7 @@
 #include "MultiplierUp.h"
 #include "ScoreComponent.h"
 
-MultiplierUp::MultiplierUp(GameObject * parent) : PowerUp(0.0f, MULTIPLIER_UP){
+MultiplierUp::MultiplierUp(GameObject * parent) : PowerUp(0.0f, MULTIPLIER_UP, "Multiplier up"){
 	_parent = parent;
 }
 

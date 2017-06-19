@@ -7,8 +7,7 @@
  * \brief IndexedMesh Drawing
  * Extends the DrawComponent class with its Draw() Function that is called by View (when drawn)
  */
-class MeshDrawComponent :
-	public DrawComponent
+class MeshDrawComponent : public DrawComponent
 {
 public:
 	/**

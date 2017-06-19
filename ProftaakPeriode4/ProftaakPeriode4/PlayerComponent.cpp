@@ -5,10 +5,15 @@
 #include "VisionComponent.h"
 #include "CameraComponent.h"
 #include "LaneObstacleComponent.h"
+#include "PowerUpComponent.h"
 
-PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Model * model, Sound * collisionSound, Sound * deathSound ,bool useOpenCV)
+PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Text * powerUp ,Model * model, Sound * coinSound, Sound * collisionSound, Sound * deathSound ,bool useOpenCV)
 : Component(PLAYER_COMPONENT)
 {
+	_coinSound = coinSound;
+	srand(time(nullptr));
+	_collided = false;
+	_powerUp = powerUp;
     _isInvinsible = false;
 	_deathSound = deathSound;
 	_collisionSound = collisionSound;
@@ -57,13 +62,28 @@ void PlayerComponent::Update(float deltaTime)
 
 	CollisionComponent * collider = static_cast<CollisionComponent*>(_parent->GetComponent(COLLISION_COMPONENT));
 
-	if (!_isInvinsible)
+	if (!_isInvinsible && collider != nullptr && collider->_collided.size() > 0)
 	{
-		if (collider != nullptr)
+		if (!_collided)
 		{
-			if (collider->_collided.size() > 0)
+			GameObject * otherObj = collider->_collided.at(0);
+			if (otherObj != nullptr)
 			{
-				if (!_collided)
+				if(otherObj->GetComponent(ROTATE_COMPONENT) != nullptr)
+				{
+					PowerUpComponent * powerUp = dynamic_cast<PowerUpComponent*>
+						(_parent->GetComponent(POWER_UP_COMPONENT));
+					if(powerUp != nullptr)
+					{
+						int number = rand() % 5;
+						PowerUp * actualPowerUp = powerUp->GetPowerUp(PowerUpId(number));
+						actualPowerUp->Activate();
+						_coinSound->Restart();
+						_powerUp->Update(actualPowerUp->_name);
+					}
+					_collided = true;
+
+				} else
 				{
 					_collided = true;
 					int hp = _lifeBar->Decrement();
@@ -82,11 +102,11 @@ void PlayerComponent::Update(float deltaTime)
 					}
 				}
 			}
-			else
-			{
-				_collided = false;
-			}
 		}
+	}
+	else
+	{
+		_collided = false;
 	}
 
 	if(_useOpenCV)

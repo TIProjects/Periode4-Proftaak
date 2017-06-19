@@ -47,7 +47,7 @@ public:
 	/*
 	*Boolean to draw debug lines for camera
 	*/
-	bool _debugMotion = true;
+	bool _debugMotion = false;
 
 	/*
 	*Size of the captured image

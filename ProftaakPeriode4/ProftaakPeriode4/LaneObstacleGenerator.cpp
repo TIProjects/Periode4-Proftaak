@@ -8,6 +8,7 @@
 #include "LaneGeneratorComponent.h"
 #include "AsteroidComponent.h"
 #include "PowerUpComponent.h"
+#include "RotateComponent.h"
 
 /**
  * Used for selecting a pattern, is placed here because of errors in usage (generator uses Pattern and Pattern uses generator)
@@ -59,9 +60,8 @@ void LaneObstacleGenerator::addObstacle(int laneIndex, Mesh * mesh_object, float
 		obstacle->AddComponent(new AsteroidComponent());
 
 	if (std::find(_obstacleModelsPowerUp.begin(), _obstacleModelsPowerUp.end(), mesh_object) != _obstacleModelsPowerUp.end()) {
-		PowerUpComponent * power_up = new PowerUpComponent();
-		obstacle->AddComponent(power_up);
-		power_up->Init();
+		RotateComponent * rotateComp = new RotateComponent({ 0.0f,10.0f,0.0f });
+		obstacle->AddComponent(rotateComp);
 	}
 	obstacle->AddComponent(new CollisionComponent(Hitbox({ mesh_object->_width,mesh_object->_height,mesh_object->_length }), false));
 	
@@ -94,10 +94,10 @@ Mesh * LaneObstacleGenerator::getRandomMeshObject()
 {
 	int randomPercentage = rand() % 100;
 
-	if (randomPercentage <= 95)
+	if (randomPercentage <= 90)
 		return _obstacleModelsAsteroid[rand() % _obstacleModelsAsteroid.size()];
-	if (randomPercentage <= 98)
-		return _obstacleModelsNormal[rand() % _obstacleModelsNormal.size()];
+//	if (randomPercentage <= 98)
+//		return _obstacleModelsNormal[rand() % _obstacleModelsNormal.size()];
 	return _obstacleModelsPowerUp[rand() % _obstacleModelsPowerUp.size()];
 }
 
@@ -157,19 +157,22 @@ void LaneObstacleGenerator::Update(float nanotime)
 		LaneComponent * lane_component = dynamic_cast<LaneComponent*>(laneObject->GetComponent(LANE_COMPONENT));
 		if (lane_component != nullptr) {
 			float speed = *_speed;
-			if (nextPattern != nullptr && nextPattern->_speed != -1.0f)
-				speed = nextPattern->_speed;
+			if (nextPattern != nullptr)
+				speed = nextPattern->_speed**_speed;
+				
 			if (pattern != nullptr) {
-				float length = pattern->getLengthAfter(speed, lane_component->getLength());
+
+				float length = pattern->getLengthAfter(speed, lane_component->getLength(),this);
 				if (length != 0.0f) {
 					minNeededPattern = length;
 				}
 			}
 		}
 		
-
+//		std::cout << _lengthMovedSince[newLane] << " needed!" << std::endl;
 		if (minNeededPattern != 0.0f && pattern != nullptr && _lengthMovedSince[pattern->_newLane] < minNeededPattern) {
 				newLane = getNewLane();
+				
 				while (newLane == pattern->_newLane)
 					newLane = rand() % (*_lanes).size();
 				if (_lengthMovedSince[newLane] / minNeeded >= 1.0f)
@@ -187,6 +190,9 @@ void LaneObstacleGenerator::Update(float nanotime)
 			else
 				newLane = getNewLane();
 
+			if (minNeededPattern < minNeeded) {
+				minNeededPattern = minNeeded;
+			}
 
 			if (_lengthMovedSince[newLane] >= minNeededPattern) {
 				if (nextPattern != nullptr) {
