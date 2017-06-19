@@ -236,7 +236,7 @@ void Model::Init()
 
 
 	laneGenerator->AddComponent(laneDrawComponent);
-
+	powerUps->SetParent(laneGenerator);
 
 	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstaclesAsteroid, obstaclesNormal, obstaclesPowerUp);
 
