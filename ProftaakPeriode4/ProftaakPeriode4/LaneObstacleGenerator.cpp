@@ -46,7 +46,6 @@ LaneObstacleGenerator::LaneObstacleGenerator(std::vector<Mesh*> obstacleModelsAs
 }
 void LaneObstacleGenerator::addObstacle(int laneIndex, Mesh * mesh_object, float speed)
 {
-	std::cout << "PLACED!" << std::endl;
 	GameObject* obstacle = new GameObject(_parent->_parentList);
 	obstacle->AddComponent(new MeshDrawComponent(mesh_object));
 	LaneObstacleComponent * component = new LaneObstacleComponent(laneIndex);
