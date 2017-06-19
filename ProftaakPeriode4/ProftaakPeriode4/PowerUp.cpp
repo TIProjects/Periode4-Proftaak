@@ -1,10 +1,11 @@
 #include "PowerUP.h"
 #include <iostream>
 
-PowerUp::PowerUp(float timeActive, PowerUpId id)
+PowerUp::PowerUp(float timeActive, PowerUpId id, std::string name)
 {
 	_resetTimer = timeActive;
 	_id = id;
+	_name = name;
 }
 
 void PowerUp::Update(float deltaTime)

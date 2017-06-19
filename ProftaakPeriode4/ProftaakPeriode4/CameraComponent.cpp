@@ -111,7 +111,7 @@ void CameraComponent::Update(float deltaTime)
 			PowerUpComponent* pu = dynamic_cast<PowerUpComponent*>(go->GetComponent(POWER_UP_COMPONENT));
 			if (pu != nullptr)
 			{
-				auto tempPu = dynamic_cast<Invinsible*>(pu->GetPowerUp(INVINSIBLE));
+				auto tempPu = dynamic_cast<Invinsible*>(pu->GetPowerUp(INVINCIBLE));
 				if (tempPu != nullptr) tempPu->Activate();
 			}
 		}

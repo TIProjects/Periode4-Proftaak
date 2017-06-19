@@ -8,12 +8,12 @@ enum PowerUpId {
 	SPEED_UP,
 	SPEED_DOWN,
 	MULTIPLIER_UP,
-	INVINSIBLE
+	INVINCIBLE
 };
 
 class PowerUp {
 public:  
-	PowerUp(float timeActive, PowerUpId id);
+	PowerUp(float timeActive, PowerUpId id, std::string name);
 	/**
 	* Update methode
 	*/
@@ -30,6 +30,10 @@ public:
 	* Id of the powerup
 	*/
 	PowerUpId _id;
+	/**
+	* Name of the powerup
+	*/
+	std::string _name = "Something went wrong here";
 
 private:
 	/**
