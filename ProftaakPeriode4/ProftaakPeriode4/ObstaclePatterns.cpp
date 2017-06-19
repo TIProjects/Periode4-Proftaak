@@ -31,9 +31,9 @@ void MovingPattern::Init(LaneObstacleGenerator* lane_obstacle_generator)
 	_speed = ((rand() % 50) + 50) / 100.0f;
 }
 
-float MovingPattern::getLengthAfter(float speedAfter, float lengthLane)
+float MovingPattern::getLengthAfter(float speedAfter, float lengthLane, LaneObstacleGenerator* obstacle_generator)
 {
-	float dist1 = lengthLane / _speed;
+	float dist1 = lengthLane / (_speed**obstacle_generator->_speed);
 	float dist2 = lengthLane / speedAfter;
 	float dist3 = dist1 - dist2;
 	float dist4 = dist3 * speedAfter;

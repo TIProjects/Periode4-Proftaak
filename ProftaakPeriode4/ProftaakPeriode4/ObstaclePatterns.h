@@ -48,7 +48,7 @@ public:
 	/**
 	 * Get the reserved length after placing the pattern
 	 */
-	virtual float getLengthAfter(float speedAfter, float lengthLane) {
+	virtual float getLengthAfter(float speedAfter, float lengthLane, LaneObstacleGenerator* obstacle_generator) {
 		return 0.0f;
 	};
 
@@ -87,7 +87,7 @@ public:
 
 	void Init(LaneObstacleGenerator* lane_obstacle_generator) override;;
 
-	float getLengthAfter(float speedAfter, float lengthLane) override;;
+	float getLengthAfter(float speedAfter, float lengthLane, LaneObstacleGenerator* obstacle_generator) override;;
 
 	MovingPattern()
 	{
