@@ -13,7 +13,6 @@ public:
 	 */
 	ObstaclePattern()
 	{
-		_speed = 0.0f;
 		_newLane = 0;
 	}
 	/**
@@ -49,14 +48,14 @@ public:
 	/**
 	 * Get the reserved length after placing the pattern
 	 */
-	virtual float getLengthAfter(float speedAfter, float lengthLane) {
+	virtual float getLengthAfter(float speedAfter, float lengthLane, LaneObstacleGenerator* obstacle_generator) {
 		return 0.0f;
 	};
 
 	/**
 	 * The speed of the pattern (used when adding obstacle)
 	 */
-	float _speed;
+	float _speed = 1.0f;
 	/**
 	 * The new lane to execute the pattern at
 	 */
@@ -88,7 +87,7 @@ public:
 
 	void Init(LaneObstacleGenerator* lane_obstacle_generator) override;;
 
-	float getLengthAfter(float speedAfter, float lengthLane) override;;
+	float getLengthAfter(float speedAfter, float lengthLane, LaneObstacleGenerator* obstacle_generator) override;;
 
 	MovingPattern()
 	{

@@ -94,10 +94,10 @@ Mesh * LaneObstacleGenerator::getRandomMeshObject()
 {
 	int randomPercentage = rand() % 100;
 
-	if (randomPercentage <= 95)
+	if (randomPercentage <= 90)
 		return _obstacleModelsAsteroid[rand() % _obstacleModelsAsteroid.size()];
-	if (randomPercentage <= 98)
-		return _obstacleModelsNormal[rand() % _obstacleModelsNormal.size()];
+//	if (randomPercentage <= 98)
+//		return _obstacleModelsNormal[rand() % _obstacleModelsNormal.size()];
 	return _obstacleModelsPowerUp[rand() % _obstacleModelsPowerUp.size()];
 }
 
@@ -157,10 +157,12 @@ void LaneObstacleGenerator::Update(float nanotime)
 		LaneComponent * lane_component = dynamic_cast<LaneComponent*>(laneObject->GetComponent(LANE_COMPONENT));
 		if (lane_component != nullptr) {
 			float speed = *_speed;
-			if (nextPattern != nullptr && nextPattern->_speed != -1.0f)
-				speed = nextPattern->_speed;
+			if (nextPattern != nullptr)
+				speed = nextPattern->_speed**_speed;
+				
 			if (pattern != nullptr) {
-				float length = pattern->getLengthAfter(speed, lane_component->getLength());
+
+				float length = pattern->getLengthAfter(speed, lane_component->getLength(),this);
 				if (length != 0.0f) {
 					minNeededPattern = length;
 				}
@@ -170,10 +172,12 @@ void LaneObstacleGenerator::Update(float nanotime)
 
 		if (minNeededPattern != 0.0f && pattern != nullptr && _lengthMovedSince[pattern->_newLane] < minNeededPattern) {
 				newLane = getNewLane();
+				
 				while (newLane == pattern->_newLane)
 					newLane = rand() % (*_lanes).size();
 				if (_lengthMovedSince[newLane] / minNeeded >= 1.0f)
 				{
+					std::cout << minNeededPattern - _lengthMovedSince[pattern->_newLane] << " needed for pattern!" << std::endl;
 					addObstacle(newLane, nextMesh);
 					for (int i = 0; i < component->_lanes.size(); i++)
 						if (i != pattern->_newLane)
