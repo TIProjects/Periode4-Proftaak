@@ -4,7 +4,7 @@
 #include "PlayerComponent.h"
 #include "LaneObstacleGenerator.h"
 
-LifeUp::LifeUp(GameObject * parent) : PowerUp(0.0f, LIFE_UP)
+LifeUp::LifeUp(GameObject * parent) : PowerUp(0.0f, LIFE_UP, "Life up")
 {
 	_parent = parent;
 }
