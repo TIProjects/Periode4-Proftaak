@@ -16,7 +16,7 @@ public:
 	 * \brief 
 	 * \param meshes 
 	 */
-	LaneObstacleGenerator(std::vector<Mesh*> obstacleModelsAsteroid, std::vector<Mesh*> obstacleModelsNormal);
+	LaneObstacleGenerator(std::vector<Mesh*> obstacleModelsAsteroid, std::vector<Mesh*> obstacleModelsNormal, std::vector<Mesh*> obstacleModelsPowerUp);
 	/*
 	 * Add a obstacle to the lane on the given lane with the given mesh and a speed
 	 * When speed = -1 then the lane speed is used!
@@ -56,8 +56,10 @@ public:
 	 * The pointer of the obstacles from LaneGenerator
 	 */
 	std::vector<GameObject*> * _obstacles;
+
 	std::vector<Mesh*> _obstacleModelsNormal;
 	std::vector<Mesh*> _obstacleModelsAsteroid;
+	std::vector<Mesh*> _obstacleModelsPowerUp;
 	/**
 	 * List of skipped amount 
 	 * The size is equal to the amount of lanes in _lanes

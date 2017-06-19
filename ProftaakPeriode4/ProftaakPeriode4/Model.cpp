@@ -164,17 +164,14 @@ void Model::Init()
 
 	_gameObjects.push_back(camera);
 
-	// Create and add the skybox GameObject
+	// Create and add the skybox to the camera
 	if (!MeshHasNext())
 		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Skybox//skybox.Cobj"));
 
-	GameObject * skybox = new GameObject(&_gameObjects);
 	DrawComponent * skyboxDrawComponent = new MeshDrawComponent(GetNextMesh());
-	skybox->_scale = { 25.0f, 25.0f, 25.0f };
-	skybox->_lighting = false;
-	skybox->AddComponent(skyboxDrawComponent);
-	
-	_gameObjects.push_back(skybox);
+	camera->_scale = { 30.0f, 30.0f, 30.0f };
+	camera->_lighting = false;
+	camera->AddComponent(skyboxDrawComponent);
 
 	// Create and add the Mars GameObject
 	if (!MeshHasNext())
@@ -221,27 +218,20 @@ void Model::Init()
 	if (!MeshHasNext())
 		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
 	obstaclesNormal.push_back(GetNextMesh());
+	
+	std::vector<Mesh*> obstaclesPowerUp;
+	if (!MeshHasNext())
+		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Coin//coin.Cobj"));
+	obstaclesPowerUp.push_back(GetNextMesh());
 
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
-	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 1.5f, meshes, player);
+	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 1.5f, meshes, player, speedCounter, distanceCounter);
 
 
 	laneGenerator->AddComponent(laneDrawComponent);
 
 
-//	std::vector<GameObject*> obstacles;
-//	GameObject * game_object = new GameObject(&_gameObjects);
-//	game_object->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//Asteroid//Asteroid_LemoineM.Cobj")));
-//	game_object->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
-//	obstacles.push_back(game_object);
-//
-//	GameObject * game_object2 = new GameObject(laneGenerator->_gameObjects);
-//	game_object2->AddComponent(new MeshDrawComponent(LoadMeshFile("Assets//Models//TestCube//Cube.Cobj")));
-//	game_object2->AddComponent(new CollisionComponent(Hitbox({ 1.0f,1.0f,1.0f }), false));
-//	obstacles.push_back(game_object2);
-
-
-	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstaclesAsteroid, obstaclesNormal);
+	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstaclesAsteroid, obstaclesNormal, obstaclesPowerUp);
 
 	laneGenerator->AddComponent(lane_obstacle_generator);
 	_gameObjects.push_back(laneGenerator);
@@ -275,6 +265,7 @@ void Model::Init()
 	powerUps->AddComponent(pu);
 
     _gameObjects.push_back(powerUps);
+	_lastTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 }
 
 Mesh* Model::GetNextMesh()

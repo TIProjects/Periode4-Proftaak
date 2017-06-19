@@ -1,5 +1,6 @@
 #include "LifeUp.h"
 #include "LaneGeneratorComponent.h"
+#include "Component.h"
 #include "PlayerComponent.h"
 #include "LaneObstacleGenerator.h"
 
@@ -12,10 +13,10 @@ void LifeUp::Effect() {
     auto tempList = *_parent->_parentList;
 	for (auto go : tempList)
 	{
-		LaneGeneratorComponent* pc = dynamic_cast<LaneGeneratorComponent*>(go->GetComponent(DRAW_COMPONENT));
-		if (pc != nullptr)
+		LaneGeneratorComponent* lg = dynamic_cast<LaneGeneratorComponent*>(go->GetComponent(DRAW_COMPONENT));
+		if (lg != nullptr)
 		{
-			PlayerComponent * player = static_cast<PlayerComponent*>(pc->_player->GetComponent(PLAYER_COMPONENT));
+			PlayerComponent * player = dynamic_cast<PlayerComponent*>(lg->_player->GetComponent(PLAYER_COMPONENT));
 			player->_lifeBar->Increment();
 			return;
 		}

@@ -9,11 +9,11 @@ View::View(Model * model, int argc, char * argv[])
 	_modelPtr = model;
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(1280, 720);
+	glutInitWindowSize(1920, 1080);
 	glutInit(&argc, argv);
 
-	glutCreateWindow("Cube_Runner");
-//	glutFullScreen();
+	glutCreateWindow("Space dodger");
+	//glutFullScreen();
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
