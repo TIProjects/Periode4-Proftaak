@@ -7,9 +7,10 @@
 #include "LaneObstacleComponent.h"
 #include "PowerUpComponent.h"
 
-PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Text * powerUp ,Model * model, Sound * collisionSound, Sound * deathSound ,bool useOpenCV)
+PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Text * powerUp ,Model * model, Sound * coinSound, Sound * collisionSound, Sound * deathSound ,bool useOpenCV)
 : Component(PLAYER_COMPONENT)
 {
+	_coinSound = coinSound;
 	srand(time(nullptr));
 	_collided = false;
 	_powerUp = powerUp;
@@ -77,6 +78,7 @@ void PlayerComponent::Update(float deltaTime)
 						int number = rand() % 5;
 						PowerUp * actualPowerUp = powerUp->GetPowerUp(PowerUpId(number));
 						actualPowerUp->Activate();
+						_coinSound->Restart();
 						_powerUp->Update(actualPowerUp->_name);
 					}
 					_collided = true;

@@ -126,7 +126,7 @@ void Model::Init()
 	diededImage->Hide();
 	GUI->AddElement(diededImage);
 
-	Text * powerUpText = new Text(Vec3f(1280.0f / 4.0 + 60.0f, 40, 0), Vec3f(255, 255, 255), "");
+	Text * powerUpText = new Text(Vec3f(1280.0f / 4.0 + 60.0f, 60, 0), Vec3f(255, 255, 255), "");
 	GUI->AddElement(powerUpText);
 
 	LifeBar * lifebar = new LifeBar(
@@ -194,7 +194,7 @@ void Model::Init()
 	int laneAmount = 3;
 	GameObject * player = new GameObject(nullptr, { 0.0f,0.0f,-1.0f });
 
-	PlayerComponent * playerComponent = new PlayerComponent(laneAmount / 2, laneAmount, lifebar, diededImage, powerUpText, this, new Sound("Assets/Sounds/Thud.wav", false), new Sound("Assets/Sounds/Death.wav", false),false);
+	PlayerComponent * playerComponent = new PlayerComponent(laneAmount / 2, laneAmount, lifebar, diededImage, powerUpText, this, new Sound("Assets/Sounds/coin.wav", false),  new Sound("Assets/Sounds/Thud.wav", false), new Sound("Assets/Sounds/Death.wav", false),false);
 	player->AddComponent(playerComponent);
 	player->AddComponent(new CollisionComponent(Hitbox({ 1,1,1 }))); // Hitbox
 	player->AddComponent(new MeshDrawComponent(GetNextMesh())); // todo move out of scope
