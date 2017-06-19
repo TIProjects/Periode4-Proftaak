@@ -1,7 +1,7 @@
 #include "LaneGeneratorComponent.h"
 #include "SpeedDown.h"
 
-SpeedDown::SpeedDown(GameObject * parent) : PowerUp(40.0f, SPEED_DOWN, "Speed down")
+SpeedDown::SpeedDown(GameObject * parent) : PowerUp(30.0f, SPEED_DOWN, "Speed down")
 {
 	_parent = parent;
 	_speedDif = 6.0f;
