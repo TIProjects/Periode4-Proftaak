@@ -201,7 +201,6 @@ void Model::Init()
 	player->AddComponent(lanePlayer);
 	
 	PowerUpComponent * powerUps = new PowerUpComponent();
-	powerUps->Init();
 	player->AddComponent(powerUps);
 
 	// Create and add the LaneGenerator GameObject
@@ -234,6 +233,7 @@ void Model::Init()
 
 	laneGenerator->AddComponent(laneDrawComponent);
 	powerUps->SetParent(laneGenerator);
+	powerUps->Init();
 
 	LaneObstacleGenerator * lane_obstacle_generator = new LaneObstacleGenerator(obstaclesAsteroid, obstaclesNormal, obstaclesPowerUp);
 
