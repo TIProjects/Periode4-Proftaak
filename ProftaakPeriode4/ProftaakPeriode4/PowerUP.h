@@ -3,7 +3,6 @@
 
 
 enum PowerUpId {
-	OWN,
 	LIFE_UP,
 	SPEED_UP,
 	SPEED_DOWN,

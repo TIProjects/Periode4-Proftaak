@@ -199,6 +199,10 @@ void Model::Init()
 	player->_position.y = 2.0f;
 	player->_position.z = -10.0f;
 	player->AddComponent(lanePlayer);
+	
+	PowerUpComponent * powerUps = new PowerUpComponent();
+	powerUps->Init();
+	player->AddComponent(powerUps);
 
 	// Create and add the LaneGenerator GameObject
 	float speed = 10.0f;
@@ -256,15 +260,6 @@ void Model::Init()
     scoreBoard->AddScore(tempScore->ReturnScoreStruct());
 
     _gameObjects.push_back(scoreObject);
-
-    GameObject * powerUps = new GameObject(&_gameObjects);
-
-	PowerUpComponent * pu = new PowerUpComponent();
-	pu->SetParent(powerUps);
-	pu->Init();
-	powerUps->AddComponent(pu);
-
-    _gameObjects.push_back(powerUps);
 	_lastTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 }
 
