@@ -46,6 +46,7 @@ LaneObstacleGenerator::LaneObstacleGenerator(std::vector<Mesh*> obstacleModelsAs
 }
 void LaneObstacleGenerator::addObstacle(int laneIndex, Mesh * mesh_object, float speed)
 {
+	std::cout << "PLACED!" << std::endl;
 	GameObject* obstacle = new GameObject(_parent->_parentList);
 	obstacle->AddComponent(new MeshDrawComponent(mesh_object));
 	LaneObstacleComponent * component = new LaneObstacleComponent(laneIndex);
@@ -169,7 +170,7 @@ void LaneObstacleGenerator::Update(float nanotime)
 			}
 		}
 		
-
+//		std::cout << _lengthMovedSince[newLane] << " needed!" << std::endl;
 		if (minNeededPattern != 0.0f && pattern != nullptr && _lengthMovedSince[pattern->_newLane] < minNeededPattern) {
 				newLane = getNewLane();
 				
@@ -177,7 +178,6 @@ void LaneObstacleGenerator::Update(float nanotime)
 					newLane = rand() % (*_lanes).size();
 				if (_lengthMovedSince[newLane] / minNeeded >= 1.0f)
 				{
-					std::cout << minNeededPattern - _lengthMovedSince[pattern->_newLane] << " needed for pattern!" << std::endl;
 					addObstacle(newLane, nextMesh);
 					for (int i = 0; i < component->_lanes.size(); i++)
 						if (i != pattern->_newLane)
@@ -191,6 +191,9 @@ void LaneObstacleGenerator::Update(float nanotime)
 			else
 				newLane = getNewLane();
 
+			if (minNeededPattern < minNeeded) {
+				minNeededPattern = minNeeded;
+			}
 
 			if (_lengthMovedSince[newLane] >= minNeededPattern) {
 				if (nextPattern != nullptr) {
