@@ -10,6 +10,7 @@
 PlayerComponent::PlayerComponent(int laneIndex, int laneCount, LifeBar * lifeBar, Image * gameOverScreen, Text * powerUp ,Model * model, Sound * collisionSound, Sound * deathSound ,bool useOpenCV)
 : Component(PLAYER_COMPONENT)
 {
+	srand(time(nullptr));
 	_collided = false;
 	_powerUp = powerUp;
     _isInvinsible = false;
