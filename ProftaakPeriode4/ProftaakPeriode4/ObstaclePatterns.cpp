@@ -1,12 +1,14 @@
 #include "ObstaclePatterns.h"
+#include <iostream>
 
 void ObstaclePattern::Init(LaneObstacleGenerator* lane_obstacle_generator)
 {
-	_speed = *lane_obstacle_generator->_speed;
+//	_speed = lane_obstacle_generator->_speed;
 }
 
 void ObstaclePattern::Execute(LaneObstacleGenerator* lane_obstacle_generator, Mesh* mesh)
 {
+	
 	lane_obstacle_generator->addObstacle(_newLane, mesh, _speed);
 }
 
@@ -20,13 +22,13 @@ void TwoPattern::Execute(LaneObstacleGenerator* lane_obstacle_generator, Mesh* m
 		if (_newLane != i && otherLane != i)
 			lane_obstacle_generator->laneAmountSkipped[i] += lane_obstacle_generator->maxSkip;
 		else
-			lane_obstacle_generator->addObstacle(i, mesh, *lane_obstacle_generator->_speed);
+			lane_obstacle_generator->addObstacle(i, mesh);
 	}
 }
 
 void MovingPattern::Init(LaneObstacleGenerator* lane_obstacle_generator)
 {
-	_speed = (rand() % (int)(*lane_obstacle_generator->_speed - 5.0f)) + 5.0f;
+	_speed = ((rand() % 50) + 50) / 100.0f;
 }
 
 float MovingPattern::getLengthAfter(float speedAfter, float lengthLane)

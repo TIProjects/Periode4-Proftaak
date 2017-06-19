@@ -13,7 +13,6 @@ public:
 	 */
 	ObstaclePattern()
 	{
-		_speed = 0.0f;
 		_newLane = 0;
 	}
 	/**
@@ -56,7 +55,7 @@ public:
 	/**
 	 * The speed of the pattern (used when adding obstacle)
 	 */
-	float _speed;
+	float _speed = 1.0f;
 	/**
 	 * The new lane to execute the pattern at
 	 */

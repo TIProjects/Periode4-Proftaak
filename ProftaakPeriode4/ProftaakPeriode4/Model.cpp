@@ -215,9 +215,9 @@ void Model::Init()
 
 
 	std::vector<Mesh*> obstaclesNormal;
-	if (!MeshHasNext())
-		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
-	obstaclesNormal.push_back(GetNextMesh());
+//	if (!MeshHasNext())
+//		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Transporter//transporter.Cobj"));
+//	obstaclesNormal.push_back(GetNextMesh());
 	
 	std::vector<Mesh*> obstaclesPowerUp;
 	if (!MeshHasNext())

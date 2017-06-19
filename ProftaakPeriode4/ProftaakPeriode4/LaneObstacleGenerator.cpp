@@ -94,10 +94,10 @@ Mesh * LaneObstacleGenerator::getRandomMeshObject()
 {
 	int randomPercentage = rand() % 100;
 
-	if (randomPercentage <= 95)
-		return _obstacleModelsAsteroid[rand() % _obstacleModelsAsteroid.size()];
 	if (randomPercentage <= 98)
-		return _obstacleModelsNormal[rand() % _obstacleModelsNormal.size()];
+		return _obstacleModelsAsteroid[rand() % _obstacleModelsAsteroid.size()];
+//	if (randomPercentage <= 98)
+//		return _obstacleModelsNormal[rand() % _obstacleModelsNormal.size()];
 	return _obstacleModelsPowerUp[rand() % _obstacleModelsPowerUp.size()];
 }
 
@@ -157,8 +157,8 @@ void LaneObstacleGenerator::Update(float nanotime)
 		LaneComponent * lane_component = dynamic_cast<LaneComponent*>(laneObject->GetComponent(LANE_COMPONENT));
 		if (lane_component != nullptr) {
 			float speed = *_speed;
-			if (nextPattern != nullptr && nextPattern->_speed != -1.0f)
-				speed = nextPattern->_speed;
+			if (nextPattern != nullptr)
+				speed = nextPattern->_speed**_speed;
 			if (pattern != nullptr) {
 				float length = pattern->getLengthAfter(speed, lane_component->getLength());
 				if (length != 0.0f) {
