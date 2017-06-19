@@ -8,6 +8,7 @@
 #include "LaneGeneratorComponent.h"
 #include "AsteroidComponent.h"
 #include "PowerUpComponent.h"
+#include "RotateComponent.h"
 
 /**
  * Used for selecting a pattern, is placed here because of errors in usage (generator uses Pattern and Pattern uses generator)
@@ -59,9 +60,8 @@ void LaneObstacleGenerator::addObstacle(int laneIndex, Mesh * mesh_object, float
 		obstacle->AddComponent(new AsteroidComponent());
 
 	if (std::find(_obstacleModelsPowerUp.begin(), _obstacleModelsPowerUp.end(), mesh_object) != _obstacleModelsPowerUp.end()) {
-		PowerUpComponent * power_up = new PowerUpComponent();
-		obstacle->AddComponent(power_up);
-		power_up->Init();
+		RotateComponent * rotateComp = new RotateComponent({ 0.0f,10.0f,0.0f });
+		obstacle->AddComponent(rotateComp);
 	}
 	obstacle->AddComponent(new CollisionComponent(Hitbox({ mesh_object->_width,mesh_object->_height,mesh_object->_length }), false));
 	
