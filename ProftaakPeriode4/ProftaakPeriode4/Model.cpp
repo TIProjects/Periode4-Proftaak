@@ -224,6 +224,7 @@ void Model::Init()
 		_loadedMeshes.push_back(LoadMeshFile("Assets//Models//Coin//coin.Cobj"));
 	obstaclesPowerUp.push_back(GetNextMesh());
 
+
 	GameObject * laneGenerator = new GameObject(&_gameObjects);
 	LaneGeneratorComponent * laneDrawComponent = new LaneGeneratorComponent(3, 20, 1.5f, meshes, player, speedCounter, distanceCounter);
 
