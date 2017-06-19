@@ -74,7 +74,8 @@ void PlayerComponent::Update(float deltaTime)
 					if(powerUp != nullptr)
 					{
 						int number = rand() % 5;
-						powerUp->GetPowerUp(PowerUpId(number))->Activate();
+						PowerUp * actualPowerUp = powerUp->GetPowerUp(PowerUpId(number));
+						_powerUp->Update(actualPowerUp->_name);
 					}
 
 				} else
