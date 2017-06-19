@@ -75,8 +75,10 @@ void PlayerComponent::Update(float deltaTime)
 					{
 						int number = rand() % 5;
 						PowerUp * actualPowerUp = powerUp->GetPowerUp(PowerUpId(number));
+						actualPowerUp->Activate();
 						_powerUp->Update(actualPowerUp->_name);
 					}
+					_collided = true;
 
 				} else
 				{

@@ -126,7 +126,7 @@ void Model::Init()
 	diededImage->Hide();
 	GUI->AddElement(diededImage);
 
-	Text * powerUpText = new Text(Vec3f(1280.0f / 4.0 + 60.0f, 45, 0), Vec3f(255, 255, 255), "");
+	Text * powerUpText = new Text(Vec3f(1280.0f / 4.0 + 60.0f, 40, 0), Vec3f(255, 255, 255), "");
 	GUI->AddElement(powerUpText);
 
 	LifeBar * lifebar = new LifeBar(
