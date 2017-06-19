@@ -169,7 +169,7 @@ void LaneObstacleGenerator::Update(float nanotime)
 			}
 		}
 		
-
+//		std::cout << _lengthMovedSince[newLane] << " needed!" << std::endl;
 		if (minNeededPattern != 0.0f && pattern != nullptr && _lengthMovedSince[pattern->_newLane] < minNeededPattern) {
 				newLane = getNewLane();
 				
@@ -177,7 +177,6 @@ void LaneObstacleGenerator::Update(float nanotime)
 					newLane = rand() % (*_lanes).size();
 				if (_lengthMovedSince[newLane] / minNeeded >= 1.0f)
 				{
-					std::cout << minNeededPattern - _lengthMovedSince[pattern->_newLane] << " needed for pattern!" << std::endl;
 					addObstacle(newLane, nextMesh);
 					for (int i = 0; i < component->_lanes.size(); i++)
 						if (i != pattern->_newLane)
@@ -191,6 +190,9 @@ void LaneObstacleGenerator::Update(float nanotime)
 			else
 				newLane = getNewLane();
 
+			if (minNeededPattern < minNeeded) {
+				minNeededPattern = minNeeded;
+			}
 
 			if (_lengthMovedSince[newLane] >= minNeededPattern) {
 				if (nextPattern != nullptr) {
